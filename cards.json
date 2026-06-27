@@ -174,5 +174,17 @@
     "interval": 1,
     "ease": 2.5,
     "reps": 0
+  },
+  {
+    "id": 1782564449010,
+    "korean": "영국",
+    "english": "England",
+    "tag": "",
+    "trap": "",
+    "created": 1782564449010,
+    "nextReview": 1782564449010,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
   }
 ]
