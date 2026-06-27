@@ -186,5 +186,17 @@
     "interval": 1,
     "ease": 2.5,
     "reps": 0
+  },
+  {
+    "id": 1782566110070,
+    "korean": "음식",
+    "english": "Food",
+    "tag": "",
+    "trap": "",
+    "created": 1782566110070,
+    "nextReview": 1782566110070,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
   }
 ]
