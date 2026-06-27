@@ -155,10 +155,10 @@
   /* All Cards list */
   .all-empty { text-align: center; padding: 40px 20px; color: var(--muted); }
   .card-list  { display: flex; flex-direction: column; gap: 8px; }
-  .card-item  { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; cursor: pointer; }
+  .card-item  { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; display: flex; align-items: flex-start; gap: 12px; cursor: pointer; }
   .card-item:hover { background: var(--accent-light); }
-  .ci-kor  { font-size: 1.2rem; font-weight: 700; color: var(--accent); min-width: 80px; }
-  .ci-eng  { font-size: 0.88rem; color: var(--text); flex: 1; }
+  .ci-kor  { font-size: 1.2rem; font-weight: 700; color: var(--accent); display: block; }
+  .ci-eng  { font-size: 0.88rem; color: var(--text); display: block; }
   .ci-tag  { font-size: 0.75rem; color: var(--muted); background: var(--accent-light); padding: 2px 10px; border-radius: 20px; white-space: nowrap; }
   .ci-due  { font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
   .ci-del  { background: none; border: none; color: #ccc; font-size: 1.1rem; cursor: pointer; padding: 4px 6px; border-radius: 6px; transition: color 0.15s; flex-shrink: 0; }
@@ -190,6 +190,9 @@
   .srs-next:hover { border-color: var(--muted); color: var(--text); }
   .flip-instruction { font-size: 0.88rem; color: rgba(255,255,255,0.8); margin-top: 6px; animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:0.6} 50%{opacity:1} }
+  .flip-trap { font-size: 0.8rem; color: #c0660a; background: #fff4e6; border: 1px solid #f0c070; border-radius: 8px; padding: 6px 12px; text-align: center; width: 100%; margin-top: 4px; }
+  .flip-trap::before { content: '⚠ '; }
+  .ci-trap { font-size: 0.72rem; color: #c0660a; margin-top: 2px; }
 
   @media (max-width: 500px) {
     .char-grid { grid-template-columns: repeat(auto-fill, minmax(105px,1fr)); }
@@ -465,6 +468,10 @@
         <input type="text" id="inp-tag" placeholder="tag…" autocomplete="off" list="tag-suggestions">
         <datalist id="tag-suggestions"></datalist>
       </div>
+      <div class="fc-field">
+        <label>Pronunciation Trap <span style="font-weight:400;text-transform:none">(optional)</span></label>
+        <input type="text" id="inp-trap" placeholder="e.g. ㄱ nasalizes before 는 → sounds like [ㅇ]" autocomplete="off" spellcheck="false">
+      </div>
       <button class="add-btn" onclick="addCard()">Add Card</button>
       <div class="add-success" id="add-success">Card added!</div>
     </div>
@@ -646,7 +653,8 @@ inpKor.addEventListener('blur', () => {
 });
 inpKor.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-eng').focus(); });
 document.getElementById('inp-eng').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-tag').focus(); });
-document.getElementById('inp-tag').addEventListener('keydown', e => { if (e.key === 'Enter') addCard(); });
+document.getElementById('inp-tag').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-trap').focus(); });
+document.getElementById('inp-trap').addEventListener('keydown', e => { if (e.key === 'Enter') addCard(); });
 
 function naverLookup() {
   const v = inpKor.value.trim();
@@ -670,7 +678,8 @@ function addCard() {
     id: Date.now(),
     korean,
     english,
-    tag: document.getElementById('inp-tag').value.trim(),
+    tag:  document.getElementById('inp-tag').value.trim(),
+    trap: document.getElementById('inp-trap').value.trim(),
     created: Date.now(),
     nextReview: Date.now(),
     interval: 1,
@@ -682,6 +691,7 @@ function addCard() {
   inpKor.value = '';
   document.getElementById('inp-eng').value = '';
   document.getElementById('inp-tag').value = '';
+  document.getElementById('inp-trap').value = '';
   inpKor.focus();
 
   const ok = document.getElementById('add-success');
@@ -767,6 +777,7 @@ function renderStudyCard() {
         <div class="flip-face flip-back">
           <div class="flip-eng">${card.english}</div>
           ${card.tag ? `<div class="flip-tag">${card.tag}</div>` : ''}
+          ${card.trap ? `<div class="flip-trap">${card.trap}</div>` : ''}
           <button class="speak-card-btn" style="background:var(--accent-light);border-color:var(--accent);color:var(--accent)" onclick="event.stopPropagation();speak('${korSafe}')">▶ Hear it</button>
           <div class="flip-instruction" style="color:var(--muted);animation:none">👆 Tap to flip back</div>
         </div>
@@ -829,8 +840,11 @@ function renderAll() {
     item.onclick = () => speak(card.korean);
     const dueDate = card.nextReview ? new Date(card.nextReview).toLocaleDateString() : 'now';
     item.innerHTML = `
-      <span class="ci-kor">${card.korean}</span>
-      <span class="ci-eng">${card.english}</span>
+      <span style="flex:1;min-width:0">
+        <span class="ci-kor">${card.korean}</span>
+        <span class="ci-eng">${card.english}</span>
+        ${card.trap ? `<div class="ci-trap">⚠ ${card.trap}</div>` : ''}
+      </span>
       ${card.tag ? `<span class="ci-tag">${card.tag}</span>` : ''}
       <span class="ci-due">due ${dueDate}</span>
       <button class="ci-del" onclick="event.stopPropagation();deleteCard(${card.id})" title="Delete">✕</button>`;
