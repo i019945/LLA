@@ -138,5 +138,17 @@
     "interval": 1,
     "ease": 2.5,
     "reps": 0
+  },
+  {
+    "id": 1782563905963,
+    "korean": "컴퓨터",
+    "english": "computer",
+    "tag": "",
+    "trap": "",
+    "created": 1782563905963,
+    "nextReview": 1782563905963,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
   }
 ]
