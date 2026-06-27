@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLA · Korean</title>
+<style>
+  :root {
+    --bg: #f8f7f5;
+    --card: #ffffff;
+    --border: #e2e0db;
+    --accent: #1a4fa0;
+    --accent-light: #eef2fa;
+    --accent2: #c0392b;
+    --text: #1a1a1a;
+    --muted: #666;
+    --rule-bg: #fffbf0;
+    --rule-border: #f0c040;
+    --green: #27ae60;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; }
+
+  /* ── Header ── */
+  header { background: var(--accent); color: white; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .header-title h1 { font-size: 1.25rem; font-weight: 700; }
+  .header-title p { font-size: 0.78rem; opacity: 0.7; margin-top: 1px; }
+  .speed-control { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+  .speed-control span { font-size: 0.78rem; opacity: 0.8; white-space: nowrap; }
+  .speed-btn { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.35); color: white; padding: 4px 11px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+  .speed-btn:hover { background: rgba(255,255,255,0.25); }
+  .speed-btn.spd-active { background: white; color: var(--accent); }
+
+  /* ── Nav ── */
+  nav { background: white; border-bottom: 1px solid var(--border); display: flex; overflow-x: auto; position: sticky; top: 0; z-index: 10; }
+  nav button { border: none; background: none; padding: 13px 16px; font-size: 0.85rem; font-weight: 600; color: var(--muted); cursor: pointer; white-space: nowrap; border-bottom: 3px solid transparent; transition: all 0.15s; }
+  nav button.active { color: var(--accent); border-bottom-color: var(--accent); }
+  nav button:hover:not(.active) { color: var(--text); background: var(--bg); }
+
+  /* ── Sections ── */
+  .section { display: none; padding: 20px 16px 60px; max-width: 760px; margin: 0 auto; }
+  .section.active { display: block; }
+
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 24px 0 10px; color: var(--accent); }
+  h2:first-child { margin-top: 4px; }
+  h3 { font-size: 0.95rem; font-weight: 700; margin: 18px 0 8px; }
+  p { margin-bottom: 10px; }
+
+  .intro-box { background: var(--accent-light); border-left: 4px solid var(--accent); padding: 12px 14px; border-radius: 4px; margin-bottom: 18px; font-size: 0.9rem; }
+  .tip  { background: #f0faf0; border-left: 4px solid var(--green); padding: 10px 14px; border-radius: 4px; font-size: 0.85rem; margin: 8px 0 12px; }
+  .tip strong { color: var(--green); }
+  .warn { background: #fff5f5; border-left: 4px solid var(--accent2); padding: 10px 14px; border-radius: 4px; font-size: 0.85rem; margin: 8px 0 12px; }
+  .warn strong { color: var(--accent2); }
+
+  /* ── Character cards ── */
+  .char-grid  { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); gap: 10px; margin-bottom: 18px; }
+  .vowel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: 10px; margin-bottom: 18px; }
+  .char-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 12px 10px 10px; text-align: center; cursor: pointer; transition: box-shadow 0.15s, transform 0.1s; user-select: none; }
+  .char-card:hover { box-shadow: 0 2px 10px rgba(26,79,160,0.15); transform: translateY(-1px); }
+  .char-card:active { transform: scale(0.97); }
+  .char       { font-size: 2.2rem; color: var(--accent); display: block; margin-bottom: 2px; }
+  .char-name  { font-size: 0.7rem; color: var(--muted); margin-bottom: 4px; display: block; }
+  .roman      { font-size: 0.85rem; font-weight: 600; color: var(--text); display: block; }
+  .example    { font-size: 0.75rem; color: var(--muted); margin-top: 4px; display: block; }
+  .speak-hint { font-size: 0.65rem; color: var(--accent); opacity: 0.7; margin-top: 2px; display: block; }
+
+  /* ── Rule cards ── */
+  .rule-card { background: var(--rule-bg); border: 1px solid var(--rule-border); border-radius: 10px; padding: 14px 16px; margin-bottom: 14px; }
+  .rule-title { font-size: 1rem; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+  .rule-tag   { background: var(--accent); color: white; font-size: 0.7rem; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+  .rule-desc  { font-size: 0.88rem; color: var(--muted); margin-bottom: 10px; }
+  .rule-formula { background: white; border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; font-size: 0.9rem; margin-bottom: 10px; font-family: monospace; }
+  .examples   { display: flex; flex-direction: column; gap: 6px; }
+  .ex-row     { display: flex; align-items: baseline; gap: 10px; background: white; border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; cursor: pointer; transition: background 0.1s; }
+  .ex-row:hover { background: var(--accent-light); }
+  .ex-kor  { font-size: 1.1rem; color: var(--accent); font-weight: 700; min-width: 70px; }
+  .ex-arrow{ color: var(--accent2); font-weight: 700; font-size: 0.9rem; }
+  .ex-pron { font-size: 0.88rem; color: #555; font-family: monospace; }
+  .ex-eng  { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
+
+  /* ── Tables ── */
+  .seven-table, .double-table { width: 100%; border-collapse: collapse; margin: 10px 0 18px; font-size: 0.88rem; }
+  .seven-table th { background: var(--accent); color: white; padding: 8px 10px; text-align: left; }
+  .seven-table td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .seven-table tr:nth-child(even) td { background: var(--accent-light); }
+  .big-char { font-size: 1.3rem; color: var(--accent); font-weight: 700; }
+  .maps { color: var(--muted); }
+  .double-table th { background: #555; color: white; padding: 8px 10px; text-align: left; }
+  .double-table td { padding: 7px 10px; border-bottom: 1px solid var(--border); }
+  .double-table tr:nth-child(even) td { background: #f5f5f5; }
+  .double-table .big { font-size: 1.1rem; font-weight: 700; }
+
+  /* ── Syllable diagram ── */
+  .syllable-diagram { display: flex; align-items: center; justify-content: center; gap: 16px; margin: 16px 0; flex-wrap: wrap; }
+  .syl-box { background: var(--card); border: 2px solid var(--accent); border-radius: 12px; padding: 14px 18px; text-align: center; min-width: 80px; }
+  .syl-label { font-size: 0.7rem; color: var(--muted); margin-bottom: 4px; }
+  .syl-char  { font-size: 2rem; color: var(--accent); }
+  .syl-optional { border-style: dashed; opacity: 0.7; }
+  .syl-plus, .syl-eq { font-size: 1.5rem; color: var(--muted); }
+
+  /* ════════════════════════════════════════
+     FLASHCARD SECTION
+  ════════════════════════════════════════ */
+  .fc-subnav { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .fc-subnav button { border: 2px solid var(--border); background: white; padding: 8px 18px; border-radius: 24px; font-size: 0.85rem; font-weight: 600; color: var(--muted); cursor: pointer; transition: all 0.15s; }
+  .fc-subnav button.active { background: var(--accent); border-color: var(--accent); color: white; }
+  .fc-panel { display: none; }
+  .fc-panel.active { display: block; }
+
+  /* Add form */
+  .fc-form { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .fc-field { margin-bottom: 14px; }
+  .fc-field label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .fc-input-row { display: flex; gap: 8px; }
+  .fc-field input { width: 100%; border: 1.5px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 1rem; outline: none; transition: border-color 0.15s; font-family: inherit; }
+  .fc-field input:focus { border-color: var(--accent); }
+  .fc-field input.kor-input { font-size: 1.3rem; }
+  .naver-btn { border: 1.5px solid var(--border); background: white; border-radius: 8px; padding: 0 14px; font-size: 0.8rem; font-weight: 700; color: var(--accent); cursor: pointer; white-space: nowrap; transition: background 0.15s; flex-shrink: 0; }
+  .naver-btn:hover { background: var(--accent-light); }
+  .add-btn { width: 100%; background: var(--accent); color: white; border: none; border-radius: 8px; padding: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: opacity 0.15s; margin-top: 4px; }
+  .add-btn:hover { opacity: 0.88; }
+  .add-success { display: none; color: var(--green); font-size: 0.88rem; margin-top: 8px; text-align: center; font-weight: 600; }
+
+  /* Study — flip card */
+  .study-empty { text-align: center; padding: 40px 20px; color: var(--muted); }
+  .study-empty .big-num { font-size: 3rem; margin-bottom: 8px; }
+  .study-progress { font-size: 0.82rem; color: var(--muted); text-align: center; margin-bottom: 16px; }
+
+  .flip-scene { perspective: 900px; width: 100%; max-width: 440px; margin: 0 auto 20px; height: 200px; cursor: pointer; }
+  .flip-card  { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.45s; }
+  .flip-card.flipped { transform: rotateY(180deg); }
+  .flip-face  { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 20px; }
+  .flip-front { background: var(--accent); color: white; box-shadow: 0 4px 20px rgba(26,79,160,0.25); }
+  .flip-back  { background: white; border: 2px solid var(--accent); transform: rotateY(180deg); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+  .flip-kor   { font-size: 2.4rem; font-weight: 700; line-height: 1.2; }
+  .flip-hint  { font-size: 0.82rem; opacity: 0.7; }
+  .flip-eng   { font-size: 1.3rem; font-weight: 700; color: var(--text); text-align: center; }
+  .flip-tag   { font-size: 0.8rem; color: var(--muted); background: var(--accent-light); padding: 3px 12px; border-radius: 20px; }
+  .flip-tap   { font-size: 0.78rem; opacity: 0.6; }
+
+  .speak-card-btn { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: white; border-radius: 20px; padding: 4px 14px; font-size: 0.8rem; cursor: pointer; }
+  .speak-card-btn:hover { background: rgba(255,255,255,0.3); }
+
+  .flip-btn   { display: block; margin: 0 auto 20px; background: white; border: 2px solid var(--accent); color: var(--accent); border-radius: 24px; padding: 10px 32px; font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: all 0.15s; }
+  .flip-btn:hover { background: var(--accent); color: white; }
+
+  .srs-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .srs-btn  { flex: 1; min-width: 80px; max-width: 140px; border: none; border-radius: 10px; padding: 12px 8px; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: opacity 0.15s; }
+  .srs-btn:hover { opacity: 0.85; }
+  .srs-hard { background: #fde8e8; color: #c0392b; }
+  .srs-good { background: #e8f4fd; color: #1a4fa0; }
+  .srs-easy { background: #e8faf0; color: #27ae60; }
+  .srs-label { display: block; font-size: 0.7rem; font-weight: 400; opacity: 0.75; margin-top: 2px; }
+
+  /* All Cards list */
+  .all-empty { text-align: center; padding: 40px 20px; color: var(--muted); }
+  .card-list  { display: flex; flex-direction: column; gap: 8px; }
+  .card-item  { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; cursor: pointer; }
+  .card-item:hover { background: var(--accent-light); }
+  .ci-kor  { font-size: 1.2rem; font-weight: 700; color: var(--accent); min-width: 80px; }
+  .ci-eng  { font-size: 0.88rem; color: var(--text); flex: 1; }
+  .ci-tag  { font-size: 0.75rem; color: var(--muted); background: var(--accent-light); padding: 2px 10px; border-radius: 20px; white-space: nowrap; }
+  .ci-due  { font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
+  .ci-del  { background: none; border: none; color: #ccc; font-size: 1.1rem; cursor: pointer; padding: 4px 6px; border-radius: 6px; transition: color 0.15s; flex-shrink: 0; }
+  .ci-del:hover { color: var(--accent2); }
+  .all-stats { font-size: 0.82rem; color: var(--muted); margin-bottom: 12px; }
+
+  @media (max-width: 500px) {
+    .char-grid { grid-template-columns: repeat(auto-fill, minmax(105px,1fr)); }
+    nav button { padding: 11px 12px; font-size: 0.8rem; }
+    .flip-scene { height: 180px; }
+    .flip-kor { font-size: 1.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-title">
+    <h1>LLA · 한국어</h1>
+    <p>Korean Language Learning · Tap any character or example to hear it</p>
+  </div>
+  <div class="speed-control">
+    <span>Speed:</span>
+    <button class="speed-btn" onclick="setRate(0.6, this)">Slow</button>
+    <button class="speed-btn spd-active" id="spd-normal" onclick="setRate(0.85, this)">Normal</button>
+    <button class="speed-btn" onclick="setRate(1.1, this)">Fast</button>
+  </div>
+</header>
+
+<nav>
+  <button class="active" onclick="show('consonants', this)">Consonants</button>
+  <button onclick="show('vowels', this)">Vowels</button>
+  <button onclick="show('syllables', this)">Syllables</button>
+  <button onclick="show('batchim', this)">받침 Rules ★</button>
+  <button onclick="show('flashcards', this); refreshFC()">Flashcards</button>
+</nav>
+
+<!-- ══════════════════ CONSONANTS ══════════════════ -->
+<div id="consonants" class="section active">
+  <div class="intro-box">Korean has <strong>14 basic consonants</strong> + <strong>5 tense consonants</strong>. Each can appear at the start (initial) or end (final/받침) of a syllable — and the sound differs. Tap any card to hear it.</div>
+  <h2>Basic Consonants (기본 자음)</h2>
+  <div class="char-grid" id="basic-con"></div>
+  <h2>Tense Consonants (쌍자음) — "doubled"</h2>
+  <div class="intro-box" style="margin-bottom:12px;">Produced with extra tension — like holding the consonant back before releasing. No English equivalent; listen carefully.</div>
+  <div class="char-grid" id="tense-con"></div>
+</div>
+
+<!-- ══════════════════ VOWELS ══════════════════ -->
+<div id="vowels" class="section">
+  <div class="intro-box">Korean has <strong>10 basic vowels</strong> + <strong>11 compound vowels</strong>. Vowels can't stand alone — always written with ㅇ (silent) as placeholder: ㅏ → 아, ㅣ → 이.</div>
+  <h2>Basic Vowels (기본 모음)</h2>
+  <div class="vowel-grid" id="basic-vow"></div>
+  <h2>Compound Vowels (이중 모음)</h2>
+  <div class="intro-box" style="margin-bottom:12px;">Note: ㅐ and ㅔ sound identical in modern Korean — don't stress the difference.</div>
+  <div class="vowel-grid" id="compound-vow"></div>
+</div>
+
+<!-- ══════════════════ SYLLABLES ══════════════════ -->
+<div id="syllables" class="section">
+  <div class="intro-box">Korean syllables are written as <strong>blocks</strong>, not linearly. Each block = one syllable: <strong>consonant + vowel (+ optional final consonant)</strong>.</div>
+  <h2>Syllable Structure</h2>
+  <div class="syllable-diagram">
+    <div class="syl-box"><div class="syl-label">Initial (초성)</div><div class="syl-char">C</div><div class="syl-label">consonant (ㅇ if none)</div></div>
+    <div class="syl-plus">+</div>
+    <div class="syl-box"><div class="syl-label">Vowel (중성)</div><div class="syl-char">V</div><div class="syl-label">always required</div></div>
+    <div class="syl-plus">+</div>
+    <div class="syl-box syl-optional"><div class="syl-label">Final (받침)</div><div class="syl-char">C?</div><div class="syl-label">optional</div></div>
+    <div class="syl-eq">=</div>
+    <div class="syl-box" style="border-color:#c0392b"><div class="syl-label">One block</div><div class="syl-char" style="color:#c0392b">한</div><div class="syl-label">ㅎ+ㅏ+ㄴ</div></div>
+  </div>
+  <h2>Example Blocks</h2>
+  <div class="char-grid" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr))">
+    <div class="char-card" onclick="speakWord('가')"><span class="char">가</span><span class="char-name">ㄱ + ㅏ</span><span class="roman">ga</span><span class="example">가다 — to go</span></div>
+    <div class="char-card" onclick="speakWord('나')"><span class="char">나</span><span class="char-name">ㄴ + ㅏ</span><span class="roman">na</span><span class="example">나 — I / me</span></div>
+    <div class="char-card" onclick="speakWord('한')"><span class="char">한</span><span class="char-name">ㅎ + ㅏ + ㄴ</span><span class="roman">han</span><span class="example">한국 — Korea</span></div>
+    <div class="char-card" onclick="speakWord('밥')"><span class="char">밥</span><span class="char-name">ㅂ + ㅏ + ㅂ</span><span class="roman">bap</span><span class="example">밥 — rice/meal</span></div>
+    <div class="char-card" onclick="speakWord('물')"><span class="char">물</span><span class="char-name">ㅁ + ㅜ + ㄹ</span><span class="roman">mul</span><span class="example">물 — water</span></div>
+    <div class="char-card" onclick="speakWord('사람')"><span class="char">사람</span><span class="char-name">2 syllables</span><span class="roman">sa-ram</span><span class="example">사람 — person</span></div>
+  </div>
+  <h2>Key Facts</h2>
+  <div class="tip"><strong>ㅇ as placeholder:</strong> When a syllable starts with a vowel sound, ㅇ is written silently: 아 = a, 이 = i, 오 = o.</div>
+  <div class="tip"><strong>Reading order:</strong> Left→right for vertical vowels (가, 나), top→bottom for horizontal vowels (모, 보), then final consonant at the bottom.</div>
+  <div class="warn"><strong>ㄹ changes by position:</strong> As initial → sounds like <em>r</em>. As final (받침) → sounds like <em>l</em>. Example: 라 = ra, 말 = mal.</div>
+</div>
+
+<!-- ══════════════════ BATCHIM ══════════════════ -->
+<div id="batchim" class="section">
+  <div class="intro-box"><strong>받침 (batchim)</strong> = the final consonant at the bottom of a syllable. There are 5 pronunciation rules that govern how consonants change when they meet across syllable boundaries. Master these and you'll sound natural fast.</div>
+
+  <h2>The 7 Final Consonant Sounds</h2>
+  <p style="margin-bottom:8px;font-size:0.88rem;color:var(--muted)">All batchim reduce to one of just <strong>7 sounds</strong> when the syllable stands alone or precedes another consonant.</p>
+  <table class="seven-table">
+    <tr><th>Sound</th><th>Written as</th><th>Example</th><th>Meaning</th></tr>
+    <tr><td><span class="big-char">ㄱ</span> [k]</td><td class="maps">ㄱ, ㅋ, ㄲ</td><td onclick="speakWord('국')" style="cursor:pointer" class="big-char">국</td><td>soup</td></tr>
+    <tr><td><span class="big-char">ㄴ</span> [n]</td><td class="maps">ㄴ</td><td onclick="speakWord('눈')" style="cursor:pointer" class="big-char">눈</td><td>eye / snow</td></tr>
+    <tr><td><span class="big-char">ㄷ</span> [t]</td><td class="maps">ㄷ, ㅅ, ㅆ, ㅈ, ㅊ, ㅌ, ㅎ</td><td onclick="speakWord('옷')" style="cursor:pointer" class="big-char">옷</td><td>clothes</td></tr>
+    <tr><td><span class="big-char">ㄹ</span> [l]</td><td class="maps">ㄹ</td><td onclick="speakWord('말')" style="cursor:pointer" class="big-char">말</td><td>horse / word</td></tr>
+    <tr><td><span class="big-char">ㅁ</span> [m]</td><td class="maps">ㅁ</td><td onclick="speakWord('밤')" style="cursor:pointer" class="big-char">밤</td><td>night / chestnut</td></tr>
+    <tr><td><span class="big-char">ㅂ</span> [p]</td><td class="maps">ㅂ, ㅍ</td><td onclick="speakWord('밥')" style="cursor:pointer" class="big-char">밥</td><td>rice / meal</td></tr>
+    <tr><td><span class="big-char">ㅇ</span> [ng]</td><td class="maps">ㅇ</td><td onclick="speakWord('방')" style="cursor:pointer" class="big-char">방</td><td>room</td></tr>
+  </table>
+
+  <!-- Rule 1 -->
+  <h2>Rule 1 — Linking 연음화</h2>
+  <div class="rule-card">
+    <div class="rule-title"><span class="rule-tag">Rule 1</span> Batchim "slides" to the next syllable</div>
+    <div class="rule-desc">When a batchim syllable is followed by ㅇ (silent placeholder), the batchim moves over to become the initial of the next syllable.</div>
+    <div class="rule-formula">받침 + ㅇ__ → (no batchim) + (받침)__</div>
+    <div class="tip"><strong>Trick:</strong> ㅇ is a vacuum — it sucks the consonant from the syllable before it.</div>
+    <div class="examples">
+      <div class="ex-row" onclick="speakWord('먹어')"><span class="ex-kor">먹어</span><span class="ex-arrow">→</span><span class="ex-pron">[머거] meo-geo</span><span class="ex-eng">eat (informal)</span></div>
+      <div class="ex-row" onclick="speakWord('읽어')"><span class="ex-kor">읽어</span><span class="ex-arrow">→</span><span class="ex-pron">[일거] il-geo</span><span class="ex-eng">read (informal)</span></div>
+      <div class="ex-row" onclick="speakWord('있어')"><span class="ex-kor">있어</span><span class="ex-arrow">→</span><span class="ex-pron">[이써] i-sseo</span><span class="ex-eng">have / exist</span></div>
+      <div class="ex-row" onclick="speakWord('한국어')"><span class="ex-kor">한국어</span><span class="ex-arrow">→</span><span class="ex-pron">[한구거] han-gu-geo</span><span class="ex-eng">Korean language</span></div>
+      <div class="ex-row" onclick="speakWord('옷이')"><span class="ex-kor">옷이</span><span class="ex-arrow">→</span><span class="ex-pron">[오시] o-si</span><span class="ex-eng">clothes (subject)</span></div>
+    </div>
+    <div class="warn" style="margin-top:10px"><strong>ㅎ exception:</strong> ㅎ as batchim before ㅇ is dropped entirely — not linked.
+      <div class="examples" style="margin-top:8px">
+        <div class="ex-row" onclick="speakWord('좋아요')"><span class="ex-kor">좋아요</span><span class="ex-arrow">→</span><span class="ex-pron">[조아요] jo-a-yo</span><span class="ex-eng">good / I like it</span></div>
+        <div class="ex-row" onclick="speakWord('많아요')"><span class="ex-kor">많아요</span><span class="ex-arrow">→</span><span class="ex-pron">[마나요] ma-na-yo</span><span class="ex-eng">there is a lot</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rule 2 -->
+  <h2>Rule 2 — Nasalization 비음화</h2>
+  <div class="rule-card">
+    <div class="rule-title"><span class="rule-tag">Rule 2</span> Hard stops soften before nasal sounds</div>
+    <div class="rule-desc">When batchim ㄱ/ㄷ/ㅂ precedes ㄴ or ㅁ, it changes to its matching nasal.</div>
+    <div class="rule-formula">ㄱ→ㅇ &nbsp;|&nbsp; ㄷ→ㄴ &nbsp;|&nbsp; ㅂ→ㅁ &nbsp;&nbsp; (before ㄴ or ㅁ)</div>
+    <div class="tip"><strong>Trick:</strong> Nasality is contagious — ㄱ→ㅇ (throat), ㄷ→ㄴ (tongue), ㅂ→ㅁ (lips).</div>
+    <h3>ㄱ → ㅇ</h3>
+    <div class="examples">
+      <div class="ex-row" onclick="speakWord('국민')"><span class="ex-kor">국민</span><span class="ex-arrow">→</span><span class="ex-pron">[궁민] gung-min</span><span class="ex-eng">citizen</span></div>
+      <div class="ex-row" onclick="speakWord('작년')"><span class="ex-kor">작년</span><span class="ex-arrow">→</span><span class="ex-pron">[장년] jang-nyeon</span><span class="ex-eng">last year</span></div>
+      <div class="ex-row" onclick="speakWord('먹는다')"><span class="ex-kor">먹는다</span><span class="ex-arrow">→</span><span class="ex-pron">[멍는다] meong-neun-da</span><span class="ex-eng">is eating</span></div>
+    </div>
+    <h3 style="margin-top:12px">ㄷ → ㄴ</h3>
+    <div class="examples">
+      <div class="ex-row" onclick="speakWord('닫는다')"><span class="ex-kor">닫는다</span><span class="ex-arrow">→</span><span class="ex-pron">[단는다] dan-neun-da</span><span class="ex-eng">is closing</span></div>
+      <div class="ex-row" onclick="speakWord('있는')"><span class="ex-kor">있는</span><span class="ex-arrow">→</span><span class="ex-pron">[인는] in-neun</span><span class="ex-eng">that exists</span></div>
+      <div class="ex-row" onclick="speakWord('믿는다')"><span class="ex-kor">믿는다</span><span class="ex-arrow">→</span><span class="ex-pron">[민는다] min-neun-da</span><span class="ex-eng">believes</span></div>
+    </div>
+    <h3 style="margin-top:12px">ㅂ → ㅁ</h3>
+    <div class="examples">
+      <div class="ex-row" onclick="speakWord('입문')"><span class="ex-kor">입문</span><span class="ex-arrow">→</span><span class="ex-pron">[임문] im-mun</span><span class="ex-eng">introduction</span></div>
+      <div class="ex-row" onclick="speakWord('없는')"><span class="ex-kor">없는</span><span class="ex-arrow">→</span><span class="ex-pron">[엄는] eom-neun</span><span class="ex-eng">that doesn't exist</span></div>
+      <div class="ex-row" onclick="speakWord('밥맛')"><span class="ex-kor">밥맛</span><span class="ex-arrow">→</span><span class="ex-pron">[밤맛] bam-mat</span><span class="ex-eng">taste of rice</span></div>
+    </div>
+  </div>
+
+  <!-- Rule 3 -->
+  <h2>Rule 3 — Lateralization 유음화</h2>
+  <div class="rule-card">
+    <div class="rule-title"><span class="rule-tag">Rule 3</span> ㄴ becomes ㄹ next to ㄹ</div>
+    <div class="rule-desc">When ㄴ and ㄹ meet across a syllable boundary (either order), both become ㄹ.</div>
+    <div class="rule-formula">ㄹ+ㄴ → ㄹ+ㄹ &nbsp;&nbsp; ㄴ+ㄹ → ㄹ+ㄹ</div>
+    <div class="tip"><strong>Trick:</strong> ㄹ is contagious — it turns any neighboring ㄴ into itself.</div>
+    <div class="examples">
+      <div class="ex-row" onclick="speakWord('신라')"><span class="ex-kor">신라</span><span class="ex-arrow">→</span><span class="ex-pron">[실라] sil-la</span><span class="ex-eng">Silla dynasty</span></div>
+      <div class="ex-row" onclick="speakWord('연락')"><span class="ex-kor">연락</span><span class="ex-arrow">→</span><span class="ex-pron">[열락] yeol-lak</span><span class="ex-eng">contact</span></div>
+      <div class="ex-row" onclick="speakWord('칼날')"><span class="ex-kor">칼날</span><span class="ex-arrow">→</span><span class="ex-pron">[칼랄] kal-lal</span><span class="ex-eng">knife blade</span></div>
+      <div class="ex-row" onclick="speakWord('설날')"><span class="ex-kor">설날</span><span class="ex-arrow">→</span><span class="ex-pron">[설랄] seol-lal</span><span class="ex-eng">Lunar New Year</span></div>
+    </div>
+  </div>
+
+  <!-- Rule 4 -->
+  <h2>Rule 4 — Aspiration 격음화</h2>
+  <div class="rule-card">
+    <div class="rule-title"><span class="rule-tag">Rule 4</span> ㅎ merges with plosives to create aspirated consonants</div>
+    <div class="rule-desc">ㅎ (breath consonant) fuses with ㄱ/ㄷ/ㅂ/ㅈ in either order, producing their aspirated forms.</div>
+    <div class="rule-formula">ㅎ+ㄱ→ㅋ &nbsp;|&nbsp; ㅎ+ㄷ→ㅌ &nbsp;|&nbsp; ㅎ+ㅂ→ㅍ &nbsp;|&nbsp; ㅎ+ㅈ→ㅊ</div>
+    <div class="tip"><strong>Trick:</strong> ㅎ adds a puff of air to whatever consonant it touches.</div>
+    <h3>ㅎ as batchim</h3>
+    <div class="examples">
+      <div class="ex-row" onclick="speakWord('좋다')"><span class="ex-kor">좋다</span><span class="ex-arrow">→</span><span class="ex-pron">[조타] jo-ta</span><span class="ex-eng">to be good</span></div>
+      <div class="ex-row" onclick="speakWord('많다')"><span class="ex-kor">많다</span><span class="ex-arrow">→</span><span class="ex-pron">[만타] man-ta</span><span class="ex-eng">many / a lot</span></div>
+      <div class="ex-row" onclick="speakWord('좋지')"><span class="ex-kor">좋지</span><span class="ex-arrow">→</span><span class="ex-pron">[조치] jo-chi</span><span class="ex-eng">right? isn't it good?</span></div>
+      <div class="ex-row" onclick="speakWord('넣고')"><span class="ex-kor">넣고</span><span class="ex-arrow">→</span><span class="ex-pron">[네코] ne-ko</span><span class="ex-eng">put in (and…)</span></div>
+    </div>
+    <h3 style="margin-top:12px">ㅎ as initial (after batchim)</h3>
+    <div class="examples">
+      <div class="ex-row" onclick="speakWord('먹히다')"><span class="ex-kor">먹히다</span><span class="ex-arrow">→</span><span class="ex-pron">[머키다] meo-ki-da</span><span class="ex-eng">to be eaten (passive)</span></div>
+      <div class="ex-row" onclick="speakWord('잡히다')"><span class="ex-kor">잡히다</span><span class="ex-arrow">→</span><span class="ex-pron">[자피다] ja-pi-da</span><span class="ex-eng">to be caught (passive)</span></div>
+      <div class="ex-row" onclick="speakWord('읽히다')"><span class="ex-kor">읽히다</span><span class="ex-arrow">→</span><span class="ex-pron">[일키다] il-ki-da</span><span class="ex-eng">to be read (passive)</span></div>
+    </div>
+  </div>
+
+  <!-- Rule 5 -->
+  <h2>Rule 5 — Tensification 경음화</h2>
+  <div class="rule-card">
+    <div class="rule-title"><span class="rule-tag">Rule 5</span> Consonants tighten after a hard stop batchim</div>
+    <div class="rule-desc">After a batchim that sounds like ㄱ, ㄷ, or ㅂ, the following ㄱ/ㄷ/ㅂ/ㅅ/ㅈ becomes tense (doubled).</div>
+    <div class="rule-formula">after [ㄱ/ㄷ/ㅂ]: &nbsp; ㄱ→ㄲ, ㄷ→ㄸ, ㅂ→ㅃ, ㅅ→ㅆ, ㅈ→ㅉ</div>
+    <div class="tip"><strong>Trick:</strong> A hard stop tensions the throat — the next consonant comes out tense too.</div>
+    <div class="examples">
+      <div class="ex-row" onclick="speakWord('학교')"><span class="ex-kor">학교</span><span class="ex-arrow">→</span><span class="ex-pron">[학꾜] hak-kkyo</span><span class="ex-eng">school</span></div>
+      <div class="ex-row" onclick="speakWord('식당')"><span class="ex-kor">식당</span><span class="ex-arrow">→</span><span class="ex-pron">[식땅] sik-ttang</span><span class="ex-eng">restaurant</span></div>
+      <div class="ex-row" onclick="speakWord('없다')"><span class="ex-kor">없다</span><span class="ex-arrow">→</span><span class="ex-pron">[업따] eop-tta</span><span class="ex-eng">to not have/exist</span></div>
+      <div class="ex-row" onclick="speakWord('닦다')"><span class="ex-kor">닦다</span><span class="ex-arrow">→</span><span class="ex-pron">[닥따] dak-tta</span><span class="ex-eng">to wipe / clean</span></div>
+      <div class="ex-row" onclick="speakWord('입구')"><span class="ex-kor">입구</span><span class="ex-arrow">→</span><span class="ex-pron">[입꾸] ip-kku</span><span class="ex-eng">entrance</span></div>
+      <div class="ex-row" onclick="speakWord('박수')"><span class="ex-kor">박수</span><span class="ex-arrow">→</span><span class="ex-pron">[박쑤] bak-ssu</span><span class="ex-eng">applause</span></div>
+    </div>
+  </div>
+
+  <!-- Double batchim -->
+  <h2>Double Batchim (겹받침)</h2>
+  <div class="rule-card" style="background:#f5f0ff;border-color:#9b59b6">
+    <div class="rule-title"><span class="rule-tag" style="background:#9b59b6">Bonus</span> Two final consonants — only one is pronounced</div>
+    <div class="rule-desc">Some syllables end with two stacked consonants. When standing alone or before a consonant, only one is pronounced. When followed by ㅇ, the right one links over.</div>
+    <h3>Left consonant pronounced</h3>
+    <table class="double-table">
+      <tr><th>Batchim</th><th>Letters</th><th>Sound</th><th>Example</th><th>Meaning</th></tr>
+      <tr><td class="big" onclick="speakWord('앉다')" style="cursor:pointer">ㄵ</td><td>ㄴ+ㅈ</td><td>ㄴ</td><td onclick="speakWord('앉다')" style="cursor:pointer">앉다 [안따]</td><td>to sit</td></tr>
+      <tr><td class="big" onclick="speakWord('넓다')" style="cursor:pointer">ㄼ</td><td>ㄹ+ㅂ</td><td>ㄹ</td><td onclick="speakWord('넓다')" style="cursor:pointer">넓다 [널따]</td><td>wide</td></tr>
+      <tr><td class="big" onclick="speakWord('훑다')" style="cursor:pointer">ㄾ</td><td>ㄹ+ㅌ</td><td>ㄹ</td><td onclick="speakWord('훑다')" style="cursor:pointer">훑다 [훌따]</td><td>to sweep</td></tr>
+      <tr><td class="big" onclick="speakWord('잃다')" style="cursor:pointer">ㅀ</td><td>ㄹ+ㅎ</td><td>ㄹ</td><td onclick="speakWord('잃다')" style="cursor:pointer">잃다 [일타]</td><td>to lose</td></tr>
+      <tr><td class="big" onclick="speakWord('넋')" style="cursor:pointer">ㄳ</td><td>ㄱ+ㅅ</td><td>ㄱ</td><td onclick="speakWord('넋')" style="cursor:pointer">넋 [넉]</td><td>soul</td></tr>
+    </table>
+    <h3>Right consonant pronounced</h3>
+    <table class="double-table">
+      <tr><th>Batchim</th><th>Letters</th><th>Sound</th><th>Example</th><th>Meaning</th></tr>
+      <tr><td class="big">ㄺ</td><td>ㄹ+ㄱ</td><td>ㄱ</td><td onclick="speakWord('닭')" style="cursor:pointer">닭 [닥]</td><td>chicken</td></tr>
+      <tr><td class="big">ㄻ</td><td>ㄹ+ㅁ</td><td>ㅁ</td><td onclick="speakWord('삶')" style="cursor:pointer">삶 [삼]</td><td>life</td></tr>
+      <tr><td class="big">ㄿ</td><td>ㄹ+ㅍ</td><td>ㅂ</td><td onclick="speakWord('읊다')" style="cursor:pointer">읊다 [읍따]</td><td>to recite</td></tr>
+    </table>
+    <div class="warn"><strong>Exception — 밟다:</strong> ㄼ normally gives ㄹ, but 밟다 [밥따] "to step on" uses ㅂ. Memorize as-is.</div>
+    <h3>Linking with double batchim (before ㅇ)</h3>
+    <div class="examples">
+      <div class="ex-row" onclick="speakWord('닭이')"><span class="ex-kor">닭이</span><span class="ex-arrow">→</span><span class="ex-pron">[달기] dal-gi</span><span class="ex-eng">chicken (subject)</span></div>
+      <div class="ex-row" onclick="speakWord('삶이')"><span class="ex-kor">삶이</span><span class="ex-arrow">→</span><span class="ex-pron">[살미] sal-mi</span><span class="ex-eng">life (subject)</span></div>
+      <div class="ex-row" onclick="speakWord('앉아')"><span class="ex-kor">앉아</span><span class="ex-arrow">→</span><span class="ex-pron">[안자] an-ja</span><span class="ex-eng">sit (informal)</span></div>
+    </div>
+  </div>
+  <h2>Rules Priority</h2>
+  <div class="intro-box">When multiple rules could apply: <strong>Aspiration (ㅎ)</strong> → <strong>Nasalization</strong> → <strong>Lateralization</strong> → <strong>Linking</strong> → <strong>Tensification</strong>. In practice you rarely stack more than two.</div>
+</div>
+
+<!-- ══════════════════ FLASHCARDS ══════════════════ -->
+<div id="flashcards" class="section">
+  <div class="fc-subnav">
+    <button class="active" onclick="fcShow('fc-add', this)">Add Card</button>
+    <button onclick="fcShow('fc-study', this)" id="study-tab-btn">Study</button>
+    <button onclick="fcShow('fc-all', this)" id="all-tab-btn">All Cards</button>
+  </div>
+
+  <!-- ── Add Card ── -->
+  <div id="fc-add" class="fc-panel active">
+    <div class="fc-form">
+      <div class="fc-field">
+        <label>Korean word or phrase</label>
+        <div class="fc-input-row">
+          <input type="text" id="inp-kor" class="kor-input" placeholder="paste or type Korean…" autocomplete="off" autocorrect="off" spellcheck="false">
+          <button class="naver-btn" onclick="naverLookup()" title="Open in Naver Dictionary">🔍 Naver</button>
+        </div>
+      </div>
+      <div class="fc-field">
+        <label>Meaning (English or Chinese)</label>
+        <input type="text" id="inp-eng" placeholder="meaning…" autocomplete="off">
+      </div>
+      <div class="fc-field">
+        <label>Tag <span style="font-weight:400;text-transform:none">(optional — e.g. food, verbs, greetings)</span></label>
+        <input type="text" id="inp-tag" placeholder="tag…" autocomplete="off" list="tag-suggestions">
+        <datalist id="tag-suggestions"></datalist>
+      </div>
+      <button class="add-btn" onclick="addCard()">Add Card</button>
+      <div class="add-success" id="add-success">Card added!</div>
+    </div>
+  </div>
+
+  <!-- ── Study ── -->
+  <div id="fc-study" class="fc-panel">
+    <div id="study-content"></div>
+  </div>
+
+  <!-- ── All Cards ── -->
+  <div id="fc-all" class="fc-panel">
+    <div id="all-content"></div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════
+// TTS
+// ════════════════════════════════════════
+let currentRate = parseFloat(localStorage.getItem('lla_rate') || '0.85');
+
+function setRate(rate, btn) {
+  currentRate = rate;
+  localStorage.setItem('lla_rate', rate);
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('spd-active'));
+  btn.classList.add('spd-active');
+}
+
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'ko-KR';
+  u.rate = currentRate;
+  window.speechSynthesis.speak(u);
+}
+function speakWord(w) { speak(w); }
+
+// Restore saved speed button state on load
+(function () {
+  const saved = parseFloat(localStorage.getItem('lla_rate') || '0.85');
+  const rates = [0.6, 0.85, 1.1];
+  const btns = document.querySelectorAll('.speed-btn');
+  btns.forEach((btn, i) => {
+    btn.classList.toggle('spd-active', rates[i] === saved);
+  });
+})();
+
+// ════════════════════════════════════════
+// Main nav
+// ════════════════════════════════════════
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ════════════════════════════════════════
+// Pronunciation guide data
+// ════════════════════════════════════════
+const basicConsonants = [
+  { char:'ㄱ', name:'기역',  initial:'g (soft)', final:'k',          ex:'가다',  exMeaning:'to go / 국 soup' },
+  { char:'ㄴ', name:'니은',  initial:'n',         final:'n',          ex:'나',    exMeaning:'I / me' },
+  { char:'ㄷ', name:'디귿',  initial:'d',         final:'t',          ex:'다',    exMeaning:'all / 닫다 close' },
+  { char:'ㄹ', name:'리을',  initial:'r',         final:'l',          ex:'라면',  exMeaning:'ramen noodles' },
+  { char:'ㅁ', name:'미음',  initial:'m',         final:'m',          ex:'마음',  exMeaning:'heart / mind' },
+  { char:'ㅂ', name:'비읍',  initial:'b',         final:'p',          ex:'바다',  exMeaning:'sea / ocean' },
+  { char:'ㅅ', name:'시옷',  initial:'s',         final:'t',          ex:'사람',  exMeaning:'person' },
+  { char:'ㅇ', name:'이응',  initial:'(silent)',  final:'ng',         ex:'아이',  exMeaning:'child' },
+  { char:'ㅈ', name:'지읒',  initial:'j',         final:'t',          ex:'자다',  exMeaning:'to sleep' },
+  { char:'ㅊ', name:'치읓',  initial:'ch',        final:'t',          ex:'차',    exMeaning:'tea / car' },
+  { char:'ㅋ', name:'키읔',  initial:'k',         final:'k',          ex:'코',    exMeaning:'nose' },
+  { char:'ㅌ', name:'티읕',  initial:'t',         final:'t',          ex:'타다',  exMeaning:'to ride' },
+  { char:'ㅍ', name:'피읖',  initial:'p',         final:'p',          ex:'파',    exMeaning:'green onion' },
+  { char:'ㅎ', name:'히읗',  initial:'h',         final:'(silent/t)', ex:'하다',  exMeaning:'to do' },
+];
+const tenseConsonants = [
+  { char:'ㄲ', name:'쌍기역', initial:'kk', final:'k', ex:'꽃',  exMeaning:'flower' },
+  { char:'ㄸ', name:'쌍디귿', initial:'tt', final:'–', ex:'딸기', exMeaning:'strawberry' },
+  { char:'ㅃ', name:'쌍비읍', initial:'pp', final:'–', ex:'빵',  exMeaning:'bread' },
+  { char:'ㅆ', name:'쌍시옷', initial:'ss', final:'t', ex:'씨',  exMeaning:'seed / Mr./Ms.' },
+  { char:'ㅉ', name:'쌍지읒', initial:'jj', final:'–', ex:'짜다', exMeaning:'salty' },
+];
+const basicVowels = [
+  { char:'ㅏ', rom:'a',    hint:'like "a" in father',         ex:'아버지', exMeaning:'father' },
+  { char:'ㅑ', rom:'ya',   hint:'like "ya" in yard',          ex:'야채',  exMeaning:'vegetable' },
+  { char:'ㅓ', rom:'eo',   hint:'"uh" — mouth open',          ex:'어머니', exMeaning:'mother' },
+  { char:'ㅕ', rom:'yeo',  hint:'like "yuh"',                 ex:'여자',  exMeaning:'woman' },
+  { char:'ㅗ', rom:'o',    hint:'like "o" in go, lips round', ex:'오다',  exMeaning:'to come' },
+  { char:'ㅛ', rom:'yo',   hint:'like "yo" in yoga',          ex:'요리',  exMeaning:'cooking' },
+  { char:'ㅜ', rom:'u',    hint:'"oo" in moon, lips forward', ex:'우유',  exMeaning:'milk' },
+  { char:'ㅠ', rom:'yu',   hint:'like "you"',                 ex:'유리',  exMeaning:'glass' },
+  { char:'ㅡ', rom:'eu',   hint:'"oo" but lips flat — unique!',ex:'으',   exMeaning:'(effort sound)' },
+  { char:'ㅣ', rom:'i',    hint:'like "ee" in see',           ex:'이',    exMeaning:'this / tooth' },
+];
+const compoundVowels = [
+  { char:'ㅐ', rom:'ae',   hint:'like "air" (short)',         ex:'개',    exMeaning:'dog' },
+  { char:'ㅔ', rom:'e',    hint:'same as ㅐ in modern Korean',ex:'세',    exMeaning:'three / world' },
+  { char:'ㅒ', rom:'yae',  hint:'yae — rare',                 ex:'얘기',  exMeaning:'story / talk' },
+  { char:'ㅖ', rom:'ye',   hint:'like "yeah" quickly',        ex:'예쁘다', exMeaning:'pretty' },
+  { char:'ㅘ', rom:'wa',   hint:'like "wa" in water',         ex:'과일',  exMeaning:'fruit' },
+  { char:'ㅙ', rom:'wae',  hint:'like "weh"',                 ex:'왜',    exMeaning:'why' },
+  { char:'ㅚ', rom:'oe',   hint:'like "weh" (same as ㅙ now)',ex:'외국',  exMeaning:'foreign country' },
+  { char:'ㅝ', rom:'wo',   hint:'like "wuh"',                 ex:'워낙',  exMeaning:'inherently' },
+  { char:'ㅞ', rom:'we',   hint:'like "weh"',                 ex:'웨이터', exMeaning:'waiter' },
+  { char:'ㅟ', rom:'wi',   hint:'like "wee"',                 ex:'위',    exMeaning:'above / stomach' },
+  { char:'ㅢ', rom:'ui→i', hint:'"ee" when not first syllable',ex:'의사', exMeaning:'doctor' },
+];
+
+function makeConCard(c) {
+  const d = document.createElement('div');
+  d.className = 'char-card';
+  d.onclick = () => speak(c.char);
+  d.innerHTML = `<span class="char">${c.char}</span><span class="char-name">${c.name}</span><span class="roman">Initial: ${c.initial}</span><span class="roman" style="color:#c0392b;font-size:0.78rem">Final: ${c.final}</span><span class="example">${c.ex} — ${c.exMeaning}</span><span class="speak-hint">▶ tap to hear</span>`;
+  return d;
+}
+function makeVowCard(v) {
+  const d = document.createElement('div');
+  d.className = 'char-card';
+  d.onclick = () => speak(v.ex);
+  d.innerHTML = `<span class="char">${v.char}</span><span class="roman">${v.rom}</span><span class="example" style="font-size:0.78rem">${v.hint}</span><span class="example">${v.ex} — ${v.exMeaning}</span><span class="speak-hint">▶ tap to hear</span>`;
+  return d;
+}
+basicConsonants.forEach(c => document.getElementById('basic-con').appendChild(makeConCard(c)));
+tenseConsonants.forEach(c => document.getElementById('tense-con').appendChild(makeConCard(c)));
+basicVowels.forEach(v => document.getElementById('basic-vow').appendChild(makeVowCard(v)));
+compoundVowels.forEach(v => document.getElementById('compound-vow').appendChild(makeVowCard(v)));
+
+// ════════════════════════════════════════
+// FLASHCARD STORAGE
+// ════════════════════════════════════════
+function loadCards() {
+  try { return JSON.parse(localStorage.getItem('lla_cards') || '[]'); } catch { return []; }
+}
+function saveCards(cards) {
+  localStorage.setItem('lla_cards', JSON.stringify(cards));
+}
+
+function dueCards(cards) {
+  const now = Date.now();
+  return cards.filter(c => !c.nextReview || c.nextReview <= now);
+}
+
+// ════════════════════════════════════════
+// FLASHCARD NAV
+// ════════════════════════════════════════
+function fcShow(panelId, btn) {
+  document.querySelectorAll('.fc-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.fc-subnav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(panelId).classList.add('active');
+  btn.classList.add('active');
+  if (panelId === 'fc-study') renderStudy();
+  if (panelId === 'fc-all')   renderAll();
+}
+
+function refreshFC() {
+  const cards = loadCards();
+  const due = dueCards(cards).length;
+  document.getElementById('study-tab-btn').textContent = due > 0 ? `Study (${due} due)` : 'Study';
+  document.getElementById('all-tab-btn').textContent = cards.length > 0 ? `All Cards (${cards.length})` : 'All Cards';
+  updateTagSuggestions(cards);
+}
+
+function updateTagSuggestions(cards) {
+  const tags = [...new Set(cards.map(c => c.tag).filter(Boolean))];
+  const dl = document.getElementById('tag-suggestions');
+  dl.innerHTML = tags.map(t => `<option value="${t}">`).join('');
+}
+
+// ════════════════════════════════════════
+// ADD CARD
+// ════════════════════════════════════════
+const inpKor = document.getElementById('inp-kor');
+inpKor.addEventListener('blur', () => {
+  const v = inpKor.value.trim();
+  if (v && /[가-힣㄰-㆏]/.test(v)) speak(v);
+});
+inpKor.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-eng').focus(); });
+document.getElementById('inp-eng').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-tag').focus(); });
+document.getElementById('inp-tag').addEventListener('keydown', e => { if (e.key === 'Enter') addCard(); });
+
+function naverLookup() {
+  const v = inpKor.value.trim();
+  const query = v ? encodeURIComponent(v) : '';
+  window.open('https://en.dict.naver.com/#/search?query=' + query, '_blank');
+}
+
+function addCard() {
+  const korean  = inpKor.value.trim();
+  const english = document.getElementById('inp-eng').value.trim();
+  if (!korean || !english) {
+    inpKor.style.borderColor = korean ? '' : '#c0392b';
+    document.getElementById('inp-eng').style.borderColor = english ? '' : '#c0392b';
+    return;
+  }
+  inpKor.style.borderColor = '';
+  document.getElementById('inp-eng').style.borderColor = '';
+
+  const cards = loadCards();
+  cards.push({
+    id: Date.now(),
+    korean,
+    english,
+    tag: document.getElementById('inp-tag').value.trim(),
+    created: Date.now(),
+    nextReview: Date.now(),
+    interval: 1,
+    ease: 2.5,
+    reps: 0,
+  });
+  saveCards(cards);
+
+  inpKor.value = '';
+  document.getElementById('inp-eng').value = '';
+  document.getElementById('inp-tag').value = '';
+  inpKor.focus();
+
+  const ok = document.getElementById('add-success');
+  ok.style.display = 'block';
+  setTimeout(() => { ok.style.display = 'none'; }, 1800);
+
+  refreshFC();
+}
+
+// ════════════════════════════════════════
+// SRS
+// ════════════════════════════════════════
+function scheduleCard(card, quality) {
+  // quality: 0=hard, 1=good, 2=easy
+  if (quality === 0) {
+    card.interval = 1;
+    card.ease = Math.max(1.3, card.ease - 0.2);
+  } else if (quality === 1) {
+    card.interval = Math.max(1, Math.round(card.interval * card.ease));
+  } else {
+    card.interval = Math.max(1, Math.round(card.interval * card.ease * 1.3));
+    card.ease = Math.min(2.5, card.ease + 0.1);
+  }
+  card.nextReview = Date.now() + card.interval * 86400000;
+  card.reps = (card.reps || 0) + 1;
+}
+
+function intervalLabel(days) {
+  if (days === 1) return '1 day';
+  if (days < 7)  return days + ' days';
+  if (days < 30) return Math.round(days / 7) + 'w';
+  return Math.round(days / 30) + 'mo';
+}
+
+// ════════════════════════════════════════
+// STUDY VIEW
+// ════════════════════════════════════════
+let studyQueue = [], studyIndex = 0, studyFlipped = false;
+
+function renderStudy() {
+  const cards = loadCards();
+  studyQueue = dueCards(cards);
+  studyIndex = 0;
+  studyFlipped = false;
+  renderStudyCard();
+}
+
+function renderStudyCard() {
+  const el = document.getElementById('study-content');
+  if (studyQueue.length === 0) {
+    el.innerHTML = `<div class="study-empty"><div class="big-num">🎉</div><p>All caught up! No cards due right now.</p><p style="margin-top:8px;font-size:0.85rem">Add more cards, or come back later for review.</p></div>`;
+    return;
+  }
+  if (studyIndex >= studyQueue.length) {
+    el.innerHTML = `<div class="study-empty"><div class="big-num">✅</div><p style="font-size:1.1rem;font-weight:700">Session done!</p><p style="margin-top:8px">${studyQueue.length} card${studyQueue.length !== 1 ? 's' : ''} reviewed.</p></div>`;
+    refreshFC();
+    return;
+  }
+
+  const card = studyQueue[studyIndex];
+  const cards = loadCards();
+  const c = cards.find(x => x.id === card.id) || card;
+
+  const hardDays = 1;
+  const goodDays = Math.max(1, Math.round(c.interval * c.ease));
+  const easyDays = Math.max(1, Math.round(c.interval * c.ease * 1.3));
+
+  el.innerHTML = `
+    <div class="study-progress">${studyIndex + 1} / ${studyQueue.length}</div>
+    <div class="flip-scene" onclick="flipCard()" id="flip-scene">
+      <div class="flip-card" id="flip-card">
+        <div class="flip-face flip-front">
+          <div class="flip-kor">${card.korean}</div>
+          <button class="speak-card-btn" onclick="event.stopPropagation();speak('${card.korean.replace(/'/g,"\\'")}')">▶ Hear it</button>
+          <div class="flip-tap">tap to flip</div>
+        </div>
+        <div class="flip-face flip-back">
+          <div class="flip-eng">${card.english}</div>
+          ${card.tag ? `<div class="flip-tag">${card.tag}</div>` : ''}
+          <button class="speak-card-btn" style="background:var(--accent-light);border-color:var(--accent);color:var(--accent)" onclick="event.stopPropagation();speak('${card.korean.replace(/'/g,"\\'")}')">▶ Hear it</button>
+        </div>
+      </div>
+    </div>
+    <button class="flip-btn" id="flip-btn" onclick="flipCard()">Flip</button>
+    <div class="srs-btns" id="srs-btns" style="display:none">
+      <button class="srs-btn srs-hard" onclick="rate(0)">Hard<span class="srs-label">${intervalLabel(hardDays)}</span></button>
+      <button class="srs-btn srs-good" onclick="rate(1)">Good<span class="srs-label">${intervalLabel(goodDays)}</span></button>
+      <button class="srs-btn srs-easy" onclick="rate(2)">Easy<span class="srs-label">${intervalLabel(easyDays)}</span></button>
+    </div>`;
+}
+
+function flipCard() {
+  if (studyFlipped) return;
+  studyFlipped = true;
+  document.getElementById('flip-card').classList.add('flipped');
+  document.getElementById('flip-btn').style.display = 'none';
+  document.getElementById('srs-btns').style.display = 'flex';
+  document.getElementById('flip-scene').style.cursor = 'default';
+}
+
+function rate(quality) {
+  const card = studyQueue[studyIndex];
+  const cards = loadCards();
+  const idx = cards.findIndex(c => c.id === card.id);
+  if (idx !== -1) {
+    scheduleCard(cards[idx], quality);
+    saveCards(cards);
+  }
+  studyIndex++;
+  studyFlipped = false;
+  renderStudyCard();
+}
+
+// ════════════════════════════════════════
+// ALL CARDS VIEW
+// ════════════════════════════════════════
+function renderAll() {
+  const cards = loadCards();
+  const el = document.getElementById('all-content');
+  if (cards.length === 0) {
+    el.innerHTML = `<div class="all-empty"><p>No cards yet. Add some in the <strong>Add Card</strong> tab.</p></div>`;
+    return;
+  }
+  const due = dueCards(cards).length;
+  el.innerHTML = `<div class="all-stats">${cards.length} card${cards.length !== 1 ? 's' : ''} total · ${due} due now</div><div class="card-list" id="card-list"></div>`;
+  const list = document.getElementById('card-list');
+  [...cards].reverse().forEach(card => {
+    const item = document.createElement('div');
+    item.className = 'card-item';
+    item.onclick = () => speak(card.korean);
+    const dueDate = card.nextReview ? new Date(card.nextReview).toLocaleDateString() : 'now';
+    item.innerHTML = `
+      <span class="ci-kor">${card.korean}</span>
+      <span class="ci-eng">${card.english}</span>
+      ${card.tag ? `<span class="ci-tag">${card.tag}</span>` : ''}
+      <span class="ci-due">due ${dueDate}</span>
+      <button class="ci-del" onclick="event.stopPropagation();deleteCard(${card.id})" title="Delete">✕</button>`;
+    list.appendChild(item);
+  });
+}
+
+function deleteCard(id) {
+  const cards = loadCards().filter(c => c.id !== id);
+  saveCards(cards);
+  refreshFC();
+  renderAll();
+}
+</script>
+</body>
+</html>
