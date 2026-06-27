@@ -211,8 +211,9 @@
   </div>
   <div class="speed-control">
     <span>Speed:</span>
+    <button class="speed-btn" onclick="setRate('syllable', this)">Syllable</button>
     <button class="speed-btn" onclick="setRate(0.6, this)">Slow</button>
-    <button class="speed-btn spd-active" id="spd-normal" onclick="setRate(0.85, this)">Normal</button>
+    <button class="speed-btn spd-active" onclick="setRate(0.85, this)">Normal</button>
     <button class="speed-btn" onclick="setRate(1.1, this)">Fast</button>
   </div>
 </header>
@@ -492,32 +493,67 @@
 // ════════════════════════════════════════
 // TTS
 // ════════════════════════════════════════
-let currentRate = parseFloat(localStorage.getItem('lla_rate') || '0.85');
+let currentRate = localStorage.getItem('lla_rate') || '0.85';
+let koreanVoice = null;
+
+function loadKoreanVoice() {
+  const voices = window.speechSynthesis.getVoices();
+  // Prefer Google Korean voice (sounds like Google Translate), then any online Korean, then any Korean
+  koreanVoice =
+    voices.find(v => v.lang.startsWith('ko') && v.name.toLowerCase().includes('google')) ||
+    voices.find(v => v.lang.startsWith('ko') && !v.localService) ||
+    voices.find(v => v.lang.startsWith('ko')) ||
+    null;
+}
+if (window.speechSynthesis) {
+  window.speechSynthesis.addEventListener('voiceschanged', loadKoreanVoice);
+  loadKoreanVoice();
+}
 
 function setRate(rate, btn) {
   currentRate = rate;
-  localStorage.setItem('lla_rate', rate);
+  localStorage.setItem('lla_rate', String(rate));
   document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('spd-active'));
   btn.classList.add('spd-active');
 }
 
 function speak(text) {
   if (!window.speechSynthesis) return;
+  if (currentRate === 'syllable') { speakSyllables(text); return; }
   window.speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
   u.lang = 'ko-KR';
-  u.rate = currentRate;
+  u.rate = parseFloat(currentRate);
+  if (koreanVoice) u.voice = koreanVoice;
   window.speechSynthesis.speak(u);
 }
+
+function speakSyllables(text) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  // Each Hangul syllable block is a single Unicode char (U+AC00–U+D7A3)
+  const syllables = [...text].filter(c => c.charCodeAt(0) >= 0xAC00 && c.charCodeAt(0) <= 0xD7A3);
+  if (syllables.length === 0) { speak(text); return; }
+  function next(i) {
+    if (i >= syllables.length) return;
+    const u = new SpeechSynthesisUtterance(syllables[i]);
+    u.lang = 'ko-KR';
+    u.rate = 0.8;
+    if (koreanVoice) u.voice = koreanVoice;
+    u.onend = () => setTimeout(() => next(i + 1), 320);
+    window.speechSynthesis.speak(u);
+  }
+  next(0);
+}
+
 function speakWord(w) { speak(w); }
 
 // Restore saved speed button state on load
 (function () {
-  const saved = parseFloat(localStorage.getItem('lla_rate') || '0.85');
-  const rates = [0.6, 0.85, 1.1];
-  const btns = document.querySelectorAll('.speed-btn');
-  btns.forEach((btn, i) => {
-    btn.classList.toggle('spd-active', rates[i] === saved);
+  const saved = localStorage.getItem('lla_rate') || '0.85';
+  const rateValues = ['syllable', '0.6', '0.85', '1.1'];
+  document.querySelectorAll('.speed-btn').forEach((btn, i) => {
+    btn.classList.toggle('spd-active', rateValues[i] === saved);
   });
 })();
 
