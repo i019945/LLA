@@ -126,5 +126,17 @@
     "interval": 1,
     "ease": 2.5,
     "reps": 0
+  },
+  {
+    "id": 1782563503138,
+    "korean": "학생",
+    "english": "student",
+    "tag": "",
+    "trap": "",
+    "created": 1782563503138,
+    "nextReview": 1782563503138,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
   }
 ]
