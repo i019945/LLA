@@ -198,5 +198,17 @@
     "interval": 1,
     "ease": 2.5,
     "reps": 0
+  },
+  {
+    "id": 1782567195176,
+    "korean": "프랑스",
+    "english": "France",
+    "tag": "",
+    "trap": "",
+    "created": 1782567195176,
+    "nextReview": 1782567195176,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
   }
 ]
