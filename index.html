@@ -631,17 +631,22 @@ const compoundVowels = [
   { char:'ㅢ', rom:'ui→i', hint:'"ee" when not first syllable',ex:'의사', exMeaning:'doctor' },
 ];
 
+function firstSyllable(text) {
+  // Returns the first Hangul syllable block — gives the bare sound without a full word
+  return [...text].find(c => c.charCodeAt(0) >= 0xAC00 && c.charCodeAt(0) <= 0xD7A3) || text;
+}
+
 function makeConCard(c) {
   const d = document.createElement('div');
   d.className = 'char-card';
-  d.onclick = () => speak(c.ex);
+  d.onclick = () => speak(firstSyllable(c.ex));
   d.innerHTML = `<span class="char">${c.char}</span><span class="char-name">${c.name}</span><span class="roman">Initial: ${c.initial}</span><span class="roman" style="color:#c0392b;font-size:0.78rem">Final: ${c.final}</span><span class="example">${c.ex} — ${c.exMeaning}</span><span class="speak-hint">▶ tap to hear</span>`;
   return d;
 }
 function makeVowCard(v) {
   const d = document.createElement('div');
   d.className = 'char-card';
-  d.onclick = () => speak(v.ex);
+  d.onclick = () => speak(firstSyllable(v.ex));
   d.innerHTML = `<span class="char">${v.char}</span><span class="roman">${v.rom}</span><span class="example" style="font-size:0.78rem">${v.hint}</span><span class="example">${v.ex} — ${v.exMeaning}</span><span class="speak-hint">▶ tap to hear</span>`;
   return d;
 }
@@ -782,9 +787,17 @@ function intervalLabel(days) {
 // ════════════════════════════════════════
 let studyQueue = [], studyIndex = 0, studyFlipped = false, studySeenBack = false;
 
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 function renderStudy() {
   const cards = loadCards();
-  studyQueue = dueCards(cards);
+  studyQueue = shuffle(dueCards(cards));
   studyIndex = 0;
   studyFlipped = false;
   studySeenBack = false;
@@ -844,7 +857,7 @@ function renderStudyCard() {
 }
 
 function startBrowse() {
-  studyQueue = loadCards();
+  studyQueue = shuffle(loadCards());
   studyIndex = 0;
   studyFlipped = false;
   studySeenBack = false;
