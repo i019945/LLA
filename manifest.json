@@ -1,0 +1,13 @@
+{
+  "name": "LLA · 한국어",
+  "short_name": "LLA",
+  "description": "Korean Language Learning",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f8f7f5",
+  "theme_color": "#1a4fa0",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
