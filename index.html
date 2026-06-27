@@ -719,13 +719,14 @@ function intervalLabel(days) {
 // ════════════════════════════════════════
 // STUDY VIEW
 // ════════════════════════════════════════
-let studyQueue = [], studyIndex = 0, studyFlipped = false;
+let studyQueue = [], studyIndex = 0, studyFlipped = false, studySeenBack = false;
 
 function renderStudy() {
   const cards = loadCards();
   studyQueue = dueCards(cards);
   studyIndex = 0;
   studyFlipped = false;
+  studySeenBack = false;
   renderStudyCard();
 }
 
@@ -761,16 +762,16 @@ function renderStudyCard() {
         <div class="flip-face flip-front">
           <div class="flip-kor">${card.korean}</div>
           <button class="speak-card-btn" onclick="event.stopPropagation();speak('${korSafe}')">▶ Hear it</button>
-          <div class="flip-instruction">👆 Tap card to reveal meaning</div>
+          <div class="flip-instruction">👆 Tap to see meaning</div>
         </div>
         <div class="flip-face flip-back">
           <div class="flip-eng">${card.english}</div>
           ${card.tag ? `<div class="flip-tag">${card.tag}</div>` : ''}
           <button class="speak-card-btn" style="background:var(--accent-light);border-color:var(--accent);color:var(--accent)" onclick="event.stopPropagation();speak('${korSafe}')">▶ Hear it</button>
+          <div class="flip-instruction" style="color:var(--muted);animation:none">👆 Tap to flip back</div>
         </div>
       </div>
     </div>
-    <button class="flip-btn" id="flip-btn" onclick="flipCard()">Flip to see meaning</button>
     <div class="srs-btns" id="srs-btns" style="display:none">
       <button class="srs-btn srs-hard" onclick="rate(0)">Hard<span class="srs-label">again in ${intervalLabel(hardDays)}</span></button>
       <button class="srs-btn srs-good" onclick="rate(1)">Good<span class="srs-label">again in ${intervalLabel(goodDays)}</span></button>
@@ -783,16 +784,17 @@ function startBrowse() {
   studyQueue = loadCards();
   studyIndex = 0;
   studyFlipped = false;
+  studySeenBack = false;
   renderStudyCard();
 }
 
 function flipCard() {
-  if (studyFlipped) return;
-  studyFlipped = true;
-  document.getElementById('flip-card').classList.add('flipped');
-  document.getElementById('flip-btn').style.display = 'none';
-  document.getElementById('srs-btns').style.display = 'flex';
-  document.getElementById('flip-scene').style.cursor = 'default';
+  studyFlipped = !studyFlipped;
+  document.getElementById('flip-card').classList.toggle('flipped', studyFlipped);
+  if (studyFlipped && !studySeenBack) {
+    studySeenBack = true;
+    document.getElementById('srs-btns').style.display = 'flex';
+  }
 }
 
 function rate(quality) {
@@ -804,6 +806,7 @@ function rate(quality) {
   }
   studyIndex++;
   studyFlipped = false;
+  studySeenBack = false;
   renderStudyCard();
 }
 
