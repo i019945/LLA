@@ -777,12 +777,12 @@ function renderStudyCard() {
         <div class="flip-face flip-back">
           <div class="flip-eng">${card.english}</div>
           ${card.tag ? `<div class="flip-tag">${card.tag}</div>` : ''}
-          ${card.trap ? `<div class="flip-trap">${card.trap}</div>` : ''}
           <button class="speak-card-btn" style="background:var(--accent-light);border-color:var(--accent);color:var(--accent)" onclick="event.stopPropagation();speak('${korSafe}')">▶ Hear it</button>
           <div class="flip-instruction" style="color:var(--muted);animation:none">👆 Tap to flip back</div>
         </div>
       </div>
     </div>
+    ${card.trap ? `<div id="card-trap" class="flip-trap" style="display:none;margin-bottom:12px">${card.trap}</div>` : '<div id="card-trap"></div>'}
     <div class="srs-btns" id="srs-btns" style="display:none">
       <button class="srs-btn srs-hard" onclick="rate(0)">Hard<span class="srs-label">again in ${intervalLabel(hardDays)}</span></button>
       <button class="srs-btn srs-good" onclick="rate(1)">Good<span class="srs-label">again in ${intervalLabel(goodDays)}</span></button>
@@ -802,6 +802,8 @@ function startBrowse() {
 function flipCard() {
   studyFlipped = !studyFlipped;
   document.getElementById('flip-card').classList.toggle('flipped', studyFlipped);
+  const trapEl = document.getElementById('card-trap');
+  if (trapEl) trapEl.style.display = studyFlipped ? 'block' : 'none';
   if (studyFlipped && !studySeenBack) {
     studySeenBack = true;
     document.getElementById('srs-btns').style.display = 'flex';
