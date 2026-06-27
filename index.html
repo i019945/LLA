@@ -924,7 +924,11 @@ function setSyncStatus(msg, type) {
 async function loadFromGitHub() {
   setSyncStatus('Loading…');
   try {
-    const res = await fetch(GH_RAW + '?t=' + Date.now());
+    // Use the API endpoint (not raw.githubusercontent.com) to bypass CDN caching
+    const token = localStorage.getItem('lla_gh_token');
+    const headers = { Accept: 'application/vnd.github.v3.raw' };
+    if (token) headers.Authorization = `token ${token}`;
+    const res = await fetch(GH_API, { headers });
     if (!res.ok) throw new Error('Not found');
     const remote = await res.json();
     if (!Array.isArray(remote)) throw new Error('Bad format');
