@@ -1,1 +1,46 @@
-[]
+[
+  {
+    "id": 1782546151426,
+    "korean": "나",
+    "english": "I",
+    "tag": "",
+    "created": 1782546151426,
+    "nextReview": 1782546151426,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1782547441820,
+    "korean": "내일",
+    "english": "tomorrow",
+    "tag": "",
+    "created": 1782547441820,
+    "nextReview": 1782547441820,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1782547464150,
+    "korean": "오늘",
+    "english": "today",
+    "tag": "",
+    "created": 1782547464150,
+    "nextReview": 1782547464150,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1782547487134,
+    "korean": "죄송합니다",
+    "english": "I'm sorry",
+    "tag": "",
+    "created": 1782547487134,
+    "nextReview": 1782547487134,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  }
+]
