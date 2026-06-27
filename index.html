@@ -58,7 +58,7 @@
   .char-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 12px 10px 10px; text-align: center; cursor: pointer; transition: box-shadow 0.15s, transform 0.1s; user-select: none; }
   .char-card:hover { box-shadow: 0 2px 10px rgba(26,79,160,0.15); transform: translateY(-1px); }
   .char-card:active { transform: scale(0.97); }
-  .char       { font-size: 2.2rem; color: var(--accent); display: block; margin-bottom: 2px; }
+  .char       { font-size: 3rem; color: var(--accent); display: block; margin-bottom: 2px; }
   .char-name  { font-size: 0.7rem; color: var(--muted); margin-bottom: 4px; display: block; }
   .roman      { font-size: 0.85rem; font-weight: 600; color: var(--text); display: block; }
   .example    { font-size: 0.75rem; color: var(--muted); margin-top: 4px; display: block; }
@@ -73,7 +73,7 @@
   .examples   { display: flex; flex-direction: column; gap: 6px; }
   .ex-row     { display: flex; align-items: baseline; gap: 10px; background: white; border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; cursor: pointer; transition: background 0.1s; }
   .ex-row:hover { background: var(--accent-light); }
-  .ex-kor  { font-size: 1.1rem; color: var(--accent); font-weight: 700; min-width: 70px; }
+  .ex-kor  { font-size: 1.4rem; color: var(--accent); font-weight: 700; min-width: 80px; }
   .ex-arrow{ color: var(--accent2); font-weight: 700; font-size: 0.9rem; }
   .ex-pron { font-size: 0.88rem; color: #555; font-family: monospace; }
   .ex-eng  { font-size: 0.82rem; color: var(--muted); margin-left: auto; }
@@ -83,7 +83,7 @@
   .seven-table th { background: var(--accent); color: white; padding: 8px 10px; text-align: left; }
   .seven-table td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
   .seven-table tr:nth-child(even) td { background: var(--accent-light); }
-  .big-char { font-size: 1.3rem; color: var(--accent); font-weight: 700; }
+  .big-char { font-size: 1.6rem; color: var(--accent); font-weight: 700; }
   .maps { color: var(--muted); }
   .double-table th { background: #555; color: white; padding: 8px 10px; text-align: left; }
   .double-table td { padding: 7px 10px; border-bottom: 1px solid var(--border); }
@@ -94,7 +94,7 @@
   .syllable-diagram { display: flex; align-items: center; justify-content: center; gap: 16px; margin: 16px 0; flex-wrap: wrap; }
   .syl-box { background: var(--card); border: 2px solid var(--accent); border-radius: 12px; padding: 14px 18px; text-align: center; min-width: 80px; }
   .syl-label { font-size: 0.7rem; color: var(--muted); margin-bottom: 4px; }
-  .syl-char  { font-size: 2rem; color: var(--accent); }
+  .syl-char  { font-size: 2.6rem; color: var(--accent); }
   .syl-optional { border-style: dashed; opacity: 0.7; }
   .syl-plus, .syl-eq { font-size: 1.5rem; color: var(--muted); }
 
@@ -126,13 +126,13 @@
   .study-empty .big-num { font-size: 3rem; margin-bottom: 8px; }
   .study-progress { font-size: 0.82rem; color: var(--muted); text-align: center; margin-bottom: 16px; }
 
-  .flip-scene { perspective: 900px; width: 100%; max-width: 440px; margin: 0 auto 20px; height: 200px; cursor: pointer; }
+  .flip-scene { perspective: 900px; width: 100%; max-width: 440px; margin: 0 auto 20px; height: 240px; cursor: pointer; }
   .flip-card  { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.45s; }
   .flip-card.flipped { transform: rotateY(180deg); }
   .flip-face  { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 20px; }
   .flip-front { background: var(--accent); color: white; box-shadow: 0 4px 20px rgba(26,79,160,0.25); }
   .flip-back  { background: white; border: 2px solid var(--accent); transform: rotateY(180deg); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-  .flip-kor   { font-size: 2.4rem; font-weight: 700; line-height: 1.2; }
+  .flip-kor   { font-size: 3.2rem; font-weight: 700; line-height: 1.2; }
   .flip-hint  { font-size: 0.82rem; opacity: 0.7; }
   .flip-eng   { font-size: 1.3rem; font-weight: 700; color: var(--text); text-align: center; }
   .flip-tag   { font-size: 0.8rem; color: var(--muted); background: var(--accent-light); padding: 3px 12px; border-radius: 20px; }
@@ -157,7 +157,7 @@
   .card-list  { display: flex; flex-direction: column; gap: 8px; }
   .card-item  { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; display: flex; align-items: flex-start; gap: 12px; cursor: pointer; }
   .card-item:hover { background: var(--accent-light); }
-  .ci-kor  { font-size: 1.2rem; font-weight: 700; color: var(--accent); display: block; }
+  .ci-kor  { font-size: 1.5rem; font-weight: 700; color: var(--accent); display: block; }
   .ci-eng  { font-size: 0.88rem; color: var(--text); display: block; }
   .ci-tag  { font-size: 0.75rem; color: var(--muted); background: var(--accent-light); padding: 2px 10px; border-radius: 20px; white-space: nowrap; }
   .ci-due  { font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
@@ -197,8 +197,8 @@
   @media (max-width: 500px) {
     .char-grid { grid-template-columns: repeat(auto-fill, minmax(105px,1fr)); }
     nav button { padding: 11px 12px; font-size: 0.8rem; }
-    .flip-scene { height: 180px; }
-    .flip-kor { font-size: 1.9rem; }
+    .flip-scene { height: 210px; }
+    .flip-kor { font-size: 2.6rem; }
   }
 </style>
 </head>
@@ -219,15 +219,15 @@
 </header>
 
 <nav>
-  <button class="active" onclick="show('consonants', this)">Consonants</button>
+  <button class="active" onclick="show('flashcards', this); refreshFC()">Flashcards</button>
+  <button onclick="show('consonants', this)">Consonants</button>
   <button onclick="show('vowels', this)">Vowels</button>
   <button onclick="show('syllables', this)">Syllables</button>
   <button onclick="show('batchim', this)">받침 Rules ★</button>
-  <button onclick="show('flashcards', this); refreshFC()">Flashcards</button>
 </nav>
 
 <!-- ══════════════════ CONSONANTS ══════════════════ -->
-<div id="consonants" class="section active">
+<div id="consonants" class="section">
   <div class="intro-box">Korean has <strong>14 basic consonants</strong> + <strong>5 tense consonants</strong>. Each can appear at the start (initial) or end (final/받침) of a syllable — and the sound differs. Tap any card to hear it.</div>
   <h2>Basic Consonants (기본 자음)</h2>
   <div class="char-grid" id="basic-con"></div>
@@ -428,7 +428,7 @@
 </div>
 
 <!-- ══════════════════ FLASHCARDS ══════════════════ -->
-<div id="flashcards" class="section">
+<div id="flashcards" class="section active">
   <div class="fc-subnav">
     <button class="active" onclick="fcShow('fc-add', this)">Add Card</button>
     <button onclick="fcShow('fc-study', this)" id="study-tab-btn">Study</button>
@@ -567,6 +567,7 @@ function speakWord(w) { speak(w); }
     btn.classList.toggle('spd-active', rateValues[i] === saved);
   });
 })();
+refreshFC();
 
 // ════════════════════════════════════════
 // Main nav
@@ -633,7 +634,7 @@ const compoundVowels = [
 function makeConCard(c) {
   const d = document.createElement('div');
   d.className = 'char-card';
-  d.onclick = () => speak(c.char);
+  d.onclick = () => speak(c.ex);
   d.innerHTML = `<span class="char">${c.char}</span><span class="char-name">${c.name}</span><span class="roman">Initial: ${c.initial}</span><span class="roman" style="color:#c0392b;font-size:0.78rem">Final: ${c.final}</span><span class="example">${c.ex} — ${c.exMeaning}</span><span class="speak-hint">▶ tap to hear</span>`;
   return d;
 }
@@ -751,18 +752,9 @@ function addCard() {
 // ════════════════════════════════════════
 // SRS
 // ════════════════════════════════════════
-function scheduleCard(card, quality) {
-  // quality: 0=hard, 1=good, 2=easy
-  if (quality === 0) {
-    card.interval = 1;
-    card.ease = Math.max(1.3, card.ease - 0.2);
-  } else if (quality === 1) {
-    card.interval = Math.max(1, Math.round(card.interval * card.ease));
-  } else {
-    card.interval = Math.max(1, Math.round(card.interval * card.ease * 1.3));
-    card.ease = Math.min(2.5, card.ease + 0.1);
-  }
-  card.nextReview = Date.now() + card.interval * 86400000;
+function scheduleCard(card, days) {
+  card.interval = days;
+  card.nextReview = Date.now() + days * 86400000;
   card.reps = (card.reps || 0) + 1;
 }
 
@@ -806,10 +798,6 @@ function renderStudyCard() {
   }
 
   const card = studyQueue[studyIndex];
-  const c = allCards.find(x => x.id === card.id) || card;
-  const hardDays = 1;
-  const goodDays = Math.max(1, Math.round(c.interval * c.ease));
-  const easyDays = Math.max(1, Math.round(c.interval * c.ease * 1.3));
   const korSafe = card.korean.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
 
   el.innerHTML = `
@@ -831,10 +819,10 @@ function renderStudyCard() {
     </div>
     ${card.trap ? `<div id="card-trap" class="flip-trap" style="display:none;margin-bottom:12px">${card.trap}</div>` : '<div id="card-trap"></div>'}
     <div class="srs-btns" id="srs-btns" style="display:none">
-      <button class="srs-btn srs-hard" onclick="rate(0)">Hard<span class="srs-label">again in ${intervalLabel(hardDays)}</span></button>
-      <button class="srs-btn srs-good" onclick="rate(1)">Good<span class="srs-label">again in ${intervalLabel(goodDays)}</span></button>
-      <button class="srs-btn srs-easy" onclick="rate(2)">Easy<span class="srs-label">again in ${intervalLabel(easyDays)}</span></button>
-      <button class="srs-next" onclick="rate(-1)" title="Skip without rating">Skip →</button>
+      <button class="srs-btn srs-hard" onclick="rate(1)">1 Day</button>
+      <button class="srs-btn srs-good" onclick="rate(2)">2 Days</button>
+      <button class="srs-btn srs-easy" onclick="rate(3)">3 Days</button>
+      <button class="srs-btn" style="background:#ede0ff;color:#6b21a8" onclick="rate(10)">10 Days</button>
     </div>`;
 }
 
@@ -857,13 +845,11 @@ function flipCard() {
   }
 }
 
-function rate(quality) {
+function rate(days) {
   const card = studyQueue[studyIndex];
-  if (quality >= 0) {
-    const cards = loadCards();
-    const idx = cards.findIndex(c => c.id === card.id);
-    if (idx !== -1) { scheduleCard(cards[idx], quality); saveCards(cards); }
-  }
+  const cards = loadCards();
+  const idx = cards.findIndex(c => c.id === card.id);
+  if (idx !== -1) { scheduleCard(cards[idx], days); saveCards(cards); }
   studyIndex++;
   studyFlipped = false;
   studySeenBack = false;
