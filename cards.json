@@ -38,7 +38,31 @@
     "english": "I'm sorry",
     "tag": "",
     "created": 1782547487134,
-    "nextReview": 1782547487134,
+    "nextReview": 1782639567392,
+    "interval": 1,
+    "ease": 2.3,
+    "reps": 1
+  },
+  {
+    "id": 1782552109975,
+    "korean": "책",
+    "english": "book",
+    "tag": "",
+    "trap": "",
+    "created": 1782552109975,
+    "nextReview": 1782552109975,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1782552613172,
+    "korean": "학교",
+    "english": "school",
+    "tag": "",
+    "trap": "",
+    "created": 1782552613172,
+    "nextReview": 1782552613172,
     "interval": 1,
     "ease": 2.5,
     "reps": 0
