@@ -165,6 +165,32 @@
   .ci-del:hover { color: var(--accent2); }
   .all-stats { font-size: 0.82rem; color: var(--muted); margin-bottom: 12px; }
 
+  /* ── Sync bar ── */
+  .sync-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .sync-btn { border: 1.5px solid var(--border); background: white; border-radius: 8px; padding: 7px 14px; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 5px; }
+  .sync-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+  .sync-save { border-color: var(--accent); color: var(--accent); }
+  .sync-save:hover { background: var(--accent); color: white; }
+  .sync-setup { background: none; border: none; font-size: 1rem; cursor: pointer; color: var(--muted); padding: 4px 6px; border-radius: 6px; margin-left: auto; }
+  .sync-setup:hover { background: var(--border); }
+  .sync-status { font-size: 0.78rem; color: var(--muted); }
+  .sync-status.ok  { color: var(--green); }
+  .sync-status.err { color: var(--accent2); }
+  .token-row { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; margin-bottom: 14px; display: none; }
+  .token-row label { display: block; font-size: 0.78rem; font-weight: 700; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .token-row .token-hint { font-size: 0.78rem; color: var(--muted); margin-bottom: 8px; }
+  .token-row .token-hint code { background: var(--bg); padding: 1px 5px; border-radius: 4px; font-size: 0.82rem; }
+  .token-input-row { display: flex; gap: 8px; }
+  .token-input-row input { flex: 1; border: 1.5px solid var(--border); border-radius: 6px; padding: 8px 10px; font-size: 0.85rem; font-family: monospace; outline: none; }
+  .token-input-row input:focus { border-color: var(--accent); }
+  .token-save-btn { background: var(--accent); color: white; border: none; border-radius: 6px; padding: 8px 14px; font-size: 0.85rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+
+  /* ── Study improvements ── */
+  .srs-next { background: none; border: 1.5px solid var(--border); color: var(--muted); border-radius: 10px; padding: 10px 16px; font-size: 0.82rem; cursor: pointer; transition: all 0.15s; }
+  .srs-next:hover { border-color: var(--muted); color: var(--text); }
+  .flip-instruction { font-size: 0.88rem; color: rgba(255,255,255,0.8); margin-top: 6px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:0.6} 50%{opacity:1} }
+
   @media (max-width: 500px) {
     .char-grid { grid-template-columns: repeat(auto-fill, minmax(105px,1fr)); }
     nav button { padding: 11px 12px; font-size: 0.8rem; }
@@ -403,6 +429,21 @@
     <button class="active" onclick="fcShow('fc-add', this)">Add Card</button>
     <button onclick="fcShow('fc-study', this)" id="study-tab-btn">Study</button>
     <button onclick="fcShow('fc-all', this)" id="all-tab-btn">All Cards</button>
+  </div>
+
+  <div class="sync-bar">
+    <button class="sync-btn" onclick="loadFromGitHub()">↓ Load from GitHub</button>
+    <button class="sync-btn sync-save" onclick="saveToGitHub()">↑ Save to GitHub</button>
+    <span class="sync-status" id="sync-status"></span>
+    <button class="sync-setup" onclick="toggleTokenSetup()" title="GitHub token settings">⚙</button>
+  </div>
+  <div class="token-row" id="token-row">
+    <label>GitHub Personal Access Token</label>
+    <p class="token-hint">On your Mac, run <code>gh auth token</code> in Terminal to get your token. Paste it below — stored locally, never shared.</p>
+    <div class="token-input-row">
+      <input type="password" id="gh-token-input" placeholder="ghp_…">
+      <button class="token-save-btn" onclick="saveToken()">Save</button>
+    </div>
   </div>
 
   <!-- ── Add Card ── -->
@@ -690,8 +731,14 @@ function renderStudy() {
 
 function renderStudyCard() {
   const el = document.getElementById('study-content');
+  const allCards = loadCards();
+
+  if (allCards.length === 0) {
+    el.innerHTML = `<div class="study-empty"><div class="big-num" style="font-size:2rem">📭</div><p style="font-weight:700;margin-top:8px">No cards yet.</p><p style="font-size:0.85rem;margin-top:6px">Add cards in the <strong>Add Card</strong> tab, or tap <strong>↓ Load from GitHub</strong> above to sync from another device.</p></div>`;
+    return;
+  }
   if (studyQueue.length === 0) {
-    el.innerHTML = `<div class="study-empty"><div class="big-num">🎉</div><p>All caught up! No cards due right now.</p><p style="margin-top:8px;font-size:0.85rem">Add more cards, or come back later for review.</p></div>`;
+    el.innerHTML = `<div class="study-empty"><div class="big-num">🎉</div><p style="font-weight:700">All caught up!</p><p style="margin-top:8px;font-size:0.85rem">No cards due right now. Come back later or add more cards.</p><p style="margin-top:12px"><button style="border:1.5px solid var(--accent);color:var(--accent);background:white;border-radius:20px;padding:8px 20px;font-weight:600;cursor:pointer" onclick="startBrowse()">Browse all ${allCards.length} cards anyway →</button></p></div>`;
     return;
   }
   if (studyIndex >= studyQueue.length) {
@@ -701,35 +748,42 @@ function renderStudyCard() {
   }
 
   const card = studyQueue[studyIndex];
-  const cards = loadCards();
-  const c = cards.find(x => x.id === card.id) || card;
-
+  const c = allCards.find(x => x.id === card.id) || card;
   const hardDays = 1;
   const goodDays = Math.max(1, Math.round(c.interval * c.ease));
   const easyDays = Math.max(1, Math.round(c.interval * c.ease * 1.3));
+  const korSafe = card.korean.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
 
   el.innerHTML = `
-    <div class="study-progress">${studyIndex + 1} / ${studyQueue.length}</div>
+    <div class="study-progress">${studyIndex + 1} / ${studyQueue.length} due</div>
     <div class="flip-scene" onclick="flipCard()" id="flip-scene">
       <div class="flip-card" id="flip-card">
         <div class="flip-face flip-front">
           <div class="flip-kor">${card.korean}</div>
-          <button class="speak-card-btn" onclick="event.stopPropagation();speak('${card.korean.replace(/'/g,"\\'")}')">▶ Hear it</button>
-          <div class="flip-tap">tap to flip</div>
+          <button class="speak-card-btn" onclick="event.stopPropagation();speak('${korSafe}')">▶ Hear it</button>
+          <div class="flip-instruction">👆 Tap card to reveal meaning</div>
         </div>
         <div class="flip-face flip-back">
           <div class="flip-eng">${card.english}</div>
           ${card.tag ? `<div class="flip-tag">${card.tag}</div>` : ''}
-          <button class="speak-card-btn" style="background:var(--accent-light);border-color:var(--accent);color:var(--accent)" onclick="event.stopPropagation();speak('${card.korean.replace(/'/g,"\\'")}')">▶ Hear it</button>
+          <button class="speak-card-btn" style="background:var(--accent-light);border-color:var(--accent);color:var(--accent)" onclick="event.stopPropagation();speak('${korSafe}')">▶ Hear it</button>
         </div>
       </div>
     </div>
-    <button class="flip-btn" id="flip-btn" onclick="flipCard()">Flip</button>
+    <button class="flip-btn" id="flip-btn" onclick="flipCard()">Flip to see meaning</button>
     <div class="srs-btns" id="srs-btns" style="display:none">
-      <button class="srs-btn srs-hard" onclick="rate(0)">Hard<span class="srs-label">${intervalLabel(hardDays)}</span></button>
-      <button class="srs-btn srs-good" onclick="rate(1)">Good<span class="srs-label">${intervalLabel(goodDays)}</span></button>
-      <button class="srs-btn srs-easy" onclick="rate(2)">Easy<span class="srs-label">${intervalLabel(easyDays)}</span></button>
+      <button class="srs-btn srs-hard" onclick="rate(0)">Hard<span class="srs-label">again in ${intervalLabel(hardDays)}</span></button>
+      <button class="srs-btn srs-good" onclick="rate(1)">Good<span class="srs-label">again in ${intervalLabel(goodDays)}</span></button>
+      <button class="srs-btn srs-easy" onclick="rate(2)">Easy<span class="srs-label">again in ${intervalLabel(easyDays)}</span></button>
+      <button class="srs-next" onclick="rate(-1)" title="Skip without rating">Skip →</button>
     </div>`;
+}
+
+function startBrowse() {
+  studyQueue = loadCards();
+  studyIndex = 0;
+  studyFlipped = false;
+  renderStudyCard();
 }
 
 function flipCard() {
@@ -743,11 +797,10 @@ function flipCard() {
 
 function rate(quality) {
   const card = studyQueue[studyIndex];
-  const cards = loadCards();
-  const idx = cards.findIndex(c => c.id === card.id);
-  if (idx !== -1) {
-    scheduleCard(cards[idx], quality);
-    saveCards(cards);
+  if (quality >= 0) {
+    const cards = loadCards();
+    const idx = cards.findIndex(c => c.id === card.id);
+    if (idx !== -1) { scheduleCard(cards[idx], quality); saveCards(cards); }
   }
   studyIndex++;
   studyFlipped = false;
@@ -787,6 +840,85 @@ function deleteCard(id) {
   saveCards(cards);
   refreshFC();
   renderAll();
+}
+
+// ════════════════════════════════════════
+// SYNC — GitHub
+// ════════════════════════════════════════
+const GH_RAW  = 'https://raw.githubusercontent.com/i019945/LLA/main/cards.json';
+const GH_API  = 'https://api.github.com/repos/i019945/LLA/contents/cards.json';
+
+function setSyncStatus(msg, type) {
+  const el = document.getElementById('sync-status');
+  el.textContent = msg;
+  el.className = 'sync-status' + (type ? ' ' + type : '');
+  if (type === 'ok') setTimeout(() => { el.textContent = ''; el.className = 'sync-status'; }, 3000);
+}
+
+async function loadFromGitHub() {
+  setSyncStatus('Loading…');
+  try {
+    const res = await fetch(GH_RAW + '?t=' + Date.now());
+    if (!res.ok) throw new Error('Not found');
+    const remote = await res.json();
+    if (!Array.isArray(remote)) throw new Error('Bad format');
+    // merge: remote wins for same ID, keep local-only cards
+    const local = loadCards();
+    const merged = [...remote];
+    local.forEach(lc => { if (!merged.find(r => r.id === lc.id)) merged.push(lc); });
+    saveCards(merged);
+    refreshFC();
+    setSyncStatus(`✓ Loaded ${remote.length} cards`, 'ok');
+  } catch (e) {
+    setSyncStatus('Load failed: ' + e.message, 'err');
+  }
+}
+
+async function saveToGitHub() {
+  const token = localStorage.getItem('lla_gh_token');
+  if (!token) {
+    document.getElementById('token-row').style.display = 'block';
+    setSyncStatus('Enter GitHub token first (⚙ above)', 'err');
+    return;
+  }
+  setSyncStatus('Saving…');
+  try {
+    const cards = loadCards();
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(cards, null, 2))));
+    // get current SHA (required for updates)
+    let sha = null;
+    const existing = await fetch(GH_API, { headers: { Authorization: `token ${token}` } });
+    if (existing.ok) { const d = await existing.json(); sha = d.sha; }
+    const body = { message: 'Update cards', content };
+    if (sha) body.sha = sha;
+    const res = await fetch(GH_API, {
+      method: 'PUT',
+      headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) throw new Error((await res.json()).message || res.status);
+    setSyncStatus(`✓ Saved ${cards.length} cards to GitHub`, 'ok');
+  } catch (e) {
+    setSyncStatus('Save failed: ' + e.message, 'err');
+  }
+}
+
+function toggleTokenSetup() {
+  const row = document.getElementById('token-row');
+  row.style.display = row.style.display === 'none' ? 'block' : 'none';
+  if (row.style.display === 'block') {
+    const saved = localStorage.getItem('lla_gh_token');
+    if (saved) document.getElementById('gh-token-input').value = saved;
+    document.getElementById('gh-token-input').focus();
+  }
+}
+
+function saveToken() {
+  const t = document.getElementById('gh-token-input').value.trim();
+  if (!t) return;
+  localStorage.setItem('lla_gh_token', t);
+  document.getElementById('token-row').style.display = 'none';
+  setSyncStatus('Token saved', 'ok');
 }
 </script>
 </body>
