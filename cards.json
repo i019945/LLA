@@ -66,5 +66,53 @@
     "interval": 1,
     "ease": 2.5,
     "reps": 0
+  },
+  {
+    "id": 1782562678821,
+    "korean": "미국",
+    "english": "美國",
+    "tag": "美國",
+    "trap": "",
+    "created": 1782562678821,
+    "nextReview": 1782562678821,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1782562742038,
+    "korean": "한국어",
+    "english": "韓語",
+    "tag": "",
+    "trap": "",
+    "created": 1782562742038,
+    "nextReview": 1782562742038,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1782562802062,
+    "korean": "영어",
+    "english": "英語",
+    "tag": "",
+    "trap": "",
+    "created": 1782562802062,
+    "nextReview": 1782562802062,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1782562832768,
+    "korean": "일본어",
+    "english": "日語",
+    "tag": "",
+    "trap": "",
+    "created": 1782562832768,
+    "nextReview": 1782562832768,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
   }
 ]
