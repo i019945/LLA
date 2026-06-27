@@ -114,5 +114,17 @@
     "interval": 1,
     "ease": 2.5,
     "reps": 0
+  },
+  {
+    "id": 1782563141337,
+    "korean": "공부하다",
+    "english": "study (V)",
+    "tag": "",
+    "trap": "",
+    "created": 1782563141337,
+    "nextReview": 1782563141337,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
   }
 ]
