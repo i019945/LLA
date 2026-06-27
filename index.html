@@ -928,7 +928,7 @@ async function loadFromGitHub() {
     const token = localStorage.getItem('lla_gh_token');
     const headers = { Accept: 'application/vnd.github.v3.raw' };
     if (token) headers.Authorization = `token ${token}`;
-    const res = await fetch(GH_API, { headers });
+    const res = await fetch(GH_API, { headers, cache: 'no-store' });
     if (!res.ok) throw new Error('Not found');
     const remote = await res.json();
     if (!Array.isArray(remote)) throw new Error('Bad format');
