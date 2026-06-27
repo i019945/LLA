@@ -150,5 +150,17 @@
     "interval": 1,
     "ease": 2.5,
     "reps": 0
+  },
+  {
+    "id": 1782564208983,
+    "korean": "집",
+    "english": "home",
+    "tag": "",
+    "trap": "",
+    "created": 1782564208983,
+    "nextReview": 1782564208983,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
   }
 ]
