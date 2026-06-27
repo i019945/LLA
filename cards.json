@@ -162,5 +162,17 @@
     "interval": 1,
     "ease": 2.5,
     "reps": 0
+  },
+  {
+    "id": 1782564336199,
+    "korean": "물",
+    "english": "water",
+    "tag": "",
+    "trap": "",
+    "created": 1782564336199,
+    "nextReview": 1782564336199,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
   }
 ]
