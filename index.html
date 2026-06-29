@@ -199,6 +199,17 @@
   .flip-trap::before { content: '⚠ '; }
   .ci-trap { font-size: 0.72rem; color: #c0660a; margin-top: 2px; }
 
+  /* ── Auto-fill ── */
+  .autofill-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+  .autofill-btn { background: var(--accent); color: white; border: none; border-radius: 8px; padding: 8px 14px; font-size: 0.85rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: opacity 0.15s; }
+  .autofill-btn:hover { opacity: 0.85; }
+  .autofill-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .autofill-status { font-size: 0.78rem; color: var(--muted); flex: 1; }
+  .autofill-status.ok  { color: var(--green); }
+  .autofill-status.err { color: var(--accent2); }
+  .autofill-key-btn { background: none; border: none; color: var(--muted); font-size: 0.78rem; cursor: pointer; padding: 4px 6px; border-radius: 6px; }
+  .autofill-key-btn:hover { background: var(--border); }
+
   @media (max-width: 500px) {
     .char-grid { grid-template-columns: repeat(auto-fill, minmax(105px,1fr)); }
     nav button { padding: 11px 12px; font-size: 0.8rem; }
@@ -457,12 +468,25 @@
 
   <!-- ── Add Card ── -->
   <div id="fc-add" class="fc-panel active">
+    <div class="token-row" id="anthropic-row">
+      <label>Anthropic API Key (for Auto-fill)</label>
+      <p class="token-hint">Get a key at <code>console.anthropic.com</code> → API Keys. Stored locally, never shared.</p>
+      <div class="token-input-row">
+        <input type="password" id="anthropic-key-input" placeholder="sk-ant-…">
+        <button class="token-save-btn" onclick="saveAnthropicKey()">Save</button>
+      </div>
+    </div>
     <div class="fc-form">
       <div class="fc-field">
         <label>Korean word or phrase</label>
         <div class="fc-input-row">
           <input type="text" id="inp-kor" class="kor-input" placeholder="paste or type Korean…" autocomplete="off" autocorrect="off" spellcheck="false">
           <button class="naver-btn" onclick="naverLookup()" title="Open in Naver Dictionary">🔍 Naver</button>
+        </div>
+        <div class="autofill-row">
+          <button class="autofill-btn" id="autofill-btn" onclick="autoFill()">✨ Auto-fill</button>
+          <span class="autofill-status" id="autofill-status"></span>
+          <button class="autofill-key-btn" onclick="toggleAnthropicSetup()" title="Set Anthropic API key">⚙ API key</button>
         </div>
       </div>
       <div class="fc-field">
@@ -841,14 +865,12 @@ function renderStudyCard() {
       <div class="flip-card" id="flip-card">
         <div class="flip-face flip-front">
           <div class="flip-kor">${card.korean}</div>
-          <button class="speak-card-btn" onclick="event.stopPropagation();speak('${korSafe}')">▶ Hear it</button>
-          <div class="flip-instruction">👆 Tap to see meaning</div>
+          <div class="flip-instruction">👆 Tap to hear & see meaning</div>
         </div>
         <div class="flip-face flip-back">
           <div class="flip-eng">${card.english}</div>
           ${card.tag ? `<div class="flip-tag">${card.tag}</div>` : ''}
-          <button class="speak-card-btn" style="background:var(--accent-light);border-color:var(--accent);color:var(--accent)" onclick="event.stopPropagation();speak('${korSafe}')">▶ Hear it</button>
-          <div class="flip-instruction" style="color:var(--muted);animation:none">👆 Tap to flip back</div>
+          <div class="flip-instruction" style="color:var(--muted);animation:none">👆 Tap to hear & flip back</div>
         </div>
       </div>
     </div>
@@ -870,6 +892,7 @@ function startBrowse() {
 }
 
 function flipCard() {
+  if (studyQueue[studyIndex]) speak(studyQueue[studyIndex].korean);
   studyFlipped = !studyFlipped;
   document.getElementById('flip-card').classList.toggle('flipped', studyFlipped);
   const trapEl = document.getElementById('card-trap');
@@ -1012,6 +1035,83 @@ function saveToken() {
   localStorage.setItem('lla_gh_token', t);
   document.getElementById('token-row').style.display = 'none';
   setSyncStatus('Token saved', 'ok');
+}
+
+// ════════════════════════════════════════
+// CLAUDE API AUTO-FILL
+// ════════════════════════════════════════
+function toggleAnthropicSetup() {
+  const row = document.getElementById('anthropic-row');
+  row.style.display = row.style.display === 'none' ? 'block' : 'none';
+  if (row.style.display === 'block') {
+    const saved = localStorage.getItem('lla_anthropic_key');
+    if (saved) document.getElementById('anthropic-key-input').value = saved;
+    document.getElementById('anthropic-key-input').focus();
+  }
+}
+
+function saveAnthropicKey() {
+  const k = document.getElementById('anthropic-key-input').value.trim();
+  if (!k) return;
+  localStorage.setItem('lla_anthropic_key', k);
+  document.getElementById('anthropic-row').style.display = 'none';
+  setAutofillStatus('API key saved', 'ok');
+  setTimeout(() => setAutofillStatus(''), 2000);
+}
+
+function setAutofillStatus(msg, type) {
+  const el = document.getElementById('autofill-status');
+  el.textContent = msg;
+  el.className = 'autofill-status' + (type ? ' ' + type : '');
+}
+
+async function autoFill() {
+  const korean = document.getElementById('inp-kor').value.trim();
+  if (!korean) { setAutofillStatus('Type a Korean word first', 'err'); return; }
+  const key = localStorage.getItem('lla_anthropic_key');
+  if (!key) {
+    document.getElementById('anthropic-row').style.display = 'block';
+    setAutofillStatus('Enter Anthropic API key first (⚙ API key above)', 'err');
+    return;
+  }
+  const btn = document.getElementById('autofill-btn');
+  btn.disabled = true;
+  btn.textContent = '…';
+  setAutofillStatus('Looking up…');
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5',
+        max_tokens: 256,
+        messages: [{
+          role: 'user',
+          content: `Korean word or phrase: ${korean}\n\nReturn ONLY valid JSON:\n{"english": "<concise English meaning, 1-6 words>", "trap": "<brief pronunciation trap if a non-obvious rule applies (nasalization, aspiration, linking 연음화, tensification 경음화, etc.). Include rule name and example sound change. Empty string if no trap.>"}`,
+        }],
+      }),
+    });
+    if (!res.ok) { const err = await res.json(); throw new Error(err.error?.message || res.status); }
+    const data = await res.json();
+    const text = data.content[0].text.trim();
+    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('Bad response format');
+    const result = JSON.parse(jsonMatch[0]);
+    if (result.english) document.getElementById('inp-eng').value = result.english;
+    if (result.trap !== undefined) document.getElementById('inp-trap').value = result.trap;
+    setAutofillStatus('✓ Filled', 'ok');
+    setTimeout(() => setAutofillStatus(''), 2000);
+  } catch (e) {
+    setAutofillStatus('Error: ' + e.message, 'err');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '✨ Auto-fill';
+  }
 }
 </script>
 <script>
