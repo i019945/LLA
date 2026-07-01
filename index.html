@@ -210,6 +210,15 @@
   .autofill-key-btn { background: none; border: none; color: var(--muted); font-size: 0.78rem; cursor: pointer; padding: 4px 6px; border-radius: 6px; }
   .autofill-key-btn:hover { background: var(--border); }
 
+  /* ── Auto-play ── */
+  .ap-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+  .ap-meta { font-size: 0.82rem; color: var(--muted); }
+  .ap-interval-sel { font-size: 0.82rem; border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px; background: white; }
+  .ap-start-btn { border: 1.5px solid var(--accent); color: var(--accent); background: white; border-radius: 20px; padding: 5px 14px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.15s; margin-left: auto; }
+  .ap-start-btn:hover { background: var(--accent); color: white; }
+  .ap-stop-btn { border: 1.5px solid var(--accent2); color: var(--accent2); background: white; border-radius: 20px; padding: 5px 14px; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
+  .ap-stop-btn:hover { background: var(--accent2); color: white; }
+
   @media (max-width: 500px) {
     .char-grid { grid-template-columns: repeat(auto-fill, minmax(105px,1fr)); }
     nav button { padding: 11px 12px; font-size: 0.8rem; }
@@ -602,6 +611,7 @@ refreshFC();
 // Main nav
 // ════════════════════════════════════════
 function show(id, btn) {
+  stopAutoPlay(false);
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -703,6 +713,7 @@ function dueCards(cards) {
 // FLASHCARD NAV
 // ════════════════════════════════════════
 function fcShow(panelId, btn) {
+  if (panelId !== 'fc-all') stopAutoPlay(false);
   document.querySelectorAll('.fc-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.fc-subnav button').forEach(b => b.classList.remove('active'));
   document.getElementById(panelId).classList.add('active');
@@ -815,6 +826,7 @@ function intervalLabel(days) {
 // STUDY VIEW
 // ════════════════════════════════════════
 let studyQueue = [], studyIndex = 0, studyFlipped = false, studySeenBack = false;
+let autoPlayActive = false, autoPlayQueue = [], autoPlayIndex = 0, autoPlayTimer = null, autoPlayResolve = null;
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -925,7 +937,7 @@ function renderAll() {
     return;
   }
   const due = dueCards(cards).length;
-  el.innerHTML = `<div class="all-stats">${cards.length} card${cards.length !== 1 ? 's' : ''} total · ${due} due now</div><div class="card-list" id="card-list"></div>`;
+  el.innerHTML = `<div class="all-stats" style="display:flex;align-items:center">${cards.length} card${cards.length !== 1 ? 's' : ''} total · ${due} due now<button class="ap-start-btn" onclick="startAutoPlay()">▶ Auto-play</button></div><div class="card-list" id="card-list"></div>`;
   const list = document.getElementById('card-list');
   [...cards].reverse().forEach(card => {
     const item = document.createElement('div');
@@ -1045,6 +1057,116 @@ function saveToken() {
   localStorage.setItem('lla_gh_token', t);
   document.getElementById('token-row').style.display = 'none';
   setSyncStatus('Token saved', 'ok');
+}
+
+// ════════════════════════════════════════
+// AUTO-PLAY
+// ════════════════════════════════════════
+function getApInterval() {
+  return parseInt(localStorage.getItem('lla_ap_interval') || '500');
+}
+
+function apDelay(ms) {
+  return new Promise(resolve => {
+    autoPlayResolve = resolve;
+    autoPlayTimer = setTimeout(resolve, ms);
+  });
+}
+
+function speakSlowAndWait(text) {
+  return new Promise(resolve => {
+    if (!window.speechSynthesis) { resolve(); return; }
+    const synth = window.speechSynthesis;
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ko-KR';
+    u.rate = 0.6;
+    if (koreanVoice) u.voice = koreanVoice;
+    const fallback = setTimeout(resolve, 5000);
+    u.onend = () => { clearTimeout(fallback); resolve(); };
+    u.onerror = () => { clearTimeout(fallback); resolve(); };
+    if (synth.speaking || synth.pending) {
+      synth.cancel();
+      setTimeout(() => synth.speak(u), 100);
+    } else {
+      synth.speak(u);
+    }
+  });
+}
+
+function renderApCard(card) {
+  const el = document.getElementById('all-content');
+  const interval = getApInterval();
+  el.innerHTML = `
+    <div class="ap-bar">
+      <span class="ap-meta">${autoPlayIndex} / ${autoPlayQueue.length}</span>
+      <span class="ap-meta">Interval: <select class="ap-interval-sel" onchange="localStorage.setItem('lla_ap_interval',this.value)">
+        ${[500,1000,2000,3000].map(v=>`<option value="${v}"${v===interval?' selected':''}>${v/1000}s</option>`).join('')}
+      </select></span>
+      <button class="ap-stop-btn" onclick="stopAutoPlay()">■ Stop</button>
+    </div>
+    <div class="flip-scene" style="cursor:default">
+      <div class="flip-card" id="ap-card">
+        <div class="flip-face flip-front">
+          <div class="flip-kor">${card.korean}</div>
+        </div>
+        <div class="flip-face flip-back">
+          <div class="flip-eng">${card.english}</div>
+          ${card.tag ? `<div class="flip-tag">${card.tag}</div>` : ''}
+          ${card.trap ? `<div class="flip-trap" style="display:block;margin-top:8px">${card.trap}</div>` : ''}
+        </div>
+      </div>
+    </div>`;
+}
+
+function apFlip(flipped) {
+  const c = document.getElementById('ap-card');
+  if (c) c.classList.toggle('flipped', flipped);
+}
+
+function stopAutoPlay(rerender = true) {
+  if (!autoPlayActive) return;
+  autoPlayActive = false;
+  clearTimeout(autoPlayTimer);
+  if (autoPlayResolve) { autoPlayResolve(); autoPlayResolve = null; }
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  if (rerender) renderAll();
+}
+
+async function autoPlayRun() {
+  while (autoPlayActive) {
+    if (autoPlayIndex >= autoPlayQueue.length) {
+      autoPlayQueue = shuffle([...loadCards()]);
+      autoPlayIndex = 0;
+    }
+    const card = autoPlayQueue[autoPlayIndex++];
+
+    renderApCard(card);                        // front
+    await speakSlowAndWait(card.korean);
+    if (!autoPlayActive) return;
+    await apDelay(getApInterval());
+    if (!autoPlayActive) return;
+
+    apFlip(true);                              // back
+    await speakSlowAndWait(card.korean);
+    if (!autoPlayActive) return;
+    await apDelay(getApInterval());
+    if (!autoPlayActive) return;
+
+    apFlip(false);                             // front again
+    await speakSlowAndWait(card.korean);
+    if (!autoPlayActive) return;
+    await apDelay(getApInterval());
+    if (!autoPlayActive) return;
+  }
+}
+
+function startAutoPlay() {
+  const cards = loadCards();
+  if (!cards.length) return;
+  autoPlayActive = true;
+  autoPlayQueue = shuffle([...cards]);
+  autoPlayIndex = 0;
+  autoPlayRun();
 }
 
 // ════════════════════════════════════════
