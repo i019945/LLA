@@ -378,5 +378,41 @@
     "interval": 1,
     "ease": 2.5,
     "reps": 0
+  },
+  {
+    "id": 1782920071626,
+    "korean": "안녕하세요",
+    "english": "你好（早中晚都可用的招呼語）",
+    "tag": "",
+    "trap": "",
+    "created": 1782920071626,
+    "nextReview": 1782920071626,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1782920116819,
+    "korean": "좋은 아침",
+    "english": "早安（強調早晨）",
+    "tag": "",
+    "trap": "",
+    "created": 1782920116819,
+    "nextReview": 1782920116819,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1782920190505,
+    "korean": "알겠어",
+    "english": "知道了；",
+    "tag": "",
+    "trap": "",
+    "created": 1782920190505,
+    "nextReview": 1782920190505,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
   }
 ]
