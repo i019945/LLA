@@ -931,6 +931,7 @@ function renderAll() {
     const item = document.createElement('div');
     item.className = 'card-item';
     item.onclick = () => speak(card.korean);
+    item.ondblclick = () => window.open('https://en.dict.naver.com/#/search?query=' + encodeURIComponent(card.korean), '_blank');
     const dueDate = card.nextReview ? new Date(card.nextReview).toLocaleDateString() : 'now';
     item.innerHTML = `
       <span style="flex:1;min-width:0">
