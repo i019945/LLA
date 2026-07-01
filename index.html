@@ -934,7 +934,7 @@ function renderAll() {
     item.onclick = () => {
       const now = Date.now();
       if (now - lastTap < 350) {
-        window.open('https://en.dict.naver.com/#/search?query=' + encodeURIComponent(card.korean), '_blank');
+        window.open('https://papago.naver.com/?sk=ko&tk=en&st=' + encodeURIComponent(card.korean), '_blank');
         lastTap = 0;
       } else {
         speak(card.korean);
