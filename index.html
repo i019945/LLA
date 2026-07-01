@@ -930,8 +930,17 @@ function renderAll() {
   [...cards].reverse().forEach(card => {
     const item = document.createElement('div');
     item.className = 'card-item';
-    item.onclick = () => speak(card.korean);
-    item.ondblclick = () => window.open('https://en.dict.naver.com/#/search?query=' + encodeURIComponent(card.korean), '_blank');
+    let lastTap = 0;
+    item.onclick = () => {
+      const now = Date.now();
+      if (now - lastTap < 350) {
+        window.open('https://en.dict.naver.com/#/search?query=' + encodeURIComponent(card.korean), '_blank');
+        lastTap = 0;
+      } else {
+        speak(card.korean);
+        lastTap = now;
+      }
+    };
     const dueDate = card.nextReview ? new Date(card.nextReview).toLocaleDateString() : 'now';
     item.innerHTML = `
       <span style="flex:1;min-width:0">
