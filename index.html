@@ -826,7 +826,7 @@ function intervalLabel(days) {
 // STUDY VIEW
 // ════════════════════════════════════════
 let studyQueue = [], studyIndex = 0, studyFlipped = false, studySeenBack = false;
-let autoPlayActive = false, autoPlayQueue = [], autoPlayIndex = 0, autoPlayTimer = null, autoPlayResolve = null, autoPlaySkip = false;
+let autoPlayActive = false, autoPlayPaused = false, autoPlayQueue = [], autoPlayIndex = 0, autoPlayTimer = null, autoPlayResolve = null, autoPlaySkip = false, lastApTap = 0, apTapTimer = null;
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -1102,19 +1102,20 @@ function renderApCard(card) {
       <span class="ap-meta">Interval: <select class="ap-interval-sel" onchange="localStorage.setItem('lla_ap_interval',this.value)">
         ${[500,1000,2000,3000].map(v=>`<option value="${v}"${v===interval?' selected':''}>${v/1000}s</option>`).join('')}
       </select></span>
+      <span class="ap-meta" id="ap-status"></span>
       <button class="ap-stop-btn" onclick="stopAutoPlay()">■ Stop</button>
     </div>
-    <div class="flip-scene" onclick="replayAutoPlayCard()">
+    <div class="flip-scene" onclick="handleApTap()">
       <div class="flip-card" id="ap-card">
         <div class="flip-face flip-front">
           <div class="flip-kor">${card.korean}</div>
-          <div class="flip-hint">👆 Tap to replay</div>
+          <div class="flip-hint">👆 Tap replay · · · double-tap pause</div>
         </div>
         <div class="flip-face flip-back">
           <div class="flip-eng">${card.english}</div>
           ${card.tag ? `<div class="flip-tag">${card.tag}</div>` : ''}
           ${card.trap ? `<div class="flip-trap" style="display:block;margin-top:8px">${card.trap}</div>` : ''}
-          <div class="flip-hint" style="color:var(--muted)">👆 Tap to replay</div>
+          <div class="flip-hint" style="color:var(--muted)">👆 Tap replay · · · double-tap pause</div>
         </div>
       </div>
     </div>`;
@@ -1125,26 +1126,64 @@ function apFlip(flipped) {
   if (c) c.classList.toggle('flipped', flipped);
 }
 
+function handleApTap() {
+  if (!autoPlayActive) return;
+  const now = Date.now();
+  if (now - lastApTap < 350) {
+    clearTimeout(apTapTimer);
+    lastApTap = 0;
+    toggleAutoPlayPause();
+  } else {
+    lastApTap = now;
+    clearTimeout(apTapTimer);
+    apTapTimer = setTimeout(() => { lastApTap = 0; replayAutoPlayCard(); }, 350);
+  }
+}
+
+function toggleAutoPlayPause() {
+  if (!autoPlayActive) return;
+  if (autoPlayPaused) {
+    autoPlayPaused = false;
+    autoPlayIndex = Math.max(0, autoPlayIndex - 1);
+    const s = document.getElementById('ap-status');
+    if (s) s.textContent = '';
+    autoPlayRun();
+  } else {
+    autoPlayPaused = true;
+    autoPlaySkip = true;
+    clearTimeout(autoPlayTimer);
+    if (autoPlayResolve) { autoPlayResolve(); autoPlayResolve = null; }
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+    const s = document.getElementById('ap-status');
+    if (s) s.textContent = '⏸ Paused';
+  }
+}
+
 function replayAutoPlayCard() {
   if (!autoPlayActive) return;
+  const wasPaused = autoPlayPaused;
+  autoPlayPaused = false;
   autoPlayIndex = Math.max(0, autoPlayIndex - 1);
   autoPlaySkip = true;
   clearTimeout(autoPlayTimer);
   if (autoPlayResolve) { autoPlayResolve(); autoPlayResolve = null; }
   if (window.speechSynthesis) window.speechSynthesis.cancel();
+  if (wasPaused) autoPlayRun();
 }
 
 function stopAutoPlay(rerender = true) {
   if (!autoPlayActive) return;
   autoPlayActive = false;
+  autoPlayPaused = false;
   clearTimeout(autoPlayTimer);
+  clearTimeout(apTapTimer);
   if (autoPlayResolve) { autoPlayResolve(); autoPlayResolve = null; }
   if (window.speechSynthesis) window.speechSynthesis.cancel();
   if (rerender) renderAll();
 }
 
 async function autoPlayRun() {
-  while (autoPlayActive) {
+  while (autoPlayActive && !autoPlayPaused) {
     autoPlaySkip = false;
     if (autoPlayIndex >= autoPlayQueue.length) {
       autoPlayQueue = shuffle([...loadCards()]);
@@ -1181,6 +1220,7 @@ function startAutoPlay() {
   const cards = loadCards();
   if (!cards.length) return;
   autoPlayActive = true;
+  autoPlayPaused = false;
   autoPlayQueue = shuffle([...cards]);
   autoPlayIndex = 0;
   autoPlayRun();
