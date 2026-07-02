@@ -826,7 +826,7 @@ function intervalLabel(days) {
 // STUDY VIEW
 // ════════════════════════════════════════
 let studyQueue = [], studyIndex = 0, studyFlipped = false, studySeenBack = false;
-let autoPlayActive = false, autoPlayQueue = [], autoPlayIndex = 0, autoPlayTimer = null, autoPlayResolve = null;
+let autoPlayActive = false, autoPlayQueue = [], autoPlayIndex = 0, autoPlayTimer = null, autoPlayResolve = null, autoPlaySkip = false;
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -1104,15 +1104,17 @@ function renderApCard(card) {
       </select></span>
       <button class="ap-stop-btn" onclick="stopAutoPlay()">■ Stop</button>
     </div>
-    <div class="flip-scene" style="cursor:default">
+    <div class="flip-scene" onclick="replayAutoPlayCard()">
       <div class="flip-card" id="ap-card">
         <div class="flip-face flip-front">
           <div class="flip-kor">${card.korean}</div>
+          <div class="flip-hint">👆 Tap to replay</div>
         </div>
         <div class="flip-face flip-back">
           <div class="flip-eng">${card.english}</div>
           ${card.tag ? `<div class="flip-tag">${card.tag}</div>` : ''}
           ${card.trap ? `<div class="flip-trap" style="display:block;margin-top:8px">${card.trap}</div>` : ''}
+          <div class="flip-hint" style="color:var(--muted)">👆 Tap to replay</div>
         </div>
       </div>
     </div>`;
@@ -1121,6 +1123,15 @@ function renderApCard(card) {
 function apFlip(flipped) {
   const c = document.getElementById('ap-card');
   if (c) c.classList.toggle('flipped', flipped);
+}
+
+function replayAutoPlayCard() {
+  if (!autoPlayActive) return;
+  autoPlayIndex = Math.max(0, autoPlayIndex - 1);
+  autoPlaySkip = true;
+  clearTimeout(autoPlayTimer);
+  if (autoPlayResolve) { autoPlayResolve(); autoPlayResolve = null; }
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
 }
 
 function stopAutoPlay(rerender = true) {
@@ -1134,6 +1145,7 @@ function stopAutoPlay(rerender = true) {
 
 async function autoPlayRun() {
   while (autoPlayActive) {
+    autoPlaySkip = false;
     if (autoPlayIndex >= autoPlayQueue.length) {
       autoPlayQueue = shuffle([...loadCards()]);
       autoPlayIndex = 0;
@@ -1143,18 +1155,23 @@ async function autoPlayRun() {
     renderApCard(card);                        // front
     await speakSlowAndWait(card.korean);
     if (!autoPlayActive) return;
+    if (autoPlaySkip) continue;
     await apDelay(getApInterval());
     if (!autoPlayActive) return;
+    if (autoPlaySkip) continue;
 
     apFlip(true);                              // back
     await speakSlowAndWait(card.korean);
     if (!autoPlayActive) return;
+    if (autoPlaySkip) continue;
     await apDelay(getApInterval());
     if (!autoPlayActive) return;
+    if (autoPlaySkip) continue;
 
     apFlip(false);                             // front again
     await speakSlowAndWait(card.korean);
     if (!autoPlayActive) return;
+    if (autoPlaySkip) continue;
     await apDelay(getApInterval());
     if (!autoPlayActive) return;
   }
