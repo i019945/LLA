@@ -534,10 +534,10 @@
     "tag": "",
     "trap": "",
     "created": 1783310074765,
-    "nextReview": 1783310074765,
-    "interval": 1,
-    "ease": 2.5,
-    "reps": 0
+    "nextReview": 1783503008387,
+    "interval": 2,
+    "ease": 2.4,
+    "reps": 1
   },
   {
     "id": 1783310339547,
@@ -891,6 +891,22 @@
     "notes": "",
     "created": 1782920200020,
     "nextReview": 1782920200020,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783331881089,
+    "korean": "사랑해요.",
+    "english": "I love you.",
+    "example": "",
+    "tag": "",
+    "deck": "grammar",
+    "level": "해요체",
+    "trap": "",
+    "notes": "사랑해         用於戀人、非常親近的人之間;\n사랑합니다   非常正式，常見於演講、婚禮、公開告白或對長輩表達敬意\n하다            意思是 「做」，是一個很常見的動詞;           해  是 하다 的非正式現在式",
+    "created": 1783331881089,
+    "nextReview": 1783331881089,
     "interval": 1,
     "ease": 2.5,
     "reps": 0
