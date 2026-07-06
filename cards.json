@@ -78,10 +78,10 @@
     "interval": 1,
     "ease": 2.5,
     "reps": 0,
-    "example": "",
     "deck": "",
     "level": "",
-    "notes": ""
+    "notes": "",
+    "examples": []
   },
   {
     "id": 1782562742038,
@@ -558,14 +558,16 @@
     "tag": "number",
     "deck": "Sino-Korean numbers",
     "level": "해요체",
-    "example": "일 층에 있어요. (It's on the first floor.)",
     "trap": "",
     "notes": "",
     "created": 1782920200001,
     "nextReview": 1782920200001,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "일 층에 있어요. (It's on the first floor.)"
+    ]
   },
   {
     "id": 1782920200002,
@@ -574,14 +576,16 @@
     "tag": "number",
     "deck": "Sino-Korean numbers",
     "level": "해요체",
-    "example": "이 시에 만나요. (Let's meet at 2 o'clock.)",
     "trap": "",
     "notes": "",
     "created": 1782920200002,
     "nextReview": 1782920200002,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "이 시에 만나요. (Let's meet at 2 o'clock.)"
+    ]
   },
   {
     "id": 1782920200003,
@@ -590,14 +594,16 @@
     "tag": "number",
     "deck": "Sino-Korean numbers",
     "level": "해요체",
-    "example": "삼 월에 봄이 와요. (Spring comes in March.)",
     "trap": "",
     "notes": "",
     "created": 1782920200003,
     "nextReview": 1782920200003,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "삼 월에 봄이 와요. (Spring comes in March.)"
+    ]
   },
   {
     "id": 1782920200004,
@@ -606,14 +612,16 @@
     "tag": "number",
     "deck": "Sino-Korean numbers",
     "level": "해요체",
-    "example": "사 명이 왔어요. (Four people came.)",
     "trap": "",
     "notes": "",
     "created": 1782920200004,
     "nextReview": 1782920200004,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "사 명이 왔어요. (Four people came.)"
+    ]
   },
   {
     "id": 1782920200005,
@@ -622,14 +630,16 @@
     "tag": "number",
     "deck": "Sino-Korean numbers",
     "level": "해요체",
-    "example": "오 분 후에 도착해요. (I'll arrive in 5 minutes.)",
     "trap": "",
     "notes": "",
     "created": 1782920200005,
     "nextReview": 1782920200005,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "오 분 후에 도착해요. (I'll arrive in 5 minutes.)"
+    ]
   },
   {
     "id": 1782920200006,
@@ -638,14 +648,16 @@
     "tag": "number",
     "deck": "Sino-Korean numbers",
     "level": "해요체",
-    "example": "유월에 비가 많이 와요. (It rains a lot in June.)",
     "trap": "6월 (June) is spoken as 유월, not 육월 — the ㄱ drops before ㅇ.",
     "notes": "",
     "created": 1782920200006,
     "nextReview": 1782920200006,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "유월에 비가 많이 와요. (It rains a lot in June.)"
+    ]
   },
   {
     "id": 1782920200007,
@@ -654,14 +666,16 @@
     "tag": "number",
     "deck": "Sino-Korean numbers",
     "level": "해요체",
-    "example": "칠 월에 방학이에요. (It's vacation in July.)",
     "trap": "",
     "notes": "",
     "created": 1782920200007,
     "nextReview": 1782920200007,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "칠 월에 방학이에요. (It's vacation in July.)"
+    ]
   },
   {
     "id": 1782920200008,
@@ -670,14 +684,16 @@
     "tag": "number",
     "deck": "Sino-Korean numbers",
     "level": "해요체",
-    "example": "팔 시에 출근해요. (I go to work at 8.)",
     "trap": "",
     "notes": "",
     "created": 1782920200008,
     "nextReview": 1782920200008,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "팔 시에 출근해요. (I go to work at 8.)"
+    ]
   },
   {
     "id": 1782920200009,
@@ -686,14 +702,16 @@
     "tag": "number",
     "deck": "Sino-Korean numbers",
     "level": "해요체",
-    "example": "구 월에 학교를 시작해요. (School starts in September.)",
     "trap": "",
     "notes": "",
     "created": 1782920200009,
     "nextReview": 1782920200009,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "구 월에 학교를 시작해요. (School starts in September.)"
+    ]
   },
   {
     "id": 1782920200010,
@@ -702,14 +720,16 @@
     "tag": "number",
     "deck": "Sino-Korean numbers",
     "level": "해요체",
-    "example": "십 분 걸려요. (It takes 10 minutes.)",
     "trap": "ㅂ batchim links forward: 십일 → [시빌], 십이 → [시비].",
     "notes": "",
     "created": 1782920200010,
     "nextReview": 1782920200010,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "십 분 걸려요. (It takes 10 minutes.)"
+    ]
   },
   {
     "id": 1783298062507,
@@ -742,14 +762,16 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "사과가 하나 있어요. (There is one apple.)",
     "trap": "Drops the 아 before a counter: 하나 개 ✗ → 한 개 ✓ (한 명, 한 시간).",
     "notes": "",
     "created": 1782920200011,
     "nextReview": 1782920200011,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "사과가 하나 있어요. (There is one apple.)"
+    ]
   },
   {
     "id": 1782920200012,
@@ -758,14 +780,16 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "커피 두 잔 주세요. (Two coffees, please.)",
     "trap": "Drops ㄹ before a counter: 둘 개 ✗ → 두 개 ✓ (두 명, 두 시).",
     "notes": "",
     "created": 1782920200012,
     "nextReview": 1782920200012,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "커피 두 잔 주세요. (Two coffees, please.)"
+    ]
   },
   {
     "id": 1782920200013,
@@ -774,14 +798,16 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "친구가 세 명이에요. (I have three friends.)",
     "trap": "Drops ㅅ before a counter: 셋 개 ✗ → 세 개 ✓ (세 명, 세 시).",
     "notes": "",
     "created": 1782920200013,
     "nextReview": 1782920200013,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "친구가 세 명이에요. (I have three friends.)"
+    ]
   },
   {
     "id": 1782920200014,
@@ -790,14 +816,16 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "네 시에 만나요. (Let's meet at 4 o'clock.)",
     "trap": "Drops ㅅ before a counter: 넷 개 ✗ → 네 개 ✓ (네 명, 네 시).",
     "notes": "",
     "created": 1782920200014,
     "nextReview": 1782920200014,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "네 시에 만나요. (Let's meet at 4 o'clock.)"
+    ]
   },
   {
     "id": 1782920200015,
@@ -806,14 +834,16 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "다섯 시에 일어나요. (I wake up at 5 o'clock.)",
     "trap": "",
     "notes": "",
     "created": 1782920200015,
     "nextReview": 1782920200015,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "다섯 시에 일어나요. (I wake up at 5 o'clock.)"
+    ]
   },
   {
     "id": 1782920200016,
@@ -822,14 +852,16 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "여섯 살이에요. (I am 6 years old.)",
     "trap": "",
     "notes": "",
     "created": 1782920200016,
     "nextReview": 1782920200016,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "여섯 살이에요. (I am 6 years old.)"
+    ]
   },
   {
     "id": 1782920200017,
@@ -838,14 +870,16 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "일곱 시에 저녁을 먹어요. (I have dinner at 7.)",
     "trap": "",
     "notes": "",
     "created": 1782920200017,
     "nextReview": 1782920200017,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "일곱 시에 저녁을 먹어요. (I have dinner at 7.)"
+    ]
   },
   {
     "id": 1782920200018,
@@ -854,14 +888,16 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "여덟 시간 잤어요. (I slept for 8 hours.)",
     "trap": "Double batchim ㄼ — sounds like [여덜] before consonants.",
     "notes": "",
     "created": 1782920200018,
     "nextReview": 1782920200018,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "여덟 시간 잤어요. (I slept for 8 hours.)"
+    ]
   },
   {
     "id": 1782920200019,
@@ -870,14 +906,16 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "아홉 살에 학교에 갔어요. (I started school at age 9.)",
     "trap": "",
     "notes": "",
     "created": 1782920200019,
     "nextReview": 1782920200019,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "아홉 살에 학교에 갔어요. (I started school at age 9.)"
+    ]
   },
   {
     "id": 1782920200020,
@@ -886,20 +924,22 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "열 시에 자요. (I go to sleep at 10.)",
     "trap": "",
     "notes": "",
     "created": 1782920200020,
     "nextReview": 1782920200020,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "열 시에 자요. (I go to sleep at 10.)"
+    ]
   },
   {
     "id": 1783331881089,
     "korean": "사랑해요.",
     "english": "I love you.",
-    "example": "",
+    "examples": [],
     "tag": "",
     "deck": "grammar",
     "level": "해요체",
@@ -915,7 +955,7 @@
     "id": 1783334392544,
     "korean": "오늘 저는 스타벅스에서 두 시간을 보냈습니다.",
     "english": "Today I stayed at Starbucks for two hours.",
-    "example": "",
+    "examples": [],
     "tag": "",
     "deck": "grammar",
     "level": "",
@@ -931,7 +971,7 @@
     "id": 1783335733421,
     "korean": "에서",
     "english": "在 ...",
-    "example": "학교에서 공부해요(在學校讀書); 카페에서 만나요(在咖啡廳見面)。",
+    "examples": ["학교에서 공부해요(在學校讀書); 카페에서 만나요(在咖啡廳見面)。"],
     "tag": "",
     "deck": "grammar",
     "level": "",
@@ -947,7 +987,7 @@
     "id": 1783336808889,
     "korean": "보내다",
     "english": "送；寄； 打發； 度過（時間）",
-    "example": "",
+    "examples": [],
     "tag": "",
     "deck": "",
     "level": "",

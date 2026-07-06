@@ -541,8 +541,10 @@
         <input type="text" id="inp-eng" placeholder="meaning…" autocomplete="off">
       </div>
       <div class="fc-field">
-        <label>Example Sentence <span style="font-weight:400;text-transform:none">(optional)</span></label>
-        <input type="text" id="inp-example" placeholder="e.g. 저는 학생이에요." autocomplete="off" spellcheck="false">
+        <label>Example Sentences <span style="font-weight:400;text-transform:none">(optional — up to 3)</span></label>
+        <input type="text" id="inp-example1" placeholder="Example 1…" autocomplete="off" spellcheck="false">
+        <input type="text" id="inp-example2" placeholder="Example 2…" autocomplete="off" spellcheck="false" style="margin-top:6px">
+        <input type="text" id="inp-example3" placeholder="Example 3…" autocomplete="off" spellcheck="false" style="margin-top:6px">
       </div>
       <div class="fc-field">
         <label>Tag <span style="font-weight:400;text-transform:none">(optional — e.g. food, verbs, grammar)</span></label>
@@ -808,8 +810,10 @@ inpKor.addEventListener('blur', () => {
   if (v && /[가-힣㄰-㆏]/.test(v)) speak(v);
 });
 inpKor.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-eng').focus(); });
-document.getElementById('inp-eng').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-example').focus(); });
-document.getElementById('inp-example').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-tag').focus(); });
+document.getElementById('inp-eng').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-example1').focus(); });
+document.getElementById('inp-example1').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-example2').focus(); });
+document.getElementById('inp-example2').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-example3').focus(); });
+document.getElementById('inp-example3').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-tag').focus(); });
 document.getElementById('inp-tag').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-deck').focus(); });
 document.getElementById('inp-deck').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-trap').focus(); });
 document.getElementById('inp-trap').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-notes').focus(); });
@@ -836,7 +840,11 @@ function addCard() {
     id: Date.now(),
     korean,
     english,
-    example: document.getElementById('inp-example').value.trim(),
+    examples: [
+      document.getElementById('inp-example1').value.trim(),
+      document.getElementById('inp-example2').value.trim(),
+      document.getElementById('inp-example3').value.trim(),
+    ].filter(Boolean),
     tag:     document.getElementById('inp-tag').value.trim(),
     deck:    document.getElementById('inp-deck').value.trim(),
     level:   document.getElementById('inp-level').value,
@@ -853,7 +861,9 @@ function addCard() {
   stickyDeck = document.getElementById('inp-deck').value.trim();
   inpKor.value = '';
   document.getElementById('inp-eng').value = '';
-  document.getElementById('inp-example').value = '';
+  document.getElementById('inp-example1').value = '';
+  document.getElementById('inp-example2').value = '';
+  document.getElementById('inp-example3').value = '';
   document.getElementById('inp-tag').value = '';
   // inp-deck kept sticky
   document.getElementById('inp-level').value = '';
@@ -986,7 +996,7 @@ function renderStudyCard() {
         </div>
         <div class="flip-face flip-back">
           <div class="flip-eng">${card.english}</div>
-          ${card.example ? `<div class="example-box">${card.example}</div>` : ''}
+          ${getExamples(card).map(e => `<div class="example-box">${e}</div>`).join('')}
           <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center">
             ${card.tag ? `<div class="flip-tag">${card.tag}</div>` : ''}
             ${card.level ? `<div class="level-badge">${card.level}</div>` : ''}
@@ -1075,7 +1085,7 @@ function renderAll() {
       <span style="flex:1;min-width:0">
         <span class="ci-kor">${card.korean}</span>
         <span class="ci-eng">${card.english}</span>
-        ${card.example ? `<div class="ci-example">${card.example}</div>` : ''}
+        ${getExamples(card).map(e => `<div class="ci-example">${e}</div>`).join('')}
         ${card.trap ? `<div class="ci-trap">⚠ ${card.trap}</div>` : ''}
         ${card.notes ? `<div class="ci-notes">${card.notes}</div>` : ''}
         ${(card.tag || card.deck || card.level) ? `<div class="ci-meta-row">
@@ -1089,6 +1099,12 @@ function renderAll() {
       <button class="ci-del" onclick="event.stopPropagation();deleteCard(${card.id})" title="Delete">✕</button>`;
     list.appendChild(item);
   });
+}
+
+function getExamples(card) {
+  if (card.examples && card.examples.length) return card.examples;
+  if (card.example) return [card.example];
+  return [];
 }
 
 function escHtml(s) {
@@ -1105,7 +1121,7 @@ function editCard(id) {
     <div class="card-edit-form">
       <div class="card-edit-row"><label>Korean</label><input class="kor-edit" id="edit-kor-${id}" value="${escHtml(card.korean)}" autocorrect="off" spellcheck="false"></div>
       <div class="card-edit-row"><label>Meaning</label><input id="edit-eng-${id}" value="${escHtml(card.english)}"></div>
-      <div class="card-edit-row"><label>Example</label><input id="edit-example-${id}" value="${escHtml(card.example||'')}" spellcheck="false"></div>
+      ${(() => { const ex = getExamples(card); return [0,1,2].map(i => `<div class="card-edit-row"><label>Example ${i+1}</label><input id="edit-ex${i+1}-${id}" value="${escHtml(ex[i]||'')}" spellcheck="false"></div>`).join(''); })()}
       <div class="card-edit-row"><label>Tag</label><input id="edit-tag-${id}" value="${escHtml(card.tag||'')}"></div>
       <div class="card-edit-row"><label>Deck</label><input id="edit-deck-${id}" value="${escHtml(card.deck||'')}"></div>
       <div class="card-edit-row"><label>Level</label><select id="edit-level-${id}">
@@ -1133,7 +1149,8 @@ function saveEdit(id) {
   if (!korean || !english) return;
   cards[idx].korean   = korean;
   cards[idx].english  = english;
-  cards[idx].example  = document.getElementById('edit-example-' + id).value.trim();
+  cards[idx].examples = [1,2,3].map(i => document.getElementById(`edit-ex${i}-${id}`).value.trim()).filter(Boolean);
+  delete cards[idx].example;
   cards[idx].tag      = document.getElementById('edit-tag-' + id).value.trim();
   cards[idx].deck     = document.getElementById('edit-deck-' + id).value.trim();
   cards[idx].level    = document.getElementById('edit-level-' + id).value;
@@ -1290,7 +1307,7 @@ function renderApCard(card) {
         </div>
         <div class="flip-face flip-back">
           <div class="flip-eng">${card.english}</div>
-          ${card.example ? `<div class="example-box" style="margin-top:6px">${card.example}</div>` : ''}
+          ${getExamples(card).map(e => `<div class="example-box" style="margin-top:6px">${e}</div>`).join('')}
           <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:4px">
             ${card.tag ? `<div class="flip-tag">${card.tag}</div>` : ''}
             ${card.level ? `<div class="level-badge">${card.level}</div>` : ''}
