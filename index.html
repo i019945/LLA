@@ -1365,7 +1365,10 @@ async function autoPlayRun() {
   while (autoPlayActive && !autoPlayPaused) {
     autoPlaySkip = false;
     if (autoPlayIndex >= autoPlayQueue.length) {
-      autoPlayQueue = shuffle([...loadCards()]);
+      let pool = loadCards();
+      if (allTagFilter)  pool = pool.filter(c => c.tag  === allTagFilter);
+      if (allDeckFilter) pool = pool.filter(c => c.deck === allDeckFilter);
+      autoPlayQueue = shuffle([...pool]);
       autoPlayIndex = 0;
     }
     const card = autoPlayQueue[autoPlayIndex++];
