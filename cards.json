@@ -71,13 +71,17 @@
     "id": 1782562678821,
     "korean": "미국",
     "english": "美國",
-    "tag": "美國",
+    "tag": "",
     "trap": "",
     "created": 1782562678821,
     "nextReview": 1782562678821,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "example": "",
+    "deck": "",
+    "level": "",
+    "notes": ""
   },
   {
     "id": 1782562742038,
@@ -703,6 +707,30 @@
     "notes": "",
     "created": 1782920200010,
     "nextReview": 1782920200010,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783298062507,
+    "korean": "많이",
+    "english": "a lot of; quite a little; thick",
+    "tag": "",
+    "trap": "",
+    "created": 1783298062507,
+    "nextReview": 1783298062507,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783298231037,
+    "korean": "사랑",
+    "english": "love; 例句「我愛你」 사랑해.    사랑해요.   사랑합니다",
+    "tag": "",
+    "trap": "",
+    "created": 1783298231037,
+    "nextReview": 1783298231037,
     "interval": 1,
     "ease": 2.5,
     "reps": 0
