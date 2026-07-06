@@ -198,6 +198,19 @@
   .flip-trap { font-size: 0.8rem; color: #c0660a; background: #fff4e6; border: 1px solid #f0c070; border-radius: 8px; padding: 6px 12px; text-align: center; width: 100%; margin-top: 4px; }
   .flip-trap::before { content: '⚠ '; }
   .ci-trap { font-size: 0.72rem; color: #c0660a; margin-top: 2px; }
+  .ci-edit { background: none; border: none; color: #ccc; font-size: 1rem; cursor: pointer; padding: 4px 6px; border-radius: 6px; transition: color 0.15s; flex-shrink: 0; }
+  .ci-edit:hover { color: var(--accent); }
+  .card-edit-form { width: 100%; }
+  .card-edit-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px; }
+  .card-edit-row label { font-size: 0.72rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; width: 64px; flex-shrink: 0; padding-top: 9px; }
+  .card-edit-form input, .card-edit-form textarea, .card-edit-form select { flex: 1; border: 1.5px solid var(--border); border-radius: 6px; padding: 7px 10px; font-size: 0.88rem; font-family: inherit; outline: none; min-width: 0; background: white; }
+  .card-edit-form input:focus, .card-edit-form textarea:focus, .card-edit-form select:focus { border-color: var(--accent); }
+  .card-edit-form .kor-edit { font-size: 1.2rem; }
+  .card-edit-form textarea { min-height: 60px; resize: vertical; }
+  .card-edit-actions { display: flex; gap: 8px; }
+  .edit-save-btn { background: var(--accent); color: white; border: none; border-radius: 6px; padding: 7px 16px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+  .edit-save-btn:hover { opacity: 0.88; }
+  .edit-cancel-btn { background: white; color: var(--muted); border: 1.5px solid var(--border); border-radius: 6px; padding: 7px 16px; font-size: 0.85rem; cursor: pointer; }
 
   /* ── Auto-fill ── */
   .autofill-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
@@ -209,6 +222,32 @@
   .autofill-status.err { color: var(--accent2); }
   .autofill-key-btn { background: none; border: none; color: var(--muted); font-size: 0.78rem; cursor: pointer; padding: 4px 6px; border-radius: 6px; }
   .autofill-key-btn:hover { background: var(--border); }
+
+  /* ── Select in add form ── */
+  .fc-field select { width: 100%; border: 1.5px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 1rem; outline: none; font-family: inherit; background: white; cursor: pointer; transition: border-color 0.15s; appearance: none; }
+  .fc-field select:focus { border-color: var(--accent); }
+
+  /* ── Example sentence ── */
+  .example-box { font-size: 0.85rem; font-style: italic; color: #444; background: #f8f8f8; border: 1px solid #e0e0e0; border-radius: 6px; padding: 6px 10px; width: 100%; text-align: center; }
+  .ci-example { font-size: 0.72rem; color: #555; font-style: italic; margin-top: 2px; }
+
+  /* ── Deck & level badges ── */
+  .deck-badge { font-size: 0.72rem; color: #0369a1; background: #e0f2fe; padding: 2px 9px; border-radius: 20px; white-space: nowrap; }
+  .level-badge { font-size: 0.72rem; color: #6b21a8; background: #f3e8ff; padding: 2px 9px; border-radius: 20px; white-space: nowrap; }
+  .ci-meta-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; align-items: center; }
+  .filter-label { font-size: 0.72rem; font-weight: 700; color: var(--muted); padding: 5px 2px; white-space: nowrap; }
+
+  /* ── Tag filter ── */
+  .tag-filter { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .tag-filter-btn { border: 1.5px solid var(--border); background: white; border-radius: 20px; padding: 5px 14px; font-size: 0.78rem; font-weight: 600; color: var(--muted); cursor: pointer; transition: all 0.15s; }
+  .tag-filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .tag-filter-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+
+  /* ── Notes ── */
+  .fc-field textarea { width: 100%; border: 1.5px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 0.9rem; outline: none; transition: border-color 0.15s; font-family: inherit; resize: vertical; min-height: 72px; line-height: 1.5; }
+  .fc-field textarea:focus { border-color: var(--accent); }
+  .notes-box { background: #f0f4ff; border: 1px solid #c5d3f0; border-radius: 8px; padding: 8px 12px; font-size: 0.82rem; color: var(--text); text-align: left; width: 100%; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
+  .ci-notes { font-size: 0.72rem; color: #3a5a9a; margin-top: 3px; white-space: pre-wrap; }
 
   /* ── Auto-play ── */
   .ap-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
@@ -503,13 +542,35 @@
         <input type="text" id="inp-eng" placeholder="meaning…" autocomplete="off">
       </div>
       <div class="fc-field">
-        <label>Tag <span style="font-weight:400;text-transform:none">(optional — e.g. food, verbs, greetings)</span></label>
+        <label>Example Sentence <span style="font-weight:400;text-transform:none">(optional)</span></label>
+        <input type="text" id="inp-example" placeholder="e.g. 저는 학생이에요." autocomplete="off" spellcheck="false">
+      </div>
+      <div class="fc-field">
+        <label>Tag <span style="font-weight:400;text-transform:none">(optional — e.g. food, verbs, grammar)</span></label>
         <input type="text" id="inp-tag" placeholder="tag…" autocomplete="off" list="tag-suggestions">
         <datalist id="tag-suggestions"></datalist>
       </div>
       <div class="fc-field">
+        <label>Deck <span style="font-weight:400;text-transform:none">(optional — e.g. YouTube ep 5, TTMIK lesson 3)</span></label>
+        <input type="text" id="inp-deck" placeholder="deck name…" autocomplete="off" list="deck-suggestions">
+        <datalist id="deck-suggestions"></datalist>
+      </div>
+      <div class="fc-field">
+        <label>Speech Level <span style="font-weight:400;text-transform:none">(optional)</span></label>
+        <select id="inp-level">
+          <option value="">— unspecified —</option>
+          <option value="반말">반말 (casual)</option>
+          <option value="해요체">해요체 (polite)</option>
+          <option value="합쇼체">합쇼체 (formal)</option>
+        </select>
+      </div>
+      <div class="fc-field">
         <label>Pronunciation Trap <span style="font-weight:400;text-transform:none">(optional)</span></label>
         <input type="text" id="inp-trap" placeholder="e.g. ㄱ nasalizes before 는 → sounds like [ㅇ]" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="fc-field">
+        <label>Notes <span style="font-weight:400;text-transform:none">(optional — grammar explanation, sentence structure, etc.)</span></label>
+        <textarea id="inp-notes" placeholder="e.g. 저는 = I + topic marker 는. 이에요 = polite copula. Pattern: Subject + noun + 이에요/예요." spellcheck="false"></textarea>
       </div>
       <button class="add-btn" onclick="addCard()">Add Card</button>
       <div class="add-success" id="add-success">Card added!</div>
@@ -518,6 +579,7 @@
 
   <!-- ── Study ── -->
   <div id="fc-study" class="fc-panel">
+    <div id="study-tag-filter"></div>
     <div id="study-content"></div>
   </div>
 
@@ -718,6 +780,7 @@ function fcShow(panelId, btn) {
   document.querySelectorAll('.fc-subnav button').forEach(b => b.classList.remove('active'));
   document.getElementById(panelId).classList.add('active');
   btn.classList.add('active');
+  if (panelId === 'fc-add')   document.getElementById('inp-deck').value = stickyDeck;
   if (panelId === 'fc-study') renderStudy();
   if (panelId === 'fc-all')   renderAll();
 }
@@ -732,8 +795,9 @@ function refreshFC() {
 
 function updateTagSuggestions(cards) {
   const tags = [...new Set(cards.map(c => c.tag).filter(Boolean))];
-  const dl = document.getElementById('tag-suggestions');
-  dl.innerHTML = tags.map(t => `<option value="${t}">`).join('');
+  document.getElementById('tag-suggestions').innerHTML = tags.map(t => `<option value="${t}">`).join('');
+  const decks = [...new Set(cards.map(c => c.deck).filter(Boolean))];
+  document.getElementById('deck-suggestions').innerHTML = decks.map(d => `<option value="${d}">`).join('');
 }
 
 // ════════════════════════════════════════
@@ -745,9 +809,11 @@ inpKor.addEventListener('blur', () => {
   if (v && /[가-힣㄰-㆏]/.test(v)) speak(v);
 });
 inpKor.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-eng').focus(); });
-document.getElementById('inp-eng').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-tag').focus(); });
-document.getElementById('inp-tag').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-trap').focus(); });
-document.getElementById('inp-trap').addEventListener('keydown', e => { if (e.key === 'Enter') addCard(); });
+document.getElementById('inp-eng').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-example').focus(); });
+document.getElementById('inp-example').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-tag').focus(); });
+document.getElementById('inp-tag').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-deck').focus(); });
+document.getElementById('inp-deck').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-trap').focus(); });
+document.getElementById('inp-trap').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('inp-notes').focus(); });
 
 function naverLookup() {
   const v = inpKor.value.trim();
@@ -771,8 +837,12 @@ function addCard() {
     id: Date.now(),
     korean,
     english,
-    tag:  document.getElementById('inp-tag').value.trim(),
-    trap: document.getElementById('inp-trap').value.trim(),
+    example: document.getElementById('inp-example').value.trim(),
+    tag:     document.getElementById('inp-tag').value.trim(),
+    deck:    document.getElementById('inp-deck').value.trim(),
+    level:   document.getElementById('inp-level').value,
+    trap:    document.getElementById('inp-trap').value.trim(),
+    notes:   document.getElementById('inp-notes').value.trim(),
     created: Date.now(),
     nextReview: Date.now(),
     interval: 1,
@@ -781,10 +851,15 @@ function addCard() {
   });
   saveCards(cards);
 
+  stickyDeck = document.getElementById('inp-deck').value.trim();
   inpKor.value = '';
   document.getElementById('inp-eng').value = '';
+  document.getElementById('inp-example').value = '';
   document.getElementById('inp-tag').value = '';
+  // inp-deck kept sticky
+  document.getElementById('inp-level').value = '';
   document.getElementById('inp-trap').value = '';
+  document.getElementById('inp-notes').value = '';
   inpKor.focus();
 
   const ok = document.getElementById('add-success');
@@ -826,6 +901,8 @@ function intervalLabel(days) {
 // STUDY VIEW
 // ════════════════════════════════════════
 let studyQueue = [], studyIndex = 0, studyFlipped = false, studySeenBack = false;
+let studyTagFilter = '', allTagFilter = '', allDeckFilter = '';
+let stickyDeck = '';
 let autoPlayActive = false, autoPlayPaused = false, autoPlayQueue = [], autoPlayIndex = 0, autoPlayTimer = null, autoPlayResolve = null, autoPlaySkip = false, lastApTap = 0, apTapTimer = null;
 
 function shuffle(arr) {
@@ -836,9 +913,36 @@ function shuffle(arr) {
   return arr;
 }
 
+function filterBar(cards, field, currentFilter, setFn, label) {
+  const values = [...new Set(cards.map(c => c[field]).filter(Boolean))].sort();
+  if (!values.length) return '';
+  return `<div class="tag-filter">
+    ${label ? `<span class="filter-label">${label}</span>` : ''}
+    <button class="tag-filter-btn${!currentFilter ? ' active' : ''}" onclick="${setFn}('')">All</button>
+    ${values.map(v => `<button class="tag-filter-btn${currentFilter === v ? ' active' : ''}" onclick="${setFn}('${v.replace(/'/g,"\\'")}')"> ${v}</button>`).join('')}
+  </div>`;
+}
+
+function setStudyFilter(tag) {
+  studyTagFilter = tag;
+  renderStudy();
+}
+
+function setAllFilter(tag) {
+  allTagFilter = tag;
+  renderAll();
+}
+
+function setDeckFilter(deck) {
+  allDeckFilter = deck;
+  renderAll();
+}
+
 function renderStudy() {
   const cards = loadCards();
-  studyQueue = shuffle(dueCards(cards));
+  document.getElementById('study-tag-filter').innerHTML = filterBar(cards, 'tag', studyTagFilter, 'setStudyFilter');
+  const pool = studyTagFilter ? cards.filter(c => c.tag === studyTagFilter) : cards;
+  studyQueue = shuffle(dueCards(pool));
   studyIndex = 0;
   studyFlipped = false;
   studySeenBack = false;
@@ -881,7 +985,12 @@ function renderStudyCard() {
         </div>
         <div class="flip-face flip-back">
           <div class="flip-eng">${card.english}</div>
-          ${card.tag ? `<div class="flip-tag">${card.tag}</div>` : ''}
+          ${card.example ? `<div class="example-box">${card.example}</div>` : ''}
+          <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center">
+            ${card.tag ? `<div class="flip-tag">${card.tag}</div>` : ''}
+            ${card.level ? `<div class="level-badge">${card.level}</div>` : ''}
+          </div>
+          ${card.notes ? `<div class="notes-box">${card.notes}</div>` : ''}
           <div class="flip-instruction" style="color:var(--muted);animation:none">👆 Tap to hear & flip back</div>
         </div>
       </div>
@@ -937,11 +1046,16 @@ function renderAll() {
     return;
   }
   const due = dueCards(cards).length;
-  el.innerHTML = `<div class="all-stats" style="display:flex;align-items:center">${cards.length} card${cards.length !== 1 ? 's' : ''} total · ${due} due now<button class="ap-start-btn" onclick="startAutoPlay()">▶ Auto-play</button></div><div class="card-list" id="card-list"></div>`;
+  let displayed = allTagFilter ? cards.filter(c => c.tag === allTagFilter) : cards;
+  if (allDeckFilter) displayed = displayed.filter(c => c.deck === allDeckFilter);
+  el.innerHTML = filterBar(cards, 'tag', allTagFilter, 'setAllFilter', 'Tag') +
+    filterBar(cards, 'deck', allDeckFilter, 'setDeckFilter', 'Deck') +
+    `<div class="all-stats" style="display:flex;align-items:center">${displayed.length} card${displayed.length !== 1 ? 's' : ''} total · ${dueCards(displayed).length} due now<button class="ap-start-btn" onclick="startAutoPlay()">▶ Auto-play</button></div><div class="card-list" id="card-list"></div>`;
   const list = document.getElementById('card-list');
-  [...cards].reverse().forEach(card => {
+  [...displayed].reverse().forEach(card => {
     const item = document.createElement('div');
     item.className = 'card-item';
+    item.id = 'card-item-' + card.id;
     let lastTap = 0;
     item.onclick = () => {
       const now = Date.now();
@@ -958,13 +1072,73 @@ function renderAll() {
       <span style="flex:1;min-width:0">
         <span class="ci-kor">${card.korean}</span>
         <span class="ci-eng">${card.english}</span>
+        ${card.example ? `<div class="ci-example">${card.example}</div>` : ''}
         ${card.trap ? `<div class="ci-trap">⚠ ${card.trap}</div>` : ''}
+        ${card.notes ? `<div class="ci-notes">${card.notes}</div>` : ''}
+        ${(card.tag || card.deck || card.level) ? `<div class="ci-meta-row">
+          ${card.tag ? `<span class="ci-tag">${card.tag}</span>` : ''}
+          ${card.deck ? `<span class="deck-badge">${card.deck}</span>` : ''}
+          ${card.level ? `<span class="level-badge">${card.level}</span>` : ''}
+        </div>` : ''}
       </span>
-      ${card.tag ? `<span class="ci-tag">${card.tag}</span>` : ''}
       <span class="ci-due">due ${dueDate}</span>
+      <button class="ci-edit" onclick="event.stopPropagation();editCard(${card.id})" title="Edit">✏</button>
       <button class="ci-del" onclick="event.stopPropagation();deleteCard(${card.id})" title="Delete">✕</button>`;
     list.appendChild(item);
   });
+}
+
+function escHtml(s) {
+  return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function editCard(id) {
+  const card = loadCards().find(c => c.id === id);
+  if (!card) return;
+  const item = document.getElementById('card-item-' + id);
+  if (!item) return;
+  item.onclick = null;
+  item.innerHTML = `
+    <div class="card-edit-form">
+      <div class="card-edit-row"><label>Korean</label><input class="kor-edit" id="edit-kor-${id}" value="${escHtml(card.korean)}" autocorrect="off" spellcheck="false"></div>
+      <div class="card-edit-row"><label>Meaning</label><input id="edit-eng-${id}" value="${escHtml(card.english)}"></div>
+      <div class="card-edit-row"><label>Example</label><input id="edit-example-${id}" value="${escHtml(card.example||'')}" spellcheck="false"></div>
+      <div class="card-edit-row"><label>Tag</label><input id="edit-tag-${id}" value="${escHtml(card.tag||'')}"></div>
+      <div class="card-edit-row"><label>Deck</label><input id="edit-deck-${id}" value="${escHtml(card.deck||'')}"></div>
+      <div class="card-edit-row"><label>Level</label><select id="edit-level-${id}">
+        <option value=""${!card.level ? ' selected' : ''}>— unspecified —</option>
+        <option value="반말"${card.level==='반말' ? ' selected' : ''}>반말 (casual)</option>
+        <option value="해요체"${card.level==='해요체' ? ' selected' : ''}>해요체 (polite)</option>
+        <option value="합쇼체"${card.level==='합쇼체' ? ' selected' : ''}>합쇼체 (formal)</option>
+      </select></div>
+      <div class="card-edit-row"><label>Trap</label><input id="edit-trap-${id}" value="${escHtml(card.trap||'')}" spellcheck="false"></div>
+      <div class="card-edit-row"><label>Notes</label><textarea id="edit-notes-${id}" spellcheck="false">${escHtml(card.notes||'')}</textarea></div>
+      <div class="card-edit-actions">
+        <button class="edit-save-btn" onclick="saveEdit(${id})">Save</button>
+        <button class="edit-cancel-btn" onclick="renderAll()">Cancel</button>
+      </div>
+    </div>`;
+  document.getElementById('edit-kor-' + id).focus();
+}
+
+function saveEdit(id) {
+  const cards = loadCards();
+  const idx = cards.findIndex(c => c.id === id);
+  if (idx === -1) return;
+  const korean = document.getElementById('edit-kor-' + id).value.trim();
+  const english = document.getElementById('edit-eng-' + id).value.trim();
+  if (!korean || !english) return;
+  cards[idx].korean   = korean;
+  cards[idx].english  = english;
+  cards[idx].example  = document.getElementById('edit-example-' + id).value.trim();
+  cards[idx].tag      = document.getElementById('edit-tag-' + id).value.trim();
+  cards[idx].deck     = document.getElementById('edit-deck-' + id).value.trim();
+  cards[idx].level    = document.getElementById('edit-level-' + id).value;
+  cards[idx].trap     = document.getElementById('edit-trap-' + id).value.trim();
+  cards[idx].notes    = document.getElementById('edit-notes-' + id).value.trim();
+  saveCards(cards);
+  refreshFC();
+  renderAll();
 }
 
 function deleteCard(id) {
@@ -1113,8 +1287,13 @@ function renderApCard(card) {
         </div>
         <div class="flip-face flip-back">
           <div class="flip-eng">${card.english}</div>
-          ${card.tag ? `<div class="flip-tag">${card.tag}</div>` : ''}
+          ${card.example ? `<div class="example-box" style="margin-top:6px">${card.example}</div>` : ''}
+          <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:4px">
+            ${card.tag ? `<div class="flip-tag">${card.tag}</div>` : ''}
+            ${card.level ? `<div class="level-badge">${card.level}</div>` : ''}
+          </div>
           ${card.trap ? `<div class="flip-trap" style="display:block;margin-top:8px">${card.trap}</div>` : ''}
+          ${card.notes ? `<div class="notes-box" style="margin-top:8px">${card.notes}</div>` : ''}
           <div class="flip-hint" style="color:var(--muted)">👆 Tap replay · · · double-tap pause</div>
         </div>
       </div>
@@ -1217,7 +1396,9 @@ async function autoPlayRun() {
 }
 
 function startAutoPlay() {
-  const cards = loadCards();
+  let cards = loadCards();
+  if (allTagFilter)  cards = cards.filter(c => c.tag  === allTagFilter);
+  if (allDeckFilter) cards = cards.filter(c => c.deck === allDeckFilter);
   if (!cards.length) return;
   autoPlayActive = true;
   autoPlayPaused = false;
