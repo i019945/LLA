@@ -910,5 +910,53 @@
     "interval": 1,
     "ease": 2.5,
     "reps": 0
+  },
+  {
+    "id": 1783334392544,
+    "korean": "오늘 저는 스타벅스에서 두 시간을 보냈습니다.",
+    "english": "Today I stayed at Starbucks for two hours.",
+    "example": "",
+    "tag": "",
+    "deck": "grammar",
+    "level": "",
+    "trap": "",
+    "notes": ">時間 + 主題 + 地點에서 + 時間長度 + 보내다\n> 에서 : 在 ...\n> 둘 --> 두 시간 (兩小時）\n> 보내다    보냈습니다 (度過了); 을 = 受詞助詞; 動詞「度過了」，所以「兩小時」是受詞。",
+    "created": 1783334392544,
+    "nextReview": 1783334392544,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783335733421,
+    "korean": "에서",
+    "english": "在 ...",
+    "example": "학교에서 공부해요(在學校讀書); 카페에서 만나요(在咖啡廳見面)。",
+    "tag": "",
+    "deck": "grammar",
+    "level": "",
+    "trap": "",
+    "notes": "",
+    "created": 1783335733421,
+    "nextReview": 1783335733421,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783336808889,
+    "korean": "보내다",
+    "english": "送；寄； 打發； 度過（時間）",
+    "example": "",
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "notes": "보냈다 （過去式）\n보냈습니다　（過去式 + 正式禮貌）",
+    "created": 1783336808889,
+    "nextReview": 1783336808889,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
   }
 ]
