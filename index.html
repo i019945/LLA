@@ -235,13 +235,12 @@
   .deck-badge { font-size: 0.72rem; color: #0369a1; background: #e0f2fe; padding: 2px 9px; border-radius: 20px; white-space: nowrap; }
   .level-badge { font-size: 0.72rem; color: #6b21a8; background: #f3e8ff; padding: 2px 9px; border-radius: 20px; white-space: nowrap; }
   .ci-meta-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; align-items: center; }
-  .filter-label { font-size: 0.72rem; font-weight: 700; color: var(--muted); padding: 5px 2px; white-space: nowrap; }
-
-  /* ── Tag filter ── */
-  .tag-filter { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
-  .tag-filter-btn { border: 1.5px solid var(--border); background: white; border-radius: 20px; padding: 5px 14px; font-size: 0.78rem; font-weight: 600; color: var(--muted); cursor: pointer; transition: all 0.15s; }
-  .tag-filter-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .tag-filter-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+  /* ── Filter dropdowns ── */
+  .filter-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  .filter-label { font-size: 0.72rem; font-weight: 700; color: var(--muted); white-space: nowrap; }
+  .filter-select { border: 1.5px solid var(--border); border-radius: 6px; padding: 5px 8px; font-size: 0.85rem; font-family: inherit; background: white; cursor: pointer; outline: none; color: var(--text); }
+  .filter-select:focus { border-color: var(--accent); }
+  .filter-select.active { border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 600; }
 
   /* ── Notes ── */
   .fc-field textarea { width: 100%; border: 1.5px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 0.9rem; outline: none; transition: border-color 0.15s; font-family: inherit; resize: vertical; min-height: 72px; line-height: 1.5; }
@@ -913,14 +912,15 @@ function shuffle(arr) {
   return arr;
 }
 
-function filterBar(cards, field, currentFilter, setFn, label) {
+function filterSelect(cards, field, currentFilter, setFn, label) {
   const values = [...new Set(cards.map(c => c[field]).filter(Boolean))].sort();
   if (!values.length) return '';
-  return `<div class="tag-filter">
-    ${label ? `<span class="filter-label">${label}</span>` : ''}
-    <button class="tag-filter-btn${!currentFilter ? ' active' : ''}" onclick="${setFn}('')">All</button>
-    ${values.map(v => `<button class="tag-filter-btn${currentFilter === v ? ' active' : ''}" onclick="${setFn}('${v.replace(/'/g,"\\'")}')"> ${v}</button>`).join('')}
-  </div>`;
+  const active = currentFilter ? ' active' : '';
+  return `<span class="filter-label">${label}</span>
+    <select class="filter-select${active}" onchange="${setFn}(this.value);this.className='filter-select'+(this.value?' active':'')">
+      <option value="">All</option>
+      ${values.map(v => `<option value="${v}"${currentFilter === v ? ' selected' : ''}>${v}</option>`).join('')}
+    </select>`;
 }
 
 function setStudyFilter(tag) {
@@ -940,7 +940,8 @@ function setDeckFilter(deck) {
 
 function renderStudy() {
   const cards = loadCards();
-  document.getElementById('study-tag-filter').innerHTML = filterBar(cards, 'tag', studyTagFilter, 'setStudyFilter');
+  const sTagSel = filterSelect(cards, 'tag', studyTagFilter, 'setStudyFilter', 'Tag');
+  document.getElementById('study-tag-filter').innerHTML = sTagSel ? `<div class="filter-row">${sTagSel}</div>` : '';
   const pool = studyTagFilter ? cards.filter(c => c.tag === studyTagFilter) : cards;
   studyQueue = shuffle(dueCards(pool));
   studyIndex = 0;
@@ -1048,8 +1049,10 @@ function renderAll() {
   const due = dueCards(cards).length;
   let displayed = allTagFilter ? cards.filter(c => c.tag === allTagFilter) : cards;
   if (allDeckFilter) displayed = displayed.filter(c => c.deck === allDeckFilter);
-  el.innerHTML = filterBar(cards, 'tag', allTagFilter, 'setAllFilter', 'Tag') +
-    filterBar(cards, 'deck', allDeckFilter, 'setDeckFilter', 'Deck') +
+  const tagSel  = filterSelect(cards, 'tag',  allTagFilter,  'setAllFilter',  'Tag');
+  const deckSel = filterSelect(cards, 'deck', allDeckFilter, 'setDeckFilter', 'Deck');
+  const filterRow = (tagSel || deckSel) ? `<div class="filter-row">${tagSel}${deckSel}</div>` : '';
+  el.innerHTML = filterRow +
     `<div class="all-stats" style="display:flex;align-items:center">${displayed.length} card${displayed.length !== 1 ? 's' : ''} total · ${dueCards(displayed).length} due now<button class="ap-start-btn" onclick="startAutoPlay()">▶ Auto-play</button></div><div class="card-list" id="card-list"></div>`;
   const list = document.getElementById('card-list');
   [...displayed].reverse().forEach(card => {
