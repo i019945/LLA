@@ -74,27 +74,50 @@ The meaning field is one English utterance. No language detection at all in the 
 - **One-time cleanup:** I can scan `cards.json` and list every card whose examples/meaning violate the format (multiple `=`, mixed sides), and either fix them mechanically or hand you the list to edit. Current data is small (~40 cards); this is minutes, not hours.
 - **Nudge at entry time (optional):** the Add/Edit form could show a soft hint when an example has no `=` or has Hangul after it. No enforcement — just a reminder.
 
-## 4. Notes: mixing is legitimate — split by Hangul runs
+## 4. Notes: line-based format — `Korean : English` breakdowns
 
-Notes are English prose that cites Korean (`저는 = I + topic marker 는. 이에요 = polite copula.`). Forcing a format here would fight the field's purpose, so no rules apply to Notes. Two options:
+*(Format proposed by the user, 2026-07-09.)* Cards hold not just words but daily phrases and proverbs; Notes is where a sentence gets broken down into grammatical elements. So Notes gets its own convention, applied **per line** (Notes is a multi-line textarea — each line stands alone):
 
-**Option A (default): don't read Notes aloud.** This is today's behavior. Notes are long; hearing a grammar paragraph at 0.6× on every auto-play pass would drag. Notes stay on-screen reading material.
+**Line type 1 — pure English.** Free commentary, no Hangul anywhere.
 
-**Option B (if wanted): Hangul-run splitting.** With Chinese out of scope this is *not* the fragile heuristic from the failed attempts — it's exact:
-
-- Walk the string; every char is either Hangul (U+AC00–U+D7A3, plus Jamo) or not.
-- Group into alternating runs; punctuation/digits/spaces attach to the run in progress.
-- Korean runs → Korean voice; everything else → English voice.
+**Line type 2 — `Korean : English` breakdown.** Everything left of the first `:` is Korean (a grammatical element of the sentence), everything right of it is the English explanation. The `:` functions as a pause and is never spoken.
 
 ```
-"저는 = I + topic marker 는. 이에요 = polite copula."
- ko: "저는"      en: "= I + topic marker"      ko: "는."
- ko: "이에요"    en: "= polite copula."
+✓ 저는 : I plus the topic marker
+✓ 이에요 : polite copula
+✓ A proverb about persistence, used encouragingly.
+✗ Pattern: Subject + noun + 이에요/예요     ← English line citing Hangul — rewrite as a breakdown line
 ```
 
-No thresholds, no language guessing — binary classification can't misfire the way three-way detection did. The only remaining imperfection is cadence: rapid ko/en alternation produces slightly choppy audio with ~100–300ms voice-switch gaps. That's inherent to switching voices and acceptable for an optional feature.
+As in Examples, keep each side pure — the English side of a breakdown shouldn't itself cite Hangul.
 
-Recommendation: ship §3 with Option A first; add Option B behind a toggle (e.g. a "read notes" checkbox in auto-play controls) only if you find you want it.
+**Delimiter semantics across the card (deliberate):** `=` in Examples means *"is translated as"*; `:` in Notes means *"is explained as"*. Two delimiters, two relationships — a parser never guesses which one a line expresses.
+
+### 4.1 The parser
+
+Per line: if the text left of the first `:` contains Hangul → breakdown line (Korean voice for the left side, English voice for the right); otherwise → English line (English voice for the whole line). No thresholds, no guessing.
+
+```js
+async function speakNoteLine(line) {
+  const [left, right] = splitOnce(line, ':');
+  if (right && hasHangul(left)) {
+    await speakSlowAndWait(left.trim(), koreanVoice, 'ko-KR');
+    await speakSlowAndWait(right.trim(), engVoice, 'en-US');   // the gap = the pause
+  } else {
+    await speakSlowAndWait(line, engVoice, 'en-US');
+  }
+}
+```
+
+**Safety net (same as Examples):** any English side / English line that unexpectedly contains Hangul is routed through binary Hangul-run splitting (Korean runs → Korean voice, the rest → English voice — exact now that Chinese is out of scope) instead of letting the English voice `onerror` and skip. Legacy notes written in the old `저는 = I + topic marker 는.` style stay audible until cleaned up.
+
+### 4.2 Whether to read Notes aloud at all
+
+Still worth a toggle: Notes on a proverb card can be long, and hearing the full breakdown at 0.6× on *every* auto-play pass may drag. Suggested: a "read notes" checkbox in the auto-play bar (persisted like the interval), default **off**.
+
+### 4.3 Auto-filling Notes later
+
+The user intends to eventually have Claude fill the Notes field. The format makes this reliable in both directions: the auto-fill prompt can *demand* the format ("output one `Korean : English` line per grammatical element, or pure-English lines"), and the app can *validate* the output mechanically (every line either Hangul-free or `Hangul-left : colon : English-right`) before inserting it — malformed AI output gets rejected instead of silently polluting a card. This extends the existing `autoFill()` (which already fills Meaning + Trap via Claude Haiku) with a Notes section in the same request.
 
 ## 5. Alternatives considered (not recommended now)
 
@@ -114,12 +137,16 @@ Recommendation: ship §3 with Option A first; add Option B behind a toggle (e.g.
 
 ## 7. Decision needed
 
-Confirmed so far (user feedback 2026-07-09): **Korean + English only** — Chinese dropped; **Notes may mix freely** — handled by §4, no format rules there.
+Confirmed so far (user feedback 2026-07-09):
+
+- **Korean + English only** — Chinese dropped; all classification is binary Hangul-or-not.
+- **Notes format (user's own proposal):** each line is either pure English or `Korean : English` with `:` as a spoken pause — see §4.
+- **Future:** user may ask Claude to auto-fill Notes following this format (§4.3).
 
 Still open:
 
-1. **Adopt the format for Examples/Meaning?** (4 rules in §3.1 — you're already ~90% compliant)
-2. **Cleanup mode:** auto-fix existing cards mechanically, or produce a list for you to edit by hand?
-3. **Notes aloud:** Option A (not read — default) or Option B (Hangul-run splitting behind a toggle)?
+1. **Adopt the Examples/Meaning format?** (4 rules in §3.1 — you're already ~90% compliant)
+2. **Cleanup mode:** auto-fix existing cards mechanically, or produce a list for you to edit by hand? (Old notes in `저는 = …` style would also be converted to `저는 : …`.)
+3. **"Read notes" toggle default:** proposal says default off (§4.2) — confirm or change.
 
 Say "implement the TTS proposal" in a future session once you've decided.
