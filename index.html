@@ -1277,14 +1277,16 @@ function apDelay(ms) {
   });
 }
 
-function detectLang(text) {
+function detectLang(text, anyKo = false) {
   let ko = 0, zh = 0;
+  const nonSpace = [...text].filter(ch => ch.trim()).length || 1;
   for (const ch of text) {
     const cp = ch.codePointAt(0);
     if (cp >= 0xAC00 && cp <= 0xD7A3) ko++;
     else if (cp >= 0x4E00 && cp <= 0x9FFF) zh++;
   }
-  if (ko > 0 && ko >= zh) return 'ko';
+  const koWins = anyKo ? ko > 0 : ko / nonSpace >= 0.3;
+  if (koWins && ko >= zh) return 'ko';
   if (zh > 0) return 'zh';
   return 'en';
 }
@@ -1309,8 +1311,8 @@ function speakSlowAndWait(text, voice, lang) {
   });
 }
 
-function speakAuto(text) {
-  const lang = detectLang(text);
+function speakAuto(text, anyKo = false) {
+  const lang = detectLang(text, anyKo);
   if (lang === 'ko') return speakSlowAndWait(text, koreanVoice, 'ko-KR');
   if (lang === 'zh') return speakSlowAndWait(text, chnVoice, 'zh-TW');
   return speakSlowAndWait(text, engVoice, 'en-US');
@@ -1438,7 +1440,7 @@ async function autoPlayRun() {
       await apDelay(300);
       if (!autoPlayActive) return;
       if (autoPlaySkip) break;
-      await speakAuto(ex);
+      await speakAuto(ex, true);
       if (!autoPlayActive) return;
       if (autoPlaySkip) break;
     }
