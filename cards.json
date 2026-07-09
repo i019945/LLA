@@ -1038,5 +1038,59 @@
     "interval": 1,
     "ease": 2.5,
     "reps": 0
+  },
+  {
+    "id": 1783554382662,
+    "korean": "무엇",
+    "english": "what; 但是日常生活中，幾乎都縮成 뭐",
+    "examples": [
+      "뭐 해요? = What are you doing?",
+      "뭐 먹어요? = What are you eating?",
+      "뭐 좋아해요? = What do you like?"
+    ],
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "notes": "",
+    "created": 1783554382662,
+    "nextReview": 1783554382662,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783554587032,
+    "korean": "스페인",
+    "english": "Spain",
+    "examples": [],
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "notes": "",
+    "created": 1783554587032,
+    "nextReview": 1783554587032,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783561951620,
+    "korean": "가요",
+    "english": "to go; polite form of \"가다\"",
+    "examples": [
+      "어디 가? = Where are you going?"
+    ],
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "notes": "가다: dictionary form\n가: casual\n갑니다: formal",
+    "created": 1783561951620,
+    "nextReview": 1783561951620,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
   }
 ]
