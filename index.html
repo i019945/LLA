@@ -256,6 +256,8 @@
   .ap-start-btn:hover { background: var(--accent); color: white; }
   .ap-stop-btn { border: 1.5px solid var(--accent2); color: var(--accent2); background: white; border-radius: 20px; padding: 5px 14px; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
   .ap-stop-btn:hover { background: var(--accent2); color: white; }
+  .ap-mode-btn { border: 1.5px solid var(--border); color: var(--muted); background: white; border-radius: 20px; padding: 5px 12px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+  .ap-mode-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
 
   @media (max-width: 500px) {
     .char-grid { grid-template-columns: repeat(auto-fill, minmax(105px,1fr)); }
@@ -590,7 +592,7 @@
 // TTS
 // ════════════════════════════════════════
 let currentRate = localStorage.getItem('lla_rate') || '0.85';
-let koreanVoice = null, engVoice = null, chnVoice = null;
+let koreanVoice = null, engVoice = null;
 
 // Each Hangul syllable block is a single Unicode char (U+AC00–U+D7A3)
 function isHangulSyllable(ch) {
@@ -609,11 +611,6 @@ function loadVoices() {
     google('en-US') ||
     voices.find(v => v.lang === 'en-US') ||
     voices.find(v => ['en-GB','en-AU','en-CA'].includes(v.lang)) || null;
-  chnVoice =
-    google('zh') ||
-    voices.find(v => v.lang === 'zh-TW') ||
-    voices.find(v => v.lang === 'zh-CN') ||
-    voices.find(v => v.lang.startsWith('zh')) || null;
 }
 
 // iOS Safari: cancel() + immediate speak() silently drops the utterance.
@@ -682,30 +679,81 @@ function speakSlowAndWait(text, voice, lang) {
   });
 }
 
-// Classifies text as ko/zh/en for voice selection.
-// anyKo=true: any Hangul at all forces Korean (English voices error on Hangul).
-// anyKo=false: Korean must be ≥30% of chars, so 'love (사랑)' stays English.
-function detectLang(text, anyKo = false) {
-  let ko = 0, zh = 0;
-  const nonSpace = [...text].filter(ch => ch.trim()).length || 1;
-  for (const ch of text) {
-    const cp = ch.codePointAt(0);
-    if (cp >= 0xAC00 && cp <= 0xD7A3) ko++;
-    else if (cp >= 0x4E00 && cp <= 0x9FFF) zh++;
-  }
-  const koWins = anyKo ? ko > 0 : ko / nonSpace >= 0.3;
-  if (koWins && ko >= zh) return 'ko';
-  if (zh > 0) return 'zh';
-  return 'en';
+function hasHangul(text) {
+  return /[가-힣㄰-㆏]/.test(text);
 }
 
-// Speaks text with the voice matching its detected language.
-// Currently unused by auto-play (reverted); kept for future multi-language reading.
-function speakAuto(text, anyKo = false) {
-  const lang = detectLang(text, anyKo);
-  if (lang === 'ko') return speakSlowAndWait(text, koreanVoice, 'ko-KR');
-  if (lang === 'zh') return speakSlowAndWait(text, chnVoice, 'zh-TW');
-  return speakSlowAndWait(text, engVoice, 'en-US');
+// Safety net: speak text that unexpectedly mixes Hangul and Latin.
+// Walks the string, groups into Korean/non-Korean runs, speaks each with its matching voice.
+// Only called when the English side of a card contains Hangul (non-conforming card).
+async function speakMixed(text) {
+  const runs = [];
+  let buf = '', ko = null;
+  for (const ch of text) {
+    const isKo = /[가-힣㄰-㆏]/.test(ch);
+    const isLetter = /[a-zA-Z가-힣㄰-㆏]/.test(ch);
+    if (!isLetter) { buf += ch; continue; }
+    if (ko === null) { ko = isKo; buf += ch; }
+    else if (isKo === ko) { buf += ch; }
+    else { if (buf.trim()) runs.push({ ko, text: buf }); buf = ch; ko = isKo; }
+  }
+  if (buf.trim()) runs.push({ ko: ko ?? false, text: buf });
+  for (const r of runs) {
+    if (!autoPlayActive || autoPlaySkip) return;
+    await speakSlowAndWait(r.text.trim(), r.ko ? koreanVoice : engVoice, r.ko ? 'ko-KR' : 'en-US');
+  }
+}
+
+// Speak one example sentence: "Korean sentence = English translation".
+// Left of '=' → Korean voice. Right of '=' → English voice.
+// No '=' → whole string treated as Korean.
+async function speakExample(ex) {
+  const i = ex.indexOf('=');
+  if (i === -1) { await speakSlowAndWait(ex.trim(), koreanVoice, 'ko-KR'); return; }
+  const kor = ex.slice(0, i).trim();
+  const eng = ex.slice(i + 1).trim();
+  if (kor) await speakSlowAndWait(kor, koreanVoice, 'ko-KR');
+  if (!autoPlayActive || autoPlaySkip) return;
+  if (eng) await (hasHangul(eng) ? speakMixed(eng) : speakSlowAndWait(eng, engVoice, 'en-US'));
+}
+
+// Speak Notes field, one line at a time.
+// "Korean : English" lines → Korean voice / English voice (gap = the pause).
+// Pure English lines → English voice.
+// Lines with unexpected Hangul → speakMixed safety net.
+async function speakNotes(notes) {
+  for (const line of notes.split('\n').map(l => l.trim()).filter(Boolean)) {
+    if (!autoPlayActive || autoPlaySkip) return;
+    const i = line.indexOf(':');
+    if (i !== -1 && hasHangul(line.slice(0, i))) {
+      const kor = line.slice(0, i).trim();
+      const eng = line.slice(i + 1).trim();
+      if (kor) await speakSlowAndWait(kor, koreanVoice, 'ko-KR');
+      if (!autoPlayActive || autoPlaySkip) return;
+      if (eng) await speakSlowAndWait(eng, engVoice, 'en-US');
+    } else {
+      await (hasHangul(line) ? speakMixed(line) : speakSlowAndWait(line, engVoice, 'en-US'));
+    }
+  }
+}
+
+// Full back-face reading: meaning → examples → notes (if enabled).
+async function speakBackFull(card) {
+  if (card.english) {
+    await (hasHangul(card.english) ? speakMixed(card.english) : speakSlowAndWait(card.english, engVoice, 'en-US'));
+    if (!autoPlayActive || autoPlaySkip) return;
+  }
+  for (const ex of getExamples(card)) {
+    await apDelay(300);
+    if (!autoPlayActive || autoPlaySkip) return;
+    await speakExample(ex);
+    if (!autoPlayActive || autoPlaySkip) return;
+  }
+  if (getApNotes() && card.notes) {
+    await apDelay(300);
+    if (!autoPlayActive || autoPlaySkip) return;
+    await speakNotes(card.notes);
+  }
 }
 
 // ════════════════════════════════════════
@@ -1309,8 +1357,22 @@ function saveToken() {
 // ════════════════════════════════════════
 // AUTO-PLAY
 // ════════════════════════════════════════
-function getApInterval() {
-  return parseInt(localStorage.getItem('lla_ap_interval') || '500');
+function getApInterval() { return parseInt(localStorage.getItem('lla_ap_interval') || '500'); }
+function getApMode()     { return localStorage.getItem('lla_ap_mode') || 'word'; }
+function getApNotes()    { return localStorage.getItem('lla_ap_notes') === 'on'; }
+
+function toggleApMode() {
+  const next = getApMode() === 'word' ? 'full' : 'word';
+  localStorage.setItem('lla_ap_mode', next);
+  const btn = document.getElementById('ap-mode-btn');
+  if (btn) { btn.textContent = next === 'full' ? 'Full' : 'Word'; btn.className = 'ap-mode-btn' + (next === 'full' ? ' active' : ''); }
+}
+
+function toggleApNotes() {
+  const next = !getApNotes();
+  localStorage.setItem('lla_ap_notes', next ? 'on' : 'off');
+  const btn = document.getElementById('ap-notes-btn');
+  if (btn) { btn.textContent = next ? 'Notes on' : 'Notes off'; btn.className = 'ap-mode-btn' + (next ? ' active' : ''); }
 }
 
 function apDelay(ms) {
@@ -1329,6 +1391,8 @@ function renderApCard(card) {
       <span class="ap-meta">Interval: <select class="ap-interval-sel" onchange="localStorage.setItem('lla_ap_interval',this.value)">
         ${[500,1000,2000,3000].map(v=>`<option value="${v}"${v===interval?' selected':''}>${v/1000}s</option>`).join('')}
       </select></span>
+      <button id="ap-mode-btn"  class="ap-mode-btn${getApMode()==='full'?' active':''}"  onclick="toggleApMode()">${getApMode()==='full'?'Full':'Word'}</button>
+      <button id="ap-notes-btn" class="ap-mode-btn${getApNotes()?' active':''}" onclick="toggleApNotes()">${getApNotes()?'Notes on':'Notes off'}</button>
       <span class="ap-meta" id="ap-status"></span>
       <button class="ap-stop-btn" onclick="stopAutoPlay()">■ Stop</button>
     </div>
@@ -1430,11 +1494,20 @@ async function autoPlayRun() {
     }
     const card = autoPlayQueue[autoPlayIndex++];
 
-    renderApCard(card);                        // front
+    renderApCard(card);                        // front — always Korean
     if (!(await apStep(card))) continue;
-    apFlip(true);                              // back
-    if (!(await apStep(card))) continue;
-    apFlip(false);                             // front again
+
+    apFlip(true);                              // back — Word: Korean again; Full: meaning + examples + notes
+    if (getApMode() === 'full') {
+      await speakBackFull(card);
+    } else {
+      await speakSlowAndWait(card.korean, koreanVoice, 'ko-KR');
+    }
+    if (!autoPlayActive || autoPlaySkip) continue;
+    await apDelay(getApInterval());
+    if (!autoPlayActive || autoPlaySkip) continue;
+
+    apFlip(false);                             // front again — always Korean
     await apStep(card);
   }
 }
