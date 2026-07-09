@@ -721,7 +721,11 @@
     "nextReview": 1783298062507,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [],
+    "deck": "",
+    "level": "",
+    "notes": ""
   },
   {
     "id": 1783298231037,
@@ -742,14 +746,16 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "사과가 하나 있어요. (There is one apple.)",
     "trap": "Drops the 아 before a counter: 하나 개 ✗ → 한 개 ✓ (한 명, 한 시간).",
     "notes": "",
     "created": 1782920200011,
     "nextReview": 1782920200011,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "사과가 하나 있어요. = There is one apple."
+    ]
   },
   {
     "id": 1782920200012,
@@ -758,14 +764,16 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "커피 두 잔 주세요. (Two coffees, please.)",
     "trap": "Drops ㄹ before a counter: 둘 개 ✗ → 두 개 ✓ (두 명, 두 시).",
     "notes": "",
     "created": 1782920200012,
     "nextReview": 1782920200012,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "커피 두 잔 주세요. = Two coffees, please."
+    ]
   },
   {
     "id": 1782920200013,
@@ -774,14 +782,16 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "친구가 세 명이에요. (I have three friends.)",
     "trap": "Drops ㅅ before a counter: 셋 개 ✗ → 세 개 ✓ (세 명, 세 시).",
     "notes": "",
     "created": 1782920200013,
     "nextReview": 1782920200013,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "친구가 세 명이에요. = I have three friends."
+    ]
   },
   {
     "id": 1782920200014,
@@ -790,14 +800,16 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "네 시에 만나요. (Let's meet at 4 o'clock.)",
     "trap": "Drops ㅅ before a counter: 넷 개 ✗ → 네 개 ✓ (네 명, 네 시).",
     "notes": "",
     "created": 1782920200014,
     "nextReview": 1782920200014,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "네 시에 만나요. = Let's meet at 4 o'clock."
+    ]
   },
   {
     "id": 1782920200015,
@@ -806,14 +818,16 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "다섯 시에 일어나요. (I wake up at 5 o'clock.)",
     "trap": "",
     "notes": "",
     "created": 1782920200015,
     "nextReview": 1782920200015,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "다섯 시에 일어나요. = I wake up at 5 o'clock."
+    ]
   },
   {
     "id": 1782920200016,
@@ -822,14 +836,16 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "여섯 살이에요. (I am 6 years old.)",
     "trap": "",
     "notes": "",
     "created": 1782920200016,
     "nextReview": 1782920200016,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "여섯 살이에요. = I am 6 years old."
+    ]
   },
   {
     "id": 1782920200017,
@@ -838,14 +854,16 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "일곱 시에 저녁을 먹어요. (I have dinner at 7.)",
     "trap": "",
     "notes": "",
     "created": 1782920200017,
     "nextReview": 1782920200017,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "일곱 시에 저녁을 먹어요 = I have dinner at 7."
+    ]
   },
   {
     "id": 1782920200018,
@@ -854,14 +872,16 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "여덟 시간 잤어요. (I slept for 8 hours.)",
     "trap": "Double batchim ㄼ — sounds like [여덜] before consonants.",
     "notes": "",
     "created": 1782920200018,
     "nextReview": 1782920200018,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "여덟 시간 잤어요. = I slept for 8 hours."
+    ]
   },
   {
     "id": 1782920200019,
@@ -870,14 +890,16 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "아홉 살에 학교에 갔어요. (I started school at age 9.)",
     "trap": "",
     "notes": "",
     "created": 1782920200019,
     "nextReview": 1782920200019,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "아홉 살에 학교에 갔어요. = I started school at age 9."
+    ]
   },
   {
     "id": 1782920200020,
@@ -886,52 +908,37 @@
     "tag": "number",
     "deck": "Native Korean numbers",
     "level": "해요체",
-    "example": "열 시에 자요. (I go to sleep at 10.)",
     "trap": "",
     "notes": "",
     "created": 1782920200020,
     "nextReview": 1782920200020,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "열 시에 자요. = I go to sleep at 10."
+    ]
   },
   {
     "id": 1783331881089,
     "korean": "사랑해요.",
     "english": "I love you.",
-    "example": "",
     "tag": "",
-    "deck": "grammar",
+    "deck": "",
     "level": "해요체",
     "trap": "",
-    "notes": "사랑해         用於戀人、非常親近的人之間;\n사랑합니다   非常正式，常見於演講、婚禮、公開告白或對長輩表達敬意\n하다            意思是 「做」，是一個很常見的動詞;           해  是 하다 的非正式現在式",
+    "notes": "사랑해 : intimate relationship\n사랑합니다 : very formal",
     "created": 1783331881089,
     "nextReview": 1783331881089,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
-  },
-  {
-    "id": 1783334392544,
-    "korean": "오늘 저는 스타벅스에서 두 시간을 보냈습니다.",
-    "english": "Today I stayed at Starbucks for two hours.",
-    "example": "",
-    "tag": "",
-    "deck": "grammar",
-    "level": "",
-    "trap": "",
-    "notes": ">時間 + 主題 + 地點에서 + 時間長度 + 보내다\n> 에서 : 在 ...\n> 둘 --> 두 시간 (兩小時）\n> 보내다    보냈습니다 (度過了); 을 = 受詞助詞; 動詞「度過了」，所以「兩小時」是受詞。",
-    "created": 1783334392544,
-    "nextReview": 1783334392544,
-    "interval": 1,
-    "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": []
   },
   {
     "id": 1783335733421,
     "korean": "에서",
-    "english": "在 ...",
-    "example": "학교에서 공부해요(在學校讀書); 카페에서 만나요(在咖啡廳見面)。",
+    "english": "at ... (a location)",
     "tag": "",
     "deck": "grammar",
     "level": "",
@@ -941,23 +948,30 @@
     "nextReview": 1783335733421,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "학교에서 공부해요 = study at school",
+      "카페에서 만나요 = meet at the coffee shop"
+    ]
   },
   {
     "id": 1783336808889,
     "korean": "보내다",
-    "english": "送；寄； 打發； 度過（時間）",
-    "example": "",
+    "english": "spend (time); send (message)",
     "tag": "",
     "deck": "",
     "level": "",
     "trap": "",
-    "notes": "보냈다 （過去式）\n보냈습니다　（過去式 + 正式禮貌）",
+    "notes": "보내요 : present polite form\n보냈습니다 : past tense formal",
     "created": 1783336808889,
     "nextReview": 1783336808889,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "오늘은 집에서 시간을 보내요. = I spend time at home today.",
+      "오늘 저는 스타벅스에서 두 시간을 보냈습니다. = Today I spent two hours at Starbucks"
+    ]
   },
   {
     "id": 1783379836341,
@@ -1042,7 +1056,7 @@
   {
     "id": 1783554382662,
     "korean": "무엇",
-    "english": "what; 但是日常生活中，幾乎都縮成 뭐",
+    "english": "what;",
     "examples": [
       "뭐 해요? = What are you doing?",
       "뭐 먹어요? = What are you eating?",
@@ -1052,7 +1066,7 @@
     "deck": "",
     "level": "",
     "trap": "",
-    "notes": "",
+    "notes": "뭐 : a compact form, used very often in daily conversation.",
     "created": 1783554382662,
     "nextReview": 1783554382662,
     "interval": 1,
@@ -1114,13 +1128,14 @@
     "korean": "어디",
     "english": "where",
     "examples": [
-      "어디 있어요? = Where are you? 있어요 = is/are, exists (from 있다)"
+      "어디 있어요? = Where are you?",
+      "있어요 = is/are, exists."
     ],
     "tag": "",
     "deck": "",
     "level": "",
     "trap": "",
-    "notes": "Depending on context, it can mean: Where is my phone? Where are you? Where is the restaurant?",
+    "notes": "어디 있어요? : Depending on context, it can mean: Where is my phone? Where are you? Where is the restaurant?",
     "created": 1783563162977,
     "nextReview": 1783563162977,
     "interval": 1,
@@ -1130,15 +1145,15 @@
   {
     "id": 1783565684894,
     "korean": "아니요",
-    "english": "No (a polite 'no'); 注意這不是\"不「是」\" 的那個「是」（作為動詞；아니다）",
+    "english": "No (a polite 'no'); Note that it's not a verb.",
     "examples": [
-      "아니요.　학생이 아니다.　＝ 不，他不是學生。"
+      "아니요.　학생이 아니다.　＝ He is not a student."
     ],
     "tag": "",
     "deck": "",
     "level": "",
     "trap": "",
-    "notes": "아닙니다 : formal",
+    "notes": "아닙니다 : formal\n아니다 : verb, as in he \"is not\" a student.",
     "created": 1783565684894,
     "nextReview": 1783565684894,
     "interval": 1,
@@ -1150,13 +1165,13 @@
     "korean": "에",
     "english": "to / at (destination or location)",
     "examples": [
-      "집에 와요. = I come home. (와요. 的原形為오다 (come)）"
+      "집에 와요. = I come home."
     ],
     "tag": "",
     "deck": "",
     "level": "",
     "trap": "",
-    "notes": "different from: 에서 = at / in (where an action happens)",
+    "notes": "오다 : dictionary form come)\n에서 : at / in (where an action happens).",
     "created": 1783566495374,
     "nextReview": 1783566495374,
     "interval": 1,
