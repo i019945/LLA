@@ -608,7 +608,8 @@ function loadKoreanVoice() {
   engVoice =
     voices.find(v => v.lang === 'en-US' && v.name.toLowerCase().includes('google')) ||
     voices.find(v => v.lang === 'en-US') ||
-    voices.find(v => v.lang.startsWith('en')) || null;
+    voices.find(v => ['en-GB','en-AU','en-CA'].includes(v.lang)) ||
+    null;
   chnVoice =
     voices.find(v => v.lang.startsWith('zh') && v.name.toLowerCase().includes('google')) ||
     voices.find(v => v.lang === 'zh-TW') ||
@@ -1277,14 +1278,16 @@ function apDelay(ms) {
 }
 
 function detectLang(text) {
+  const chars = [...text].filter(ch => ch.trim());
   let ko = 0, zh = 0;
-  for (const ch of text) {
+  for (const ch of chars) {
     const cp = ch.codePointAt(0);
     if (cp >= 0xAC00 && cp <= 0xD7A3) ko++;
     else if (cp >= 0x4E00 && cp <= 0x9FFF) zh++;
   }
-  if (ko > zh && ko > 0) return 'ko';
-  if (zh > 0) return 'zh';
+  const total = chars.length || 1;
+  if (ko / total >= 0.3 && ko >= zh) return 'ko';
+  if (zh / total >= 0.3) return 'zh';
   return 'en';
 }
 
