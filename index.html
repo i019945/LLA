@@ -749,7 +749,7 @@ async function speakBackFull(card) {
     await speakExample(ex);
     if (!autoPlayActive || autoPlaySkip) return;
   }
-  if (getApNotes() && card.notes) {
+  if (card.notes) {
     await apDelay(300);
     if (!autoPlayActive || autoPlaySkip) return;
     await speakNotes(card.notes);
@@ -1358,21 +1358,13 @@ function saveToken() {
 // AUTO-PLAY
 // ════════════════════════════════════════
 function getApInterval() { return parseInt(localStorage.getItem('lla_ap_interval') || '500'); }
-function getApMode()     { return localStorage.getItem('lla_ap_mode') || 'word'; }
-function getApNotes()    { return localStorage.getItem('lla_ap_notes') === 'on'; }
+function getApMode() { return localStorage.getItem('lla_ap_mode') || 'word'; }
 
 function toggleApMode() {
   const next = getApMode() === 'word' ? 'full' : 'word';
   localStorage.setItem('lla_ap_mode', next);
   const btn = document.getElementById('ap-mode-btn');
   if (btn) { btn.textContent = next === 'full' ? 'Full' : 'Word'; btn.className = 'ap-mode-btn' + (next === 'full' ? ' active' : ''); }
-}
-
-function toggleApNotes() {
-  const next = !getApNotes();
-  localStorage.setItem('lla_ap_notes', next ? 'on' : 'off');
-  const btn = document.getElementById('ap-notes-btn');
-  if (btn) { btn.textContent = next ? 'Notes on' : 'Notes off'; btn.className = 'ap-mode-btn' + (next ? ' active' : ''); }
 }
 
 function apDelay(ms) {
@@ -1391,8 +1383,7 @@ function renderApCard(card) {
       <span class="ap-meta">Interval: <select class="ap-interval-sel" onchange="localStorage.setItem('lla_ap_interval',this.value)">
         ${[500,1000,2000,3000].map(v=>`<option value="${v}"${v===interval?' selected':''}>${v/1000}s</option>`).join('')}
       </select></span>
-      <button id="ap-mode-btn"  class="ap-mode-btn${getApMode()==='full'?' active':''}"  onclick="toggleApMode()">${getApMode()==='full'?'Full':'Word'}</button>
-      <button id="ap-notes-btn" class="ap-mode-btn${getApNotes()?' active':''}" onclick="toggleApNotes()">${getApNotes()?'Notes on':'Notes off'}</button>
+      <button id="ap-mode-btn" class="ap-mode-btn${getApMode()==='full'?' active':''}" onclick="toggleApMode()">${getApMode()==='full'?'Full':'Word'}</button>
       <span class="ap-meta" id="ap-status"></span>
       <button class="ap-stop-btn" onclick="stopAutoPlay()">■ Stop</button>
     </div>
