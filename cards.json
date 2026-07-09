@@ -1092,5 +1092,75 @@
     "interval": 1,
     "ease": 2.5,
     "reps": 0
+  },
+  {
+    "id": 1783562582189,
+    "korean": "런던",
+    "english": "London",
+    "examples": [],
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "notes": "",
+    "created": 1783562582189,
+    "nextReview": 1783562582189,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783563162977,
+    "korean": "어디",
+    "english": "where",
+    "examples": [
+      "어디 있어요? = Where are you? 있어요 = is/are, exists (from 있다)"
+    ],
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "notes": "Depending on context, it can mean: Where is my phone? Where are you? Where is the restaurant?",
+    "created": 1783563162977,
+    "nextReview": 1783563162977,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783565684894,
+    "korean": "아니요",
+    "english": "No (a polite 'no'); 注意這不是\"不「是」\" 的那個「是」（作為動詞；아니다）",
+    "examples": [
+      "아니요.　학생이 아니다.　＝ 不，他不是學生。"
+    ],
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "notes": "아닙니다 : formal",
+    "created": 1783565684894,
+    "nextReview": 1783565684894,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783566495374,
+    "korean": "에",
+    "english": "to / at (destination or location)",
+    "examples": [
+      "집에 와요. = I come home. (와요. 的原形為오다 (come)）"
+    ],
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "notes": "different from: 에서 = at / in (where an action happens)",
+    "created": 1783566495374,
+    "nextReview": 1783566495374,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
   }
 ]
