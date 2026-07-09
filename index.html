@@ -1278,16 +1278,14 @@ function apDelay(ms) {
 }
 
 function detectLang(text) {
-  const chars = [...text].filter(ch => ch.trim());
   let ko = 0, zh = 0;
-  for (const ch of chars) {
+  for (const ch of text) {
     const cp = ch.codePointAt(0);
     if (cp >= 0xAC00 && cp <= 0xD7A3) ko++;
     else if (cp >= 0x4E00 && cp <= 0x9FFF) zh++;
   }
-  const total = chars.length || 1;
-  if (ko / total >= 0.3 && ko >= zh) return 'ko';
-  if (zh / total >= 0.3) return 'zh';
+  if (ko > 0 && ko >= zh) return 'ko';
+  if (zh > 0) return 'zh';
   return 'en';
 }
 
