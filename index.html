@@ -1432,18 +1432,9 @@ async function autoPlayRun() {
     if (!autoPlayActive) return;
     if (autoPlaySkip) continue;
 
-    apFlip(true);                              // back — english/meaning
-    await speakAuto(card.english);
+    apFlip(true);                              // back
+    await speakSlowAndWait(card.korean, koreanVoice, 'ko-KR');
     if (!autoPlayActive) return;
-    if (autoPlaySkip) continue;
-    for (const ex of getExamples(card)) {     // each example in its language
-      await apDelay(300);
-      if (!autoPlayActive) return;
-      if (autoPlaySkip) break;
-      await speakAuto(ex, true);
-      if (!autoPlayActive) return;
-      if (autoPlaySkip) break;
-    }
     if (autoPlaySkip) continue;
     await apDelay(getApInterval());
     if (!autoPlayActive) return;
