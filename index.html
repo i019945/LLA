@@ -672,7 +672,7 @@ function speakSlowAndWait(text, voice, lang) {
     u.lang = lang || 'ko-KR';
     u.rate = 0.6;
     if (voice) u.voice = voice;
-    const fallback = setTimeout(resolve, 5000);
+    const fallback = setTimeout(resolve, Math.max(8000, text.length * 150));
     u.onend = () => { clearTimeout(fallback); resolve(); };
     u.onerror = () => { clearTimeout(fallback); resolve(); };
     safeSpeak(u);
