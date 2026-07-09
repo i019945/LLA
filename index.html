@@ -324,12 +324,12 @@
   </div>
   <h2>Example Blocks</h2>
   <div class="char-grid" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr))">
-    <div class="char-card" onclick="speakWord('가')"><span class="char">가</span><span class="char-name">ㄱ + ㅏ</span><span class="roman">ga</span><span class="example">가다 — to go</span></div>
-    <div class="char-card" onclick="speakWord('나')"><span class="char">나</span><span class="char-name">ㄴ + ㅏ</span><span class="roman">na</span><span class="example">나 — I / me</span></div>
-    <div class="char-card" onclick="speakWord('한')"><span class="char">한</span><span class="char-name">ㅎ + ㅏ + ㄴ</span><span class="roman">han</span><span class="example">한국 — Korea</span></div>
-    <div class="char-card" onclick="speakWord('밥')"><span class="char">밥</span><span class="char-name">ㅂ + ㅏ + ㅂ</span><span class="roman">bap</span><span class="example">밥 — rice/meal</span></div>
-    <div class="char-card" onclick="speakWord('물')"><span class="char">물</span><span class="char-name">ㅁ + ㅜ + ㄹ</span><span class="roman">mul</span><span class="example">물 — water</span></div>
-    <div class="char-card" onclick="speakWord('사람')"><span class="char">사람</span><span class="char-name">2 syllables</span><span class="roman">sa-ram</span><span class="example">사람 — person</span></div>
+    <div class="char-card" onclick="speak('가')"><span class="char">가</span><span class="char-name">ㄱ + ㅏ</span><span class="roman">ga</span><span class="example">가다 — to go</span></div>
+    <div class="char-card" onclick="speak('나')"><span class="char">나</span><span class="char-name">ㄴ + ㅏ</span><span class="roman">na</span><span class="example">나 — I / me</span></div>
+    <div class="char-card" onclick="speak('한')"><span class="char">한</span><span class="char-name">ㅎ + ㅏ + ㄴ</span><span class="roman">han</span><span class="example">한국 — Korea</span></div>
+    <div class="char-card" onclick="speak('밥')"><span class="char">밥</span><span class="char-name">ㅂ + ㅏ + ㅂ</span><span class="roman">bap</span><span class="example">밥 — rice/meal</span></div>
+    <div class="char-card" onclick="speak('물')"><span class="char">물</span><span class="char-name">ㅁ + ㅜ + ㄹ</span><span class="roman">mul</span><span class="example">물 — water</span></div>
+    <div class="char-card" onclick="speak('사람')"><span class="char">사람</span><span class="char-name">2 syllables</span><span class="roman">sa-ram</span><span class="example">사람 — person</span></div>
   </div>
   <h2>Key Facts</h2>
   <div class="tip"><strong>ㅇ as placeholder:</strong> When a syllable starts with a vowel sound, ㅇ is written silently: 아 = a, 이 = i, 오 = o.</div>
@@ -345,13 +345,13 @@
   <p style="margin-bottom:8px;font-size:0.88rem;color:var(--muted)">All batchim reduce to one of just <strong>7 sounds</strong> when the syllable stands alone or precedes another consonant.</p>
   <table class="seven-table">
     <tr><th>Sound</th><th>Written as</th><th>Example</th><th>Meaning</th></tr>
-    <tr><td><span class="big-char">ㄱ</span> [k]</td><td class="maps">ㄱ, ㅋ, ㄲ</td><td onclick="speakWord('국')" style="cursor:pointer" class="big-char">국</td><td>soup</td></tr>
-    <tr><td><span class="big-char">ㄴ</span> [n]</td><td class="maps">ㄴ</td><td onclick="speakWord('눈')" style="cursor:pointer" class="big-char">눈</td><td>eye / snow</td></tr>
-    <tr><td><span class="big-char">ㄷ</span> [t]</td><td class="maps">ㄷ, ㅅ, ㅆ, ㅈ, ㅊ, ㅌ, ㅎ</td><td onclick="speakWord('옷')" style="cursor:pointer" class="big-char">옷</td><td>clothes</td></tr>
-    <tr><td><span class="big-char">ㄹ</span> [l]</td><td class="maps">ㄹ</td><td onclick="speakWord('말')" style="cursor:pointer" class="big-char">말</td><td>horse / word</td></tr>
-    <tr><td><span class="big-char">ㅁ</span> [m]</td><td class="maps">ㅁ</td><td onclick="speakWord('밤')" style="cursor:pointer" class="big-char">밤</td><td>night / chestnut</td></tr>
-    <tr><td><span class="big-char">ㅂ</span> [p]</td><td class="maps">ㅂ, ㅍ</td><td onclick="speakWord('밥')" style="cursor:pointer" class="big-char">밥</td><td>rice / meal</td></tr>
-    <tr><td><span class="big-char">ㅇ</span> [ng]</td><td class="maps">ㅇ</td><td onclick="speakWord('방')" style="cursor:pointer" class="big-char">방</td><td>room</td></tr>
+    <tr><td><span class="big-char">ㄱ</span> [k]</td><td class="maps">ㄱ, ㅋ, ㄲ</td><td onclick="speak('국')" style="cursor:pointer" class="big-char">국</td><td>soup</td></tr>
+    <tr><td><span class="big-char">ㄴ</span> [n]</td><td class="maps">ㄴ</td><td onclick="speak('눈')" style="cursor:pointer" class="big-char">눈</td><td>eye / snow</td></tr>
+    <tr><td><span class="big-char">ㄷ</span> [t]</td><td class="maps">ㄷ, ㅅ, ㅆ, ㅈ, ㅊ, ㅌ, ㅎ</td><td onclick="speak('옷')" style="cursor:pointer" class="big-char">옷</td><td>clothes</td></tr>
+    <tr><td><span class="big-char">ㄹ</span> [l]</td><td class="maps">ㄹ</td><td onclick="speak('말')" style="cursor:pointer" class="big-char">말</td><td>horse / word</td></tr>
+    <tr><td><span class="big-char">ㅁ</span> [m]</td><td class="maps">ㅁ</td><td onclick="speak('밤')" style="cursor:pointer" class="big-char">밤</td><td>night / chestnut</td></tr>
+    <tr><td><span class="big-char">ㅂ</span> [p]</td><td class="maps">ㅂ, ㅍ</td><td onclick="speak('밥')" style="cursor:pointer" class="big-char">밥</td><td>rice / meal</td></tr>
+    <tr><td><span class="big-char">ㅇ</span> [ng]</td><td class="maps">ㅇ</td><td onclick="speak('방')" style="cursor:pointer" class="big-char">방</td><td>room</td></tr>
   </table>
 
   <!-- Rule 1 -->
@@ -362,16 +362,16 @@
     <div class="rule-formula">받침 + ㅇ__ → (no batchim) + (받침)__</div>
     <div class="tip"><strong>Trick:</strong> ㅇ is a vacuum — it sucks the consonant from the syllable before it.</div>
     <div class="examples">
-      <div class="ex-row" onclick="speakWord('먹어')"><span class="ex-kor">먹어</span><span class="ex-arrow">→</span><span class="ex-pron">[머거] meo-geo</span><span class="ex-eng">eat (informal)</span></div>
-      <div class="ex-row" onclick="speakWord('읽어')"><span class="ex-kor">읽어</span><span class="ex-arrow">→</span><span class="ex-pron">[일거] il-geo</span><span class="ex-eng">read (informal)</span></div>
-      <div class="ex-row" onclick="speakWord('있어')"><span class="ex-kor">있어</span><span class="ex-arrow">→</span><span class="ex-pron">[이써] i-sseo</span><span class="ex-eng">have / exist</span></div>
-      <div class="ex-row" onclick="speakWord('한국어')"><span class="ex-kor">한국어</span><span class="ex-arrow">→</span><span class="ex-pron">[한구거] han-gu-geo</span><span class="ex-eng">Korean language</span></div>
-      <div class="ex-row" onclick="speakWord('옷이')"><span class="ex-kor">옷이</span><span class="ex-arrow">→</span><span class="ex-pron">[오시] o-si</span><span class="ex-eng">clothes (subject)</span></div>
+      <div class="ex-row" onclick="speak('먹어')"><span class="ex-kor">먹어</span><span class="ex-arrow">→</span><span class="ex-pron">[머거] meo-geo</span><span class="ex-eng">eat (informal)</span></div>
+      <div class="ex-row" onclick="speak('읽어')"><span class="ex-kor">읽어</span><span class="ex-arrow">→</span><span class="ex-pron">[일거] il-geo</span><span class="ex-eng">read (informal)</span></div>
+      <div class="ex-row" onclick="speak('있어')"><span class="ex-kor">있어</span><span class="ex-arrow">→</span><span class="ex-pron">[이써] i-sseo</span><span class="ex-eng">have / exist</span></div>
+      <div class="ex-row" onclick="speak('한국어')"><span class="ex-kor">한국어</span><span class="ex-arrow">→</span><span class="ex-pron">[한구거] han-gu-geo</span><span class="ex-eng">Korean language</span></div>
+      <div class="ex-row" onclick="speak('옷이')"><span class="ex-kor">옷이</span><span class="ex-arrow">→</span><span class="ex-pron">[오시] o-si</span><span class="ex-eng">clothes (subject)</span></div>
     </div>
     <div class="warn" style="margin-top:10px"><strong>ㅎ exception:</strong> ㅎ as batchim before ㅇ is dropped entirely — not linked.
       <div class="examples" style="margin-top:8px">
-        <div class="ex-row" onclick="speakWord('좋아요')"><span class="ex-kor">좋아요</span><span class="ex-arrow">→</span><span class="ex-pron">[조아요] jo-a-yo</span><span class="ex-eng">good / I like it</span></div>
-        <div class="ex-row" onclick="speakWord('많아요')"><span class="ex-kor">많아요</span><span class="ex-arrow">→</span><span class="ex-pron">[마나요] ma-na-yo</span><span class="ex-eng">there is a lot</span></div>
+        <div class="ex-row" onclick="speak('좋아요')"><span class="ex-kor">좋아요</span><span class="ex-arrow">→</span><span class="ex-pron">[조아요] jo-a-yo</span><span class="ex-eng">good / I like it</span></div>
+        <div class="ex-row" onclick="speak('많아요')"><span class="ex-kor">많아요</span><span class="ex-arrow">→</span><span class="ex-pron">[마나요] ma-na-yo</span><span class="ex-eng">there is a lot</span></div>
       </div>
     </div>
   </div>
@@ -385,21 +385,21 @@
     <div class="tip"><strong>Trick:</strong> Nasality is contagious — ㄱ→ㅇ (throat), ㄷ→ㄴ (tongue), ㅂ→ㅁ (lips).</div>
     <h3>ㄱ → ㅇ</h3>
     <div class="examples">
-      <div class="ex-row" onclick="speakWord('국민')"><span class="ex-kor">국민</span><span class="ex-arrow">→</span><span class="ex-pron">[궁민] gung-min</span><span class="ex-eng">citizen</span></div>
-      <div class="ex-row" onclick="speakWord('작년')"><span class="ex-kor">작년</span><span class="ex-arrow">→</span><span class="ex-pron">[장년] jang-nyeon</span><span class="ex-eng">last year</span></div>
-      <div class="ex-row" onclick="speakWord('먹는다')"><span class="ex-kor">먹는다</span><span class="ex-arrow">→</span><span class="ex-pron">[멍는다] meong-neun-da</span><span class="ex-eng">is eating</span></div>
+      <div class="ex-row" onclick="speak('국민')"><span class="ex-kor">국민</span><span class="ex-arrow">→</span><span class="ex-pron">[궁민] gung-min</span><span class="ex-eng">citizen</span></div>
+      <div class="ex-row" onclick="speak('작년')"><span class="ex-kor">작년</span><span class="ex-arrow">→</span><span class="ex-pron">[장년] jang-nyeon</span><span class="ex-eng">last year</span></div>
+      <div class="ex-row" onclick="speak('먹는다')"><span class="ex-kor">먹는다</span><span class="ex-arrow">→</span><span class="ex-pron">[멍는다] meong-neun-da</span><span class="ex-eng">is eating</span></div>
     </div>
     <h3 style="margin-top:12px">ㄷ → ㄴ</h3>
     <div class="examples">
-      <div class="ex-row" onclick="speakWord('닫는다')"><span class="ex-kor">닫는다</span><span class="ex-arrow">→</span><span class="ex-pron">[단는다] dan-neun-da</span><span class="ex-eng">is closing</span></div>
-      <div class="ex-row" onclick="speakWord('있는')"><span class="ex-kor">있는</span><span class="ex-arrow">→</span><span class="ex-pron">[인는] in-neun</span><span class="ex-eng">that exists</span></div>
-      <div class="ex-row" onclick="speakWord('믿는다')"><span class="ex-kor">믿는다</span><span class="ex-arrow">→</span><span class="ex-pron">[민는다] min-neun-da</span><span class="ex-eng">believes</span></div>
+      <div class="ex-row" onclick="speak('닫는다')"><span class="ex-kor">닫는다</span><span class="ex-arrow">→</span><span class="ex-pron">[단는다] dan-neun-da</span><span class="ex-eng">is closing</span></div>
+      <div class="ex-row" onclick="speak('있는')"><span class="ex-kor">있는</span><span class="ex-arrow">→</span><span class="ex-pron">[인는] in-neun</span><span class="ex-eng">that exists</span></div>
+      <div class="ex-row" onclick="speak('믿는다')"><span class="ex-kor">믿는다</span><span class="ex-arrow">→</span><span class="ex-pron">[민는다] min-neun-da</span><span class="ex-eng">believes</span></div>
     </div>
     <h3 style="margin-top:12px">ㅂ → ㅁ</h3>
     <div class="examples">
-      <div class="ex-row" onclick="speakWord('입문')"><span class="ex-kor">입문</span><span class="ex-arrow">→</span><span class="ex-pron">[임문] im-mun</span><span class="ex-eng">introduction</span></div>
-      <div class="ex-row" onclick="speakWord('없는')"><span class="ex-kor">없는</span><span class="ex-arrow">→</span><span class="ex-pron">[엄는] eom-neun</span><span class="ex-eng">that doesn't exist</span></div>
-      <div class="ex-row" onclick="speakWord('밥맛')"><span class="ex-kor">밥맛</span><span class="ex-arrow">→</span><span class="ex-pron">[밤맛] bam-mat</span><span class="ex-eng">taste of rice</span></div>
+      <div class="ex-row" onclick="speak('입문')"><span class="ex-kor">입문</span><span class="ex-arrow">→</span><span class="ex-pron">[임문] im-mun</span><span class="ex-eng">introduction</span></div>
+      <div class="ex-row" onclick="speak('없는')"><span class="ex-kor">없는</span><span class="ex-arrow">→</span><span class="ex-pron">[엄는] eom-neun</span><span class="ex-eng">that doesn't exist</span></div>
+      <div class="ex-row" onclick="speak('밥맛')"><span class="ex-kor">밥맛</span><span class="ex-arrow">→</span><span class="ex-pron">[밤맛] bam-mat</span><span class="ex-eng">taste of rice</span></div>
     </div>
   </div>
 
@@ -411,10 +411,10 @@
     <div class="rule-formula">ㄹ+ㄴ → ㄹ+ㄹ &nbsp;&nbsp; ㄴ+ㄹ → ㄹ+ㄹ</div>
     <div class="tip"><strong>Trick:</strong> ㄹ is contagious — it turns any neighboring ㄴ into itself.</div>
     <div class="examples">
-      <div class="ex-row" onclick="speakWord('신라')"><span class="ex-kor">신라</span><span class="ex-arrow">→</span><span class="ex-pron">[실라] sil-la</span><span class="ex-eng">Silla dynasty</span></div>
-      <div class="ex-row" onclick="speakWord('연락')"><span class="ex-kor">연락</span><span class="ex-arrow">→</span><span class="ex-pron">[열락] yeol-lak</span><span class="ex-eng">contact</span></div>
-      <div class="ex-row" onclick="speakWord('칼날')"><span class="ex-kor">칼날</span><span class="ex-arrow">→</span><span class="ex-pron">[칼랄] kal-lal</span><span class="ex-eng">knife blade</span></div>
-      <div class="ex-row" onclick="speakWord('설날')"><span class="ex-kor">설날</span><span class="ex-arrow">→</span><span class="ex-pron">[설랄] seol-lal</span><span class="ex-eng">Lunar New Year</span></div>
+      <div class="ex-row" onclick="speak('신라')"><span class="ex-kor">신라</span><span class="ex-arrow">→</span><span class="ex-pron">[실라] sil-la</span><span class="ex-eng">Silla dynasty</span></div>
+      <div class="ex-row" onclick="speak('연락')"><span class="ex-kor">연락</span><span class="ex-arrow">→</span><span class="ex-pron">[열락] yeol-lak</span><span class="ex-eng">contact</span></div>
+      <div class="ex-row" onclick="speak('칼날')"><span class="ex-kor">칼날</span><span class="ex-arrow">→</span><span class="ex-pron">[칼랄] kal-lal</span><span class="ex-eng">knife blade</span></div>
+      <div class="ex-row" onclick="speak('설날')"><span class="ex-kor">설날</span><span class="ex-arrow">→</span><span class="ex-pron">[설랄] seol-lal</span><span class="ex-eng">Lunar New Year</span></div>
     </div>
   </div>
 
@@ -427,16 +427,16 @@
     <div class="tip"><strong>Trick:</strong> ㅎ adds a puff of air to whatever consonant it touches.</div>
     <h3>ㅎ as batchim</h3>
     <div class="examples">
-      <div class="ex-row" onclick="speakWord('좋다')"><span class="ex-kor">좋다</span><span class="ex-arrow">→</span><span class="ex-pron">[조타] jo-ta</span><span class="ex-eng">to be good</span></div>
-      <div class="ex-row" onclick="speakWord('많다')"><span class="ex-kor">많다</span><span class="ex-arrow">→</span><span class="ex-pron">[만타] man-ta</span><span class="ex-eng">many / a lot</span></div>
-      <div class="ex-row" onclick="speakWord('좋지')"><span class="ex-kor">좋지</span><span class="ex-arrow">→</span><span class="ex-pron">[조치] jo-chi</span><span class="ex-eng">right? isn't it good?</span></div>
-      <div class="ex-row" onclick="speakWord('넣고')"><span class="ex-kor">넣고</span><span class="ex-arrow">→</span><span class="ex-pron">[네코] ne-ko</span><span class="ex-eng">put in (and…)</span></div>
+      <div class="ex-row" onclick="speak('좋다')"><span class="ex-kor">좋다</span><span class="ex-arrow">→</span><span class="ex-pron">[조타] jo-ta</span><span class="ex-eng">to be good</span></div>
+      <div class="ex-row" onclick="speak('많다')"><span class="ex-kor">많다</span><span class="ex-arrow">→</span><span class="ex-pron">[만타] man-ta</span><span class="ex-eng">many / a lot</span></div>
+      <div class="ex-row" onclick="speak('좋지')"><span class="ex-kor">좋지</span><span class="ex-arrow">→</span><span class="ex-pron">[조치] jo-chi</span><span class="ex-eng">right? isn't it good?</span></div>
+      <div class="ex-row" onclick="speak('넣고')"><span class="ex-kor">넣고</span><span class="ex-arrow">→</span><span class="ex-pron">[네코] ne-ko</span><span class="ex-eng">put in (and…)</span></div>
     </div>
     <h3 style="margin-top:12px">ㅎ as initial (after batchim)</h3>
     <div class="examples">
-      <div class="ex-row" onclick="speakWord('먹히다')"><span class="ex-kor">먹히다</span><span class="ex-arrow">→</span><span class="ex-pron">[머키다] meo-ki-da</span><span class="ex-eng">to be eaten (passive)</span></div>
-      <div class="ex-row" onclick="speakWord('잡히다')"><span class="ex-kor">잡히다</span><span class="ex-arrow">→</span><span class="ex-pron">[자피다] ja-pi-da</span><span class="ex-eng">to be caught (passive)</span></div>
-      <div class="ex-row" onclick="speakWord('읽히다')"><span class="ex-kor">읽히다</span><span class="ex-arrow">→</span><span class="ex-pron">[일키다] il-ki-da</span><span class="ex-eng">to be read (passive)</span></div>
+      <div class="ex-row" onclick="speak('먹히다')"><span class="ex-kor">먹히다</span><span class="ex-arrow">→</span><span class="ex-pron">[머키다] meo-ki-da</span><span class="ex-eng">to be eaten (passive)</span></div>
+      <div class="ex-row" onclick="speak('잡히다')"><span class="ex-kor">잡히다</span><span class="ex-arrow">→</span><span class="ex-pron">[자피다] ja-pi-da</span><span class="ex-eng">to be caught (passive)</span></div>
+      <div class="ex-row" onclick="speak('읽히다')"><span class="ex-kor">읽히다</span><span class="ex-arrow">→</span><span class="ex-pron">[일키다] il-ki-da</span><span class="ex-eng">to be read (passive)</span></div>
     </div>
   </div>
 
@@ -448,12 +448,12 @@
     <div class="rule-formula">after [ㄱ/ㄷ/ㅂ]: &nbsp; ㄱ→ㄲ, ㄷ→ㄸ, ㅂ→ㅃ, ㅅ→ㅆ, ㅈ→ㅉ</div>
     <div class="tip"><strong>Trick:</strong> A hard stop tensions the throat — the next consonant comes out tense too.</div>
     <div class="examples">
-      <div class="ex-row" onclick="speakWord('학교')"><span class="ex-kor">학교</span><span class="ex-arrow">→</span><span class="ex-pron">[학꾜] hak-kkyo</span><span class="ex-eng">school</span></div>
-      <div class="ex-row" onclick="speakWord('식당')"><span class="ex-kor">식당</span><span class="ex-arrow">→</span><span class="ex-pron">[식땅] sik-ttang</span><span class="ex-eng">restaurant</span></div>
-      <div class="ex-row" onclick="speakWord('없다')"><span class="ex-kor">없다</span><span class="ex-arrow">→</span><span class="ex-pron">[업따] eop-tta</span><span class="ex-eng">to not have/exist</span></div>
-      <div class="ex-row" onclick="speakWord('닦다')"><span class="ex-kor">닦다</span><span class="ex-arrow">→</span><span class="ex-pron">[닥따] dak-tta</span><span class="ex-eng">to wipe / clean</span></div>
-      <div class="ex-row" onclick="speakWord('입구')"><span class="ex-kor">입구</span><span class="ex-arrow">→</span><span class="ex-pron">[입꾸] ip-kku</span><span class="ex-eng">entrance</span></div>
-      <div class="ex-row" onclick="speakWord('박수')"><span class="ex-kor">박수</span><span class="ex-arrow">→</span><span class="ex-pron">[박쑤] bak-ssu</span><span class="ex-eng">applause</span></div>
+      <div class="ex-row" onclick="speak('학교')"><span class="ex-kor">학교</span><span class="ex-arrow">→</span><span class="ex-pron">[학꾜] hak-kkyo</span><span class="ex-eng">school</span></div>
+      <div class="ex-row" onclick="speak('식당')"><span class="ex-kor">식당</span><span class="ex-arrow">→</span><span class="ex-pron">[식땅] sik-ttang</span><span class="ex-eng">restaurant</span></div>
+      <div class="ex-row" onclick="speak('없다')"><span class="ex-kor">없다</span><span class="ex-arrow">→</span><span class="ex-pron">[업따] eop-tta</span><span class="ex-eng">to not have/exist</span></div>
+      <div class="ex-row" onclick="speak('닦다')"><span class="ex-kor">닦다</span><span class="ex-arrow">→</span><span class="ex-pron">[닥따] dak-tta</span><span class="ex-eng">to wipe / clean</span></div>
+      <div class="ex-row" onclick="speak('입구')"><span class="ex-kor">입구</span><span class="ex-arrow">→</span><span class="ex-pron">[입꾸] ip-kku</span><span class="ex-eng">entrance</span></div>
+      <div class="ex-row" onclick="speak('박수')"><span class="ex-kor">박수</span><span class="ex-arrow">→</span><span class="ex-pron">[박쑤] bak-ssu</span><span class="ex-eng">applause</span></div>
     </div>
   </div>
 
@@ -465,25 +465,25 @@
     <h3>Left consonant pronounced</h3>
     <table class="double-table">
       <tr><th>Batchim</th><th>Letters</th><th>Sound</th><th>Example</th><th>Meaning</th></tr>
-      <tr><td class="big" onclick="speakWord('앉다')" style="cursor:pointer">ㄵ</td><td>ㄴ+ㅈ</td><td>ㄴ</td><td onclick="speakWord('앉다')" style="cursor:pointer">앉다 [안따]</td><td>to sit</td></tr>
-      <tr><td class="big" onclick="speakWord('넓다')" style="cursor:pointer">ㄼ</td><td>ㄹ+ㅂ</td><td>ㄹ</td><td onclick="speakWord('넓다')" style="cursor:pointer">넓다 [널따]</td><td>wide</td></tr>
-      <tr><td class="big" onclick="speakWord('훑다')" style="cursor:pointer">ㄾ</td><td>ㄹ+ㅌ</td><td>ㄹ</td><td onclick="speakWord('훑다')" style="cursor:pointer">훑다 [훌따]</td><td>to sweep</td></tr>
-      <tr><td class="big" onclick="speakWord('잃다')" style="cursor:pointer">ㅀ</td><td>ㄹ+ㅎ</td><td>ㄹ</td><td onclick="speakWord('잃다')" style="cursor:pointer">잃다 [일타]</td><td>to lose</td></tr>
-      <tr><td class="big" onclick="speakWord('넋')" style="cursor:pointer">ㄳ</td><td>ㄱ+ㅅ</td><td>ㄱ</td><td onclick="speakWord('넋')" style="cursor:pointer">넋 [넉]</td><td>soul</td></tr>
+      <tr><td class="big" onclick="speak('앉다')" style="cursor:pointer">ㄵ</td><td>ㄴ+ㅈ</td><td>ㄴ</td><td onclick="speak('앉다')" style="cursor:pointer">앉다 [안따]</td><td>to sit</td></tr>
+      <tr><td class="big" onclick="speak('넓다')" style="cursor:pointer">ㄼ</td><td>ㄹ+ㅂ</td><td>ㄹ</td><td onclick="speak('넓다')" style="cursor:pointer">넓다 [널따]</td><td>wide</td></tr>
+      <tr><td class="big" onclick="speak('훑다')" style="cursor:pointer">ㄾ</td><td>ㄹ+ㅌ</td><td>ㄹ</td><td onclick="speak('훑다')" style="cursor:pointer">훑다 [훌따]</td><td>to sweep</td></tr>
+      <tr><td class="big" onclick="speak('잃다')" style="cursor:pointer">ㅀ</td><td>ㄹ+ㅎ</td><td>ㄹ</td><td onclick="speak('잃다')" style="cursor:pointer">잃다 [일타]</td><td>to lose</td></tr>
+      <tr><td class="big" onclick="speak('넋')" style="cursor:pointer">ㄳ</td><td>ㄱ+ㅅ</td><td>ㄱ</td><td onclick="speak('넋')" style="cursor:pointer">넋 [넉]</td><td>soul</td></tr>
     </table>
     <h3>Right consonant pronounced</h3>
     <table class="double-table">
       <tr><th>Batchim</th><th>Letters</th><th>Sound</th><th>Example</th><th>Meaning</th></tr>
-      <tr><td class="big">ㄺ</td><td>ㄹ+ㄱ</td><td>ㄱ</td><td onclick="speakWord('닭')" style="cursor:pointer">닭 [닥]</td><td>chicken</td></tr>
-      <tr><td class="big">ㄻ</td><td>ㄹ+ㅁ</td><td>ㅁ</td><td onclick="speakWord('삶')" style="cursor:pointer">삶 [삼]</td><td>life</td></tr>
-      <tr><td class="big">ㄿ</td><td>ㄹ+ㅍ</td><td>ㅂ</td><td onclick="speakWord('읊다')" style="cursor:pointer">읊다 [읍따]</td><td>to recite</td></tr>
+      <tr><td class="big">ㄺ</td><td>ㄹ+ㄱ</td><td>ㄱ</td><td onclick="speak('닭')" style="cursor:pointer">닭 [닥]</td><td>chicken</td></tr>
+      <tr><td class="big">ㄻ</td><td>ㄹ+ㅁ</td><td>ㅁ</td><td onclick="speak('삶')" style="cursor:pointer">삶 [삼]</td><td>life</td></tr>
+      <tr><td class="big">ㄿ</td><td>ㄹ+ㅍ</td><td>ㅂ</td><td onclick="speak('읊다')" style="cursor:pointer">읊다 [읍따]</td><td>to recite</td></tr>
     </table>
     <div class="warn"><strong>Exception — 밟다:</strong> ㄼ normally gives ㄹ, but 밟다 [밥따] "to step on" uses ㅂ. Memorize as-is.</div>
     <h3>Linking with double batchim (before ㅇ)</h3>
     <div class="examples">
-      <div class="ex-row" onclick="speakWord('닭이')"><span class="ex-kor">닭이</span><span class="ex-arrow">→</span><span class="ex-pron">[달기] dal-gi</span><span class="ex-eng">chicken (subject)</span></div>
-      <div class="ex-row" onclick="speakWord('삶이')"><span class="ex-kor">삶이</span><span class="ex-arrow">→</span><span class="ex-pron">[살미] sal-mi</span><span class="ex-eng">life (subject)</span></div>
-      <div class="ex-row" onclick="speakWord('앉아')"><span class="ex-kor">앉아</span><span class="ex-arrow">→</span><span class="ex-pron">[안자] an-ja</span><span class="ex-eng">sit (informal)</span></div>
+      <div class="ex-row" onclick="speak('닭이')"><span class="ex-kor">닭이</span><span class="ex-arrow">→</span><span class="ex-pron">[달기] dal-gi</span><span class="ex-eng">chicken (subject)</span></div>
+      <div class="ex-row" onclick="speak('삶이')"><span class="ex-kor">삶이</span><span class="ex-arrow">→</span><span class="ex-pron">[살미] sal-mi</span><span class="ex-eng">life (subject)</span></div>
+      <div class="ex-row" onclick="speak('앉아')"><span class="ex-kor">앉아</span><span class="ex-arrow">→</span><span class="ex-pron">[안자] an-ja</span><span class="ex-eng">sit (informal)</span></div>
     </div>
   </div>
   <h2>Rules Priority</h2>
@@ -558,12 +558,7 @@
       </div>
       <div class="fc-field">
         <label>Speech Level <span style="font-weight:400;text-transform:none">(optional)</span></label>
-        <select id="inp-level">
-          <option value="">— unspecified —</option>
-          <option value="반말">반말 (casual)</option>
-          <option value="해요체">해요체 (polite)</option>
-          <option value="합쇼체">합쇼체 (formal)</option>
-        </select>
+        <select id="inp-level"><!-- populated from SPEECH_LEVELS at init --></select>
       </div>
       <div class="fc-field">
         <label>Pronunciation Trap <span style="font-weight:400;text-transform:none">(optional)</span></label>
@@ -595,30 +590,42 @@
 // TTS
 // ════════════════════════════════════════
 let currentRate = localStorage.getItem('lla_rate') || '0.85';
-let koreanVoice = null;
+let koreanVoice = null, engVoice = null, chnVoice = null;
 
-let engVoice = null, chnVoice = null;
+// Each Hangul syllable block is a single Unicode char (U+AC00–U+D7A3)
+function isHangulSyllable(ch) {
+  const cp = ch.codePointAt(0);
+  return cp >= 0xAC00 && cp <= 0xD7A3;
+}
 
-function loadKoreanVoice() {
+function loadVoices() {
   const voices = window.speechSynthesis.getVoices();
+  const google = prefix => voices.find(v => v.lang.startsWith(prefix) && v.name.toLowerCase().includes('google'));
   koreanVoice =
-    voices.find(v => v.lang.startsWith('ko') && v.name.toLowerCase().includes('google')) ||
+    google('ko') ||
     voices.find(v => v.lang.startsWith('ko') && !v.localService) ||
     voices.find(v => v.lang.startsWith('ko')) || null;
   engVoice =
-    voices.find(v => v.lang === 'en-US' && v.name.toLowerCase().includes('google')) ||
+    google('en-US') ||
     voices.find(v => v.lang === 'en-US') ||
-    voices.find(v => ['en-GB','en-AU','en-CA'].includes(v.lang)) ||
-    null;
+    voices.find(v => ['en-GB','en-AU','en-CA'].includes(v.lang)) || null;
   chnVoice =
-    voices.find(v => v.lang.startsWith('zh') && v.name.toLowerCase().includes('google')) ||
+    google('zh') ||
     voices.find(v => v.lang === 'zh-TW') ||
     voices.find(v => v.lang === 'zh-CN') ||
     voices.find(v => v.lang.startsWith('zh')) || null;
 }
-if (window.speechSynthesis) {
-  window.speechSynthesis.addEventListener('voiceschanged', loadKoreanVoice);
-  loadKoreanVoice();
+
+// iOS Safari: cancel() + immediate speak() silently drops the utterance.
+// Only cancel when something is already playing, and delay speak to let cancel settle.
+function safeSpeak(u) {
+  const synth = window.speechSynthesis;
+  if (synth.speaking || synth.pending) {
+    synth.cancel();
+    setTimeout(() => synth.speak(u), 100);
+  } else {
+    synth.speak(u);
+  }
 }
 
 function setRate(rate, btn) {
@@ -631,27 +638,18 @@ function setRate(rate, btn) {
 function speak(text) {
   if (!window.speechSynthesis) return;
   if (currentRate === 'syllable') { speakSyllables(text); return; }
-  const synth = window.speechSynthesis;
   const u = new SpeechSynthesisUtterance(text);
   u.lang = 'ko-KR';
   u.rate = parseFloat(currentRate);
   if (koreanVoice) u.voice = koreanVoice;
-  // iOS Safari: cancel() + immediate speak() silently drops the utterance.
-  // Only cancel when something is already playing, and delay speak to let cancel settle.
-  if (synth.speaking || synth.pending) {
-    synth.cancel();
-    setTimeout(() => synth.speak(u), 100);
-  } else {
-    synth.speak(u);
-  }
+  safeSpeak(u);
 }
 
 function speakSyllables(text) {
   if (!window.speechSynthesis) return;
   const synth = window.speechSynthesis;
   synth.cancel();
-  // Each Hangul syllable block is a single Unicode char (U+AC00–U+D7A3)
-  const syllables = [...text].filter(c => c.charCodeAt(0) >= 0xAC00 && c.charCodeAt(0) <= 0xD7A3);
+  const syllables = [...text].filter(isHangulSyllable);
   if (syllables.length === 0) { speak(text); return; }
   function next(i) {
     if (i >= syllables.length) return;
@@ -668,17 +666,47 @@ function speakSyllables(text) {
   setTimeout(() => next(0), 100);
 }
 
-function speakWord(w) { speak(w); }
-
-// Restore saved speed button state on load
-(function () {
-  const saved = localStorage.getItem('lla_rate') || '0.85';
-  const rateValues = ['syllable', '0.6', '0.85', '1.1'];
-  document.querySelectorAll('.speed-btn').forEach((btn, i) => {
-    btn.classList.toggle('spd-active', rateValues[i] === saved);
+// Speaks slowly and resolves on utterance end (or 5s fallback).
+// Used by auto-play so each step waits for speech to finish.
+function speakSlowAndWait(text, voice, lang) {
+  return new Promise(resolve => {
+    if (!window.speechSynthesis) { resolve(); return; }
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = lang || 'ko-KR';
+    u.rate = 0.6;
+    if (voice) u.voice = voice;
+    const fallback = setTimeout(resolve, 5000);
+    u.onend = () => { clearTimeout(fallback); resolve(); };
+    u.onerror = () => { clearTimeout(fallback); resolve(); };
+    safeSpeak(u);
   });
-})();
-refreshFC();
+}
+
+// Classifies text as ko/zh/en for voice selection.
+// anyKo=true: any Hangul at all forces Korean (English voices error on Hangul).
+// anyKo=false: Korean must be ≥30% of chars, so 'love (사랑)' stays English.
+function detectLang(text, anyKo = false) {
+  let ko = 0, zh = 0;
+  const nonSpace = [...text].filter(ch => ch.trim()).length || 1;
+  for (const ch of text) {
+    const cp = ch.codePointAt(0);
+    if (cp >= 0xAC00 && cp <= 0xD7A3) ko++;
+    else if (cp >= 0x4E00 && cp <= 0x9FFF) zh++;
+  }
+  const koWins = anyKo ? ko > 0 : ko / nonSpace >= 0.3;
+  if (koWins && ko >= zh) return 'ko';
+  if (zh > 0) return 'zh';
+  return 'en';
+}
+
+// Speaks text with the voice matching its detected language.
+// Currently unused by auto-play (reverted); kept for future multi-language reading.
+function speakAuto(text, anyKo = false) {
+  const lang = detectLang(text, anyKo);
+  if (lang === 'ko') return speakSlowAndWait(text, koreanVoice, 'ko-KR');
+  if (lang === 'zh') return speakSlowAndWait(text, chnVoice, 'zh-TW');
+  return speakSlowAndWait(text, engVoice, 'en-US');
+}
 
 // ════════════════════════════════════════
 // Main nav
@@ -745,7 +773,7 @@ const compoundVowels = [
 
 function firstSyllable(text) {
   // Returns the first Hangul syllable block — gives the bare sound without a full word
-  return [...text].find(c => c.charCodeAt(0) >= 0xAC00 && c.charCodeAt(0) <= 0xD7A3) || text;
+  return [...text].find(isHangulSyllable) || text;
 }
 
 function makeConCard(c) {
@@ -768,8 +796,15 @@ basicVowels.forEach(v => document.getElementById('basic-vow').appendChild(makeVo
 compoundVowels.forEach(v => document.getElementById('compound-vow').appendChild(makeVowCard(v)));
 
 // ════════════════════════════════════════
-// FLASHCARD STORAGE
+// FLASHCARD STORAGE & CARD HELPERS
 // ════════════════════════════════════════
+const SPEECH_LEVELS = [
+  ['',      '— unspecified —'],
+  ['반말',   '반말 (casual)'],
+  ['해요체', '해요체 (polite)'],
+  ['합쇼체', '합쇼체 (formal)'],
+];
+
 function loadCards() {
   try { return JSON.parse(localStorage.getItem('lla_cards') || '[]'); } catch { return []; }
 }
@@ -780,6 +815,35 @@ function saveCards(cards) {
 function dueCards(cards) {
   const now = Date.now();
   return cards.filter(c => !c.nextReview || c.nextReview <= now);
+}
+
+// Cards saved before the examples[] migration may still carry a single example string
+function getExamples(card) {
+  if (card.examples && card.examples.length) return card.examples;
+  if (card.example) return [card.example];
+  return [];
+}
+
+function escHtml(s) {
+  return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function levelOptions(selected) {
+  return SPEECH_LEVELS.map(([v, label]) =>
+    `<option value="${v}"${v === (selected || '') ? ' selected' : ''}>${label}</option>`).join('');
+}
+
+// Tag + speech-level pills shown on the back of study and auto-play flip cards
+function flipBadges(card) {
+  return `${card.tag ? `<div class="flip-tag">${card.tag}</div>` : ''}
+          ${card.level ? `<div class="level-badge">${card.level}</div>` : ''}`;
+}
+
+// Cards visible under the current All Cards tag + deck filters
+function applyFilters(cards) {
+  if (allTagFilter)  cards = cards.filter(c => c.tag  === allTagFilter);
+  if (allDeckFilter) cards = cards.filter(c => c.deck === allDeckFilter);
+  return cards;
 }
 
 // ════════════════════════════════════════
@@ -994,7 +1058,6 @@ function renderStudyCard() {
   const n1 = Math.max(2, Math.round(c.interval * Math.max(1.0, c.ease - 0.5)));
   const n2 = Math.max(3, Math.round(c.interval * c.ease));
   const n3 = Math.max(10, Math.round(c.interval * c.ease * 1.3));
-  const korSafe = card.korean.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
 
   el.innerHTML = `
     <div class="study-progress">${studyIndex + 1} / ${studyQueue.length} due</div>
@@ -1007,10 +1070,7 @@ function renderStudyCard() {
         <div class="flip-face flip-back">
           <div class="flip-eng">${card.english}</div>
           ${getExamples(card).map(e => `<div class="example-box">${e}</div>`).join('')}
-          <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center">
-            ${card.tag ? `<div class="flip-tag">${card.tag}</div>` : ''}
-            ${card.level ? `<div class="level-badge">${card.level}</div>` : ''}
-          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center">${flipBadges(card)}</div>
           ${card.notes ? `<div class="notes-box">${card.notes}</div>` : ''}
           <div class="flip-instruction" style="color:var(--muted);animation:none">👆 Tap to hear & flip back</div>
         </div>
@@ -1066,9 +1126,7 @@ function renderAll() {
     el.innerHTML = `<div class="all-empty"><p>No cards yet. Add some in the <strong>Add Card</strong> tab.</p></div>`;
     return;
   }
-  const due = dueCards(cards).length;
-  let displayed = allTagFilter ? cards.filter(c => c.tag === allTagFilter) : cards;
-  if (allDeckFilter) displayed = displayed.filter(c => c.deck === allDeckFilter);
+  const displayed = applyFilters(cards);
   const tagSel  = filterSelect(cards, 'tag',  allTagFilter,  'setAllFilter',  'Tag');
   const deckSel = filterSelect(cards, 'deck', allDeckFilter, 'setDeckFilter', 'Deck');
   const filterRow = (tagSel || deckSel) ? `<div class="filter-row">${tagSel}${deckSel}</div>` : '';
@@ -1111,16 +1169,6 @@ function renderAll() {
   });
 }
 
-function getExamples(card) {
-  if (card.examples && card.examples.length) return card.examples;
-  if (card.example) return [card.example];
-  return [];
-}
-
-function escHtml(s) {
-  return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
 function editCard(id) {
   const card = loadCards().find(c => c.id === id);
   if (!card) return;
@@ -1134,12 +1182,7 @@ function editCard(id) {
       ${(() => { const ex = getExamples(card); return [0,1,2].map(i => `<div class="card-edit-row"><label>Example ${i+1}</label><input id="edit-ex${i+1}-${id}" value="${escHtml(ex[i]||'')}" spellcheck="false"></div>`).join(''); })()}
       <div class="card-edit-row"><label>Tag</label><input id="edit-tag-${id}" value="${escHtml(card.tag||'')}"></div>
       <div class="card-edit-row"><label>Deck</label><input id="edit-deck-${id}" value="${escHtml(card.deck||'')}"></div>
-      <div class="card-edit-row"><label>Level</label><select id="edit-level-${id}">
-        <option value=""${!card.level ? ' selected' : ''}>— unspecified —</option>
-        <option value="반말"${card.level==='반말' ? ' selected' : ''}>반말 (casual)</option>
-        <option value="해요체"${card.level==='해요체' ? ' selected' : ''}>해요체 (polite)</option>
-        <option value="합쇼체"${card.level==='합쇼체' ? ' selected' : ''}>합쇼체 (formal)</option>
-      </select></div>
+      <div class="card-edit-row"><label>Level</label><select id="edit-level-${id}">${levelOptions(card.level)}</select></div>
       <div class="card-edit-row"><label>Trap</label><input id="edit-trap-${id}" value="${escHtml(card.trap||'')}" spellcheck="false"></div>
       <div class="card-edit-row"><label>Notes</label><textarea id="edit-notes-${id}" spellcheck="false">${escHtml(card.notes||'')}</textarea></div>
       <div class="card-edit-actions">
@@ -1277,47 +1320,6 @@ function apDelay(ms) {
   });
 }
 
-function detectLang(text, anyKo = false) {
-  let ko = 0, zh = 0;
-  const nonSpace = [...text].filter(ch => ch.trim()).length || 1;
-  for (const ch of text) {
-    const cp = ch.codePointAt(0);
-    if (cp >= 0xAC00 && cp <= 0xD7A3) ko++;
-    else if (cp >= 0x4E00 && cp <= 0x9FFF) zh++;
-  }
-  const koWins = anyKo ? ko > 0 : ko / nonSpace >= 0.3;
-  if (koWins && ko >= zh) return 'ko';
-  if (zh > 0) return 'zh';
-  return 'en';
-}
-
-function speakSlowAndWait(text, voice, lang) {
-  return new Promise(resolve => {
-    if (!window.speechSynthesis) { resolve(); return; }
-    const synth = window.speechSynthesis;
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = lang || 'ko-KR';
-    u.rate = 0.6;
-    if (voice) u.voice = voice;
-    const fallback = setTimeout(resolve, 5000);
-    u.onend = () => { clearTimeout(fallback); resolve(); };
-    u.onerror = () => { clearTimeout(fallback); resolve(); };
-    if (synth.speaking || synth.pending) {
-      synth.cancel();
-      setTimeout(() => synth.speak(u), 100);
-    } else {
-      synth.speak(u);
-    }
-  });
-}
-
-function speakAuto(text, anyKo = false) {
-  const lang = detectLang(text, anyKo);
-  if (lang === 'ko') return speakSlowAndWait(text, koreanVoice, 'ko-KR');
-  if (lang === 'zh') return speakSlowAndWait(text, chnVoice, 'zh-TW');
-  return speakSlowAndWait(text, engVoice, 'en-US');
-}
-
 function renderApCard(card) {
   const el = document.getElementById('all-content');
   const interval = getApInterval();
@@ -1339,10 +1341,7 @@ function renderApCard(card) {
         <div class="flip-face flip-back">
           <div class="flip-eng">${card.english}</div>
           ${getExamples(card).map(e => `<div class="example-box" style="margin-top:6px">${e}</div>`).join('')}
-          <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:4px">
-            ${card.tag ? `<div class="flip-tag">${card.tag}</div>` : ''}
-            ${card.level ? `<div class="level-badge">${card.level}</div>` : ''}
-          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:4px">${flipBadges(card)}</div>
           ${card.trap ? `<div class="flip-trap" style="display:block;margin-top:8px">${card.trap}</div>` : ''}
           ${card.notes ? `<div class="notes-box" style="margin-top:8px">${card.notes}</div>` : ''}
           <div class="flip-hint" style="color:var(--muted)">👆 Tap replay · · · double-tap pause</div>
@@ -1412,51 +1411,40 @@ function stopAutoPlay(rerender = true) {
   if (rerender) renderAll();
 }
 
+// One auto-play step: speak the Korean, then pause for the configured interval.
+// Returns false when the loop should not proceed to the next face
+// (stopped, paused, or skipped by tap-replay — the while loop re-checks state).
+async function apStep(card) {
+  await speakSlowAndWait(card.korean, koreanVoice, 'ko-KR');
+  if (!autoPlayActive || autoPlaySkip) return false;
+  await apDelay(getApInterval());
+  return autoPlayActive && !autoPlaySkip;
+}
+
 async function autoPlayRun() {
   while (autoPlayActive && !autoPlayPaused) {
     autoPlaySkip = false;
     if (autoPlayIndex >= autoPlayQueue.length) {
-      let pool = loadCards();
-      if (allTagFilter)  pool = pool.filter(c => c.tag  === allTagFilter);
-      if (allDeckFilter) pool = pool.filter(c => c.deck === allDeckFilter);
-      autoPlayQueue = shuffle([...pool]);
+      autoPlayQueue = shuffle(applyFilters(loadCards()));
       autoPlayIndex = 0;
     }
     const card = autoPlayQueue[autoPlayIndex++];
 
     renderApCard(card);                        // front
-    await speakSlowAndWait(card.korean, koreanVoice, 'ko-KR');
-    if (!autoPlayActive) return;
-    if (autoPlaySkip) continue;
-    await apDelay(getApInterval());
-    if (!autoPlayActive) return;
-    if (autoPlaySkip) continue;
-
+    if (!(await apStep(card))) continue;
     apFlip(true);                              // back
-    await speakSlowAndWait(card.korean, koreanVoice, 'ko-KR');
-    if (!autoPlayActive) return;
-    if (autoPlaySkip) continue;
-    await apDelay(getApInterval());
-    if (!autoPlayActive) return;
-    if (autoPlaySkip) continue;
-
+    if (!(await apStep(card))) continue;
     apFlip(false);                             // front again
-    await speakSlowAndWait(card.korean, koreanVoice, 'ko-KR');
-    if (!autoPlayActive) return;
-    if (autoPlaySkip) continue;
-    await apDelay(getApInterval());
-    if (!autoPlayActive) return;
+    await apStep(card);
   }
 }
 
 function startAutoPlay() {
-  let cards = loadCards();
-  if (allTagFilter)  cards = cards.filter(c => c.tag  === allTagFilter);
-  if (allDeckFilter) cards = cards.filter(c => c.deck === allDeckFilter);
+  const cards = applyFilters(loadCards());
   if (!cards.length) return;
   autoPlayActive = true;
   autoPlayPaused = false;
-  autoPlayQueue = shuffle([...cards]);
+  autoPlayQueue = shuffle(cards);
   autoPlayIndex = 0;
   autoPlayRun();
 }
@@ -1537,8 +1525,27 @@ async function autoFill() {
     btn.textContent = '✨ Auto-fill';
   }
 }
-</script>
-<script>
+
+// ════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════
+if (window.speechSynthesis) {
+  window.speechSynthesis.addEventListener('voiceschanged', loadVoices);
+  loadVoices();
+}
+
+// Restore saved speed button state
+(function () {
+  const saved = localStorage.getItem('lla_rate') || '0.85';
+  const rateValues = ['syllable', '0.6', '0.85', '1.1'];
+  document.querySelectorAll('.speed-btn').forEach((btn, i) => {
+    btn.classList.toggle('spd-active', rateValues[i] === saved);
+  });
+})();
+
+document.getElementById('inp-level').innerHTML = levelOptions('');
+refreshFC();
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
 }
