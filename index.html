@@ -597,14 +597,23 @@
 let currentRate = localStorage.getItem('lla_rate') || '0.85';
 let koreanVoice = null;
 
+let engVoice = null, chnVoice = null;
+
 function loadKoreanVoice() {
   const voices = window.speechSynthesis.getVoices();
-  // Prefer Google Korean voice (sounds like Google Translate), then any online Korean, then any Korean
   koreanVoice =
     voices.find(v => v.lang.startsWith('ko') && v.name.toLowerCase().includes('google')) ||
     voices.find(v => v.lang.startsWith('ko') && !v.localService) ||
-    voices.find(v => v.lang.startsWith('ko')) ||
-    null;
+    voices.find(v => v.lang.startsWith('ko')) || null;
+  engVoice =
+    voices.find(v => v.lang === 'en-US' && v.name.toLowerCase().includes('google')) ||
+    voices.find(v => v.lang === 'en-US') ||
+    voices.find(v => v.lang.startsWith('en')) || null;
+  chnVoice =
+    voices.find(v => v.lang.startsWith('zh') && v.name.toLowerCase().includes('google')) ||
+    voices.find(v => v.lang === 'zh-TW') ||
+    voices.find(v => v.lang === 'zh-CN') ||
+    voices.find(v => v.lang.startsWith('zh')) || null;
 }
 if (window.speechSynthesis) {
   window.speechSynthesis.addEventListener('voiceschanged', loadKoreanVoice);
@@ -1267,14 +1276,26 @@ function apDelay(ms) {
   });
 }
 
-function speakSlowAndWait(text) {
+function detectLang(text) {
+  let ko = 0, zh = 0;
+  for (const ch of text) {
+    const cp = ch.codePointAt(0);
+    if (cp >= 0xAC00 && cp <= 0xD7A3) ko++;
+    else if (cp >= 0x4E00 && cp <= 0x9FFF) zh++;
+  }
+  if (ko > zh && ko > 0) return 'ko';
+  if (zh > 0) return 'zh';
+  return 'en';
+}
+
+function speakSlowAndWait(text, voice, lang) {
   return new Promise(resolve => {
     if (!window.speechSynthesis) { resolve(); return; }
     const synth = window.speechSynthesis;
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'ko-KR';
+    u.lang = lang || 'ko-KR';
     u.rate = 0.6;
-    if (koreanVoice) u.voice = koreanVoice;
+    if (voice) u.voice = voice;
     const fallback = setTimeout(resolve, 5000);
     u.onend = () => { clearTimeout(fallback); resolve(); };
     u.onerror = () => { clearTimeout(fallback); resolve(); };
@@ -1285,6 +1306,13 @@ function speakSlowAndWait(text) {
       synth.speak(u);
     }
   });
+}
+
+function speakAuto(text) {
+  const lang = detectLang(text);
+  if (lang === 'ko') return speakSlowAndWait(text, koreanVoice, 'ko-KR');
+  if (lang === 'zh') return speakSlowAndWait(text, chnVoice, 'zh-TW');
+  return speakSlowAndWait(text, engVoice, 'en-US');
 }
 
 function renderApCard(card) {
@@ -1394,23 +1422,32 @@ async function autoPlayRun() {
     const card = autoPlayQueue[autoPlayIndex++];
 
     renderApCard(card);                        // front
-    await speakSlowAndWait(card.korean);
+    await speakSlowAndWait(card.korean, koreanVoice, 'ko-KR');
     if (!autoPlayActive) return;
     if (autoPlaySkip) continue;
     await apDelay(getApInterval());
     if (!autoPlayActive) return;
     if (autoPlaySkip) continue;
 
-    apFlip(true);                              // back
-    await speakSlowAndWait(card.korean);
+    apFlip(true);                              // back — english/meaning
+    await speakAuto(card.english);
     if (!autoPlayActive) return;
+    if (autoPlaySkip) continue;
+    for (const ex of getExamples(card)) {     // each example in its language
+      await apDelay(300);
+      if (!autoPlayActive) return;
+      if (autoPlaySkip) break;
+      await speakAuto(ex);
+      if (!autoPlayActive) return;
+      if (autoPlaySkip) break;
+    }
     if (autoPlaySkip) continue;
     await apDelay(getApInterval());
     if (!autoPlayActive) return;
     if (autoPlaySkip) continue;
 
     apFlip(false);                             // front again
-    await speakSlowAndWait(card.korean);
+    await speakSlowAndWait(card.korean, koreanVoice, 'ko-KR');
     if (!autoPlayActive) return;
     if (autoPlaySkip) continue;
     await apDelay(getApInterval());
