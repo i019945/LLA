@@ -282,6 +282,7 @@
   .story-word { cursor:pointer; border-bottom:1.5px dotted var(--border); padding-bottom:1px; border-radius:2px; transition:background 0.1s; display:inline-flex; flex-direction:column; align-items:center; vertical-align:top; }
   .story-word:hover { background:var(--accent-light); }
   .story-word-known { color:var(--accent); border-bottom-color:var(--accent); border-bottom-style:solid; }
+  .story-particle-sfx { color:#9b59b6; font-size:0.88em; }
   .story-roman { display:none; font-size:0.78rem; color:var(--accent); font-family:monospace; letter-spacing:0.03em; line-height:1.3; white-space:nowrap; font-weight:500; }
   .roman-on .story-roman { display:block; }
   .story-reader-toolbar { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
@@ -294,7 +295,7 @@
   .wp-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.35); z-index:300; }
   .wp-sheet { position:fixed; bottom:0; left:0; right:0; background:white; border-radius:18px 18px 0 0; padding:20px 20px calc(20px + env(safe-area-inset-bottom,0px)); box-shadow:0 -4px 28px rgba(0,0,0,0.18); }
   .wp-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
-  .wp-word { font-size:1.7rem; font-weight:700; color:var(--text); }
+  .wp-word { font-size:1.7rem; font-weight:700; color:var(--text); user-select:text; -webkit-user-select:text; }
   .wp-actions { display:flex; gap:4px; align-items:center; }
   .wp-speak { background:none; border:none; font-size:1.3rem; cursor:pointer; padding:4px 6px; }
   .wp-close { background:none; border:1px solid var(--border); border-radius:50%; width:28px; height:28px; font-size:0.9rem; cursor:pointer; color:var(--muted); display:flex; align-items:center; justify-content:center; }
@@ -1695,6 +1696,27 @@ async function autoFill() {
 // ════════════════════════════════════════
 // STORIES
 // ════════════════════════════════════════
+let _lastWordTap = 0, _lastWordTapEl = null, _wordTapTimer = null;
+
+function handleWordTap(el) {
+  event.stopPropagation();
+  const now = Date.now();
+  if (el === _lastWordTapEl && now - _lastWordTap < 350) {
+    clearTimeout(_wordTapTimer);
+    _lastWordTap = 0; _lastWordTapEl = null;
+    const word = el.dataset.word;
+    navigator.clipboard.writeText(word).catch(() => {});
+    el.style.outline = '2px solid #9b59b6';
+    setTimeout(() => el.style.outline = '', 600);
+  } else {
+    _lastWordTap = now; _lastWordTapEl = el;
+    clearTimeout(_wordTapTimer);
+    _wordTapTimer = setTimeout(() => {
+      _lastWordTap = 0; _lastWordTapEl = null;
+      showWordPopup(el.dataset.word, el.dataset.deck);
+    }, 350);
+  }
+}
 
 function loadStories() {
   try { return JSON.parse(localStorage.getItem('lla_stories') || '[]'); } catch { return []; }
@@ -1738,14 +1760,20 @@ function openStory(id) {
     ? `<a class="story-yt-btn" href="${escHtml(story.youtubeUrl)}" target="_blank" rel="noopener">▶ Watch on YouTube</a><br>`
     : '';
   // Build interval map once: korean text → highest interval across all cards
+  const allCards = loadCards();
   const ivMap = new Map();
-  loadCards().forEach(c => {
+  allCards.forEach(c => {
     const iv = c.interval || 1;
     if (iv > (ivMap.get(c.korean) || 0)) ivMap.set(c.korean, iv);
   });
+  // Particle list sorted longest-first for greedy suffix matching
+  const particleList = allCards
+    .filter(c => c.tag === 'particle')
+    .map(c => c.korean)
+    .sort((a, b) => b.length - a.length);
   const sentences = story.sentences.map(s => `
     <div class="story-sentence">
-      <div class="story-ko" data-ko="${escHtml(s.ko)}" onclick="speak(this.dataset.ko)">${tokenizeKo(s.ko, story.deck, ivMap)}</div>
+      <div class="story-ko" data-ko="${escHtml(s.ko)}" onclick="speak(this.dataset.ko)">${tokenizeKo(s.ko, story.deck, ivMap, particleList)}</div>
       <div class="story-en">${escHtml(s.en)}</div>
     </div>`).join('');
   const romanActive = isRomanOn();
@@ -1811,14 +1839,27 @@ function wordIv(word, ivMap) {
   return best;
 }
 
-function tokenizeKo(text, deck, ivMap) {
+function tokenizeKo(text, deck, ivMap, particleList) {
   return text.split(/(\s+)/).map(tok => {
     if (!tok || /^\s+$/.test(tok)) return tok;
     const m = tok.match(/^([^가-힣㄰-㆏]*)([가-힣ㄱ-ㅎㅏ-ㅣ가-힣㄰-㆏]+(?:[^가-힣㄰-㆏]*[가-힣ㄱ-ㅎㅏ-ㅣ가-힣㄰-㆏]+)*)([^가-힣㄰-㆏]*)$/u);
     if (!m) return escHtml(tok);
     const [, pre, word, post] = m;
     const known = wordIv(word, ivMap) > 1;
-    return `${escHtml(pre)}<span class="story-word${known?' story-word-known':''}" data-word="${escHtml(word)}" data-deck="${escHtml(deck)}" onclick="event.stopPropagation();showWordPopup(this.dataset.word,this.dataset.deck)">${escHtml(word)}<span class="story-roman">${romanize(word)}</span></span>${escHtml(post)}`;
+    // Split base + particle suffix if a card exists for the base
+    let wordHtml = escHtml(word);
+    if (particleList) {
+      for (const p of particleList) {
+        if (word.length > p.length && word.endsWith(p)) {
+          const base = word.slice(0, word.length - p.length);
+          if (ivMap.has(base)) {
+            wordHtml = `${escHtml(base)}<span class="story-particle-sfx">${escHtml(p)}</span>`;
+            break;
+          }
+        }
+      }
+    }
+    return `${escHtml(pre)}<span class="story-word${known?' story-word-known':''}" data-word="${escHtml(word)}" data-deck="${escHtml(deck)}" onclick="handleWordTap(this)">${wordHtml}<span class="story-roman">${romanize(word)}</span></span>${escHtml(post)}`;
   }).join('');
 }
 
