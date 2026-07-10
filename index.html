@@ -283,8 +283,8 @@
   .import-status.ok { color:var(--green); }
   .import-status.err { color:var(--accent2); }
   /* Word popup — bottom sheet */
-  .wp-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.35); z-index:300; display:flex; align-items:flex-end; justify-content:center; }
-  .wp-sheet { background:white; border-radius:18px 18px 0 0; padding:20px 20px calc(20px + env(safe-area-inset-bottom)); width:100%; max-width:560px; box-shadow:0 -4px 28px rgba(0,0,0,0.18); }
+  .wp-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.35); z-index:300; }
+  .wp-sheet { position:fixed; bottom:0; left:0; right:0; background:white; border-radius:18px 18px 0 0; padding:20px 20px calc(20px + env(safe-area-inset-bottom,0px)); box-shadow:0 -4px 28px rgba(0,0,0,0.18); }
   .wp-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
   .wp-word { font-size:1.7rem; font-weight:700; color:var(--text); }
   .wp-actions { display:flex; gap:4px; align-items:center; }
