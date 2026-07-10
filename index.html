@@ -2095,7 +2095,30 @@ function showWordPopup(word, deck) {
       if (pc) html += wpParticleHtml(pc);
     }
   } else {
-    // No card — check vocab.json alias bridge (conjugated form with known base → auto-add)
+    // No card — check vocab.json (direct base entry, alias bridge, or noun+particle)
+    const directEntry = _storyVocabMap && _storyVocabMap[word];
+    if (directEntry && directEntry.english && !directEntry.base) {
+      // Word appears bare in story and is a vocab.json base entry — auto-add
+      const cards = loadCards();
+      let justAdded = false;
+      if (!cards.find(c => c.korean === word)) {
+        const now = Date.now();
+        cards.push({
+          id: now, created: now, korean: word, english: directEntry.english,
+          trap: directEntry.trap || '', notes: buildConjugationNotes(word, directEntry, _storyVocabMap),
+          examples: [], tag: '', deck: deck || '', level: '',
+          nextReview: now, interval: 1, ease: 2.5, reps: 0,
+        });
+        saveCards(cards);
+        justAdded = true;
+      }
+      html = `<div class="wp-meaning">${escHtml(directEntry.english)}</div>`;
+      if (directEntry.trap) html += `<div class="flip-trap" style="margin:6px 0 4px">${escHtml(directEntry.trap)}</div>`;
+      const notes = buildConjugationNotes(word, directEntry, _storyVocabMap);
+      if (notes) html += `<div class="wp-notes">${escHtml(notes)}</div>`;
+      if (justAdded) html += `<div class="wp-added">✓ Added to your cards</div>`;
+    } else {
+    // Alias bridge (conjugated form with known base → auto-add)
     const aliasBase = _storyVocabMap && (_storyVocabMap[word]?.base);
     if (aliasBase) {
       const baseEntry = _storyVocabMap[aliasBase];
@@ -2164,6 +2187,7 @@ function showWordPopup(word, deck) {
         html = `<div class="wp-nomatch">No card yet for this word.</div>`;
       }
     }
+    } // end else (not a direct base entry)
   }
   body.innerHTML = html;
   document.getElementById('wp-overlay').style.display = 'flex';
