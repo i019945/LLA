@@ -1802,7 +1802,7 @@ function wordIv(word, ivMap) {
   if (ivMap.has(word)) return ivMap.get(word);
   // prefix match: 여행을 → finds card 여행
   let best = 0;
-  ivMap.forEach((iv, ko) => { if (ko.length >= 2 && word.startsWith(ko) && iv > best) best = iv; });
+  ivMap.forEach((iv, ko) => { if (ko.length >= 1 && word.startsWith(ko) && iv > best) best = iv; });
   return best;
 }
 
@@ -1826,10 +1826,10 @@ function findCardForToken(word, deck) {
   c = cards.find(c => c.korean === word);
   if (c) return c;
   // 3. prefix match in story deck (handles noun+particle: 여행을 → 여행)
-  c = cards.find(c => c.korean.length >= 2 && word.startsWith(c.korean) && c.deck === deck);
+  c = cards.find(c => c.korean.length >= 1 && word.startsWith(c.korean) && c.deck === deck);
   if (c) return c;
   // 4. prefix match in any deck
-  return cards.find(c => c.korean.length >= 2 && word.startsWith(c.korean)) || null;
+  return cards.find(c => c.korean.length >= 1 && word.startsWith(c.korean)) || null;
 }
 
 function showWordPopup(word, deck) {

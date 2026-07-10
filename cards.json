@@ -1,5 +1,18 @@
 [
   {
+    "id": 1782546151420,
+    "korean": "저",
+    "english": "I / me (formal/humble)",
+    "examples": ["저는 학생이에요 = I am a student"],
+    "notes": "저 : formal/humble form of 나 (casual I/me)\n저와 : I and… / with me\n저는 : I (topic marker)",
+    "tag": "",
+    "created": 1782546151420,
+    "nextReview": 1782546151420,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
     "id": 1782546151426,
     "korean": "나",
     "english": "I",
