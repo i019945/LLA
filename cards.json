@@ -70,7 +70,7 @@
   {
     "id": 1782562678821,
     "korean": "미국",
-    "english": "美國",
+    "english": "United States",
     "tag": "",
     "trap": "",
     "created": 1782562678821,
@@ -78,46 +78,58 @@
     "interval": 1,
     "ease": 2.5,
     "reps": 0,
-    "example": "",
     "deck": "",
     "level": "",
-    "notes": ""
+    "notes": "",
+    "examples": []
   },
   {
     "id": 1782562742038,
     "korean": "한국어",
-    "english": "韓語",
+    "english": "Korean (language)",
     "tag": "",
     "trap": "",
     "created": 1782562742038,
     "nextReview": 1782562742038,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [],
+    "deck": "",
+    "level": "",
+    "notes": ""
   },
   {
     "id": 1782562802062,
     "korean": "영어",
-    "english": "英語",
+    "english": "English",
     "tag": "",
     "trap": "",
     "created": 1782562802062,
     "nextReview": 1782562802062,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [],
+    "deck": "",
+    "level": "",
+    "notes": ""
   },
   {
     "id": 1782562832768,
     "korean": "일본어",
-    "english": "日語",
+    "english": "Japanese (language)",
     "tag": "",
     "trap": "",
     "created": 1782562832768,
     "nextReview": 1782562832768,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [],
+    "deck": "",
+    "level": "",
+    "notes": ""
   },
   {
     "id": 1782563141337,
@@ -278,26 +290,34 @@
   {
     "id": 1782712632913,
     "korean": "감사합니다",
-    "english": "thank you (敬語（對長輩、上司、陌生人）",
+    "english": "thank you (respectful form）",
     "tag": "",
     "trap": "",
     "created": 1782712632913,
     "nextReview": 1782712632913,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [],
+    "deck": "",
+    "level": "합쇼체",
+    "notes": ""
   },
   {
     "id": 1782712689528,
     "korean": "고마워",
-    "english": "Thank. you (僅對同輩或熟絡的朋友使用)",
+    "english": "Thank. you (used between friends familiar with each other)",
     "tag": "",
     "trap": "",
     "created": 1782712689528,
     "nextReview": 1782712689528,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [],
+    "deck": "",
+    "level": "",
+    "notes": ""
   },
   {
     "id": 1782712768092,
@@ -326,26 +346,34 @@
   {
     "id": 1782713023405,
     "korean": "타코",
-    "english": "墨西哥夾餅",
+    "english": "a kind of Mexican pie",
     "tag": "",
     "trap": "",
     "created": 1782713023405,
     "nextReview": 1782713023405,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [],
+    "deck": "",
+    "level": "",
+    "notes": ""
   },
   {
     "id": 1782713271417,
     "korean": "셔츠",
-    "english": "shirt; 襯衫",
+    "english": "shirt;",
     "tag": "",
     "trap": "",
     "created": 1782713271417,
     "nextReview": 1782713271417,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [],
+    "deck": "",
+    "level": "",
+    "notes": ""
   },
   {
     "id": 1782713372838,
@@ -386,50 +414,66 @@
   {
     "id": 1782920071626,
     "korean": "안녕하세요",
-    "english": "你好（早中晚都可用的招呼語）",
+    "english": "how; how are you (the hello word used most commonly at any time）",
     "tag": "",
     "trap": "",
     "created": 1782920071626,
     "nextReview": 1782920071626,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [],
+    "deck": "",
+    "level": "",
+    "notes": ""
   },
   {
     "id": 1782920116819,
     "korean": "좋은 아침",
-    "english": "早安（強調早晨）",
+    "english": "Good morning (emphasizing morning)",
     "tag": "",
     "trap": "",
     "created": 1782920116819,
     "nextReview": 1782920116819,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [],
+    "deck": "",
+    "level": "",
+    "notes": ""
   },
   {
     "id": 1782920190505,
     "korean": "알겠어",
-    "english": "知道了；",
+    "english": "I got it.",
     "tag": "",
     "trap": "",
     "created": 1782920190505,
     "nextReview": 1782920190505,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [],
+    "deck": "",
+    "level": "",
+    "notes": ""
   },
   {
     "id": 1783307756544,
     "korean": "너무",
-    "english": "much/far/way) too, so, overly",
+    "english": "much, far away too, so, overly",
     "tag": "",
     "trap": "",
     "created": 1783307756544,
     "nextReview": 1783307756544,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [],
+    "deck": "",
+    "level": "",
+    "notes": ""
   },
   {
     "id": 1783307833730,
@@ -458,14 +502,18 @@
   {
     "id": 1783308106049,
     "korean": "저희",
-    "english": "We/us (excluding the listener)",
+    "english": "we; us (excluding the listener)",
     "tag": "",
     "trap": "",
     "created": 1783308106049,
     "nextReview": 1783308106049,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [],
+    "deck": "",
+    "level": "",
+    "notes": ""
   },
   {
     "id": 1783309006811,
@@ -482,14 +530,21 @@
   {
     "id": 1783309299484,
     "korean": "주말",
-    "english": "Weekend; 주=week, 말=end",
+    "english": "Weekend",
     "tag": "",
     "trap": "",
     "created": 1783309299484,
     "nextReview": 1783309299484,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "주=week",
+      "말=end"
+    ],
+    "deck": "",
+    "level": "",
+    "notes": ""
   },
   {
     "id": 1783309573984,
@@ -530,14 +585,20 @@
   {
     "id": 1783310074765,
     "korean": "고사",
-    "english": "考試； exam, test; 기말 고사 期末考",
+    "english": "exam, test;",
     "tag": "",
     "trap": "",
     "created": 1783310074765,
     "nextReview": 1783503008387,
     "interval": 2,
     "ease": 2.4,
-    "reps": 1
+    "reps": 1,
+    "examples": [
+      "기말 고사 = final exam of the semester"
+    ],
+    "deck": "",
+    "level": "",
+    "notes": ""
   },
   {
     "id": 1783310339547,
@@ -760,14 +821,22 @@
   {
     "id": 1783298231037,
     "korean": "사랑",
-    "english": "love; 例句「我愛你」 사랑해.    사랑해요.   사랑합니다",
+    "english": "love;",
     "tag": "",
     "trap": "",
     "created": 1783298231037,
     "nextReview": 1783298231037,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "사랑해 = I love you (intimate)",
+      "사랑해요 = I love you (polite)",
+      "사랑합니다 = I love you (formal)"
+    ],
+    "deck": "",
+    "level": "",
+    "notes": ""
   },
   {
     "id": 1782920200011,
