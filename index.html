@@ -265,6 +265,34 @@
     .flip-scene { height: 210px; }
     .flip-kor { font-size: 2.6rem; }
   }
+
+  /* ── Story section ── */
+  .story-list-item { background:white; border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:12px; cursor:pointer; transition:border-color 0.15s; }
+  .story-list-item:hover { border-color:var(--accent); }
+  .story-list-title { font-size:1.05rem; font-weight:700; color:var(--text); margin-bottom:3px; }
+  .story-list-meta { font-size:0.82rem; color:var(--muted); }
+  .story-yt-btn { display:inline-flex; align-items:center; gap:6px; background:#ff0000; color:white; border:none; border-radius:8px; padding:8px 16px; font-size:0.85rem; font-weight:600; cursor:pointer; margin-bottom:20px; text-decoration:none; }
+  .story-back-btn { background:none; border:none; color:var(--accent); font-size:0.9rem; font-weight:600; cursor:pointer; padding:0; margin-bottom:14px; display:inline-flex; align-items:center; gap:4px; }
+  .story-sentence { margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid var(--border); }
+  .story-sentence:last-child { border-bottom:none; }
+  .story-ko { font-size:1.15rem; line-height:1.8; margin-bottom:4px; }
+  .story-en { font-size:0.9rem; color:var(--muted); font-style:italic; line-height:1.5; }
+  .story-word { cursor:pointer; border-bottom:1.5px dotted var(--accent); padding-bottom:1px; border-radius:2px; transition:background 0.1s; }
+  .story-word:hover { background:var(--accent-light); }
+  .import-status { margin-top:10px; font-size:0.88rem; color:var(--muted); min-height:1.2em; }
+  .import-status.ok { color:var(--green); }
+  .import-status.err { color:var(--accent2); }
+  /* Word popup — bottom sheet */
+  .wp-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.35); z-index:300; display:flex; align-items:flex-end; justify-content:center; }
+  .wp-sheet { background:white; border-radius:18px 18px 0 0; padding:20px 20px calc(20px + env(safe-area-inset-bottom)); width:100%; max-width:560px; box-shadow:0 -4px 28px rgba(0,0,0,0.18); }
+  .wp-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .wp-word { font-size:1.7rem; font-weight:700; color:var(--text); }
+  .wp-actions { display:flex; gap:4px; align-items:center; }
+  .wp-speak { background:none; border:none; font-size:1.3rem; cursor:pointer; padding:4px 6px; }
+  .wp-close { background:none; border:1px solid var(--border); border-radius:50%; width:28px; height:28px; font-size:0.9rem; cursor:pointer; color:var(--muted); display:flex; align-items:center; justify-content:center; }
+  .wp-meaning { font-size:1rem; color:var(--text); margin-bottom:8px; }
+  .wp-notes { font-size:0.88rem; color:var(--muted); border-top:1px solid var(--border); padding-top:10px; margin-top:6px; white-space:pre-line; }
+  .wp-nomatch { font-size:0.9rem; color:var(--muted); font-style:italic; }
 </style>
 </head>
 <body>
@@ -289,6 +317,7 @@
   <button onclick="show('vowels', this)">Vowels</button>
   <button onclick="show('syllables', this)">Syllables</button>
   <button onclick="show('batchim', this)">받침 Rules ★</button>
+  <button onclick="show('stories', this); renderStoryList()">Stories</button>
 </nav>
 
 <!-- ══════════════════ CONSONANTS ══════════════════ -->
@@ -584,6 +613,58 @@
   <!-- ── All Cards ── -->
   <div id="fc-all" class="fc-panel">
     <div id="all-content"></div>
+  </div>
+</div>
+
+<!-- ══════════════════ STORIES ══════════════════ -->
+<div id="stories" class="section">
+  <div class="fc-subnav">
+    <button class="active" onclick="stShow('st-list', this)">My Stories</button>
+    <button onclick="stShow('st-add', this)">+ Add Story</button>
+  </div>
+
+  <!-- List -->
+  <div id="st-list" class="fc-panel active">
+    <div id="story-list-content"></div>
+  </div>
+
+  <!-- Add Story -->
+  <div id="st-add" class="fc-panel">
+    <div class="fc-form">
+      <div class="fc-field">
+        <label>Title</label>
+        <input type="text" id="st-title" placeholder="e.g. Walk in Seoul 016" autocomplete="off">
+      </div>
+      <div class="fc-field">
+        <label>YouTube URL <span style="font-weight:400;text-transform:none">(optional)</span></label>
+        <input type="text" id="st-url" placeholder="https://youtu.be/…" autocomplete="off" autocorrect="off" spellcheck="false">
+      </div>
+      <div class="fc-field">
+        <label>Korean Text</label>
+        <textarea id="st-text" placeholder="Paste the full Korean text here…" spellcheck="false" rows="10" style="font-size:1rem;line-height:1.6"></textarea>
+      </div>
+      <button class="add-btn" onclick="importStory()">✨ Import Story</button>
+      <div class="import-status" id="import-status"></div>
+    </div>
+  </div>
+
+  <!-- Reader (shown when a story is opened) -->
+  <div id="st-reader" class="fc-panel">
+    <div id="story-reader-content"></div>
+  </div>
+</div>
+
+<!-- Word popup (global bottom sheet) -->
+<div id="wp-overlay" class="wp-overlay" style="display:none" onclick="hideWordPopup()">
+  <div class="wp-sheet" onclick="event.stopPropagation()">
+    <div class="wp-top">
+      <span class="wp-word" id="wp-word"></span>
+      <div class="wp-actions">
+        <button class="wp-speak" onclick="speak(document.getElementById('wp-word').textContent)">🔊</button>
+        <button class="wp-close" onclick="hideWordPopup()">✕</button>
+      </div>
+    </div>
+    <div id="wp-body"></div>
   </div>
 </div>
 
@@ -1587,6 +1668,180 @@ async function autoFill() {
   } finally {
     btn.disabled = false;
     btn.textContent = '✨ Auto-fill';
+  }
+}
+
+// ════════════════════════════════════════
+// STORIES
+// ════════════════════════════════════════
+
+function loadStories() {
+  try { return JSON.parse(localStorage.getItem('lla_stories') || '[]'); } catch { return []; }
+}
+function saveStories(s) { localStorage.setItem('lla_stories', JSON.stringify(s)); }
+
+function stShow(panel, btn) {
+  document.querySelectorAll('#stories .fc-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(panel).classList.add('active');
+  document.querySelectorAll('#stories .fc-subnav button').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function renderStoryList() {
+  const stories = loadStories();
+  const el = document.getElementById('story-list-content');
+  if (!stories.length) {
+    el.innerHTML = '<p style="color:var(--muted);text-align:center;margin-top:40px">No stories yet.<br>Tap <strong>+ Add Story</strong> to import one.</p>';
+    return;
+  }
+  el.innerHTML = stories.map(s => `
+    <div class="story-list-item" onclick="openStory(${s.id})">
+      <div class="story-list-title">${escHtml(s.title)}</div>
+      <div class="story-list-meta">${s.sentences.length} sentences · deck: ${escHtml(s.deck)}</div>
+    </div>`).join('');
+}
+
+function openStory(id) {
+  const story = loadStories().find(s => s.id === id);
+  if (!story) return;
+  stShow('st-reader', null);
+  const el = document.getElementById('story-reader-content');
+  const ytBtn = story.youtubeUrl
+    ? `<a class="story-yt-btn" href="${escHtml(story.youtubeUrl)}" target="_blank" rel="noopener">▶ Watch on YouTube</a><br>`
+    : '';
+  const sentences = story.sentences.map(s => `
+    <div class="story-sentence">
+      <div class="story-ko">${tokenizeKo(s.ko, story.deck)}</div>
+      <div class="story-en">${escHtml(s.en)}</div>
+    </div>`).join('');
+  el.innerHTML = `
+    <button class="story-back-btn" onclick="stShow('st-list', document.querySelector('#stories .fc-subnav button')); renderStoryList()">← All Stories</button>
+    <h2 style="margin:0 0 2px">${escHtml(story.title)}</h2>
+    <p style="color:var(--muted);font-size:0.82rem;margin:0 0 16px">${story.sentences.length} sentences · ${escHtml(story.deck)}</p>
+    ${ytBtn}
+    ${sentences}`;
+}
+
+function tokenizeKo(text, deck) {
+  return text.split(/(\s+)/).map(tok => {
+    if (!tok || /^\s+$/.test(tok)) return tok;
+    // Separate leading/trailing punctuation from the Korean word
+    const m = tok.match(/^([^가-힣㄰-㆏]*)([가-힣ㄱ-ㅎㅏ-ㅣ가-힣㄰-㆏]+(?:[^가-힣㄰-㆏]*[가-힣ㄱ-ㅎㅏ-ㅣ가-힣㄰-㆏]+)*)([^가-힣㄰-㆏]*)$/u);
+    if (!m) return escHtml(tok);
+    const [, pre, word, post] = m;
+    return `${escHtml(pre)}<span class="story-word" data-word="${escHtml(word)}" data-deck="${escHtml(deck)}" onclick="showWordPopup(this.dataset.word,this.dataset.deck)">${escHtml(word)}</span>${escHtml(post)}`;
+  }).join('');
+}
+
+function showWordPopup(word, deck) {
+  const card = loadCards().find(c => c.korean === word && c.deck === deck);
+  document.getElementById('wp-word').textContent = word;
+  const body = document.getElementById('wp-body');
+  if (card) {
+    const notes = card.notes
+      ? `<div class="wp-notes">${escHtml(card.notes)}</div>`
+      : '';
+    body.innerHTML = `<div class="wp-meaning">${escHtml(card.english)}</div>${notes}`;
+  } else {
+    body.innerHTML = `<div class="wp-nomatch">No card found for this word.</div>`;
+  }
+  document.getElementById('wp-overlay').style.display = 'flex';
+  speak(word);
+}
+
+function hideWordPopup() {
+  document.getElementById('wp-overlay').style.display = 'none';
+}
+
+async function importStory() {
+  const title  = document.getElementById('st-title').value.trim();
+  const url    = document.getElementById('st-url').value.trim();
+  const text   = document.getElementById('st-text').value.trim();
+  const status = document.getElementById('import-status');
+  const btn    = document.querySelector('#st-add .add-btn');
+
+  if (!title) { status.textContent = 'Please enter a title.'; status.className = 'import-status err'; return; }
+  if (!text)  { status.textContent = 'Please paste Korean text.'; status.className = 'import-status err'; return; }
+  const key = localStorage.getItem('lla_anthropic_key');
+  if (!key)   { status.textContent = 'No API key — set one in Add Card → ⚙ API key.'; status.className = 'import-status err'; return; }
+
+  btn.disabled = true;
+  btn.textContent = '…';
+  status.textContent = 'Importing… this may take 15–30 seconds.';
+  status.className = 'import-status';
+
+  const prompt = `You are processing a Korean text for an intermediate Korean learner.
+
+Given the Korean text below:
+1. Split it into natural sentences (one sentence per item; keep each sentence complete).
+2. Translate each sentence into natural, idiomatic English.
+3. Identify 10–20 key vocabulary items or phrases a learner should know. For EACH:
+   - "korean": the word/phrase EXACTLY as it appears in the text (conjugated/inflected form).
+   - "english": format as \`'dictionary form' (word type) English meaning\` e.g. \`'가다' (verb) to go\`.
+   - "example": the Korean sentence it came from, then " = ", then its English translation.
+   - "notes": one grammar note per line as \`word : explanation\` e.g. \`가요 : polite present tense of 가다\`.
+
+Return ONLY valid JSON — no markdown, no commentary:
+{
+  "sentences": [{"ko": "...", "en": "..."}],
+  "cards": [{"korean":"...","english":"...","example":"...","notes":"..."}]
+}
+
+Korean text:
+${text}`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5',
+        max_tokens: 4096,
+        messages: [{ role: 'user', content: prompt }],
+      }),
+    });
+    if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || res.status); }
+    const data = await res.json();
+    const raw  = data.content[0].text.trim().replace(/^```json\s*|\s*```$/g, '');
+    const json = JSON.parse(raw);
+
+    const story = { id: Date.now(), title, youtubeUrl: url, sentences: json.sentences, deck: title, created: Date.now() };
+    const stories = loadStories();
+    stories.unshift(story);
+    saveStories(stories);
+
+    const cards = loadCards();
+    const now   = Date.now();
+    (json.cards || []).forEach((c, i) => {
+      cards.push({
+        id: now + i,
+        korean: c.korean, english: c.english,
+        examples: c.example ? [c.example] : [],
+        notes: c.notes || '', tag: 'story', deck: title,
+        level: '', trap: '',
+        created: now, nextReview: now, interval: 1, ease: 2.5, reps: 0,
+      });
+    });
+    saveCards(cards);
+    refreshFC();
+
+    status.textContent = `Done! ${json.sentences.length} sentences · ${(json.cards||[]).length} cards → deck "${title}".`;
+    status.className = 'import-status ok';
+    document.getElementById('st-title').value = '';
+    document.getElementById('st-url').value   = '';
+    document.getElementById('st-text').value  = '';
+    setTimeout(() => { stShow('st-list', document.querySelector('#stories .fc-subnav button')); renderStoryList(); openStory(story.id); }, 1800);
+  } catch (e) {
+    status.textContent = 'Error: ' + e.message;
+    status.className = 'import-status err';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '✨ Import Story';
   }
 }
 
