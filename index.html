@@ -280,7 +280,7 @@
   .story-en { font-size:0.9rem; color:var(--muted); font-style:italic; line-height:1.5; }
   .story-word { cursor:pointer; border-bottom:1.5px dotted var(--accent); padding-bottom:1px; border-radius:2px; transition:background 0.1s; display:inline-flex; flex-direction:column; align-items:center; vertical-align:top; }
   .story-word:hover { background:var(--accent-light); }
-  .story-roman { display:none; font-size:0.58rem; color:var(--muted); font-family:monospace; letter-spacing:0.02em; line-height:1.2; white-space:nowrap; }
+  .story-roman { display:none; font-size:0.78rem; color:var(--accent); font-family:monospace; letter-spacing:0.03em; line-height:1.3; white-space:nowrap; font-weight:500; }
   .roman-on .story-roman { display:block; }
   .story-reader-toolbar { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
   .story-tool-btn { border:1.5px solid var(--border); background:white; color:var(--muted); border-radius:20px; padding:5px 12px; font-size:0.78rem; font-weight:600; cursor:pointer; transition:all 0.15s; }
@@ -675,6 +675,7 @@
 </div>
 
 <script src="import_seoul016.js"></script>
+<script src="import_seoul016_cards2.js"></script>
 <script>
 // ════════════════════════════════════════
 // TTS
@@ -1785,8 +1786,23 @@ function tokenizeKo(text, deck) {
   }).join('');
 }
 
+function findCardForToken(word, deck) {
+  const cards = loadCards();
+  // 1. exact match in story deck
+  let c = cards.find(c => c.korean === word && c.deck === deck);
+  if (c) return c;
+  // 2. exact match in any deck
+  c = cards.find(c => c.korean === word);
+  if (c) return c;
+  // 3. prefix match in story deck (handles noun+particle: 여행을 → 여행)
+  c = cards.find(c => c.korean.length >= 2 && word.startsWith(c.korean) && c.deck === deck);
+  if (c) return c;
+  // 4. prefix match in any deck
+  return cards.find(c => c.korean.length >= 2 && word.startsWith(c.korean)) || null;
+}
+
 function showWordPopup(word, deck) {
-  const card = loadCards().find(c => c.korean === word && c.deck === deck);
+  const card = findCardForToken(word, deck);
   document.getElementById('wp-word').textContent = word;
   const body = document.getElementById('wp-body');
   if (card) {
@@ -1795,7 +1811,7 @@ function showWordPopup(word, deck) {
       : '';
     body.innerHTML = `<div class="wp-meaning">${escHtml(card.english)}</div>${notes}`;
   } else {
-    body.innerHTML = `<div class="wp-nomatch">No card found for this word.</div>`;
+    body.innerHTML = `<div class="wp-nomatch">No card yet for this word.</div>`;
   }
   document.getElementById('wp-overlay').style.display = 'flex';
   speak(word);
