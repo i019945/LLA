@@ -276,8 +276,11 @@
   .story-back-btn { background:none; border:none; color:var(--accent); font-size:0.9rem; font-weight:600; cursor:pointer; padding:0; margin-bottom:14px; display:inline-flex; align-items:center; gap:4px; }
   .story-sentence { margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid var(--border); }
   .story-sentence:last-child { border-bottom:none; }
-  .story-ko { font-size:1.15rem; line-height:2.2; margin-bottom:4px; cursor:pointer; user-select:none; }
+  .story-ko-row { display:flex; align-items:flex-start; gap:6px; }
+  .story-ko { font-size:1.15rem; line-height:2.2; margin-bottom:4px; cursor:pointer; user-select:none; flex:1; }
   .story-ko:active { opacity:0.7; }
+  .story-copy-btn { background:none; border:none; font-size:1rem; cursor:pointer; color:var(--muted); padding:4px 2px; flex-shrink:0; margin-top:6px; opacity:0.6; }
+  .story-copy-btn:active { opacity:1; }
   .story-en { font-size:0.9rem; color:var(--muted); font-style:italic; line-height:1.5; }
   .story-word { cursor:pointer; border-bottom:1.5px dotted var(--border); padding-bottom:1px; border-radius:2px; transition:background 0.1s; display:inline-flex; flex-direction:column; align-items:center; vertical-align:top; }
   .story-word:hover { background:var(--accent-light); }
@@ -839,10 +842,23 @@ async function speakNotes(notes) {
   }
 }
 
+// Speak a meaning field: handles 'korean' (type) english format explicitly so the
+// Korean dictionary form is spoken by the Korean voice, not the English voice.
+async function speakMeaning(english) {
+  const m = english.match(/^'([^']+)'\s*(.*)/s);
+  if (m && hasHangul(m[1])) {
+    await speakSlowAndWait(m[1].trim(), koreanVoice, 'ko-KR');
+    if (!autoPlayActive || autoPlaySkip) return;
+    if (m[2].trim()) await speakSlowAndWait(m[2].trim(), engVoice, 'en-US');
+  } else {
+    await (hasHangul(english) ? speakMixed(english) : speakSlowAndWait(english, engVoice, 'en-US'));
+  }
+}
+
 // Full back-face reading: meaning → examples → notes (if enabled).
 async function speakBackFull(card) {
   if (card.english) {
-    await (hasHangul(card.english) ? speakMixed(card.english) : speakSlowAndWait(card.english, engVoice, 'en-US'));
+    await speakMeaning(card.english);
     if (!autoPlayActive || autoPlaySkip) return;
   }
   for (const ex of getExamples(card)) {
@@ -1876,7 +1892,10 @@ async function openStory(id) {
     .sort((a, b) => b.length - a.length);
   const sentences = story.sentences.map(s => `
     <div class="story-sentence">
-      <div class="story-ko" data-ko="${escHtml(s.ko)}" onclick="speak(this.dataset.ko)">${tokenizeKo(s.ko, story.deck, ivMap, particleList)}</div>
+      <div class="story-ko-row">
+        <div class="story-ko" data-ko="${escHtml(s.ko)}" onclick="speak(this.dataset.ko)">${tokenizeKo(s.ko, story.deck, ivMap, particleList)}</div>
+        <button class="story-copy-btn" data-text="${escHtml(s.ko)}" onclick="event.stopPropagation();copySentence(this)" title="Copy sentence">⎘</button>
+      </div>
       <div class="story-en">${escHtml(s.en)}</div>
     </div>`).join('');
   const romanActive = isRomanOn();
@@ -2034,8 +2053,7 @@ function showWordPopup(word, deck) {
   let html = '';
   if (card) {
     if (card._bridgeBase) {
-      // Found via vocab.json alias bridge — show conjugation relationship
-      html += `<div class="wp-bridge">↳ ${escHtml(card._bridgeBase)}</div>`;
+      html += `<div class="wp-bridge" onclick="event.stopPropagation();speak('${escHtml(card._bridgeBase)}')" title="Tap to hear dictionary form">↳ ${escHtml(card._bridgeBase)} 🔊</div>`;
     }
     html += `<div class="wp-meaning">${escHtml(card.english)}</div>`;
     if (card.trap) html += `<div class="flip-trap" style="margin:6px 0 4px">${escHtml(card.trap)}</div>`;
@@ -2095,6 +2113,13 @@ function showWordPopup(word, deck) {
 
 function hideWordPopup() {
   document.getElementById('wp-overlay').style.display = 'none';
+}
+
+function copySentence(btn) {
+  const text = btn.dataset.text;
+  const done = () => { const o = btn.textContent; btn.textContent = '✓'; setTimeout(() => btn.textContent = o, 1500); };
+  if (navigator.clipboard) { navigator.clipboard.writeText(text).then(done).catch(done); }
+  else { const t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t); done(); }
 }
 
 
