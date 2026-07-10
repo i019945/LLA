@@ -278,8 +278,9 @@
   .story-ko { font-size:1.15rem; line-height:2.2; margin-bottom:4px; cursor:pointer; user-select:none; }
   .story-ko:active { opacity:0.7; }
   .story-en { font-size:0.9rem; color:var(--muted); font-style:italic; line-height:1.5; }
-  .story-word { cursor:pointer; border-bottom:1.5px dotted var(--accent); padding-bottom:1px; border-radius:2px; transition:background 0.1s; display:inline-flex; flex-direction:column; align-items:center; vertical-align:top; }
+  .story-word { cursor:pointer; border-bottom:1.5px dotted var(--border); padding-bottom:1px; border-radius:2px; transition:background 0.1s; display:inline-flex; flex-direction:column; align-items:center; vertical-align:top; }
   .story-word:hover { background:var(--accent-light); }
+  .story-word-known { color:var(--accent); border-bottom-color:var(--accent); border-bottom-style:solid; }
   .story-roman { display:none; font-size:0.78rem; color:var(--accent); font-family:monospace; letter-spacing:0.03em; line-height:1.3; white-space:nowrap; font-weight:500; }
   .roman-on .story-roman { display:block; }
   .story-reader-toolbar { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
@@ -1717,9 +1718,15 @@ function openStory(id) {
   const ytBtn = story.youtubeUrl
     ? `<a class="story-yt-btn" href="${escHtml(story.youtubeUrl)}" target="_blank" rel="noopener">▶ Watch on YouTube</a><br>`
     : '';
+  // Build interval map once: korean text → highest interval across all cards
+  const ivMap = new Map();
+  loadCards().forEach(c => {
+    const iv = c.interval || 1;
+    if (iv > (ivMap.get(c.korean) || 0)) ivMap.set(c.korean, iv);
+  });
   const sentences = story.sentences.map(s => `
     <div class="story-sentence">
-      <div class="story-ko" data-ko="${escHtml(s.ko)}" onclick="speak(this.dataset.ko)">${tokenizeKo(s.ko, story.deck)}</div>
+      <div class="story-ko" data-ko="${escHtml(s.ko)}" onclick="speak(this.dataset.ko)">${tokenizeKo(s.ko, story.deck, ivMap)}</div>
       <div class="story-en">${escHtml(s.en)}</div>
     </div>`).join('');
   const romanActive = isRomanOn();
@@ -1776,13 +1783,23 @@ function toggleRoman() {
   if (body) body.classList.toggle('roman-on', on);
 }
 
-function tokenizeKo(text, deck) {
+function wordIv(word, ivMap) {
+  if (!ivMap) return 0;
+  if (ivMap.has(word)) return ivMap.get(word);
+  // prefix match: 여행을 → finds card 여행
+  let best = 0;
+  ivMap.forEach((iv, ko) => { if (ko.length >= 2 && word.startsWith(ko) && iv > best) best = iv; });
+  return best;
+}
+
+function tokenizeKo(text, deck, ivMap) {
   return text.split(/(\s+)/).map(tok => {
     if (!tok || /^\s+$/.test(tok)) return tok;
     const m = tok.match(/^([^가-힣㄰-㆏]*)([가-힣ㄱ-ㅎㅏ-ㅣ가-힣㄰-㆏]+(?:[^가-힣㄰-㆏]*[가-힣ㄱ-ㅎㅏ-ㅣ가-힣㄰-㆏]+)*)([^가-힣㄰-㆏]*)$/u);
     if (!m) return escHtml(tok);
     const [, pre, word, post] = m;
-    return `${escHtml(pre)}<span class="story-word" data-word="${escHtml(word)}" data-deck="${escHtml(deck)}" onclick="event.stopPropagation();showWordPopup(this.dataset.word,this.dataset.deck)">${escHtml(word)}<span class="story-roman">${romanize(word)}</span></span>${escHtml(post)}`;
+    const known = wordIv(word, ivMap) > 1;
+    return `${escHtml(pre)}<span class="story-word${known?' story-word-known':''}" data-word="${escHtml(word)}" data-deck="${escHtml(deck)}" onclick="event.stopPropagation();showWordPopup(this.dataset.word,this.dataset.deck)">${escHtml(word)}<span class="story-roman">${romanize(word)}</span></span>${escHtml(post)}`;
   }).join('');
 }
 
