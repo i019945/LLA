@@ -252,8 +252,9 @@
   .ap-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
   .ap-meta { font-size: 0.82rem; color: var(--muted); }
   .ap-interval-sel { font-size: 0.82rem; border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px; background: white; }
-  .ap-start-btn { border: 1.5px solid var(--accent); color: var(--accent); background: white; border-radius: 20px; padding: 5px 14px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.15s; margin-left: auto; }
+  .ap-start-btn { border: 1.5px solid var(--accent); color: var(--accent); background: white; border-radius: 20px; padding: 5px 14px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.15s; }
   .ap-start-btn:hover { background: var(--accent); color: white; }
+  .ap-start-group { display: flex; gap: 6px; margin-left: auto; }
   .ap-stop-btn { border: 1.5px solid var(--accent2); color: var(--accent2); background: white; border-radius: 20px; padding: 5px 14px; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
   .ap-stop-btn:hover { background: var(--accent2); color: white; }
   .ap-mode-btn { border: 1.5px solid var(--border); color: var(--muted); background: white; border-radius: 20px; padding: 5px 12px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.15s; }
@@ -1273,7 +1274,7 @@ function renderAll() {
   const deckSel = filterSelect(cards, 'deck', allDeckFilter, 'setDeckFilter', 'Deck');
   const filterRow = (tagSel || deckSel) ? `<div class="filter-row">${tagSel}${deckSel}</div>` : '';
   el.innerHTML = filterRow +
-    `<div class="all-stats" style="display:flex;align-items:center">${displayed.length} card${displayed.length !== 1 ? 's' : ''} total · ${dueCards(displayed).length} due now<button class="ap-start-btn" onclick="startAutoPlay()">▶ Auto-play</button></div><div class="card-list" id="card-list"></div>`;
+    `<div class="all-stats" style="display:flex;align-items:center;flex-wrap:wrap;gap:6px">${displayed.length} card${displayed.length !== 1 ? 's' : ''} total · ${dueCards(displayed).length} due now<span class="ap-start-group"><button class="ap-start-btn" onclick="startAutoPlay('car')">▶ Car</button><button class="ap-start-btn" onclick="startAutoPlay('full')">▶ Full</button></span></div><div class="card-list" id="card-list"></div>`;
   const list = document.getElementById('card-list');
   [...displayed].reverse().forEach(card => {
     const item = document.createElement('div');
@@ -1452,15 +1453,14 @@ function saveToken() {
 // AUTO-PLAY
 // ════════════════════════════════════════
 function getApInterval() { return parseInt(localStorage.getItem('lla_ap_interval') || '500'); }
-function getApMode() { return localStorage.getItem('lla_ap_mode') || 'word'; }
+function getApMode() { return localStorage.getItem('lla_ap_mode') || 'car'; }
 
-function toggleApMode() {
-  const cycle = { word: 'car', car: 'full', full: 'word' };
-  const next = cycle[getApMode()] || 'car';
-  localStorage.setItem('lla_ap_mode', next);
-  const btn = document.getElementById('ap-mode-btn');
-  const labels = { word: 'Word', car: 'Car', full: 'Full' };
-  if (btn) { btn.textContent = labels[next]; btn.className = 'ap-mode-btn' + (next !== 'word' ? ' active' : ''); }
+function setApMode(mode) {
+  localStorage.setItem('lla_ap_mode', mode);
+  ['car','full'].forEach(m => {
+    const b = document.getElementById('ap-mode-' + m);
+    if (b) b.classList.toggle('active', m === mode);
+  });
 }
 
 function apDelay(ms) {
@@ -1479,7 +1479,8 @@ function renderApCard(card) {
       <span class="ap-meta">Interval: <select class="ap-interval-sel" onchange="localStorage.setItem('lla_ap_interval',this.value)">
         ${[500,1000,2000,3000].map(v=>`<option value="${v}"${v===interval?' selected':''}>${v/1000}s</option>`).join('')}
       </select></span>
-      <button id="ap-mode-btn" class="ap-mode-btn${getApMode()!=='word'?' active':''}" onclick="toggleApMode()">${{word:'Word',car:'Car',full:'Full'}[getApMode()]||'Word'}</button>
+      <button id="ap-mode-car" class="ap-mode-btn${getApMode()==='car'?' active':''}" onclick="setApMode('car')">Car</button>
+      <button id="ap-mode-full" class="ap-mode-btn${getApMode()==='full'?' active':''}" onclick="setApMode('full')">Full</button>
       <span class="ap-meta" id="ap-status"></span>
       <button class="ap-stop-btn" onclick="stopAutoPlay()">■ Stop</button>
     </div>
@@ -1584,14 +1585,11 @@ async function autoPlayRun() {
     renderApCard(card);                        // front — always Korean
     if (!(await apStep(card))) continue;
 
-    apFlip(true);                              // back — Word: Korean; Car: meaning only; Full: meaning+examples+notes
-    const apMode = getApMode();
-    if (apMode === 'full') {
+    apFlip(true);                              // back — Car: meaning only; Full: meaning+examples+notes
+    if (getApMode() === 'full') {
       await speakBackFull(card);
-    } else if (apMode === 'car') {
-      await speakSlowAndWait(card.english, engVoice, 'en-US');
     } else {
-      await speakSlowAndWait(card.korean, koreanVoice, 'ko-KR');
+      await speakSlowAndWait(card.english, engVoice, 'en-US');
     }
     if (!autoPlayActive || autoPlaySkip) continue;
     await apDelay(getApInterval());
@@ -1602,9 +1600,10 @@ async function autoPlayRun() {
   }
 }
 
-function startAutoPlay() {
+function startAutoPlay(mode) {
   const cards = applyFilters(loadCards());
   if (!cards.length) return;
+  if (mode) localStorage.setItem('lla_ap_mode', mode);
   autoPlayActive = true;
   autoPlayPaused = false;
   autoPlayQueue = shuffle(cards);
