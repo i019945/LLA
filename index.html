@@ -319,36 +319,42 @@
 </header>
 
 <nav>
-  <button class="active" onclick="show('flashcards', this); refreshFC()">Flashcards</button>
-  <button onclick="show('consonants', this)">Consonants</button>
-  <button onclick="show('vowels', this)">Vowels</button>
-  <button onclick="show('syllables', this)">Syllables</button>
-  <button onclick="show('batchim', this)">받침 Rules ★</button>
+  <button class="active" onclick="show('flashcards', this); refreshFC()">Vocabulary</button>
   <button onclick="show('stories', this); renderStoryList()">Stories</button>
+  <button onclick="show('pronunciation', this); pronShow('pron-consonants', document.querySelector('#pronunciation .fc-subnav button'))">Pronunciation</button>
 </nav>
 
-<!-- ══════════════════ CONSONANTS ══════════════════ -->
-<div id="consonants" class="section">
+<!-- ══════════════════ PRONUNCIATION ══════════════════ -->
+<div id="pronunciation" class="section">
+  <div class="fc-subnav">
+    <button class="active" onclick="pronShow('pron-consonants', this)">Consonants</button>
+    <button onclick="pronShow('pron-vowels', this)">Vowels</button>
+    <button onclick="pronShow('pron-syllables', this)">Syllables</button>
+    <button onclick="pronShow('pron-batchim', this)">받침 Rules ★</button>
+  </div>
+
+  <!-- Consonants -->
+  <div id="pron-consonants" class="fc-panel active">
   <div class="intro-box">Korean has <strong>14 basic consonants</strong> + <strong>5 tense consonants</strong>. Each can appear at the start (initial) or end (final/받침) of a syllable — and the sound differs. Tap any card to hear it.</div>
   <h2>Basic Consonants (기본 자음)</h2>
   <div class="char-grid" id="basic-con"></div>
   <h2>Tense Consonants (쌍자음) — "doubled"</h2>
   <div class="intro-box" style="margin-bottom:12px;">Produced with extra tension — like holding the consonant back before releasing. No English equivalent; listen carefully.</div>
   <div class="char-grid" id="tense-con"></div>
-</div>
+  </div>
 
-<!-- ══════════════════ VOWELS ══════════════════ -->
-<div id="vowels" class="section">
+  <!-- Vowels -->
+  <div id="pron-vowels" class="fc-panel">
   <div class="intro-box">Korean has <strong>10 basic vowels</strong> + <strong>11 compound vowels</strong>. Vowels can't stand alone — always written with ㅇ (silent) as placeholder: ㅏ → 아, ㅣ → 이.</div>
   <h2>Basic Vowels (기본 모음)</h2>
   <div class="vowel-grid" id="basic-vow"></div>
   <h2>Compound Vowels (이중 모음)</h2>
   <div class="intro-box" style="margin-bottom:12px;">Note: ㅐ and ㅔ sound identical in modern Korean — don't stress the difference.</div>
   <div class="vowel-grid" id="compound-vow"></div>
-</div>
+  </div>
 
-<!-- ══════════════════ SYLLABLES ══════════════════ -->
-<div id="syllables" class="section">
+  <!-- Syllables -->
+  <div id="pron-syllables" class="fc-panel">
   <div class="intro-box">Korean syllables are written as <strong>blocks</strong>, not linearly. Each block = one syllable: <strong>consonant + vowel (+ optional final consonant)</strong>.</div>
   <h2>Syllable Structure</h2>
   <div class="syllable-diagram">
@@ -373,10 +379,10 @@
   <div class="tip"><strong>ㅇ as placeholder:</strong> When a syllable starts with a vowel sound, ㅇ is written silently: 아 = a, 이 = i, 오 = o.</div>
   <div class="tip"><strong>Reading order:</strong> Left→right for vertical vowels (가, 나), top→bottom for horizontal vowels (모, 보), then final consonant at the bottom.</div>
   <div class="warn"><strong>ㄹ changes by position:</strong> As initial → sounds like <em>r</em>. As final (받침) → sounds like <em>l</em>. Example: 라 = ra, 말 = mal.</div>
-</div>
+  </div>
 
-<!-- ══════════════════ BATCHIM ══════════════════ -->
-<div id="batchim" class="section">
+  <!-- Batchim -->
+  <div id="pron-batchim" class="fc-panel">
   <div class="intro-box"><strong>받침 (batchim)</strong> = the final consonant at the bottom of a syllable. There are 5 pronunciation rules that govern how consonants change when they meet across syllable boundaries. Master these and you'll sound natural fast.</div>
 
   <h2>The 7 Final Consonant Sounds</h2>
@@ -526,7 +532,8 @@
   </div>
   <h2>Rules Priority</h2>
   <div class="intro-box">When multiple rules could apply: <strong>Aspiration (ㅎ)</strong> → <strong>Nasalization</strong> → <strong>Lateralization</strong> → <strong>Linking</strong> → <strong>Tensification</strong>. In practice you rarely stack more than two.</div>
-</div>
+  </div><!-- /pron-batchim -->
+</div><!-- /pronunciation -->
 
 <!-- ══════════════════ FLASHCARDS ══════════════════ -->
 <div id="flashcards" class="section active">
@@ -1693,6 +1700,13 @@ function stShow(panel, btn) {
   document.querySelectorAll('#stories .fc-panel').forEach(p => p.classList.remove('active'));
   document.getElementById(panel).classList.add('active');
   document.querySelectorAll('#stories .fc-subnav button').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function pronShow(panel, btn) {
+  document.querySelectorAll('#pronunciation .fc-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(panel).classList.add('active');
+  document.querySelectorAll('#pronunciation .fc-subnav button').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
 }
 
