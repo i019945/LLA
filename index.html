@@ -1887,8 +1887,11 @@ ${text}`;
     saveStories(stories);
 
     const cards = loadCards();
+    const existingKo = new Set(cards.map(c => c.korean)); // all decks — skip duplicates
     const now   = Date.now();
     (json.cards || []).forEach((c, i) => {
+      if (existingKo.has(c.korean)) return;
+      existingKo.add(c.korean);
       cards.push({
         id: now + i,
         korean: c.korean, english: c.english,

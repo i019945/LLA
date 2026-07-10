@@ -1,7 +1,7 @@
 (function() {
   var DECK = 'Walk in Seoul 016';
   var existing = JSON.parse(localStorage.getItem('lla_cards') || '[]');
-  var existingKo = new Set(existing.filter(c => c.deck === DECK).map(c => c.korean));
+  var existingKo = new Set(existing.map(c => c.korean)); // check across ALL decks to avoid duplicates
   var base = Date.now();
   var added = 0;
 

@@ -76,7 +76,7 @@ Write `import_<slug>.js` to `/Users/i019945/LLA/`. Template:
 
   // ── Cards ──
   var existing = JSON.parse(localStorage.getItem('lla_cards') || '[]');
-  var existingKo = new Set(existing.filter(c => c.deck === DECK).map(c => c.korean));
+  var existingKo = new Set(existing.map(c => c.korean)); // ALL decks — avoid duplicates across stories and built-ins
   var base = Date.now();
   var newCards = [
     // { korean, english, examples: [...], notes, tag:'story', deck:DECK,
