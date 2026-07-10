@@ -1,5 +1,5 @@
-const CACHE = 'lla-v22';
-const SHELL = ['./index.html', './manifest.json', './sw.js', './icon.svg'];
+const CACHE = 'lla-v23';
+const SHELL = ['./index.html', './manifest.json', './sw.js', './icon.svg', './vocab.json'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)));

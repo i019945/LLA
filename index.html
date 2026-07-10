@@ -1617,8 +1617,57 @@ function startAutoPlay(mode) {
 }
 
 // ════════════════════════════════════════
-// CLAUDE API AUTO-FILL
+// AUTO-FILL (vocab.json first, Claude API fallback)
 // ════════════════════════════════════════
+let _vocabCache = null;
+
+async function loadVocab() {
+  if (_vocabCache) return _vocabCache;
+  try {
+    const r = await fetch('./vocab.json');
+    _vocabCache = await r.json();
+  } catch(e) {
+    _vocabCache = {};
+  }
+  return _vocabCache;
+}
+
+function vocabLookup(word, vocab) {
+  let entry = vocab[word];
+  if (!entry) return null;
+  // Follow alias chain (conjugated form → base)
+  if (entry.base) entry = vocab[entry.base];
+  return (entry && entry.english) ? entry : null;
+}
+
+function deconjugationCandidates(word) {
+  // Returns possible dictionary forms to try after stripping common endings
+  const candidates = new Set();
+  const endings = [
+    '았었어요','었었어요','았었어','었었어',
+    '았어요','었어요','았어','었어',
+    '아서요','어서요','아서','어서',
+    '아요','어요','았고','었고',
+    '으면','면','으니까','니까',
+    '는데','은데','지만',
+    '겠어요','겠어','겠습니다',
+    '으세요','세요','으십시오','십시오',
+    '습니다','ㅂ니다',
+    '고요','고','지요','죠',
+    '아','어','여','요',
+  ];
+  for (const end of endings) {
+    if (word.endsWith(end)) {
+      const stem = word.slice(0, word.length - end.length);
+      if (stem.length >= 1) {
+        candidates.add(stem + '다');
+        candidates.add(stem + '하다');
+      }
+    }
+  }
+  return [...candidates];
+}
+
 function toggleAnthropicSetup() {
   const row = document.getElementById('anthropic-row');
   row.style.display = row.style.display === 'none' ? 'block' : 'none';
@@ -1647,17 +1696,38 @@ function setAutofillStatus(msg, type) {
 async function autoFill() {
   const korean = document.getElementById('inp-kor').value.trim();
   if (!korean) { setAutofillStatus('Type a Korean word first', 'err'); return; }
-  const key = localStorage.getItem('lla_anthropic_key');
-  if (!key) {
-    document.getElementById('anthropic-row').style.display = 'block';
-    setAutofillStatus('Enter Anthropic API key first (⚙ API key above)', 'err');
-    return;
-  }
   const btn = document.getElementById('autofill-btn');
-  btn.disabled = true;
-  btn.textContent = '…';
+  btn.disabled = true; btn.textContent = '…';
   setAutofillStatus('Looking up…');
   try {
+    // 1. Local vocab.json lookup (exact match)
+    const vocab = await loadVocab();
+    let entry = vocabLookup(korean, vocab);
+    if (entry) {
+      document.getElementById('inp-eng').value = entry.english;
+      if (entry.trap) document.getElementById('inp-trap').value = entry.trap;
+      setAutofillStatus('✓ Found in TOPIK vocab', 'ok');
+      setTimeout(() => setAutofillStatus(''), 2500);
+      return;
+    }
+    // 2. De-conjugation fallback — try stripping common endings
+    for (const candidate of deconjugationCandidates(korean)) {
+      entry = vocabLookup(candidate, vocab);
+      if (entry) {
+        document.getElementById('inp-eng').value = entry.english;
+        if (entry.trap) document.getElementById('inp-trap').value = entry.trap;
+        setAutofillStatus('✓ Found as form of ' + candidate, 'ok');
+        setTimeout(() => setAutofillStatus(''), 2500);
+        return;
+      }
+    }
+    // 3. Claude API fallback (if API key is set)
+    const key = localStorage.getItem('lla_anthropic_key');
+    if (!key) {
+      setAutofillStatus('Not in TOPIK vocab — add API key for Claude lookup', 'err');
+      return;
+    }
+    setAutofillStatus('Not in local vocab — trying Claude…');
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -1683,13 +1753,12 @@ async function autoFill() {
     const result = JSON.parse(jsonMatch[0]);
     if (result.english) document.getElementById('inp-eng').value = result.english;
     if (result.trap !== undefined) document.getElementById('inp-trap').value = result.trap;
-    setAutofillStatus('✓ Filled', 'ok');
-    setTimeout(() => setAutofillStatus(''), 2000);
+    setAutofillStatus('✓ Filled via Claude', 'ok');
+    setTimeout(() => setAutofillStatus(''), 2500);
   } catch (e) {
     setAutofillStatus('Error: ' + e.message, 'err');
   } finally {
-    btn.disabled = false;
-    btn.textContent = '✨ Auto-fill';
+    btn.disabled = false; btn.textContent = '✨ Auto-fill';
   }
 }
 
