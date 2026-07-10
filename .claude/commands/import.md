@@ -63,6 +63,35 @@ Skip: particles (은/는/이/가/을/를/에/의/와/과…), pure copula 이다
 
 Do NOT skip words because they seem elementary. 있다, 되다, 좋다, 오다, 가다 all need cards.
 
+---
+
+### ⚠ Lessons learned — do not skip these
+
+**1. The `english` field is TTS-sensitive — format must be exact.**
+
+The app's `speakMeaning()` function parses `'...' (type) meaning` and routes the quoted part to the **Korean voice** and the rest to the **English voice**. Errors here cause Korean words to be read with a Western accent.
+
+Rules:
+- The single-quoted part must be the **actual Hangul** dictionary form — nothing else.
+- Do not put romanization, English gloss, or punctuation inside the quotes.
+- Example correct: `'걷다' (verb) to walk`
+- Example wrong: `'geotda' (verb) to walk` ← romanization in quotes → Korean TTS garbles it
+- Example wrong: `'걷다, 걸어' (verb) to walk` ← extra forms in quotes → Korean TTS reads the comma
+
+**2. Nouns must be bare dictionary form — it drives both lookup AND visual display.**
+
+The story reader's `tokenizeKo()` function only visually splits a suffixed token (e.g. `생각만`) into word + subscript particle (`생각` + `만`) when the bare noun exists in the card interval map. Without a `생각` card, the word appears as an unsplit lump and the particle box never shows in the popup. The prefix-match lookup (levels 3–4 of `findCardForToken`) also depends on bare form. Never store nouns as `생각만`, `여행을`, etc.
+
+**3. The vocab.json auto-add popup is a safety net, not a substitute for thorough import.**
+
+When a tapped story word is absent from the user's cards but present in `vocab.json`, the app now auto-creates a card on the spot. However, these auto-added cards are bare-minimum quality:
+- `ease: 2.5` (not the story-appropriate `2.0`)
+- No example sentence from the story
+- No morphology notes
+- No `deck` / `tag` association with the story
+
+A complete import at `ease: 2.0` with examples and notes is always preferred. The auto-add exists only as a fallback for words genuinely missed.
+
 ## Step 4 — Build the injection script
 
 Write `import_<slug>.js` to `/Users/i019945/LLA/`. Template:
