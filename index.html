@@ -299,6 +299,7 @@
   .wp-actions { display:flex; gap:4px; align-items:center; }
   .wp-speak { background:none; border:none; font-size:1.3rem; cursor:pointer; padding:4px 6px; }
   .wp-close { background:none; border:1px solid var(--border); border-radius:50%; width:28px; height:28px; font-size:0.9rem; cursor:pointer; color:var(--muted); display:flex; align-items:center; justify-content:center; }
+  .wp-bridge { font-size:0.85rem; color:#1a4fa0; font-weight:600; margin-bottom:6px; }
   .wp-meaning { font-size:1rem; color:var(--text); margin-bottom:8px; }
   .wp-notes { font-size:0.88rem; color:var(--muted); border-top:1px solid var(--border); padding-top:10px; margin-top:6px; white-space:pre-line; }
   .wp-nomatch { font-size:0.9rem; color:var(--muted); font-style:italic; }
@@ -1620,6 +1621,7 @@ function startAutoPlay(mode) {
 // AUTO-FILL (vocab.json first, Claude API fallback)
 // ════════════════════════════════════════
 let _vocabCache = null;
+let _storyVocabMap = null; // set by openStory(); used by findCardForToken level 5
 
 async function loadVocab() {
   if (_vocabCache) return _vocabCache;
@@ -1820,7 +1822,7 @@ function renderStoryList() {
     </div>`).join('');
 }
 
-function openStory(id) {
+async function openStory(id) {
   const story = loadStories().find(s => s.id === id);
   if (!story) return;
   stShow('st-reader', null);
@@ -1828,6 +1830,8 @@ function openStory(id) {
   const ytBtn = story.youtubeUrl
     ? `<a class="story-yt-btn" href="${escHtml(story.youtubeUrl)}" target="_blank" rel="noopener">▶ Watch on YouTube</a><br>`
     : '';
+  // Load vocab alias map for conjugation bridge in word popup
+  _storyVocabMap = await loadVocab();
   // Build interval map once: korean text → highest interval across all cards
   const allCards = loadCards();
   const ivMap = new Map();
@@ -1944,7 +1948,22 @@ function findCardForToken(word, deck) {
   c = cards.find(c => c.korean.length >= 1 && word.startsWith(c.korean) && c.deck === deck);
   if (c) return c;
   // 4. prefix match in any deck
-  return cards.find(c => c.korean.length >= 1 && word.startsWith(c.korean)) || null;
+  c = cards.find(c => c.korean.length >= 1 && word.startsWith(c.korean)) || null;
+  if (c) return c;
+  // 5. vocab.json alias bridge — connects conjugated forms to dictionary-form cards
+  //    e.g. 걸었어요 → {base: "걷다"} → finds card for 걷다
+  if (_storyVocabMap) {
+    const entry = _storyVocabMap[word];
+    if (entry && entry.base) {
+      const base = entry.base;
+      const bc = cards.find(c => c.korean === base && c.deck === deck)
+        || cards.find(c => c.korean === base)
+        || cards.find(c => c.korean.length >= 1 && base.startsWith(c.korean) && c.deck === deck)
+        || cards.find(c => c.korean.length >= 1 && base.startsWith(c.korean));
+      if (bc) return Object.assign(Object.create(null), bc, { _bridgeBase: base });
+    }
+  }
+  return null;
 }
 
 function findParticleCard(suffix) {
@@ -1969,9 +1988,14 @@ function showWordPopup(word, deck) {
   const body = document.getElementById('wp-body');
   let html = '';
   if (card) {
+    if (card._bridgeBase) {
+      // Found via vocab.json alias bridge — show conjugation relationship
+      html += `<div class="wp-bridge">↳ ${escHtml(card._bridgeBase)}</div>`;
+    }
     html += `<div class="wp-meaning">${escHtml(card.english)}</div>`;
+    if (card.trap) html += `<div class="flip-trap" style="margin:6px 0 4px">${escHtml(card.trap)}</div>`;
     if (card.notes) html += `<div class="wp-notes">${escHtml(card.notes)}</div>`;
-    if (card.korean.length < word.length) {
+    if (!card._bridgeBase && card.korean.length < word.length) {
       const pc = findParticleCard(word.slice(card.korean.length));
       if (pc) html += wpParticleHtml(pc);
     }
