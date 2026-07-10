@@ -807,7 +807,13 @@ async function speakMixed(text) {
   if (buf.trim()) runs.push({ ko: ko ?? false, text: buf });
   for (const r of runs) {
     if (!autoPlayActive || autoPlaySkip) return;
-    await speakSlowAndWait(r.text.trim(), r.ko ? koreanVoice : engVoice, r.ko ? 'ko-KR' : 'en-US');
+    // Korean runs: strip non-Hangul chars (apostrophes, parens, arrows, dots…)
+    // so Korean TTS only sees clean Hangul + spaces and doesn't mispronounce symbols.
+    const text = r.ko
+      ? r.text.replace(/[^가-힣ㄱ-ㅎㅏ-ㅣ\s]/g, ' ').replace(/\s+/g, ' ').trim()
+      : r.text.trim();
+    if (!text) continue;
+    await speakSlowAndWait(text, r.ko ? koreanVoice : engVoice, r.ko ? 'ko-KR' : 'en-US');
   }
 }
 
@@ -835,9 +841,9 @@ async function speakNotes(notes) {
     if (i !== -1 && hasHangul(line.slice(0, i))) {
       const kor = line.slice(0, i).trim();
       const eng = line.slice(i + 1).trim();
-      if (kor) await speakSlowAndWait(kor, koreanVoice, 'ko-KR');
+      if (kor) await speakMixed(kor);
       if (!autoPlayActive || autoPlaySkip) return;
-      if (eng) await (hasHangul(eng) ? speakMixed(eng) : speakSlowAndWait(eng, engVoice, 'en-US'));
+      if (eng) await speakMixed(eng);
     } else {
       await (hasHangul(line) ? speakMixed(line) : speakSlowAndWait(line, engVoice, 'en-US'));
     }
@@ -1635,7 +1641,7 @@ async function autoPlayRun() {
     if (getApMode() === 'full') {
       await speakBackFull(card);
     } else {
-      await speakSlowAndWait(card.english, engVoice, 'en-US');
+      await speakMeaning(card.english);
     }
     if (!autoPlayActive || autoPlaySkip) continue;
     await apDelay(getApInterval());
