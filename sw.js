@@ -1,4 +1,4 @@
-const CACHE = 'lla-v21';
+const CACHE = 'lla-v22';
 const SHELL = ['./index.html', './manifest.json', './sw.js', './icon.svg'];
 
 self.addEventListener('install', e => {

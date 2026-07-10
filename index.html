@@ -1768,7 +1768,7 @@ function openStory(id) {
   });
   // Particle list sorted longest-first for greedy suffix matching
   const particleList = allCards
-    .filter(c => c.tag === 'particle')
+    .filter(c => c.tag === 'particle' || c.tag === 'grammar')
     .map(c => c.korean)
     .sort((a, b) => b.length - a.length);
   const sentences = story.sentences.map(s => `
@@ -1880,9 +1880,18 @@ function findCardForToken(word, deck) {
 
 function findParticleCard(suffix) {
   if (!suffix) return null;
-  const all = loadCards().filter(c => c.tag === 'particle')
+  const all = loadCards().filter(c => c.tag === 'particle' || c.tag === 'grammar')
     .sort((a, b) => b.korean.length - a.korean.length);
   return all.find(c => suffix === c.korean || suffix.startsWith(c.korean)) || null;
+}
+
+function wpParticleHtml(pc) {
+  const label = pc.tag === 'grammar' ? 'ending' : 'particle';
+  return `<div class="wp-particle">
+    <div class="wp-particle-label">+ ${escHtml(pc.korean)} (${label})</div>
+    <div class="wp-particle-meaning">${escHtml(pc.english)}</div>
+    ${pc.notes ? `<div class="wp-particle-notes">${escHtml(pc.notes)}</div>` : ''}
+  </div>`;
 }
 
 function showWordPopup(word, deck) {
@@ -1894,18 +1903,18 @@ function showWordPopup(word, deck) {
     html += `<div class="wp-meaning">${escHtml(card.english)}</div>`;
     if (card.notes) html += `<div class="wp-notes">${escHtml(card.notes)}</div>`;
     if (card.korean.length < word.length) {
-      const suffix = word.slice(card.korean.length);
-      const pc = findParticleCard(suffix);
-      if (pc) {
-        html += `<div class="wp-particle">
-          <div class="wp-particle-label">+ ${escHtml(pc.korean)} particle</div>
-          <div class="wp-particle-meaning">${escHtml(pc.english)}</div>
-          ${pc.notes ? `<div class="wp-particle-notes">${escHtml(pc.notes)}</div>` : ''}
-        </div>`;
-      }
+      const pc = findParticleCard(word.slice(card.korean.length));
+      if (pc) html += wpParticleHtml(pc);
     }
   } else {
-    html = `<div class="wp-nomatch">No card yet for this word.</div>`;
+    // No card — still try to detect a grammar ending or particle suffix
+    const pc = findParticleCard(word);
+    if (pc && word.length > pc.korean.length) {
+      const base = word.slice(0, word.length - pc.korean.length);
+      html = `<div class="wp-nomatch">No card yet for <em>${escHtml(base)}</em></div>${wpParticleHtml(pc)}`;
+    } else {
+      html = `<div class="wp-nomatch">No card yet for this word.</div>`;
+    }
   }
   body.innerHTML = html;
   document.getElementById('wp-overlay').style.display = 'flex';
