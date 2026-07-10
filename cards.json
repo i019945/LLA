@@ -565,7 +565,10 @@
     "nextReview": 1782920200001,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "일 분만 기다려 주세요. = Please wait just one minute."
+    ]
   },
   {
     "id": 1782920200002,
@@ -581,7 +584,10 @@
     "nextReview": 1782920200002,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "이 층에 있어요. = It's on the second floor."
+    ]
   },
   {
     "id": 1782920200003,
@@ -597,7 +603,10 @@
     "nextReview": 1782920200003,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "삼 월에 봄이 와요. = Spring comes in March."
+    ]
   },
   {
     "id": 1782920200004,
@@ -613,7 +622,10 @@
     "nextReview": 1782920200004,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "사 천 원이에요. = It's 4,000 won."
+    ]
   },
   {
     "id": 1782920200005,
@@ -629,7 +641,10 @@
     "nextReview": 1782920200005,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "오 분 후에 출발해요. = We leave in five minutes."
+    ]
   },
   {
     "id": 1782920200006,
@@ -645,7 +660,10 @@
     "nextReview": 1782920200006,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "유월에 장마가 시작돼요. = The rainy season starts in June."
+    ]
   },
   {
     "id": 1782920200007,
@@ -661,7 +679,10 @@
     "nextReview": 1782920200007,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "칠 월에 휴가를 가요. = I go on vacation in July."
+    ]
   },
   {
     "id": 1782920200008,
@@ -677,7 +698,10 @@
     "nextReview": 1782920200008,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "팔 층에 살아요. = I live on the 8th floor."
+    ]
   },
   {
     "id": 1782920200009,
@@ -693,7 +717,10 @@
     "nextReview": 1782920200009,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "구 월에 학교가 시작해요. = School starts in September."
+    ]
   },
   {
     "id": 1782920200010,
@@ -703,13 +730,16 @@
     "deck": "Sino-Korean numbers",
     "level": "해요체",
     "example": "십 분 걸려요. (It takes 10 minutes.)",
-    "trap": "ㅂ batchim links forward: 십일 → [시빌], 십이 → [시비].",
+    "trap": "ㅂ batchim links forward: 십일 → [시빌], 십이 → [시비]. Also: 10월 (October) is 시월, not 십월.",
     "notes": "",
     "created": 1782920200010,
     "nextReview": 1782920200010,
     "interval": 1,
     "ease": 2.5,
-    "reps": 0
+    "reps": 0,
+    "examples": [
+      "시월에 단풍이 들어요. = Leaves turn red in October."
+    ]
   },
   {
     "id": 1783298062507,
