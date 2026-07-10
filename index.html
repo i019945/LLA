@@ -1642,6 +1642,11 @@ function vocabLookup(word, vocab) {
   return (entry && entry.english) ? entry : null;
 }
 
+function conjugatedForms(base, vocab) {
+  // Collect all alias keys in vocab.json that point to this base form
+  return Object.keys(vocab).filter(k => vocab[k] && vocab[k].base === base).sort();
+}
+
 function deconjugationCandidates(word) {
   // Returns possible dictionary forms to try after stripping common endings
   const candidates = new Set();
@@ -1695,6 +1700,17 @@ function setAutofillStatus(msg, type) {
   el.className = 'autofill-status' + (type ? ' ' + type : '');
 }
 
+function buildConjugationNotes(base, entry, vocab) {
+  // Build Notes content when a conjugated form is resolved to its dictionary base.
+  // Line 1: common conjugated forms from vocab.json alias table (·-separated).
+  // Line 2: conjugation/irregular rule from vocab.json trap field (if present).
+  const forms = conjugatedForms(base, vocab);
+  const lines = [];
+  if (forms.length > 0) lines.push(forms.join(' · '));
+  if (entry.trap) lines.push(entry.trap);
+  return lines.join('\n');
+}
+
 async function autoFill() {
   const korean = document.getElementById('inp-kor').value.trim();
   if (!korean) { setAutofillStatus('Type a Korean word first', 'err'); return; }
@@ -1706,11 +1722,20 @@ async function autoFill() {
     const vocab = await loadVocab();
     let entry = vocabLookup(korean, vocab);
     if (entry) {
-      const base = vocab[korean]?.base || null; // non-null when alias was followed
-      if (base) document.getElementById('inp-kor').value = base;
-      document.getElementById('inp-eng').value = entry.english;
-      if (entry.trap) document.getElementById('inp-trap').value = entry.trap;
-      setAutofillStatus(base ? `✓ Stored as dictionary form ${base}` : '✓ Found in TOPIK vocab', 'ok');
+      const aliasBase = vocab[korean]?.base || null; // non-null when conjugated form entered
+      if (aliasBase) {
+        // Conjugated form resolved → store dictionary form, put conjugation info in Notes
+        document.getElementById('inp-kor').value = aliasBase;
+        document.getElementById('inp-eng').value = entry.english;
+        document.getElementById('inp-trap').value = ''; // trap = pronunciation only; conjugation goes to Notes
+        document.getElementById('inp-notes').value = buildConjugationNotes(aliasBase, entry, vocab);
+        setAutofillStatus(`✓ Resolved to dictionary form ${aliasBase}`, 'ok');
+      } else {
+        // Exact dictionary form entered
+        document.getElementById('inp-eng').value = entry.english;
+        if (entry.trap) document.getElementById('inp-trap').value = entry.trap;
+        setAutofillStatus('✓ Found in TOPIK vocab', 'ok');
+      }
       setTimeout(() => setAutofillStatus(''), 2500);
       return;
     }
@@ -1720,8 +1745,9 @@ async function autoFill() {
       if (entry) {
         document.getElementById('inp-kor').value = candidate;
         document.getElementById('inp-eng').value = entry.english;
-        if (entry.trap) document.getElementById('inp-trap').value = entry.trap;
-        setAutofillStatus('✓ Stored as dictionary form ' + candidate, 'ok');
+        document.getElementById('inp-trap').value = ''; // trap = pronunciation only
+        document.getElementById('inp-notes').value = buildConjugationNotes(candidate, entry, vocab);
+        setAutofillStatus('✓ Resolved to dictionary form ' + candidate, 'ok');
         setTimeout(() => setAutofillStatus(''), 2500);
         return;
       }
@@ -2003,13 +2029,20 @@ function showWordPopup(word, deck) {
       if (pc) html += wpParticleHtml(pc);
     }
   } else {
-    // No card — still try to detect a grammar ending or particle suffix
-    const pc = findParticleCard(word);
-    if (pc && word.length > pc.korean.length) {
-      const base = word.slice(0, word.length - pc.korean.length);
-      html = `<div class="wp-nomatch">No card yet for <em>${escHtml(base)}</em></div>${wpParticleHtml(pc)}`;
+    // No card — check vocab.json alias bridge first (conjugated form with known base)
+    const aliasBase = _storyVocabMap && (_storyVocabMap[word]?.base);
+    if (aliasBase) {
+      html = `<div class="wp-bridge">↳ ${escHtml(aliasBase)}</div>
+              <div class="wp-nomatch">No card yet for <em>${escHtml(aliasBase)}</em></div>`;
     } else {
-      html = `<div class="wp-nomatch">No card yet for this word.</div>`;
+      // Try particle/grammar ending detection
+      const pc = findParticleCard(word);
+      if (pc && word.length > pc.korean.length) {
+        const base = word.slice(0, word.length - pc.korean.length);
+        html = `<div class="wp-nomatch">No card yet for <em>${escHtml(base)}</em></div>${wpParticleHtml(pc)}`;
+      } else {
+        html = `<div class="wp-nomatch">No card yet for this word.</div>`;
+      }
     }
   }
   body.innerHTML = html;
