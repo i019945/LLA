@@ -301,6 +301,10 @@
   .wp-meaning { font-size:1rem; color:var(--text); margin-bottom:8px; }
   .wp-notes { font-size:0.88rem; color:var(--muted); border-top:1px solid var(--border); padding-top:10px; margin-top:6px; white-space:pre-line; }
   .wp-nomatch { font-size:0.9rem; color:var(--muted); font-style:italic; }
+  .wp-particle { margin-top:10px; padding:8px 10px; background:#f5f0ff; border-radius:8px; border-left:3px solid #9b59b6; }
+  .wp-particle-label { font-size:0.82rem; font-weight:700; color:#6b21a8; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:4px; }
+  .wp-particle-meaning { font-size:0.95rem; color:var(--text); }
+  .wp-particle-notes { font-size:0.82rem; color:var(--muted); margin-top:4px; white-space:pre-line; }
 </style>
 </head>
 <body>
@@ -1833,18 +1837,36 @@ function findCardForToken(word, deck) {
   return cards.find(c => c.korean.length >= 1 && word.startsWith(c.korean)) || null;
 }
 
+function findParticleCard(suffix) {
+  if (!suffix) return null;
+  const all = loadCards().filter(c => c.tag === 'particle')
+    .sort((a, b) => b.korean.length - a.korean.length);
+  return all.find(c => suffix === c.korean || suffix.startsWith(c.korean)) || null;
+}
+
 function showWordPopup(word, deck) {
   const card = findCardForToken(word, deck);
   document.getElementById('wp-word').textContent = word;
   const body = document.getElementById('wp-body');
+  let html = '';
   if (card) {
-    const notes = card.notes
-      ? `<div class="wp-notes">${escHtml(card.notes)}</div>`
-      : '';
-    body.innerHTML = `<div class="wp-meaning">${escHtml(card.english)}</div>${notes}`;
+    html += `<div class="wp-meaning">${escHtml(card.english)}</div>`;
+    if (card.notes) html += `<div class="wp-notes">${escHtml(card.notes)}</div>`;
+    if (card.korean.length < word.length) {
+      const suffix = word.slice(card.korean.length);
+      const pc = findParticleCard(suffix);
+      if (pc) {
+        html += `<div class="wp-particle">
+          <div class="wp-particle-label">+ ${escHtml(pc.korean)} particle</div>
+          <div class="wp-particle-meaning">${escHtml(pc.english)}</div>
+          ${pc.notes ? `<div class="wp-particle-notes">${escHtml(pc.notes)}</div>` : ''}
+        </div>`;
+      }
+    }
   } else {
-    body.innerHTML = `<div class="wp-nomatch">No card yet for this word.</div>`;
+    html = `<div class="wp-nomatch">No card yet for this word.</div>`;
   }
+  body.innerHTML = html;
   document.getElementById('wp-overlay').style.display = 'flex';
   speak(word);
 }
