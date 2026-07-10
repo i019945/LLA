@@ -1838,16 +1838,19 @@ async function importStory() {
   status.textContent = 'Importing… this may take 15–30 seconds.';
   status.className = 'import-status';
 
-  const prompt = `You are processing a Korean text for an intermediate Korean learner.
+  const prompt = `You are processing a Korean text for a TRUE BEGINNER who is still learning Hangul. Do NOT skip or curate vocabulary — generate a card for EVERY content word (noun, verb, adjective, adverb). Even elementary words like 있다, 되다, 좋다 need cards.
 
 Given the Korean text below:
 1. Split it into natural sentences (one sentence per item; keep each sentence complete).
 2. Translate each sentence into natural, idiomatic English.
-3. Identify 10–20 key vocabulary items or phrases a learner should know. For EACH:
-   - "korean": the word/phrase EXACTLY as it appears in the text (conjugated/inflected form).
+3. For EVERY content word (nouns, verbs, adjectives, adverbs — not particles, not copulas 이다 alone):
+   - "korean":
+       NOUNS: bare dictionary form (e.g. "여행", not "여행을") — particle endings are handled separately.
+       VERBS/ADJECTIVES: the surface form exactly as it appears in the text, with the dictionary form noted in "english".
+       ADVERBS: bare form.
    - "english": format as \`'dictionary form' (word type) English meaning\` e.g. \`'가다' (verb) to go\`.
    - "example": the Korean sentence it came from, then " = ", then its English translation.
-   - "notes": one grammar note per line as \`word : explanation\` e.g. \`가요 : polite present tense of 가다\`.
+   - "notes": one or two grammar notes per line as \`Korean form : explanation\`. Include what dictionary form this conjugated form comes from.
 
 Return ONLY valid JSON — no markdown, no commentary:
 {
@@ -1892,7 +1895,7 @@ ${text}`;
         examples: c.example ? [c.example] : [],
         notes: c.notes || '', tag: 'story', deck: title,
         level: '', trap: '',
-        created: now, nextReview: now, interval: 1, ease: 2.5, reps: 0,
+        created: now, nextReview: now, interval: 1, ease: 2.0, reps: 0,
       });
     });
     saveCards(cards);
