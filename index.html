@@ -131,10 +131,10 @@
   .study-empty .big-num { font-size: 3rem; margin-bottom: 8px; }
   .study-progress { font-size: 0.82rem; color: var(--muted); text-align: center; margin-bottom: 16px; }
 
-  .flip-scene { perspective: 900px; width: 100%; max-width: 440px; margin: 0 auto 20px; height: 240px; cursor: pointer; }
-  .flip-card  { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.45s; }
+  .flip-scene { perspective: 900px; width: 100%; max-width: 440px; margin: 0 auto 20px; cursor: pointer; }
+  .flip-card  { width: 100%; display: grid; transform-style: preserve-3d; transition: transform 0.45s; }
   .flip-card.flipped { transform: rotateY(180deg); }
-  .flip-face  { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 20px; }
+  .flip-face  { grid-area: 1 / 1; min-height: 240px; backface-visibility: hidden; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 20px; }
   .flip-front { background: var(--accent); color: white; box-shadow: 0 4px 20px rgba(26,79,160,0.25); }
   .flip-back  { background: white; border: 2px solid var(--accent); transform: rotateY(180deg); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
   .flip-kor   { font-size: 3.2rem; font-weight: 700; line-height: 1.2; }
@@ -262,7 +262,7 @@
   @media (max-width: 500px) {
     .char-grid { grid-template-columns: repeat(auto-fill, minmax(105px,1fr)); }
     nav button { padding: 11px 12px; font-size: 0.8rem; }
-    .flip-scene { height: 210px; }
+    .flip-face { min-height: 210px; }
     .flip-kor { font-size: 2.6rem; }
   }
 
@@ -670,13 +670,10 @@
 
 <!-- Word popup (global bottom sheet) -->
 <div id="wp-overlay" class="wp-overlay" style="display:none" onclick="hideWordPopup()">
-  <div class="wp-sheet" onclick="event.stopPropagation()">
+  <div class="wp-sheet" onclick="hideWordPopup()">
     <div class="wp-top">
       <span class="wp-word" id="wp-word"></span>
-      <div class="wp-actions">
-        <button class="wp-speak" onclick="speak(document.getElementById('wp-word').textContent)">🔊</button>
-        <button class="wp-close" onclick="hideWordPopup()">✕</button>
-      </div>
+      <button class="wp-speak" onclick="event.stopPropagation();speak(document.getElementById('wp-word').textContent)">🔊</button>
     </div>
     <div id="wp-body"></div>
   </div>
@@ -1458,10 +1455,12 @@ function getApInterval() { return parseInt(localStorage.getItem('lla_ap_interval
 function getApMode() { return localStorage.getItem('lla_ap_mode') || 'word'; }
 
 function toggleApMode() {
-  const next = getApMode() === 'word' ? 'full' : 'word';
+  const cycle = { word: 'car', car: 'full', full: 'word' };
+  const next = cycle[getApMode()] || 'car';
   localStorage.setItem('lla_ap_mode', next);
   const btn = document.getElementById('ap-mode-btn');
-  if (btn) { btn.textContent = next === 'full' ? 'Full' : 'Word'; btn.className = 'ap-mode-btn' + (next === 'full' ? ' active' : ''); }
+  const labels = { word: 'Word', car: 'Car', full: 'Full' };
+  if (btn) { btn.textContent = labels[next]; btn.className = 'ap-mode-btn' + (next !== 'word' ? ' active' : ''); }
 }
 
 function apDelay(ms) {
@@ -1480,7 +1479,7 @@ function renderApCard(card) {
       <span class="ap-meta">Interval: <select class="ap-interval-sel" onchange="localStorage.setItem('lla_ap_interval',this.value)">
         ${[500,1000,2000,3000].map(v=>`<option value="${v}"${v===interval?' selected':''}>${v/1000}s</option>`).join('')}
       </select></span>
-      <button id="ap-mode-btn" class="ap-mode-btn${getApMode()==='full'?' active':''}" onclick="toggleApMode()">${getApMode()==='full'?'Full':'Word'}</button>
+      <button id="ap-mode-btn" class="ap-mode-btn${getApMode()!=='word'?' active':''}" onclick="toggleApMode()">${{word:'Word',car:'Car',full:'Full'}[getApMode()]||'Word'}</button>
       <span class="ap-meta" id="ap-status"></span>
       <button class="ap-stop-btn" onclick="stopAutoPlay()">■ Stop</button>
     </div>
@@ -1585,9 +1584,12 @@ async function autoPlayRun() {
     renderApCard(card);                        // front — always Korean
     if (!(await apStep(card))) continue;
 
-    apFlip(true);                              // back — Word: Korean again; Full: meaning + examples + notes
-    if (getApMode() === 'full') {
+    apFlip(true);                              // back — Word: Korean; Car: meaning only; Full: meaning+examples+notes
+    const apMode = getApMode();
+    if (apMode === 'full') {
       await speakBackFull(card);
+    } else if (apMode === 'car') {
+      await speakSlowAndWait(card.english, engVoice, 'en-US');
     } else {
       await speakSlowAndWait(card.korean, koreanVoice, 'ko-KR');
     }
