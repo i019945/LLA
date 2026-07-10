@@ -228,7 +228,9 @@
   .fc-field select:focus { border-color: var(--accent); }
 
   /* ── Example sentence ── */
-  .example-box { font-size: 0.85rem; font-style: italic; color: #444; background: #f8f8f8; border: 1px solid #e0e0e0; border-radius: 6px; padding: 6px 10px; width: 100%; text-align: center; }
+  .example-box { font-size: 1rem; color: #333; background: #f8f8f8; border: 1px solid #e0e0e0; border-radius: 6px; padding: 8px 12px; width: 100%; text-align: center; }
+  .ex-word { color: var(--accent); font-weight: 700; }
+  .ex-eng-part { color: var(--muted); font-style: italic; font-size: 0.88em; }
   .ci-example { font-size: 0.72rem; color: #555; font-style: italic; margin-top: 2px; }
 
   /* ── Deck & level badges ── */
@@ -835,7 +837,7 @@ async function speakNotes(notes) {
       const eng = line.slice(i + 1).trim();
       if (kor) await speakSlowAndWait(kor, koreanVoice, 'ko-KR');
       if (!autoPlayActive || autoPlaySkip) return;
-      if (eng) await speakSlowAndWait(eng, engVoice, 'en-US');
+      if (eng) await (hasHangul(eng) ? speakMixed(eng) : speakSlowAndWait(eng, engVoice, 'en-US'));
     } else {
       await (hasHangul(line) ? speakMixed(line) : speakSlowAndWait(line, engVoice, 'en-US'));
     }
@@ -988,6 +990,27 @@ function getExamples(card) {
   if (card.examples && card.examples.length) return card.examples;
   if (card.example) return [card.example];
   return [];
+}
+
+function highlightWordInExample(ex, korean) {
+  const i = ex.indexOf('=');
+  const korPart = i !== -1 ? ex.slice(0, i) : ex;
+  const engPart = i !== -1 ? ex.slice(i + 1).trim() : '';
+  // Try exact match, then verb/adj stem (strip 다 suffix)
+  const stem = korean.endsWith('다') ? korean.slice(0, -1) : '';
+  let korHtml = escHtml(korPart);
+  for (const target of [korean, stem].filter(t => t.length >= 1)) {
+    const idx = korPart.indexOf(target);
+    if (idx !== -1) {
+      korHtml = escHtml(korPart.slice(0, idx))
+        + `<span class="ex-word">${escHtml(target)}</span>`
+        + escHtml(korPart.slice(idx + target.length));
+      break;
+    }
+  }
+  return engPart
+    ? `${korHtml}<span class="ex-eng-part"> = ${escHtml(engPart)}</span>`
+    : korHtml;
 }
 
 function escHtml(s) {
@@ -1235,7 +1258,7 @@ function renderStudyCard() {
         </div>
         <div class="flip-face flip-back">
           <div class="flip-eng">${card.english}</div>
-          ${getExamples(card).map(e => `<div class="example-box">${e}</div>`).join('')}
+          ${getExamples(card).map(e => `<div class="example-box">${highlightWordInExample(e, card.korean)}</div>`).join('')}
           <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center">${flipBadges(card)}</div>
           ${card.notes ? `<div class="notes-box">${card.notes}</div>` : ''}
           <div class="flip-instruction" style="color:var(--muted);animation:none">👆 Tap to hear & flip back</div>
@@ -1515,7 +1538,7 @@ function renderApCard(card) {
         </div>
         <div class="flip-face flip-back">
           <div class="flip-eng">${card.english}</div>
-          ${getExamples(card).map(e => `<div class="example-box" style="margin-top:6px">${e}</div>`).join('')}
+          ${getExamples(card).map(e => `<div class="example-box" style="margin-top:6px">${highlightWordInExample(e, card.korean)}</div>`).join('')}
           <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:4px">${flipBadges(card)}</div>
           ${card.trap ? `<div class="flip-trap" style="display:block;margin-top:8px">${card.trap}</div>` : ''}
           ${card.notes ? `<div class="notes-box" style="margin-top:8px">${card.notes}</div>` : ''}
