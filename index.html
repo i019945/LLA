@@ -1955,7 +1955,8 @@ function tokenizeKo(text, deck, ivMap, particleList) {
       for (const p of particleList) {
         if (word.length > p.length && word.endsWith(p)) {
           const base = word.slice(0, word.length - p.length);
-          if (ivMap.has(base)) {
+          // Match noun card exactly, or verb card via stem + 다 / 하다
+          if (ivMap.has(base) || ivMap.has(base + '다') || ivMap.has(base + '하다')) {
             wordHtml = `${escHtml(base)}<span class="story-particle-sfx">${escHtml(p)}</span>`;
             break;
           }
@@ -1993,6 +1994,20 @@ function findCardForToken(word, deck) {
       if (bc) return Object.assign(Object.create(null), bc, { _bridgeBase: base });
     }
   }
+  // 6. Grammar ending strip — e.g. 보려고 → strip 려고 → stem 보 → 보다 card
+  //    Handles verb/adjective forms where levels 1–5 all fail (regular verbs, etc.)
+  const endings = cards
+    .filter(c => c.tag === 'grammar' || c.tag === 'particle')
+    .sort((a, b) => b.korean.length - a.korean.length);
+  for (const ec of endings) {
+    if (word.length > ec.korean.length && word.endsWith(ec.korean)) {
+      const stem = word.slice(0, word.length - ec.korean.length);
+      for (const dict of [stem + '다', stem + '하다']) {
+        const bc = cards.find(d => d.korean === dict);
+        if (bc) return Object.assign(Object.create(null), bc, { _bridgeBase: dict, _bridgeEnding: ec });
+      }
+    }
+  }
   return null;
 }
 
@@ -2025,7 +2040,10 @@ function showWordPopup(word, deck) {
     html += `<div class="wp-meaning">${escHtml(card.english)}</div>`;
     if (card.trap) html += `<div class="flip-trap" style="margin:6px 0 4px">${escHtml(card.trap)}</div>`;
     if (card.notes) html += `<div class="wp-notes">${escHtml(card.notes)}</div>`;
-    if (!card._bridgeBase && card.korean.length < word.length) {
+    if (card._bridgeEnding) {
+      // Level 6 match: show the grammar ending that was stripped
+      html += wpParticleHtml(card._bridgeEnding);
+    } else if (!card._bridgeBase && card.korean.length < word.length) {
       const pc = findParticleCard(word.slice(card.korean.length));
       if (pc) html += wpParticleHtml(pc);
     }
