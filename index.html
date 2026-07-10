@@ -1668,6 +1668,7 @@ function startAutoPlay(mode) {
 // ════════════════════════════════════════
 let _vocabCache = null;
 let _storyVocabMap = null; // set by openStory(); used by findCardForToken level 5
+let _currentStory = null;  // set by openStory(); used by printStory()
 
 async function loadVocab() {
   if (_vocabCache) return _vocabCache;
@@ -1900,6 +1901,7 @@ function renderStoryList() {
 async function openStory(id) {
   const story = loadStories().find(s => s.id === id);
   if (!story) return;
+  _currentStory = story;
   stShow('st-reader', null);
   const el = document.getElementById('story-reader-content');
   const ytBtn = story.youtubeUrl
@@ -1935,10 +1937,53 @@ async function openStory(id) {
     ${ytBtn}
     <div class="story-reader-toolbar">
       <button class="story-tool-btn${romanActive?' active':''}" id="roman-btn" onclick="toggleRoman()">🔤 Roman${romanActive?' ✓':''}</button>
+      <button class="story-tool-btn" onclick="printStory()" title="Print / Save as PDF">🖨 Print</button>
     </div>
     <div id="story-body" class="${romanActive?'roman-on':''}">
       ${sentences}
     </div>`;
+}
+
+function printStory() {
+  if (!_currentStory) return;
+  const rowsHtml = _currentStory.sentences.map(s => {
+    const roman = romanize(s.ko);
+    return `<div class="sentence">
+      <div class="ko"><span class="dot">&#x25CF;</span> ${escHtml(s.ko)}</div>
+      <div class="roman">${escHtml(roman)}</div>
+      <div class="en">${escHtml(s.en)}</div>
+    </div>`;
+  }).join('\n');
+  const title = escHtml(_currentStory.title);
+  const count = _currentStory.sentences.length;
+  const html = `<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>${title}</title>
+<style>
+  body { font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif; margin: 40px 50px; color: #111; }
+  h1 { font-size: 1.5rem; margin: 0 0 4px; }
+  .subtitle { color: #777; font-size: 0.85rem; margin: 0 0 28px; }
+  .sentence { margin-bottom: 22px; page-break-inside: avoid; }
+  .ko { font-size: 1.1rem; line-height: 1.7; font-weight: 600; }
+  .dot { font-weight: 900; margin-right: 8px; }
+  .roman { font-size: 0.82rem; color: #5050a0; font-family: 'Menlo', monospace; margin: 2px 0 4px 24px; letter-spacing: 0.02em; }
+  .en { font-size: 0.9rem; color: #444; font-style: italic; margin-left: 24px; line-height: 1.5; }
+  @media print { body { margin: 18mm 20mm; } }
+</style>
+</head>
+<body>
+<h1>${title}</h1>
+<div class="subtitle">${count} sentence${count !== 1 ? 's' : ''}</div>
+${rowsHtml}
+<script>window.onload = function() { window.print(); }<\/script>
+</body>
+</html>`;
+  const w = window.open('', '_blank');
+  if (!w) { alert('Allow pop-ups to print.'); return; }
+  w.document.write(html);
+  w.document.close();
 }
 
 function romanize(text) {
