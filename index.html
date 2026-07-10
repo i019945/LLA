@@ -1702,13 +1702,15 @@ async function autoFill() {
   btn.disabled = true; btn.textContent = '…';
   setAutofillStatus('Looking up…');
   try {
-    // 1. Local vocab.json lookup (exact match)
+    // 1. Local vocab.json lookup (exact match or alias)
     const vocab = await loadVocab();
     let entry = vocabLookup(korean, vocab);
     if (entry) {
+      const base = vocab[korean]?.base || null; // non-null when alias was followed
+      if (base) document.getElementById('inp-kor').value = base;
       document.getElementById('inp-eng').value = entry.english;
       if (entry.trap) document.getElementById('inp-trap').value = entry.trap;
-      setAutofillStatus('✓ Found in TOPIK vocab', 'ok');
+      setAutofillStatus(base ? `✓ Stored as dictionary form ${base}` : '✓ Found in TOPIK vocab', 'ok');
       setTimeout(() => setAutofillStatus(''), 2500);
       return;
     }
@@ -1716,9 +1718,10 @@ async function autoFill() {
     for (const candidate of deconjugationCandidates(korean)) {
       entry = vocabLookup(candidate, vocab);
       if (entry) {
+        document.getElementById('inp-kor').value = candidate;
         document.getElementById('inp-eng').value = entry.english;
         if (entry.trap) document.getElementById('inp-trap').value = entry.trap;
-        setAutofillStatus('✓ Found as form of ' + candidate, 'ok');
+        setAutofillStatus('✓ Stored as dictionary form ' + candidate, 'ok');
         setTimeout(() => setAutofillStatus(''), 2500);
         return;
       }
