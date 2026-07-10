@@ -300,7 +300,7 @@
   .wp-speak { background:none; border:none; font-size:1.3rem; cursor:pointer; padding:4px 6px; }
   .wp-close { background:none; border:1px solid var(--border); border-radius:50%; width:28px; height:28px; font-size:0.9rem; cursor:pointer; color:var(--muted); display:flex; align-items:center; justify-content:center; }
   .wp-bridge { font-size:0.85rem; color:#1a4fa0; font-weight:600; margin-bottom:6px; }
-  .wp-add-btn { margin-top:12px; width:100%; padding:10px; border:none; border-radius:10px; background:#1a4fa0; color:#fff; font-size:0.95rem; font-weight:600; cursor:pointer; }
+  .wp-added { margin-top:10px; font-size:0.82rem; color:#1a7c3e; }
   .wp-meaning { font-size:1rem; color:var(--text); margin-bottom:8px; }
   .wp-notes { font-size:0.88rem; color:var(--muted); border-top:1px solid var(--border); padding-top:10px; margin-top:6px; white-space:pre-line; }
   .wp-nomatch { font-size:0.9rem; color:var(--muted); font-style:italic; }
@@ -2030,18 +2030,35 @@ function showWordPopup(word, deck) {
       if (pc) html += wpParticleHtml(pc);
     }
   } else {
-    // No card — check vocab.json alias bridge first (conjugated form with known base)
+    // No card — check vocab.json alias bridge (conjugated form with known base → auto-add)
     const aliasBase = _storyVocabMap && (_storyVocabMap[word]?.base);
     if (aliasBase) {
       const baseEntry = _storyVocabMap[aliasBase];
-      html = `<div class="wp-bridge">↳ ${escHtml(aliasBase)}</div>`;
       if (baseEntry && baseEntry.english) {
-        html += `<div class="wp-meaning">${escHtml(baseEntry.english)}</div>`;
+        // Auto-create the card immediately — no confirmation needed
+        const cards = loadCards();
+        let justAdded = false;
+        if (!cards.find(c => c.korean === aliasBase)) {
+          const now = Date.now();
+          cards.push({
+            id: now, created: now, korean: aliasBase, english: baseEntry.english,
+            trap: '', notes: buildConjugationNotes(aliasBase, baseEntry, _storyVocabMap),
+            examples: [], tag: '', deck: deck || '', level: '',
+            nextReview: now, interval: 1, ease: 2.5, reps: 0,
+          });
+          saveCards(cards);
+          justAdded = true;
+        }
+        html = `<div class="wp-bridge">↳ ${escHtml(aliasBase)}</div>
+                <div class="wp-meaning">${escHtml(baseEntry.english)}</div>`;
         if (baseEntry.trap) html += `<div class="flip-trap" style="margin:6px 0 4px">${escHtml(baseEntry.trap)}</div>`;
+        const notes = buildConjugationNotes(aliasBase, baseEntry, _storyVocabMap);
+        if (notes) html += `<div class="wp-notes">${escHtml(notes)}</div>`;
+        if (justAdded) html += `<div class="wp-added">✓ Added to your cards</div>`;
+      } else {
+        html = `<div class="wp-bridge">↳ ${escHtml(aliasBase)}</div>
+                <div class="wp-nomatch">No card yet for <em>${escHtml(aliasBase)}</em></div>`;
       }
-      html += `<button id="wp-add-btn" class="wp-add-btn"
-        data-base="${escHtml(aliasBase)}" data-deck="${escHtml(deck)}"
-        onclick="event.stopPropagation();addCardFromPopup(this.dataset.base,this.dataset.deck)">+ Add card for ${escHtml(aliasBase)}</button>`;
     } else {
       // Try particle/grammar ending detection
       const pc = findParticleCard(word);
@@ -2062,27 +2079,6 @@ function hideWordPopup() {
   document.getElementById('wp-overlay').style.display = 'none';
 }
 
-async function addCardFromPopup(base, deck) {
-  const vocab = _storyVocabMap || await loadVocab();
-  const entry = vocab[base];
-  if (!entry || !entry.english) return;
-  const cards = loadCards();
-  if (cards.find(c => c.korean === base)) {
-    const btn = document.getElementById('wp-add-btn');
-    if (btn) { btn.disabled = true; btn.textContent = 'Already in your cards'; }
-    return;
-  }
-  const now = Date.now();
-  cards.push({
-    id: now, created: now, korean: base, english: entry.english,
-    trap: '', notes: buildConjugationNotes(base, entry, vocab),
-    examples: [], tag: '', deck: deck || '', level: '',
-    nextReview: now, interval: 1, ease: 2.5, reps: 0,
-  });
-  saveCards(cards);
-  const btn = document.getElementById('wp-add-btn');
-  if (btn) { btn.disabled = true; btn.textContent = '✓ Card added!'; btn.style.background = '#1a7c3e'; btn.style.color = '#fff'; }
-}
 
 async function importStory() {
   const title  = document.getElementById('st-title').value.trim();
