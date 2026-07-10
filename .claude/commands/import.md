@@ -33,14 +33,25 @@ Use the title as both `story.title` and `story.deck`. Shorten to ≤ 40 chars if
 
 For each sentence, provide a natural English translation.
 
-For **every** content word (nouns, verbs, adjectives, adverbs) in the story, generate one card:
+### Morphological precision (CRITICAL — apply the `/morphology` skill)
+
+Before writing any card, decompose every space-delimited token into its layers: root + particles + grammar endings + any irregular conjugation. The `/morphology` skill contains the full rules, particle list, grammar ending list, and irregular conjugation patterns.
+
+Key rules (see `/morphology` for complete reference):
+- **Nouns/adverbs**: `korean` = bare dictionary form (`여행`, not `여행을`). Note the particle in `notes`.
+- **Verbs/adjectives**: `korean` = surface form exactly as it appears in the sentence (`걸을`, `되셨나요`). Decompose all layers in `notes`.
+- **Stacked endings** (e.g. 되셨나요 = 되다+시+었+나요): decompose every layer — the user is a beginner.
+- **Irregular conjugations** (ㄷ, ㄹ, ㅂ, ㅎ, 르, 으 irregulars): always name the rule in `notes`.
+- Do NOT make cards for particles or grammar endings — built-in reference cards (tag: 'particle'/'grammar') already exist.
+
+### Card fields
 
 | Field | Rule |
 |---|---|
-| `korean` | **Nouns/adverbs**: bare dictionary form (e.g. `여행`, not `여행을`). The app's prefix-match lookup handles all particle-suffixed forms automatically. **Verbs/adjectives**: exact surface form as it appears in the sentence (e.g. `설레고`, not `설레다`). |
+| `korean` | See morphological rules above |
 | `english` | `'dictionary form' (word type) English meaning` — e.g. `'설레다' (verb) to feel excitement/flutter` |
 | `examples` | Array with one entry: `"Korean sentence = English translation"` |
-| `notes` | One or two lines; each line: `Korean form : explanation`. Always note the dictionary form and what the surface form's conjugation/ending means. |
+| `notes` | Decompose the word per `/morphology` rules: dictionary form, conjugation layers, irregular rule name if applicable |
 | `tag` | `"story"` |
 | `deck` | Story title (same as `story.deck`) |
 | `ease` | `2.0` — pre-set as difficult (all story vocabulary is new/unfamiliar to a beginner; lower ease = more frequent review until mastered) |
@@ -48,7 +59,7 @@ For **every** content word (nouns, verbs, adjectives, adverbs) in the story, gen
 | `nextReview` | `Date.now()` |
 | `reps` | `0` |
 
-Skip: particles (은/는/이/가/을/를/에/의/와/과…), pure copula 이다 when standalone, purely grammatical endings.
+Skip: particles (은/는/이/가/을/를/에/의/와/과…), pure copula 이다 when standalone, purely grammatical endings — these are already built-in reference cards.
 
 Do NOT skip words because they seem elementary. 있다, 되다, 좋다, 오다, 가다 all need cards.
 
