@@ -2125,12 +2125,42 @@ function showWordPopup(word, deck) {
                 <div class="wp-nomatch">No card yet for <em>${escHtml(aliasBase)}</em></div>`;
       }
     } else {
-      // Try particle/grammar ending detection
-      const pc = findParticleCard(word);
-      if (pc && word.length > pc.korean.length) {
-        const base = word.slice(0, word.length - pc.korean.length);
-        html = `<div class="wp-nomatch">No card yet for <em>${escHtml(base)}</em></div>${wpParticleHtml(pc)}`;
-      } else {
+      // Try stripping particle/grammar endings from the END of the word
+      const pCards = loadCards().filter(c => c.tag === 'particle' || c.tag === 'grammar')
+        .sort((a, b) => b.korean.length - a.korean.length);
+      let handled = false;
+      for (const pc of pCards) {
+        if (word.length > pc.korean.length && word.endsWith(pc.korean)) {
+          const base = word.slice(0, word.length - pc.korean.length);
+          const baseEntry = _storyVocabMap && _storyVocabMap[base];
+          if (baseEntry && baseEntry.english) {
+            const cards2 = loadCards();
+            let justAdded = false;
+            if (!cards2.find(c => c.korean === base)) {
+              const now = Date.now();
+              cards2.push({
+                id: now, created: now, korean: base, english: baseEntry.english,
+                trap: '', notes: buildConjugationNotes(base, baseEntry, _storyVocabMap),
+                examples: [], tag: '', deck: deck || '', level: '',
+                nextReview: now, interval: 1, ease: 2.5, reps: 0,
+              });
+              saveCards(cards2);
+              justAdded = true;
+            }
+            html = `<div class="wp-meaning">${escHtml(baseEntry.english)}</div>`;
+            if (baseEntry.trap) html += `<div class="flip-trap" style="margin:6px 0 4px">${escHtml(baseEntry.trap)}</div>`;
+            const notes = buildConjugationNotes(base, baseEntry, _storyVocabMap);
+            if (notes) html += `<div class="wp-notes">${escHtml(notes)}</div>`;
+            html += wpParticleHtml(pc);
+            if (justAdded) html += `<div class="wp-added">✓ Added ${escHtml(base)} to your cards</div>`;
+          } else {
+            html = `<div class="wp-nomatch">No card yet for <em>${escHtml(base)}</em></div>${wpParticleHtml(pc)}`;
+          }
+          handled = true;
+          break;
+        }
+      }
+      if (!handled) {
         html = `<div class="wp-nomatch">No card yet for this word.</div>`;
       }
     }
