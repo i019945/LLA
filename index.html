@@ -275,10 +275,16 @@
   .story-back-btn { background:none; border:none; color:var(--accent); font-size:0.9rem; font-weight:600; cursor:pointer; padding:0; margin-bottom:14px; display:inline-flex; align-items:center; gap:4px; }
   .story-sentence { margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid var(--border); }
   .story-sentence:last-child { border-bottom:none; }
-  .story-ko { font-size:1.15rem; line-height:1.8; margin-bottom:4px; }
+  .story-ko { font-size:1.15rem; line-height:2.2; margin-bottom:4px; cursor:pointer; user-select:none; }
+  .story-ko:active { opacity:0.7; }
   .story-en { font-size:0.9rem; color:var(--muted); font-style:italic; line-height:1.5; }
-  .story-word { cursor:pointer; border-bottom:1.5px dotted var(--accent); padding-bottom:1px; border-radius:2px; transition:background 0.1s; }
+  .story-word { cursor:pointer; border-bottom:1.5px dotted var(--accent); padding-bottom:1px; border-radius:2px; transition:background 0.1s; display:inline-flex; flex-direction:column; align-items:center; vertical-align:top; }
   .story-word:hover { background:var(--accent-light); }
+  .story-roman { display:none; font-size:0.58rem; color:var(--muted); font-family:monospace; letter-spacing:0.02em; line-height:1.2; white-space:nowrap; }
+  .roman-on .story-roman { display:block; }
+  .story-reader-toolbar { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+  .story-tool-btn { border:1.5px solid var(--border); background:white; color:var(--muted); border-radius:20px; padding:5px 12px; font-size:0.78rem; font-weight:600; cursor:pointer; transition:all 0.15s; }
+  .story-tool-btn.active { border-color:var(--accent); color:var(--accent); background:var(--accent-light); }
   .import-status { margin-top:10px; font-size:0.88rem; color:var(--muted); min-height:1.2em; }
   .import-status.ok { color:var(--green); }
   .import-status.err { color:var(--accent2); }
@@ -1712,25 +1718,70 @@ function openStory(id) {
     : '';
   const sentences = story.sentences.map(s => `
     <div class="story-sentence">
-      <div class="story-ko">${tokenizeKo(s.ko, story.deck)}</div>
+      <div class="story-ko" data-ko="${escHtml(s.ko)}" onclick="speak(this.dataset.ko)">${tokenizeKo(s.ko, story.deck)}</div>
       <div class="story-en">${escHtml(s.en)}</div>
     </div>`).join('');
+  const romanActive = isRomanOn();
   el.innerHTML = `
     <button class="story-back-btn" onclick="stShow('st-list', document.querySelector('#stories .fc-subnav button')); renderStoryList()">← All Stories</button>
     <h2 style="margin:0 0 2px">${escHtml(story.title)}</h2>
-    <p style="color:var(--muted);font-size:0.82rem;margin:0 0 16px">${story.sentences.length} sentences · ${escHtml(story.deck)}</p>
+    <p style="color:var(--muted);font-size:0.82rem;margin:0 0 12px">${story.sentences.length} sentences · ${escHtml(story.deck)}</p>
     ${ytBtn}
-    ${sentences}`;
+    <div class="story-reader-toolbar">
+      <button class="story-tool-btn${romanActive?' active':''}" id="roman-btn" onclick="toggleRoman()">🔤 Roman${romanActive?' ✓':''}</button>
+    </div>
+    <div id="story-body" class="${romanActive?'roman-on':''}">
+      ${sentences}
+    </div>`;
+}
+
+function romanize(text) {
+  const CHO  = ['g','kk','n','d','tt','r','m','b','pp','s','ss','','j','jj','ch','k','t','p','h'];
+  const JUNG = ['a','ae','ya','yae','eo','e','yeo','ye','o','wa','wae','oe','yo','u','wo','we','wi','yu','eu','ui','i'];
+  const JONG = ['','k','k','k','n','n','n','t','l','k','m','l','l','l','p','l','m','p','p','t','t','ng','t','t','k','t','p','t'];
+  const LINK = ['','g','kk','g','n','j','n','d','r','g','m','b','s','t','p','r','m','b','s','s','ss','ng','j','ch','k','t','p',''];
+  const arr = [...text];
+  let out = '';
+  for (let i = 0; i < arr.length; i++) {
+    const cp = arr[i].codePointAt(0);
+    if (cp < 0xAC00 || cp > 0xD7A3) { out += arr[i]; continue; }
+    const n = cp - 0xAC00;
+    const cho = Math.floor(n/588), jung = Math.floor((n%588)/28), jong = n%28;
+    const pcp = i > 0 ? arr[i-1].codePointAt(0) : 0;
+    const ncp = i < arr.length-1 ? arr[i+1].codePointAt(0) : 0;
+    const pn = (pcp >= 0xAC00 && pcp <= 0xD7A3) ? pcp - 0xAC00 : -1;
+    const nn = (ncp >= 0xAC00 && ncp <= 0xD7A3) ? ncp - 0xAC00 : -1;
+    const prevJong = pn >= 0 ? pn % 28 : 0;
+    const nextCho  = nn >= 0 ? Math.floor(nn/588) : -1;
+    // Initial: ㅇ (11) after a final consonant → linking (연음화)
+    let choRom;
+    if (cho === 11 && prevJong !== 0) choRom = LINK[prevJong];
+    else if (cho === 5 && prevJong === 8) choRom = 'l'; // ㄹ+ㄹ → ll
+    else choRom = CHO[cho];
+    // Final: skip if next syllable starts with ㅇ (linking carries it there)
+    const jongRom = (jong !== 0 && nextCho === 11) ? '' : JONG[jong];
+    out += choRom + JUNG[jung] + jongRom;
+  }
+  return out;
+}
+
+function isRomanOn() { return localStorage.getItem('lla_story_roman') === 'on'; }
+function toggleRoman() {
+  const on = !isRomanOn();
+  localStorage.setItem('lla_story_roman', on ? 'on' : 'off');
+  const btn = document.getElementById('roman-btn');
+  if (btn) { btn.textContent = on ? '🔤 Roman ✓' : '🔤 Roman'; btn.classList.toggle('active', on); }
+  const body = document.getElementById('story-body');
+  if (body) body.classList.toggle('roman-on', on);
 }
 
 function tokenizeKo(text, deck) {
   return text.split(/(\s+)/).map(tok => {
     if (!tok || /^\s+$/.test(tok)) return tok;
-    // Separate leading/trailing punctuation from the Korean word
     const m = tok.match(/^([^가-힣㄰-㆏]*)([가-힣ㄱ-ㅎㅏ-ㅣ가-힣㄰-㆏]+(?:[^가-힣㄰-㆏]*[가-힣ㄱ-ㅎㅏ-ㅣ가-힣㄰-㆏]+)*)([^가-힣㄰-㆏]*)$/u);
     if (!m) return escHtml(tok);
     const [, pre, word, post] = m;
-    return `${escHtml(pre)}<span class="story-word" data-word="${escHtml(word)}" data-deck="${escHtml(deck)}" onclick="showWordPopup(this.dataset.word,this.dataset.deck)">${escHtml(word)}</span>${escHtml(post)}`;
+    return `${escHtml(pre)}<span class="story-word" data-word="${escHtml(word)}" data-deck="${escHtml(deck)}" onclick="event.stopPropagation();showWordPopup(this.dataset.word,this.dataset.deck)">${escHtml(word)}<span class="story-roman">${romanize(word)}</span></span>${escHtml(post)}`;
   }).join('');
 }
 
