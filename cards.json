@@ -1,57 +1,923 @@
 [
-  {"id":3000000000001,"korean":"걷다","english":"(verb) to walk","examples":["저와 함께 걸을 준비 되셨나요? = Are you ready to walk with me?","매일 걸어요. = I walk every day."],"notes":"걷다 : ㄷ-irregular — stem 걷 changes to 걸 before vowel endings\n걷다 → 걸어요 (not 걷어요) | 걸을 (future modifier) | 걸어서 (by walking)\nContrast: 달리다 (to run), 뛰다 (to run/jump)","tag":"","deck":"","level":"","trap":"ㄷ irregular: 걷 → 걸 before vowels (걸어요, 걸으면, 걸을)","created":3000000000001,"nextReview":3000000000001,"interval":1,"ease":2.5,"reps":0},
-  {"id":3000000000002,"korean":"되다","english":"(verb) to become / to be done / can / to work out","examples":["준비 되셨나요? = Are you ready? (lit. has it become ready?)","안 돼요. = That won't do / I can't."],"notes":"되다 : one of the most versatile verbs\n준비가 되다 : to be ready | 안 되다 : to not work / not be allowed\nPassive: 바뀌다 = 바꾸다+이다; but 되다 also forms passives: 먹히다 vs 됩니다\n~게 되다 : come to (gradually): 알게 됐어요 = I came to know","tag":"","deck":"","level":"","trap":"돼요 = 되어요 (contracted). 되요 is a common misspelling.","created":3000000000002,"nextReview":3000000000002,"interval":1,"ease":2.5,"reps":0},
-  {"id":3000000000003,"korean":"보다","english":"(verb) to see / to look / to watch / to try","examples":["세상을 보는 눈이 넓어졌어요. = My view of the world widened.","한번 해 봐요. = Try doing it once."],"notes":"보다 : core meanings — to see (눈으로 보다), to watch (영화 보다), to look at\n~아/어 보다 : try doing (경험해 봐요 = try experiencing it)\n~게 되다 vs ~아/어 보다: 보게 됐어요 (came to see) vs 봐요 (try seeing)\n보다 also means 'than' as a particle: 나보다 커요 = taller than me","tag":"","deck":"","level":"","trap":"","created":3000000000003,"nextReview":3000000000003,"interval":1,"ease":2.5,"reps":0},
-  {"id":3000000000004,"korean":"살다","english":"(verb) to live / to reside / to be alive","examples":["매일 똑같은 곳에서 똑같은 삶을 살다 보면… = When you live the same life in the same place day after day…","어디 살아요? = Where do you live?"],"notes":"살다 : ㄹ-irregular — ㄹ drops before ㄴ, ㅂ, 시, (으)세요\n살아요 (live) | 사는 (who lives) | 사람 | 삶 (noun: life)\n살다 보면 : 'if you keep living (like that)' — ongoing habitual condition","tag":"","deck":"","level":"","trap":"","created":3000000000004,"nextReview":3000000000004,"interval":1,"ease":2.5,"reps":0},
-  {"id":3000000000005,"korean":"알다","english":"(verb) to know / to understand","examples":["평소에는 몰랐던 내 모습을 알게 돼요. = You come to know sides of yourself you didn't know.","알아요. = I know / I understand."],"notes":"알다 : ㄹ-irregular — ㄹ drops before ㄴ, ㅂ, 시\n알아요 | 아는 (who knows) | 알면 (if you know) | 아세요? (do you know? honorific)\nNegative: 모르다 (not to know) — separate verb, not 알지 않다","tag":"","deck":"","level":"","trap":"알아요 NOT 알어요. 모르다 is the irregular negative, not 안 알다.","created":3000000000005,"nextReview":3000000000005,"interval":1,"ease":2.5,"reps":0},
-  {"id":3000000000006,"korean":"있다","english":"(verb) to exist / to have / to be (at a location)","examples":["한국에 있어요. = I am in Korea.","시간이 있어요? = Do you have time?"],"notes":"있다 : existence (거기 있어요 = it's there) OR possession (돈이 있어요 = I have money)\nOpposite: 없다 (to not exist / to not have)\n있어요 → 있어 (casual) | 계세요 (honorific form of 있다 for people)","tag":"","deck":"","level":"","trap":"","created":3000000000006,"nextReview":3000000000006,"interval":1,"ease":2.5,"reps":0},
-  {"id":3000000000007,"korean":"없다","english":"(verb) to not exist / to not have / to be absent","examples":["시간이 없어요. = I don't have time.","여유가 없는 삶 = a life with no breathing room"],"notes":"없다 : opposite of 있다\n없어요 → 없어 (casual) | 안 계세요 (honorific: is not here)\n아무도 없다 = there is nobody | 돈이 없다 = to not have money","tag":"","deck":"","level":"","trap":"없어요 NOT 없아요.","created":3000000000007,"nextReview":3000000000007,"interval":1,"ease":2.5,"reps":0},
-  {"id":3000000000008,"korean":"가다","english":"(verb) to go","examples":["여행을 가요. = I go on a trip.","학교에 가요. = I go to school."],"notes":"가다 : direction away from speaker (opposite: 오다 = to come)\n가요 | 가서 (go and then) | 가면 (if you go) | 가는 것 (the act of going)\n다녀오다 : go and come back (round trip)","tag":"","deck":"","level":"","trap":"","created":3000000000008,"nextReview":3000000000008,"interval":1,"ease":2.5,"reps":0},
-  {"id":3000000000009,"korean":"오다","english":"(verb) to come","examples":["한국에서 왔어요. = I came from Korea.","내일 와요. = Come tomorrow."],"notes":"오다 : movement toward speaker or toward a reference point\n왔어요 (came) | 와서 (coming and then) | 오면 (if you come) | 오는 것\n들어오다 (come in) | 나오다 (come out) | 돌아오다 (come back)","tag":"","deck":"","level":"","trap":"와요 (not 오아요). Contracted form.","created":3000000000009,"nextReview":3000000000009,"interval":1,"ease":2.5,"reps":0},
-  {"id":3000000000010,"korean":"주다","english":"(verb) to give","examples":["여행은 우리에게 선물을 줘요. = Travel gives us a gift.","저한테 주세요. = Please give it to me."],"notes":"주다 : to give to someone else\n줘요 = 주어요 (contracted) | 드리다 = humble form (give to someone senior)\n~아/어 주다 : do something FOR someone (도와줘요 = help me [for my benefit])","tag":"","deck":"","level":"","trap":"줘요 NOT 주어요 in speech. 드리다 when giving to elders/seniors.","created":3000000000010,"nextReview":3000000000010,"interval":1,"ease":2.5,"reps":0},
-  {"id":2000000000001,"korean":"고","english":"(ending) and / and then — connective","examples":["밥을 먹고 자요. = I eat and then sleep.","마음이 설레고 기분이 좋아요. = My heart flutters and I feel good."],"notes":"고 : attaches to verb/adjective stem; connects two clauses\n먹고, 걷고, 좋고 — same subject usually shared\nOpposite order matters: A고 B = A first then B","tag":"grammar","deck":"","level":"","trap":"","created":2000000000001,"nextReview":2000000000001,"interval":1,"ease":2.5,"reps":0},
-  {"id":2000000000002,"korean":"아서","english":"(ending) because / so / and then — causal or sequential (bright vowel stem)","examples":["좋아서 웃어요. = I'm laughing because I like it.","일어나서 씻어요. = I get up and then wash."],"notes":"아서/어서 : causal (reason) or sequential (first A then B)\n아서 after ㅏ or ㅗ stem | 어서 after all others | 해서 from 하다 verbs\n가서 (← 가다) | 좋아서 (← 좋다) | 먹어서 (← 먹다)\nUnlike 고, cannot be used with imperative or propositive","tag":"grammar","deck":"","level":"","trap":"","created":2000000000002,"nextReview":2000000000002,"interval":1,"ease":2.5,"reps":0},
-  {"id":2000000000003,"korean":"어서","english":"(ending) because / so / and then — causal or sequential (dark vowel stem)","examples":["피곤해서 일찍 잤어요. = I went to sleep early because I was tired.","먹어서 배불러요. = I ate, so I'm full."],"notes":"아서/어서 : same meaning, different vowel harmony form\n어서 after stems without ㅏ or ㅗ | 아서 after ㅏ/ㅗ stems | 해서 from 하다\n해서 ← 하다: 공부해서 (because I studied)","tag":"grammar","deck":"","level":"","trap":"","created":2000000000003,"nextReview":2000000000003,"interval":1,"ease":2.5,"reps":0},
-  {"id":2000000000004,"korean":"면","english":"(ending) if / when — conditional (after vowel or ㄹ stem)","examples":["여행을 가면 행복해요. = If/when I travel, I'm happy.","알면 알수록 좋아요. = The more you know, the better."],"notes":"면/으면 : conditional — 'if' for hypothetical, 'when' for habitual\n면 after vowel or ㄹ stem | 으면 after other consonants\n가면, 살면, 알면 | 먹으면, 좋으면","tag":"grammar","deck":"","level":"","trap":"","created":2000000000004,"nextReview":2000000000004,"interval":1,"ease":2.5,"reps":0},
-  {"id":2000000000005,"korean":"으면","english":"(ending) if / when — conditional (after consonant stem)","examples":["비가 오으면 → 비가 오면. = If it rains. (오다+면, vowel, so 면)","먹으면 배불러요. = If you eat, you'll be full."],"notes":"면/으면 : conditional\n으면 after consonant stems (먹으면, 없으면, 좋으면)\n면 after vowel or ㄹ stems (가면, 살면, 알면)","tag":"grammar","deck":"","level":"","trap":"","created":2000000000005,"nextReview":2000000000005,"interval":1,"ease":2.5,"reps":0},
-  {"id":2000000000006,"korean":"지만","english":"(ending) but / although / however — contrast","examples":["여행이 좋지만 돈이 없어요. = I like travel, but I have no money.","알지만 못 해요. = I know, but I can't do it."],"notes":"지만 : connects two contrasting clauses\nAttaches to verb/adjective stem: 좋지만, 가지만, 없지만\nSofter contrast than 그런데; both clauses share the same subject usually","tag":"grammar","deck":"","level":"","trap":"","created":2000000000006,"nextReview":2000000000006,"interval":1,"ease":2.5,"reps":0},
-  {"id":2000000000007,"korean":"는데","english":"(ending) background / contrast / 'but' — present/future context","examples":["날씨가 좋은데 나가요. = The weather is nice, so let's go out.","피곤한데 일해요. = I'm tired, but I'm working."],"notes":"는데/은데 : provides background context or mild contrast\n는데 after verb/adjective present stem | 은데 after past/adjective consonant stem\n은데 ← 좋은데, 먹었는데 | 는데 ← 가는데, 먹는데\nAlso used as a trailing sentence to invite a response","tag":"grammar","deck":"","level":"","trap":"","created":2000000000007,"nextReview":2000000000007,"interval":1,"ease":2.5,"reps":0},
-  {"id":2000000000008,"korean":"은데","english":"(ending) background / contrast — past or adjective context","examples":["맛있었는데 다 먹었어요. = It was delicious, but I ate it all.","작은데 예뻐요. = It's small, but pretty."],"notes":"은데/는데 : mild contrast or background framing\n은데 after adjective consonant stems (작은데, 없는데) or past tense\n는데 after present verb stems (가는데, 먹는데)","tag":"grammar","deck":"","level":"","trap":"","created":2000000000008,"nextReview":2000000000008,"interval":1,"ease":2.5,"reps":0},
-  {"id":2000000000009,"korean":"려고","english":"(ending) intending to / in order to (after vowel or ㄹ stem)","examples":["여행을 가려고 해요. = I'm planning to travel.","이야기해 보려고 해요. = I'm trying to talk about it."],"notes":"려고/으려고 : expresses intention or purpose\n려고 after vowel or ㄹ | 으려고 after consonant\n가려고, 살려고, 알려고 | 먹으려고, 읽으려고\n~려고 하다 : be about to / planning to","tag":"grammar","deck":"","level":"","trap":"","created":2000000000009,"nextReview":2000000000009,"interval":1,"ease":2.5,"reps":0},
-  {"id":2000000000010,"korean":"으려고","english":"(ending) intending to / in order to (after consonant stem)","examples":["밥을 먹으려고 나갔어요. = I went out intending to eat.","공부하으려고 → 공부하려고. = Intending to study."],"notes":"려고/으려고 : intention\n으려고 after consonant stems (먹으려고, 읽으려고)\n려고 after vowel or ㄹ stems (가려고, 살려고)","tag":"grammar","deck":"","level":"","trap":"","created":2000000000010,"nextReview":2000000000010,"interval":1,"ease":2.5,"reps":0},
-  {"id":2000000000011,"korean":"네요","english":"(ending) I notice / I see that / how ~ — discovery or mild surprise","examples":["날씨가 좋네요. = Oh, the weather is nice (I notice).","잘 하시네요. = Wow, you're doing well."],"notes":"네요 : expresses the speaker's fresh realization or observation\nAdds a nuance of 'I just noticed' or 'how ~'\n아/어요 states a fact | 네요 reacts to noticing it\n좋네요 (I see it's good) ≠ 좋아요 (it's good)","tag":"grammar","deck":"","level":"","trap":"","created":2000000000011,"nextReview":2000000000011,"interval":1,"ease":2.5,"reps":0},
-  {"id":2000000000012,"korean":"잖아요","english":"(ending) as you know / isn't it / don't you think — shared knowledge","examples":["여행은 좋잖아요. = Travel is good, you know.","우리는 이미 알잖아요. = We already know, right?"],"notes":"잖아요 : reminds listener of something both parties should know\nImplies 'you know this already' — can sound slightly assertive\nCasual: 잖아 | 잖아요 is polite but still informal","tag":"grammar","deck":"","level":"","trap":"","created":2000000000012,"nextReview":2000000000012,"interval":1,"ease":2.5,"reps":0},
-  {"id":2000000000013,"korean":"거든요","english":"(ending) you see / the thing is / that's because — explaining background","examples":["그게 좋거든요. = You see, that's good.","여행을 좋아하거든요. = The thing is, I like travel."],"notes":"거든요 : offers a reason or background explanation to the listener\nImplies the listener didn't know yet — explains why you do/feel something\nCasual: 거든 | More formal: 거든요","tag":"grammar","deck":"","level":"","trap":"","created":2000000000013,"nextReview":2000000000013,"interval":1,"ease":2.5,"reps":0},
-  {"id":2000000000014,"korean":"기","english":"(ending) nominalizer — turns a verb/adjective into a noun (gerund)","examples":["좋아지기 쉽잖아요. = It's easy to get better (lit. 'getting better is easy').","여행하기 좋아요. = It's good for traveling."],"notes":"기 : makes a verb or adjective into a noun concept\n먹기 (the act of eating) | 살기 (living) | 좋기 (being good)\n기 vs 는 것: mostly interchangeable; 기 more common with 쉽다/어렵다/좋다/싫다","tag":"grammar","deck":"","level":"","trap":"","created":2000000000014,"nextReview":2000000000014,"interval":1,"ease":2.5,"reps":0},
-  {"id":2000000000015,"korean":"게","english":"(ending) adverbially / so that / in a way that","examples":["완전히 다르게 보게 돼요. = You come to see it completely differently.","새롭게 느껴져요. = It feels fresh/new."],"notes":"게 : converts an adjective to an adverb (크다→크게 = largely/greatly)\nAlso in ~게 되다 : come to do/become (gradually): 알게 됐어요 = I came to know\n~게 하다 : make/let someone do: 웃게 해요 = makes me laugh","tag":"grammar","deck":"","level":"","trap":"","created":2000000000015,"nextReview":2000000000015,"interval":1,"ease":2.5,"reps":0},
-  {"id":2000000000016,"korean":"아요","english":"(ending) polite present tense (bright vowel stem: ㅏ ㅗ)","examples":["가요. = I go / going.","좋아요. = It's good / I like it."],"notes":"아요/어요 : polite informal present tense (해요체)\n아요 after ㅏ or ㅗ stem: 가요 (가다), 봐요 (보다→봐요), 좋아요 (좋다)\n어요 after all other stems: 먹어요, 없어요, 해요 (하다)\n해요 from 하다 is a special case","tag":"grammar","deck":"","level":"","trap":"","created":2000000000016,"nextReview":2000000000016,"interval":1,"ease":2.5,"reps":0},
-  {"id":2000000000017,"korean":"어요","english":"(ending) polite present tense (dark/other vowel stem)","examples":["먹어요. = I eat.","없어요. = There isn't / I don't have."],"notes":"아요/어요 : polite informal present (해요체)\n어요 after stems without ㅏ/ㅗ: 먹어요, 없어요, 줘요 (주다→줘요)\n해요 ← 하다 (special); 봐요 ← 보다 (contracts: 보아요→봐요)\nThis ending is the most-used polite speech level in everyday Korean","tag":"grammar","deck":"","level":"","trap":"","created":2000000000017,"nextReview":2000000000017,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000001,"korean":"도","english":"(particle) also / too / even / again","examples":["오늘도 걸어요. = We walk again today.","저도 좋아해요. = I like it too."],"notes":"도 : additive particle — attaches directly to a noun, replacing 은/는/이/가/을/를\n오늘도 : today too | 저도 : me too | 나도 : me too (casual)\n아무도 + negative = nobody at all","tag":"particle","deck":"","level":"","trap":"","created":1000000000001,"nextReview":1000000000001,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000002,"korean":"은","english":"(particle) topic marker — after consonant","examples":["저는 학생이에요. = I am a student.","오늘은 날씨가 좋아요. = As for today, the weather is nice."],"notes":"은/는 : marks the topic of the sentence (what we're talking about)\n은 after consonant (밥은, 책은) | 는 after vowel (나는, 오늘은)\nTopic ≠ subject: 저는 often signals contrast or sets the scene","tag":"particle","deck":"","level":"","trap":"","created":1000000000002,"nextReview":1000000000002,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000003,"korean":"는","english":"(particle) topic marker — after vowel","examples":["나는 학생이에요. = I am a student.","여행은 좋아요. = Travel is good (as a topic)."],"notes":"은/는 : marks the topic of the sentence\n는 after vowel (나는, 여행은) | 은 after consonant (밥은, 학생은)\nAlso used for contrast: 저는 모르지만… = As for me, I don't know but…","tag":"particle","deck":"","level":"","trap":"","created":1000000000003,"nextReview":1000000000003,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000004,"korean":"이","english":"(particle) subject marker — after consonant","examples":["학생이 왔어요. = The student came.","책이 있어요. = There is a book."],"notes":"이/가 : marks the grammatical subject of the verb\n이 after consonant (학생이, 책이) | 가 after vowel (나가, 여기가)\nUnlike 은/는, 이/가 introduces new info or emphasizes identity","tag":"particle","deck":"","level":"","trap":"","created":1000000000004,"nextReview":1000000000004,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000005,"korean":"가","english":"(particle) subject marker — after vowel","examples":["나가 아니에요. = It's not me.","여기가 좋아요. = This place is nice."],"notes":"이/가 : marks the grammatical subject\n가 after vowel (나가, 여기가) | 이 after consonant (학생이, 책이)\n저가 is rare — 제가 is the correct humble form of 가","tag":"particle","deck":"","level":"","trap":"제가 (not 저가) is correct formal subject form","created":1000000000005,"nextReview":1000000000005,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000006,"korean":"을","english":"(particle) object marker — after consonant","examples":["밥을 먹어요. = I eat rice.","한국어를 배워요. = I learn Korean."],"notes":"을/를 : marks the direct object of the verb\n을 after consonant (밥을, 책을) | 를 after vowel (저를, 음악을)\nCan be dropped in casual speech: 밥 먹어요 is fine too","tag":"particle","deck":"","level":"","trap":"","created":1000000000006,"nextReview":1000000000006,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000007,"korean":"를","english":"(particle) object marker — after vowel","examples":["저를 도와주세요. = Please help me.","여행을 좋아해요. = I like travel."],"notes":"을/를 : marks the direct object\n를 after vowel (저를, 여행을) | 을 after consonant (밥을, 음악을)\nOften dropped in casual speech","tag":"particle","deck":"","level":"","trap":"","created":1000000000007,"nextReview":1000000000007,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000008,"korean":"와","english":"(particle) and / with — after vowel","examples":["저와 함께 = together with me","커피와 케이크 = coffee and cake"],"notes":"와/과 : connects nouns (and) or marks accompaniment (with)\n와 after vowel (저와, 커피와) | 과 after consonant (친구과→친구와)\n랑/이랑 are informal equivalents","tag":"particle","deck":"","level":"","trap":"","created":1000000000008,"nextReview":1000000000008,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000009,"korean":"과","english":"(particle) and / with — after consonant","examples":["친구과 갔어요. = I went with a friend.","밥과 국 = rice and soup"],"notes":"와/과 : connects nouns or marks accompaniment\n과 after consonant (밥과, 학생과) | 와 after vowel (저와, 오빠와)\nIn speech, 와 is often used regardless of preceding sound","tag":"particle","deck":"","level":"","trap":"","created":1000000000009,"nextReview":1000000000009,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000010,"korean":"에","english":"(particle) at / in / to / on (location or time)","examples":["학교에 가요. = I go to school.","세시에 만나요. = Let's meet at 3 o'clock."],"notes":"에 : static location (있다/없다), direction (가다/오다), or time point\n에 vs 에서: 에 = where you are/going TO | 에서 = where the action happens\n학교에 있어요 (at school) vs 학교에서 공부해요 (study AT school)","tag":"particle","deck":"","level":"","trap":"","created":1000000000010,"nextReview":1000000000010,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000011,"korean":"에서","english":"(particle) at / in / from (location of action or starting point)","examples":["카페에서 공부해요. = I study at the café.","서울에서 왔어요. = I came from Seoul."],"notes":"에서 : where an action takes place, or the starting point of movement\n에서 vs 에: 에서 = action happens here | 에 = static location or destination\n한국에서 = in Korea (action) | 한국에 = to Korea (going) / in Korea (being)","tag":"particle","deck":"","level":"","trap":"","created":1000000000011,"nextReview":1000000000011,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000012,"korean":"에게","english":"(particle) to / for (a person or animal) — formal/written","examples":["친구에게 줬어요. = I gave it to a friend.","선생님에게 물어봐요. = Ask the teacher."],"notes":"에게 : dative particle for people/animals; formal or written style\n한테 is the casual spoken equivalent\n에게서 / 한테서 = from (a person): 친구에게서 받았어요 (received from a friend)","tag":"particle","deck":"","level":"","trap":"","created":1000000000012,"nextReview":1000000000012,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000013,"korean":"한테","english":"(particle) to / for (a person) — informal/spoken","examples":["나한테 줘. = Give it to me.","친구한테 물어봐. = Ask your friend."],"notes":"한테 : casual spoken equivalent of 에게\n한테서 = from (a person) casual: 친구한테서 들었어요 (heard from a friend)\nUse 에게 in writing or formal situations","tag":"particle","deck":"","level":"","trap":"","created":1000000000013,"nextReview":1000000000013,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000014,"korean":"로","english":"(particle) direction / means / by — after vowel or ㄹ","examples":["왼쪽으로 가세요. = Go to the left.","버스로 왔어요. = I came by bus."],"notes":"로/으로 : direction toward, means/tool used, or change into\n로 after vowel or ㄹ (버스로, 서울로) | 으로 after other consonants (왼쪽으로, 연필로)\n~이 되다 vs ~로 되다: 로 marks the resulting state","tag":"particle","deck":"","level":"","trap":"","created":1000000000014,"nextReview":1000000000014,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000015,"korean":"으로","english":"(particle) direction / means / by — after consonant (not ㄹ)","examples":["학교으로 → 학교로. = toward school (로 used, not 으로, after vowel)","연필으로 써요. = I write with a pencil."],"notes":"로/으로 : direction, means, or resulting state\n으로 after consonant (except ㄹ): 연필으로, 왼쪽으로\n로 after vowel or ㄹ: 버스로, 서울로, 칼로\nMemory: 으로 adds a vowel buffer before the consonant-ending word","tag":"particle","deck":"","level":"","trap":"","created":1000000000015,"nextReview":1000000000015,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000016,"korean":"의","english":"(particle) possessive — 's / of","examples":["저의 가방 = my bag","한국의 문화 = Korea's culture"],"notes":"의 : possessive marker, like English 's or 'of'\nPronounced 에 (e) in casual speech, not 의 (ui)\n저의 → 제 in natural speech | 나의 → 내\nOften dropped: 한국 문화 sounds just as natural as 한국의 문화","tag":"particle","deck":"","level":"","trap":"Pronounced 에 (e) in normal speech, not 의 (ui)","created":1000000000016,"nextReview":1000000000016,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000017,"korean":"만","english":"(particle) only / just","examples":["저만 알아요. = Only I know.","하나만 주세요. = Please give me just one."],"notes":"만 : exclusive particle — only this and nothing else\n오직 is a more emphatic synonym\n아무도 + negative vs 만: 아무도 없어 (nobody) | 나만 있어 (only I am here)","tag":"particle","deck":"","level":"","trap":"","created":1000000000017,"nextReview":1000000000017,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000018,"korean":"부터","english":"(particle) from / starting from (time or place)","examples":["지금부터 시작해요. = Let's start from now.","월요일부터 금요일까지 = from Monday to Friday"],"notes":"부터 : marks the starting point in time or sequence\nPair with 까지 (until/to) for from–to ranges\n처음부터 : from the beginning | 지금부터 : from now on","tag":"particle","deck":"","level":"","trap":"","created":1000000000018,"nextReview":1000000000018,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000019,"korean":"까지","english":"(particle) until / up to / to (endpoint in time or space)","examples":["서울까지 얼마나 걸려요? = How long does it take to Seoul?","열시까지 기다려요. = Wait until 10 o'clock."],"notes":"까지 : marks the endpoint (time or place)\nPair with 부터: 월요일부터 금요일까지 = from Monday until Friday\n조차 is stronger: 이름조차 몰라요 = I don't even know the name","tag":"particle","deck":"","level":"","trap":"","created":1000000000019,"nextReview":1000000000019,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000020,"korean":"랑","english":"(particle) and / with — informal, after vowel","examples":["나랑 같이 가요. = Let's go together with me.","커피랑 빵 = coffee and bread"],"notes":"랑/이랑 : informal spoken equivalent of 와/과\n랑 after vowel (나랑, 커피랑) | 이랑 after consonant (친구이랑→친구랑 in speech)\nUse 와/과 in formal writing","tag":"particle","deck":"","level":"","trap":"","created":1000000000020,"nextReview":1000000000020,"interval":1,"ease":2.5,"reps":0},
-  {"id":1000000000021,"korean":"이랑","english":"(particle) and / with — informal, after consonant","examples":["친구이랑 갔어요. = I went with a friend.","밥이랑 국 = rice and soup"],"notes":"이랑/랑 : informal equivalent of 와/과\n이랑 after consonant (밥이랑, 친구이랑) | 랑 after vowel (나랑, 오빠랑)\nIn natural speech, 이랑 is often shortened to 랑 even after consonants","tag":"particle","deck":"","level":"","trap":"","created":1000000000021,"nextReview":1000000000021,"interval":1,"ease":2.5,"reps":0},
+  {
+    "id": 3000000000001,
+    "korean": "걷다",
+    "english": "(verb) to walk",
+    "examples": [
+      "저와 함께 걸을 준비 되셨나요? = Are you ready to walk with me?",
+      "매일 걸어요. = I walk every day."
+    ],
+    "notes": "걷다 : ㄷ-irregular — stem 걷 changes to 걸 before vowel endings\n걷다 → 걸어요 (not 걷어요) | 걸을 (future modifier) | 걸어서 (by walking)\nContrast: 달리다 (to run), 뛰다 (to run/jump)",
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "ㄷ irregular: 걷 → 걸 before vowels (걸어요, 걸으면, 걸을)",
+    "created": 3000000000001,
+    "nextReview": 3000000000001,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 3000000000002,
+    "korean": "되다",
+    "english": "(verb) to become / to be done / can / to work out",
+    "examples": [
+      "준비 되셨나요? = Are you ready? (lit. has it become ready?)",
+      "안 돼요. = That won't do / I can't."
+    ],
+    "notes": "되다 : one of the most versatile verbs\n준비가 되다 : to be ready | 안 되다 : to not work / not be allowed\nPassive: 바뀌다 = 바꾸다+이다; but 되다 also forms passives: 먹히다 vs 됩니다\n~게 되다 : come to (gradually): 알게 됐어요 = I came to know",
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "돼요 = 되어요 (contracted). 되요 is a common misspelling.",
+    "created": 3000000000002,
+    "nextReview": 3000000000002,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 3000000000003,
+    "korean": "보다",
+    "english": "(verb) to see / to look / to watch / to try",
+    "examples": [
+      "세상을 보는 눈이 넓어졌어요. = My view of the world widened.",
+      "한번 해 봐요. = Try doing it once."
+    ],
+    "notes": "보다 : core meanings — to see (눈으로 보다), to watch (영화 보다), to look at\n~아/어 보다 : try doing (경험해 봐요 = try experiencing it)\n~게 되다 vs ~아/어 보다: 보게 됐어요 (came to see) vs 봐요 (try seeing)\n보다 also means 'than' as a particle: 나보다 커요 = taller than me",
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 3000000000003,
+    "nextReview": 3000000000003,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 3000000000004,
+    "korean": "살다",
+    "english": "(verb) to live / to reside / to be alive",
+    "examples": [
+      "매일 똑같은 곳에서 똑같은 삶을 살다 보면… = When you live the same life in the same place day after day…",
+      "어디 살아요? = Where do you live?"
+    ],
+    "notes": "살다 : ㄹ-irregular — ㄹ drops before ㄴ, ㅂ, 시, (으)세요\n살아요 (live) | 사는 (who lives) | 사람 | 삶 (noun: life)\n살다 보면 : 'if you keep living (like that)' — ongoing habitual condition",
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 3000000000004,
+    "nextReview": 3000000000004,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 3000000000005,
+    "korean": "알다",
+    "english": "(verb) to know / to understand",
+    "examples": [
+      "평소에는 몰랐던 내 모습을 알게 돼요. = You come to know sides of yourself you didn't know.",
+      "알아요. = I know / I understand."
+    ],
+    "notes": "알다 : ㄹ-irregular — ㄹ drops before ㄴ, ㅂ, 시\n알아요 | 아는 (who knows) | 알면 (if you know) | 아세요? (do you know? honorific)\nNegative: 모르다 (not to know) — separate verb, not 알지 않다",
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "알아요 NOT 알어요. 모르다 is the irregular negative, not 안 알다.",
+    "created": 3000000000005,
+    "nextReview": 3000000000005,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 3000000000006,
+    "korean": "있다",
+    "english": "(verb) to exist / to have / to be (at a location)",
+    "examples": [
+      "한국에 있어요. = I am in Korea.",
+      "시간이 있어요? = Do you have time?"
+    ],
+    "notes": "있다 : existence (거기 있어요 = it's there) OR possession (돈이 있어요 = I have money)\nOpposite: 없다 (to not exist / to not have)\n있어요 → 있어 (casual) | 계세요 (honorific form of 있다 for people)",
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 3000000000006,
+    "nextReview": 3000000000006,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 3000000000007,
+    "korean": "없다",
+    "english": "(verb) to not exist / to not have / to be absent",
+    "examples": [
+      "시간이 없어요. = I don't have time.",
+      "여유가 없는 삶 = a life with no breathing room"
+    ],
+    "notes": "없다 : opposite of 있다\n없어요 → 없어 (casual) | 안 계세요 (honorific: is not here)\n아무도 없다 = there is nobody | 돈이 없다 = to not have money",
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "없어요 NOT 없아요.",
+    "created": 3000000000007,
+    "nextReview": 3000000000007,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 3000000000008,
+    "korean": "가다",
+    "english": "(verb) to go",
+    "examples": [
+      "여행을 가요. = I go on a trip.",
+      "학교에 가요. = I go to school."
+    ],
+    "notes": "가다 : direction away from speaker (opposite: 오다 = to come)\n가요 | 가서 (go and then) | 가면 (if you go) | 가는 것 (the act of going)\n다녀오다 : go and come back (round trip)",
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 3000000000008,
+    "nextReview": 3000000000008,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 3000000000009,
+    "korean": "오다",
+    "english": "(verb) to come",
+    "examples": [
+      "한국에서 왔어요. = I came from Korea.",
+      "내일 와요. = Come tomorrow."
+    ],
+    "notes": "오다 : movement toward speaker or toward a reference point\n왔어요 (came) | 와서 (coming and then) | 오면 (if you come) | 오는 것\n들어오다 (come in) | 나오다 (come out) | 돌아오다 (come back)",
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "와요 (not 오아요). Contracted form.",
+    "created": 3000000000009,
+    "nextReview": 3000000000009,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 3000000000010,
+    "korean": "주다",
+    "english": "(verb) to give",
+    "examples": [
+      "여행은 우리에게 선물을 줘요. = Travel gives us a gift.",
+      "저한테 주세요. = Please give it to me."
+    ],
+    "notes": "주다 : to give to someone else\n줘요 = 주어요 (contracted) | 드리다 = humble form (give to someone senior)\n~아/어 주다 : do something FOR someone (도와줘요 = help me [for my benefit])",
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "줘요 NOT 주어요 in speech. 드리다 when giving to elders/seniors.",
+    "created": 3000000000010,
+    "nextReview": 3000000000010,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 2000000000001,
+    "korean": "고",
+    "english": "(ending) and / and then — connective",
+    "examples": [
+      "밥을 먹고 자요. = I eat and then sleep.",
+      "마음이 설레고 기분이 좋아요. = My heart flutters and I feel good."
+    ],
+    "notes": "고 : attaches to verb/adjective stem; connects two clauses\n먹고, 걷고, 좋고 — same subject usually shared\nOpposite order matters: A고 B = A first then B",
+    "tag": "grammar",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 2000000000001,
+    "nextReview": 2000000000001,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 2000000000002,
+    "korean": "아서",
+    "english": "(ending) because / so / and then — causal or sequential (bright vowel stem)",
+    "examples": [
+      "좋아서 웃어요. = I'm laughing because I like it.",
+      "일어나서 씻어요. = I get up and then wash."
+    ],
+    "notes": "아서/어서 : causal (reason) or sequential (first A then B)\n아서 after ㅏ or ㅗ stem | 어서 after all others | 해서 from 하다 verbs\n가서 (← 가다) | 좋아서 (← 좋다) | 먹어서 (← 먹다)\nUnlike 고, cannot be used with imperative or propositive",
+    "tag": "grammar",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 2000000000002,
+    "nextReview": 2000000000002,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 2000000000003,
+    "korean": "어서",
+    "english": "(ending) because / so / and then — causal or sequential (dark vowel stem)",
+    "examples": [
+      "피곤해서 일찍 잤어요. = I went to sleep early because I was tired.",
+      "먹어서 배불러요. = I ate, so I'm full."
+    ],
+    "notes": "아서/어서 : same meaning, different vowel harmony form\n어서 after stems without ㅏ or ㅗ | 아서 after ㅏ/ㅗ stems | 해서 from 하다\n해서 ← 하다: 공부해서 (because I studied)",
+    "tag": "grammar",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 2000000000003,
+    "nextReview": 2000000000003,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 2000000000004,
+    "korean": "면",
+    "english": "(ending) if / when — conditional (after vowel or ㄹ stem)",
+    "examples": [
+      "여행을 가면 행복해요. = If/when I travel, I'm happy.",
+      "알면 알수록 좋아요. = The more you know, the better."
+    ],
+    "notes": "면/으면 : conditional — 'if' for hypothetical, 'when' for habitual\n면 after vowel or ㄹ stem | 으면 after other consonants\n가면, 살면, 알면 | 먹으면, 좋으면",
+    "tag": "grammar",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 2000000000004,
+    "nextReview": 2000000000004,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 2000000000005,
+    "korean": "으면",
+    "english": "(ending) if / when — conditional (after consonant stem)",
+    "examples": [
+      "비가 오으면 → 비가 오면. = If it rains. (오다+면, vowel, so 면)",
+      "먹으면 배불러요. = If you eat, you'll be full."
+    ],
+    "notes": "면/으면 : conditional\n으면 after consonant stems (먹으면, 없으면, 좋으면)\n면 after vowel or ㄹ stems (가면, 살면, 알면)",
+    "tag": "grammar",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 2000000000005,
+    "nextReview": 2000000000005,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 2000000000006,
+    "korean": "지만",
+    "english": "(ending) but / although / however — contrast",
+    "examples": [
+      "여행이 좋지만 돈이 없어요. = I like travel, but I have no money.",
+      "알지만 못 해요. = I know, but I can't do it."
+    ],
+    "notes": "지만 : connects two contrasting clauses\nAttaches to verb/adjective stem: 좋지만, 가지만, 없지만\nSofter contrast than 그런데; both clauses share the same subject usually",
+    "tag": "grammar",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 2000000000006,
+    "nextReview": 2000000000006,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 2000000000007,
+    "korean": "는데",
+    "english": "(ending) background / contrast / 'but' — present/future context",
+    "examples": [
+      "날씨가 좋은데 나가요. = The weather is nice, so let's go out.",
+      "피곤한데 일해요. = I'm tired, but I'm working."
+    ],
+    "notes": "는데/은데 : provides background context or mild contrast\n는데 after verb/adjective present stem | 은데 after past/adjective consonant stem\n은데 ← 좋은데, 먹었는데 | 는데 ← 가는데, 먹는데\nAlso used as a trailing sentence to invite a response",
+    "tag": "grammar",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 2000000000007,
+    "nextReview": 2000000000007,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 2000000000008,
+    "korean": "은데",
+    "english": "(ending) background / contrast — past or adjective context",
+    "examples": [
+      "맛있었는데 다 먹었어요. = It was delicious, but I ate it all.",
+      "작은데 예뻐요. = It's small, but pretty."
+    ],
+    "notes": "은데/는데 : mild contrast or background framing\n은데 after adjective consonant stems (작은데, 없는데) or past tense\n는데 after present verb stems (가는데, 먹는데)",
+    "tag": "grammar",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 2000000000008,
+    "nextReview": 2000000000008,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 2000000000009,
+    "korean": "려고",
+    "english": "(ending) intending to / in order to (after vowel or ㄹ stem)",
+    "examples": [
+      "여행을 가려고 해요. = I'm planning to travel.",
+      "이야기해 보려고 해요. = I'm trying to talk about it."
+    ],
+    "notes": "려고/으려고 : expresses intention or purpose\n려고 after vowel or ㄹ | 으려고 after consonant\n가려고, 살려고, 알려고 | 먹으려고, 읽으려고\n~려고 하다 : be about to / planning to",
+    "tag": "grammar",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 2000000000009,
+    "nextReview": 2000000000009,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 2000000000010,
+    "korean": "으려고",
+    "english": "(ending) intending to / in order to (after consonant stem)",
+    "examples": [
+      "밥을 먹으려고 나갔어요. = I went out intending to eat.",
+      "공부하으려고 → 공부하려고. = Intending to study."
+    ],
+    "notes": "려고/으려고 : intention\n으려고 after consonant stems (먹으려고, 읽으려고)\n려고 after vowel or ㄹ stems (가려고, 살려고)",
+    "tag": "grammar",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 2000000000010,
+    "nextReview": 2000000000010,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 2000000000011,
+    "korean": "네요",
+    "english": "(ending) I notice / I see that / how ~ — discovery or mild surprise",
+    "examples": [
+      "날씨가 좋네요. = Oh, the weather is nice (I notice).",
+      "잘 하시네요. = Wow, you're doing well."
+    ],
+    "notes": "네요 : expresses the speaker's fresh realization or observation\nAdds a nuance of 'I just noticed' or 'how ~'\n아/어요 states a fact | 네요 reacts to noticing it\n좋네요 (I see it's good) ≠ 좋아요 (it's good)",
+    "tag": "grammar",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 2000000000011,
+    "nextReview": 2000000000011,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 2000000000012,
+    "korean": "잖아요",
+    "english": "(ending) as you know / isn't it / don't you think — shared knowledge",
+    "examples": [
+      "여행은 좋잖아요. = Travel is good, you know.",
+      "우리는 이미 알잖아요. = We already know, right?"
+    ],
+    "notes": "잖아요 : reminds listener of something both parties should know\nImplies 'you know this already' — can sound slightly assertive\nCasual: 잖아 | 잖아요 is polite but still informal",
+    "tag": "grammar",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 2000000000012,
+    "nextReview": 2000000000012,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 2000000000013,
+    "korean": "거든요",
+    "english": "(ending) you see / the thing is / that's because — explaining background",
+    "examples": [
+      "그게 좋거든요. = You see, that's good.",
+      "여행을 좋아하거든요. = The thing is, I like travel."
+    ],
+    "notes": "거든요 : offers a reason or background explanation to the listener\nImplies the listener didn't know yet — explains why you do/feel something\nCasual: 거든 | More formal: 거든요",
+    "tag": "grammar",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 2000000000013,
+    "nextReview": 2000000000013,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 2000000000014,
+    "korean": "기",
+    "english": "(ending) nominalizer — turns a verb/adjective into a noun (gerund)",
+    "examples": [
+      "좋아지기 쉽잖아요. = It's easy to get better (lit. 'getting better is easy').",
+      "여행하기 좋아요. = It's good for traveling."
+    ],
+    "notes": "기 : makes a verb or adjective into a noun concept\n먹기 (the act of eating) | 살기 (living) | 좋기 (being good)\n기 vs 는 것: mostly interchangeable; 기 more common with 쉽다/어렵다/좋다/싫다",
+    "tag": "grammar",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 2000000000014,
+    "nextReview": 2000000000014,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 2000000000015,
+    "korean": "게",
+    "english": "(ending) adverbially / so that / in a way that",
+    "examples": [
+      "완전히 다르게 보게 돼요. = You come to see it completely differently.",
+      "새롭게 느껴져요. = It feels fresh/new."
+    ],
+    "notes": "게 : converts an adjective to an adverb (크다→크게 = largely/greatly)\nAlso in ~게 되다 : come to do/become (gradually): 알게 됐어요 = I came to know\n~게 하다 : make/let someone do: 웃게 해요 = makes me laugh",
+    "tag": "grammar",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 2000000000015,
+    "nextReview": 2000000000015,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 2000000000016,
+    "korean": "아요",
+    "english": "(ending) polite present tense (bright vowel stem: ㅏ ㅗ)",
+    "examples": [
+      "가요. = I go / going.",
+      "좋아요. = It's good / I like it."
+    ],
+    "notes": "아요/어요 : polite informal present tense (해요체)\n아요 after ㅏ or ㅗ stem: 가요 (가다), 봐요 (보다→봐요), 좋아요 (좋다)\n어요 after all other stems: 먹어요, 없어요, 해요 (하다)\n해요 from 하다 is a special case",
+    "tag": "grammar",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 2000000000016,
+    "nextReview": 2000000000016,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 2000000000017,
+    "korean": "어요",
+    "english": "(ending) polite present tense (dark/other vowel stem)",
+    "examples": [
+      "먹어요. = I eat.",
+      "없어요. = There isn't / I don't have."
+    ],
+    "notes": "아요/어요 : polite informal present (해요체)\n어요 after stems without ㅏ/ㅗ: 먹어요, 없어요, 줘요 (주다→줘요)\n해요 ← 하다 (special); 봐요 ← 보다 (contracts: 보아요→봐요)\nThis ending is the most-used polite speech level in everyday Korean",
+    "tag": "grammar",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 2000000000017,
+    "nextReview": 2000000000017,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000001,
+    "korean": "도",
+    "english": "(particle) also / too / even / again",
+    "examples": [
+      "오늘도 걸어요. = We walk again today.",
+      "저도 좋아해요. = I like it too."
+    ],
+    "notes": "도 : additive particle — attaches directly to a noun, replacing 은/는/이/가/을/를\n오늘도 : today too | 저도 : me too | 나도 : me too (casual)\n아무도 + negative = nobody at all",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000001,
+    "nextReview": 1000000000001,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000002,
+    "korean": "은",
+    "english": "(particle) topic marker — after consonant",
+    "examples": [
+      "저는 학생이에요. = I am a student.",
+      "오늘은 날씨가 좋아요. = As for today, the weather is nice."
+    ],
+    "notes": "은/는 : marks the topic of the sentence (what we're talking about)\n은 after consonant (밥은, 책은) | 는 after vowel (나는, 오늘은)\nTopic ≠ subject: 저는 often signals contrast or sets the scene",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000002,
+    "nextReview": 1000000000002,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000003,
+    "korean": "는",
+    "english": "(particle) topic marker — after vowel",
+    "examples": [
+      "나는 학생이에요. = I am a student.",
+      "여행은 좋아요. = Travel is good (as a topic)."
+    ],
+    "notes": "은/는 : marks the topic of the sentence\n는 after vowel (나는, 여행은) | 은 after consonant (밥은, 학생은)\nAlso used for contrast: 저는 모르지만… = As for me, I don't know but…",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000003,
+    "nextReview": 1000000000003,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000004,
+    "korean": "이",
+    "english": "(particle) subject marker — after consonant",
+    "examples": [
+      "학생이 왔어요. = The student came.",
+      "책이 있어요. = There is a book."
+    ],
+    "notes": "이/가 : marks the grammatical subject of the verb\n이 after consonant (학생이, 책이) | 가 after vowel (나가, 여기가)\nUnlike 은/는, 이/가 introduces new info or emphasizes identity",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000004,
+    "nextReview": 1000000000004,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000005,
+    "korean": "가",
+    "english": "(particle) subject marker — after vowel",
+    "examples": [
+      "나가 아니에요. = It's not me.",
+      "여기가 좋아요. = This place is nice."
+    ],
+    "notes": "이/가 : marks the grammatical subject\n가 after vowel (나가, 여기가) | 이 after consonant (학생이, 책이)\n저가 is rare — 제가 is the correct humble form of 가",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "제가 (not 저가) is correct formal subject form",
+    "created": 1000000000005,
+    "nextReview": 1000000000005,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000006,
+    "korean": "을",
+    "english": "(particle) object marker — after consonant",
+    "examples": [
+      "밥을 먹어요. = I eat rice.",
+      "한국어를 배워요. = I learn Korean."
+    ],
+    "notes": "을/를 : marks the direct object of the verb\n을 after consonant (밥을, 책을) | 를 after vowel (저를, 음악을)\nCan be dropped in casual speech: 밥 먹어요 is fine too",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000006,
+    "nextReview": 1000000000006,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000007,
+    "korean": "를",
+    "english": "(particle) object marker — after vowel",
+    "examples": [
+      "저를 도와주세요. = Please help me.",
+      "여행을 좋아해요. = I like travel."
+    ],
+    "notes": "을/를 : marks the direct object\n를 after vowel (저를, 여행을) | 을 after consonant (밥을, 음악을)\nOften dropped in casual speech",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000007,
+    "nextReview": 1000000000007,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000008,
+    "korean": "와",
+    "english": "(particle) and / with — after vowel",
+    "examples": [
+      "저와 함께 = together with me",
+      "커피와 케이크 = coffee and cake"
+    ],
+    "notes": "와/과 : connects nouns (and) or marks accompaniment (with)\n와 after vowel (저와, 커피와) | 과 after consonant (친구과→친구와)\n랑/이랑 are informal equivalents",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000008,
+    "nextReview": 1000000000008,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000009,
+    "korean": "과",
+    "english": "(particle) and / with — after consonant",
+    "examples": [
+      "친구과 갔어요. = I went with a friend.",
+      "밥과 국 = rice and soup"
+    ],
+    "notes": "와/과 : connects nouns or marks accompaniment\n과 after consonant (밥과, 학생과) | 와 after vowel (저와, 오빠와)\nIn speech, 와 is often used regardless of preceding sound",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000009,
+    "nextReview": 1000000000009,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000010,
+    "korean": "에",
+    "english": "(particle) at / in / to / on (location or time)",
+    "examples": [
+      "학교에 가요. = I go to school.",
+      "세시에 만나요. = Let's meet at 3 o'clock."
+    ],
+    "notes": "에 : static location (있다/없다), direction (가다/오다), or time point\n에 vs 에서: 에 = where you are/going TO | 에서 = where the action happens\n학교에 있어요 (at school) vs 학교에서 공부해요 (study AT school)",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000010,
+    "nextReview": 1000000000010,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000011,
+    "korean": "에서",
+    "english": "(particle) at / in / from (location of action or starting point)",
+    "examples": [
+      "카페에서 공부해요. = I study at the café.",
+      "서울에서 왔어요. = I came from Seoul."
+    ],
+    "notes": "에서 : where an action takes place, or the starting point of movement\n에서 vs 에: 에서 = action happens here | 에 = static location or destination\n한국에서 = in Korea (action) | 한국에 = to Korea (going) / in Korea (being)",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000011,
+    "nextReview": 1000000000011,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000012,
+    "korean": "에게",
+    "english": "(particle) to / for (a person or animal) — formal/written",
+    "examples": [
+      "친구에게 줬어요. = I gave it to a friend.",
+      "선생님에게 물어봐요. = Ask the teacher."
+    ],
+    "notes": "에게 : dative particle for people/animals; formal or written style\n한테 is the casual spoken equivalent\n에게서 / 한테서 = from (a person): 친구에게서 받았어요 (received from a friend)",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000012,
+    "nextReview": 1000000000012,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000013,
+    "korean": "한테",
+    "english": "(particle) to / for (a person) — informal/spoken",
+    "examples": [
+      "나한테 줘. = Give it to me.",
+      "친구한테 물어봐. = Ask your friend."
+    ],
+    "notes": "한테 : casual spoken equivalent of 에게\n한테서 = from (a person) casual: 친구한테서 들었어요 (heard from a friend)\nUse 에게 in writing or formal situations",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000013,
+    "nextReview": 1000000000013,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000014,
+    "korean": "로",
+    "english": "(particle) direction / means / by — after vowel or ㄹ",
+    "examples": [
+      "왼쪽으로 가세요. = Go to the left.",
+      "버스로 왔어요. = I came by bus."
+    ],
+    "notes": "로/으로 : direction toward, means/tool used, or change into\n로 after vowel or ㄹ (버스로, 서울로) | 으로 after other consonants (왼쪽으로, 연필로)\n~이 되다 vs ~로 되다: 로 marks the resulting state",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000014,
+    "nextReview": 1000000000014,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000015,
+    "korean": "으로",
+    "english": "(particle) direction / means / by — after consonant (not ㄹ)",
+    "examples": [
+      "학교으로 → 학교로. = toward school (로 used, not 으로, after vowel)",
+      "연필으로 써요. = I write with a pencil."
+    ],
+    "notes": "로/으로 : direction, means, or resulting state\n으로 after consonant (except ㄹ): 연필으로, 왼쪽으로\n로 after vowel or ㄹ: 버스로, 서울로, 칼로\nMemory: 으로 adds a vowel buffer before the consonant-ending word",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000015,
+    "nextReview": 1000000000015,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000016,
+    "korean": "의",
+    "english": "(particle) possessive — 's / of",
+    "examples": [
+      "저의 가방 = my bag",
+      "한국의 문화 = Korea's culture"
+    ],
+    "notes": "의 : possessive marker, like English 's or 'of'\nPronounced 에 (e) in casual speech, not 의 (ui)\n저의 → 제 in natural speech | 나의 → 내\nOften dropped: 한국 문화 sounds just as natural as 한국의 문화",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "Pronounced 에 (e) in normal speech, not 의 (ui)",
+    "created": 1000000000016,
+    "nextReview": 1000000000016,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000017,
+    "korean": "만",
+    "english": "(particle) only / just",
+    "examples": [
+      "저만 알아요. = Only I know.",
+      "하나만 주세요. = Please give me just one."
+    ],
+    "notes": "만 : exclusive particle — only this and nothing else\n오직 is a more emphatic synonym\n아무도 + negative vs 만: 아무도 없어 (nobody) | 나만 있어 (only I am here)",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000017,
+    "nextReview": 1000000000017,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000018,
+    "korean": "부터",
+    "english": "(particle) from / starting from (time or place)",
+    "examples": [
+      "지금부터 시작해요. = Let's start from now.",
+      "월요일부터 금요일까지 = from Monday to Friday"
+    ],
+    "notes": "부터 : marks the starting point in time or sequence\nPair with 까지 (until/to) for from–to ranges\n처음부터 : from the beginning | 지금부터 : from now on",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000018,
+    "nextReview": 1000000000018,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000019,
+    "korean": "까지",
+    "english": "(particle) until / up to / to (endpoint in time or space)",
+    "examples": [
+      "서울까지 얼마나 걸려요? = How long does it take to Seoul?",
+      "열시까지 기다려요. = Wait until 10 o'clock."
+    ],
+    "notes": "까지 : marks the endpoint (time or place)\nPair with 부터: 월요일부터 금요일까지 = from Monday until Friday\n조차 is stronger: 이름조차 몰라요 = I don't even know the name",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000019,
+    "nextReview": 1000000000019,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000020,
+    "korean": "랑",
+    "english": "(particle) and / with — informal, after vowel",
+    "examples": [
+      "나랑 같이 가요. = Let's go together with me.",
+      "커피랑 빵 = coffee and bread"
+    ],
+    "notes": "랑/이랑 : informal spoken equivalent of 와/과\n랑 after vowel (나랑, 커피랑) | 이랑 after consonant (친구이랑→친구랑 in speech)\nUse 와/과 in formal writing",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000020,
+    "nextReview": 1000000000020,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1000000000021,
+    "korean": "이랑",
+    "english": "(particle) and / with — informal, after consonant",
+    "examples": [
+      "친구이랑 갔어요. = I went with a friend.",
+      "밥이랑 국 = rice and soup"
+    ],
+    "notes": "이랑/랑 : informal equivalent of 와/과\n이랑 after consonant (밥이랑, 친구이랑) | 랑 after vowel (나랑, 오빠랑)\nIn natural speech, 이랑 is often shortened to 랑 even after consonants",
+    "tag": "particle",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "created": 1000000000021,
+    "nextReview": 1000000000021,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
   {
     "id": 1782546151420,
     "korean": "저",
     "english": "I / me (formal/humble)",
-    "examples": ["저는 학생이에요 = I am a student"],
+    "examples": [
+      "저는 학생이에요 = I am a student"
+    ],
     "notes": "저 : formal/humble form of 나 (casual I/me)\n저와 : I and… / with me\n저는 : I (topic marker)",
     "tag": "",
     "created": 1782546151420,
@@ -1334,6 +2200,1656 @@
     "notes": "오다 : dictionary form come)\n에서 : at / in (where an action happens).",
     "created": 1783566495374,
     "nextReview": 1783566495374,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820366,
+    "korean": "설레고",
+    "english": "'설레다' (verb) to feel excited, heart to flutter",
+    "examples": [
+      "여행 이야기만 나오면 괜히 마음이 설레고 그래요. = Whenever travel comes up, my heart just flutters for no reason."
+    ],
+    "notes": "설레고 : connective form of 설레다 (and/so excited…)\n설레다 : describes a fluttery, anticipatory excitement; not interchangeable with 흥분하다",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820367,
+    "korean": "직장인들에게",
+    "english": "'직장인' (noun) office worker, salaried employee",
+    "examples": [
+      "휴가 일수가 짧은 한국 직장인들에게 여행이 인기가 많아요. = Short trips are very popular among Korean office workers who have few vacation days."
+    ],
+    "notes": "직장인들에게 : 직장인 (worker) + 들 (plural marker) + 에게 (to/for, dative)\n직장 : workplace; 인 : person",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820368,
+    "korean": "엄밀히 말하면",
+    "english": "'엄밀하다' (adjective) strictly speaking, to be exact/precise",
+    "examples": [
+      "엄밀히 말하면 여행이 우리 삶에 꼭 필요한 건 아니에요. = Strictly speaking, travel isn't strictly necessary in our lives."
+    ],
+    "notes": "엄밀히 말하면 : set phrase, literally 'if you speak precisely'\n엄밀히 : adverb of 엄밀하다; 말하면 : if (one) speaks",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820369,
+    "korean": "시선",
+    "english": "'시선' (noun) perspective, gaze, viewpoint",
+    "examples": [
+      "여행은 우리에게 새로운 시선을 준다고 생각해요. = I think travel gives us a new perspective."
+    ],
+    "notes": "시선 : literally 'line of sight'; used figuratively for one's worldview or perspective\n새로운 시선 : a fresh perspective",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820370,
+    "korean": "좁아지기",
+    "english": "'좁아지다' (verb) to narrow, to become narrow",
+    "examples": [
+      "세상을 보는 눈이 좁아지기 쉽잖아요. = It's easy for your view of the world to narrow."
+    ],
+    "notes": "좁아지기 : 좁다 (narrow) + 아지다 (to become) + 기 (nominalizer)\n좁아지기 쉽다 : easy to become narrow; opposite: 넓어지다 (to broaden)",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820371,
+    "korean": "깨닫게 돼요",
+    "english": "'깨닫다' (verb) to realize, to come to understand",
+    "examples": [
+      "세상에는 다양한 삶이 있구나 하고 깨닫게 돼요. = You come to realize there are so many diverse ways of living in this world."
+    ],
+    "notes": "깨닫게 돼요 : 깨닫다 + 게 되다 (to come to do; gradual realization)\n깨닫다 : a deeper realization than 알다; the moment something clicks",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820372,
+    "korean": "고민",
+    "english": "'고민' (noun) worry, dilemma, anguish over a decision",
+    "examples": [
+      "내 고민이 생각보다 작게 느껴지기도 해요. = My worries start to feel smaller than I thought."
+    ],
+    "notes": "고민 : deeper than 걱정 (general anxiety); implies agonizing over a specific problem\n고민하다 : to agonize, to wrestle with a problem",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820373,
+    "korean": "선물해 줘요",
+    "english": "'선물하다' (verb) to give as a gift",
+    "examples": [
+      "여행은 우리에게 지금 이 순간을 선물해 줘요. = Travel gives us the gift of the present moment."
+    ],
+    "notes": "선물해 줘요 : 선물하다 (to gift) + 아/어 줘요 (does for someone's benefit)\n선물 alone = gift (noun)",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820374,
+    "korean": "후회하거나",
+    "english": "'후회하다' (verb) to regret",
+    "examples": [
+      "과거를 후회하거나 미래를 걱정하면서 많은 시간을 보내잖아요. = We spend a lot of time regretting the past or worrying about the future."
+    ],
+    "notes": "후회하거나 : 후회하다 + 거나 (or; connects alternatives)\n후회 (noun) = regret; 후회 없이 = without regret",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820375,
+    "korean": "익숙한",
+    "english": "'익숙하다' (adjective) familiar, accustomed to",
+    "examples": [
+      "익숙한 곳을 떠나서 낯선 곳에 가면 내가 어떤 사람인지 더 잘 보여요. = When you leave familiar places and go somewhere unfamiliar, you see more clearly what kind of person you are."
+    ],
+    "notes": "익숙한 : attributive form of 익숙하다\n익숙해지다 : to get used to something; opposite: 낯설다 (unfamiliar)",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820376,
+    "korean": "낯선",
+    "english": "'낯설다' (adjective) unfamiliar, strange, foreign",
+    "examples": [
+      "낯선 곳에서는 작은 것 하나하나가 새롭고 신기해요. = In unfamiliar places, every little thing feels new and wonderful."
+    ],
+    "notes": "낯선 : attributive form of 낯설다\n낯 = face/stranger; 설다 = to be unfamiliar; pair with 익숙한 (familiar)",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820377,
+    "korean": "들여다보는",
+    "english": "'들여다보다' (verb) to peer into, to look inside",
+    "examples": [
+      "여행은 밖을 보러 가는 거지만 사실은 내 안을 들여다보는 시간이 돼요. = While travel is about going out to see the world, it also becomes a time to look inward."
+    ],
+    "notes": "들여다보는 : 들이- (inward) + 여다 + 보다 (see); means to look closely into something\n내 안을 들여다보다 : to look inside oneself",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820378,
+    "korean": "빡빡하게",
+    "english": "'빡빡하다' (adjective) packed tight, crammed, overly demanding",
+    "examples": [
+      "일정을 너무 빡빡하게 안 짜려고 해요. = I try not to pack my schedule too tightly."
+    ],
+    "notes": "빡빡하게 : adverbial form of 빡빡하다; colloquial/informal\n일정을 빡빡하게 짜다 : to cram the schedule; also used of strict rules or demanding people",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820379,
+    "korean": "여유",
+    "english": "'여유' (noun) leisure, breathing room, ease",
+    "examples": [
+      "이제는 일부러 여유를 둬요. = Now I intentionally leave room for leisure."
+    ],
+    "notes": "여유를 두다 : to leave breathing room\n여유롭다 : to be relaxed, at ease; 여유가 없다 : to have no breathing room",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820380,
+    "korean": "사소한",
+    "english": "'사소하다' (adjective) trivial, minor, trifling",
+    "examples": [
+      "아주 사소한 순간들이 오래 남더라고요. = The tiny, trivial moments last the longest."
+    ],
+    "notes": "사소한 : attributive form of 사소하다\n사소한 것 : a trivial thing; 사소한 순간 : a tiny moment; often used to mean 'seemingly unimportant'",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820381,
+    "korean": "우연히",
+    "english": "'우연히' (adverb) by chance, coincidentally, accidentally",
+    "examples": [
+      "길을 잃었다가 우연히 들어간 작은 골목이 기억에 남아요. = A small alley I wandered into by chance after getting lost stays in my memory."
+    ],
+    "notes": "우연히 : adverb from 우연 (chance, coincidence)\n우연히 만나다 : to meet by chance; opposite: 일부러 (intentionally, on purpose)",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820382,
+    "korean": "일상",
+    "english": "'일상' (noun) daily life, everyday life, routine",
+    "examples": [
+      "여행을 다녀오면 제 일상을 조금 다르게 보게 돼요. = After traveling, I come to see my everyday life a little differently."
+    ],
+    "notes": "일상 : 日(day) + 常(ordinary/always)\n일상적 : routine, everyday (adjective); 일상에서 벗어나다 : to escape from daily routine",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820383,
+    "korean": "관광지",
+    "english": "'관광지' (noun) tourist attraction, tourist spot",
+    "examples": [
+      "유명한 관광지나 멋진 풍경도 기억에 남아요. = Famous tourist attractions and great views do stay with me."
+    ],
+    "notes": "관광지 : 관광 (sightseeing/tourism) + 지 (place)\n관광하다 : to go sightseeing; 관광객 : tourist",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820384,
+    "korean": "일정",
+    "english": "'일정' (noun) schedule, itinerary, plan",
+    "examples": [
+      "여행을 갈 때 일정을 너무 빡빡하게 안 짜려고 해요. = When I travel, I try not to pack my itinerary too tightly."
+    ],
+    "notes": "일정을 짜다 : to make a schedule/itinerary\n일정을 조정하다 : to adjust schedule; 일정이 바쁘다 : to have a busy schedule",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783663820385,
+    "korean": "다양한",
+    "english": "'다양하다' (adjective) diverse, varied, various",
+    "examples": [
+      "세상에는 정말 다양한 삶이 있구나 하고 깨닫게 돼요. = You realize there are truly so many diverse ways of living in this world."
+    ],
+    "notes": "다양한 : attributive form of 다양하다\n다양성 : diversity; 다양하게 : in various ways",
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783663820366,
+    "nextReview": 1783663820366,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783684843549,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "여행을 가다 : to go on a trip\n여행하다 : to travel (verb form)\n해외여행 : overseas travel; 국내여행 : domestic travel",
+    "korean": "여행",
+    "english": "'여행' (noun) travel, trip",
+    "examples": [
+      "여행 이야기만 나오면 괜히 마음이 설레고 그래요. = Whenever travel comes up, my heart just flutters."
+    ]
+  },
+  {
+    "id": 1783684843550,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "여러분 : polite/broadcast way to address an audience\nmore formal than 모두 (everyone)",
+    "korean": "여러분",
+    "english": "'여러분' (pronoun) everyone, all of you",
+    "examples": [
+      "여러분, 여행 좋아하세요? = Everyone, do you like traveling?"
+    ]
+  },
+  {
+    "id": 1783684843552,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "함께 ≈ 같이 (together); 함께 is slightly more literary\n저와 함께 : together with me",
+    "korean": "함께",
+    "english": "'함께' (adverb) together, along with",
+    "examples": [
+      "오늘도 저와 함께 걸을 준비 되셨나요? = Are you ready to walk with me again today?"
+    ]
+  },
+  {
+    "id": 1783684843553,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "준비가 됐어요 : I am ready\n준비하다 : to prepare; 준비 중 : in preparation",
+    "korean": "준비",
+    "english": "'준비' (noun) preparation, readiness",
+    "examples": [
+      "걸을 준비 되셨나요? = Are you ready to walk?"
+    ]
+  },
+  {
+    "id": 1783684843554,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "기분이 좋다 : to be in a good mood\n기분이 나쁘다 : to be in a bad mood; 기분 전환 : change of mood",
+    "korean": "기분",
+    "english": "'기분' (noun) mood, feeling",
+    "examples": [
+      "기분이 좋아지는 주제로 이야기해 보려고 해요. = I want to talk about a topic that makes me feel good."
+    ]
+  },
+  {
+    "id": 1783684843555,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "주제를 정하다 : to decide on a topic\n오늘의 주제 : today's topic",
+    "korean": "주제",
+    "english": "'주제' (noun) topic, subject, theme",
+    "examples": [
+      "기분이 좋아지는 주제로 이야기해 보려고 해요. = I want to talk about a topic that makes me feel good."
+    ]
+  },
+  {
+    "id": 1783684843556,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "이야기하다 : to talk, to tell a story\n이야기를 나누다 : to have a conversation",
+    "korean": "이야기",
+    "english": "'이야기' (noun) story, talk, conversation",
+    "examples": [
+      "여행 이야기만 나오면 설레고 그래요. = Whenever travel talk comes up, my heart flutters."
+    ]
+  },
+  {
+    "id": 1783684843557,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "마음이 편하다 : to feel at ease\n마음에 남다 : to stay in one's heart; 마음에 들다 : to like something",
+    "korean": "마음",
+    "english": "'마음' (noun) heart, mind, feeling",
+    "examples": [
+      "마음이 설레고 그래요. = My heart just flutters."
+    ]
+  },
+  {
+    "id": 1783684843558,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "세상에는 : in this world\n세상 = more colloquial/emotional than 세계 (세계 = formal/geographic world)",
+    "korean": "세상",
+    "english": "'세상' (noun) world, life",
+    "examples": [
+      "세상을 보는 눈이 좁아지기 쉽잖아요. = It's easy for your view of the world to narrow."
+    ]
+  },
+  {
+    "id": 1783684843559,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "삶 is the noun form of 살다 (to live)\n삶의 질 : quality of life; 일상적인 삶 : everyday life",
+    "korean": "삶",
+    "english": "'삶' (noun) life, living",
+    "examples": [
+      "똑같은 삶을 살다 보면 세상을 보는 눈이 좁아져요. = Living the same life day after day narrows your worldview."
+    ]
+  },
+  {
+    "id": 1783684843560,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "사람들 : people (plural with 들)\n사람마다 : each person; 어떤 사람 : what kind of person",
+    "korean": "사람",
+    "english": "'사람' (noun) person, people",
+    "examples": [
+      "한국 사람들은 여행을 정말 좋아하는 것 같아요. = Koreans seem to really love traveling."
+    ]
+  },
+  {
+    "id": 1783684843561,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "나라 = colloquial; 국가 = formal\n어느 나라 : which country; 우리나라 : our country (Korea)",
+    "korean": "나라",
+    "english": "'나라' (noun) country, nation",
+    "examples": [
+      "다른 나라의 경우는 잘 모르겠는데. = I'm not sure about other countries."
+    ]
+  },
+  {
+    "id": 1783684843562,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "특히 emphasizes the following item above all others\n특별히 : specially (more formal)",
+    "korean": "특히",
+    "english": "'특히' (adverb) especially, particularly",
+    "examples": [
+      "특히 휴가 일수가 짧은 한국 직장인들에게 여행이 인기가 많아요. = Especially for Korean office workers with few vacation days, trips are very popular."
+    ]
+  },
+  {
+    "id": 1783684843563,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "휴가를 가다 : to go on vacation\n유급 휴가 : paid vacation; 휴가 중 : on vacation",
+    "korean": "휴가",
+    "english": "'휴가' (noun) vacation, holiday, time off",
+    "examples": [
+      "휴가 일수가 짧은 직장인들에게 여행이 인기가 많아요. = Short trips are popular among workers with few vacation days."
+    ]
+  },
+  {
+    "id": 1783684843564,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "인기가 많다 : to be very popular\n인기 있다 / 인기 없다 : popular / unpopular; 인기 스타 : popular star",
+    "korean": "인기",
+    "english": "'인기' (noun) popularity",
+    "examples": [
+      "짧게라도 다녀오는 여행이 정말 인기가 많아요. = Even short trips are very popular."
+    ]
+  },
+  {
+    "id": 1783684843565,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "이 순간 : this moment\n그 순간 : that moment; 순간적으로 : momentarily",
+    "korean": "순간",
+    "english": "'순간' (noun) moment, instant",
+    "examples": [
+      "여행은 우리에게 지금 이 순간을 선물해 줘요. = Travel gives us the gift of this present moment."
+    ]
+  },
+  {
+    "id": 1783684843566,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "과거 ↔ 현재 (present) ↔ 미래 (future)\n과거에 : in the past",
+    "korean": "과거",
+    "english": "'과거' (noun) the past",
+    "examples": [
+      "과거를 후회하거나 미래를 걱정하면서 많은 시간을 보내잖아요. = We spend a lot of time regretting the past or worrying about the future."
+    ]
+  },
+  {
+    "id": 1783684843567,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "미래 ↔ 현재 (present) ↔ 과거 (past)\n미래에 : in the future; 미래를 꿈꾸다 : to dream of the future",
+    "korean": "미래",
+    "english": "'미래' (noun) the future",
+    "examples": [
+      "미래를 걱정하면서 많은 시간을 보내잖아요. = We spend a lot of time worrying about the future."
+    ]
+  },
+  {
+    "id": 1783684843568,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "걱정하다 : to worry\n걱정 마세요 : don't worry; 걱정이 많다 : to have many worries",
+    "korean": "걱정",
+    "english": "'걱정' (noun/verb) worry, concern; to worry",
+    "examples": [
+      "미래를 걱정하면서 많은 시간을 보내잖아요. = We spend a lot of time worrying about the future."
+    ]
+  },
+  {
+    "id": 1783684843569,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "풍경이 아름답다 : the scenery is beautiful\n풍경화 : landscape painting; 도시 풍경 : city landscape",
+    "korean": "풍경",
+    "english": "'풍경' (noun) scenery, landscape, view",
+    "examples": [
+      "새로운 풍경을 보고, 새로운 냄새를 맡고, 새로운 소리를 들으면서요. = Seeing new scenery, smelling new smells, hearing new sounds."
+    ]
+  },
+  {
+    "id": 1783684843570,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "냄새를 맡다 : to smell something\n좋은 냄새 : nice smell; 냄새가 나다 : to give off a smell",
+    "korean": "냄새",
+    "english": "'냄새' (noun) smell, scent, odor",
+    "examples": [
+      "새로운 냄새를 맡고, 새로운 소리를 들으면서요. = Smelling new smells, hearing new sounds."
+    ]
+  },
+  {
+    "id": 1783684843571,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "소리를 내다 : to make a sound\n큰 소리 : loud sound; 목소리 : voice (literally neck-sound)",
+    "korean": "소리",
+    "english": "'소리' (noun) sound, noise, voice",
+    "examples": [
+      "새로운 소리를 들으면서 지금 이 순간에 집중하게 돼요. = Hearing new sounds, you find yourself focused on the present."
+    ]
+  },
+  {
+    "id": 1783684843572,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "선물을 주다 / 받다 : to give / receive a gift\n선물하다 : to give as a gift",
+    "korean": "선물",
+    "english": "'선물' (noun) gift, present",
+    "examples": [
+      "여행은 우리에게 지금 이 순간을 선물해 줘요. = Travel gives us the gift of this present moment."
+    ]
+  },
+  {
+    "id": 1783684843573,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "자신 = oneself (reflexive)\n자신감 : self-confidence; 자신을 믿다 : to believe in oneself",
+    "korean": "자신",
+    "english": "'자신' (noun) oneself, self",
+    "examples": [
+      "여행은 우리 자신을 알게 해 줘요. = Travel helps us know ourselves."
+    ]
+  },
+  {
+    "id": 1783684843574,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "내 모습 : my (true) self / my appearance\n다양한 모습 : various sides; 모습을 드러내다 : to reveal oneself",
+    "korean": "모습",
+    "english": "'모습' (noun) appearance, figure, self, side (of a person)",
+    "examples": [
+      "평소에는 몰랐던 내 모습을 발견하게 되어요. = You discover sides of yourself you never knew in everyday life."
+    ]
+  },
+  {
+    "id": 1783684843575,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "해외여행 : overseas travel\n해외에서 : abroad; 해외로 나가다 : to go overseas",
+    "korean": "해외",
+    "english": "'해외' (noun) overseas, abroad",
+    "examples": [
+      "꼭 비행기를 타고 외국에 가는 것만 여행이 아니더라고요. = Traveling doesn't have to mean going abroad by plane."
+    ]
+  },
+  {
+    "id": 1783684843576,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "장소를 정하다 : to decide on a place\n공공 장소 : public place; 어떤 장소 : what kind of place",
+    "korean": "장소",
+    "english": "'장소' (noun) place, location, venue",
+    "examples": [
+      "장소가 그렇게 중요한 건 아니더라고요. = The place isn't as important as I thought."
+    ]
+  },
+  {
+    "id": 1783684843577,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "비행기를 타다 : to take/board a plane\n비행기표 : plane ticket; 비행 : flight (noun)",
+    "korean": "비행기",
+    "english": "'비행기' (noun) airplane",
+    "examples": [
+      "꼭 비행기를 타고 외국에 가는 것만 여행이 아니더라고요. = Traveling doesn't have to mean getting on a plane and going abroad."
+    ]
+  },
+  {
+    "id": 1783684843578,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "외국에 가다 : to go abroad\n외국어 : foreign language; 외국인 : foreigner",
+    "korean": "외국",
+    "english": "'외국' (noun) foreign country, abroad",
+    "examples": [
+      "비행기를 타고 외국에 가는 것만 여행이 아니더라고요. = Traveling doesn't have to mean going abroad by plane."
+    ]
+  },
+  {
+    "id": 1783684843579,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "우리 동네 : our neighborhood / my neighborhood\n동네 사람 : neighborhood person; 동네 산책 : neighborhood walk",
+    "korean": "동네",
+    "english": "'동네' (noun) neighborhood, local area",
+    "examples": [
+      "우리 동네에서 평소에 안 가 본 길을 걸어 보는 것도 여행이에요. = Walking a road in your neighborhood you've never been down is also travel."
+    ]
+  },
+  {
+    "id": 1783684843580,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "거리가 멀다 : the distance is far\n거리가 가깝다 : close by; 거리 = also means street/road in context",
+    "korean": "거리",
+    "english": "'거리' (noun) distance; street",
+    "examples": [
+      "중요한 건 거리가 아니라 새로운 걸 경험하려는 마음인 것 같아요. = What matters isn't the distance but the desire to experience something new."
+    ]
+  },
+  {
+    "id": 1783684843581,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "경험하다 : to experience\n경험이 많다 : to have a lot of experience; 경험을 쌓다 : to build experience",
+    "korean": "경험",
+    "english": "'경험' (noun/verb) experience; to experience",
+    "examples": [
+      "새로운 걸 경험하려는 마음인 것 같아요. = It's about the desire to experience something new."
+    ]
+  },
+  {
+    "id": 1783684843582,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "기억에 남다 : to remain in memory, to be memorable\n기억하다 : to remember; 기억이 안 나다 : can't remember",
+    "korean": "기억",
+    "english": "'기억' (noun/verb) memory; to remember",
+    "examples": [
+      "여행에서 가장 기억에 남는 게 뭔지 아세요? = Do you know what stays with me most from my travels?"
+    ]
+  },
+  {
+    "id": 1783684843583,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "골목길 : alley/side street (길 = road)\n좁은 골목 : narrow alley; 골목 안으로 : into the alley",
+    "korean": "골목",
+    "english": "'골목' (noun) alley, side street, lane",
+    "examples": [
+      "길을 잃었다가 우연히 들어간 작은 골목이 기억에 남아요. = A small alley I wandered into after getting lost stays in my memory."
+    ]
+  },
+  {
+    "id": 1783684843584,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "식당에 가다 : to go to a restaurant\n식당을 고르다 : to choose a restaurant; 학교 식당 : school cafeteria",
+    "korean": "식당",
+    "english": "'식당' (noun) restaurant, dining hall",
+    "examples": [
+      "이름도 모르는 식당에서 먹은 맛있는 음식이 기억에 남아요. = A delicious meal at a restaurant whose name I don't even know stays in my memory."
+    ]
+  },
+  {
+    "id": 1783684843585,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "대화를 나누다 : to have a conversation\n대화하다 : to converse; 짧은 대화 : brief conversation",
+    "korean": "대화",
+    "english": "'대화' (noun) conversation, dialogue",
+    "examples": [
+      "길에서 우연히 만난 사람과 나눈 짧은 대화가 기억에 남아요. = A brief conversation with a stranger I met on the street stays in my memory."
+    ]
+  },
+  {
+    "id": 1783684843586,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "도시 ↔ 시골 (countryside)\n도시 생활 : city life; 대도시 : big city; 소도시 : small city",
+    "korean": "도시",
+    "english": "'도시' (noun) city",
+    "examples": [
+      "그러면 그 도시가 훨씬 더 깊게 마음에 남는 것 같아요. = Then the city stays much more deeply in my heart."
+    ]
+  },
+  {
+    "id": 1783684843587,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "행복하다 : to be happy\n행복을 찾다 : to look for happiness; 행복감 : sense of happiness",
+    "korean": "행복",
+    "english": "'행복' (noun/adjective) happiness; to be happy",
+    "examples": [
+      "여행은 행복을 찾는 일이라기보다 행복을 느끼는 연습 같아요. = Travel is less about finding happiness and more like practicing feeling it."
+    ]
+  },
+  {
+    "id": 1783684843588,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "연습하다 : to practice\n연습이 필요하다 : practice is needed; 연습 문제 : practice problem",
+    "korean": "연습",
+    "english": "'연습' (noun/verb) practice; to practice",
+    "examples": [
+      "여행은 행복을 느끼는 연습 같다는 생각도 들어요. = I think travel is like practicing feeling happiness."
+    ]
+  },
+  {
+    "id": 1783684843589,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "출근하다 : to go to work\n출근길 : commute (road to work); 퇴근 : leaving work (opposite)",
+    "korean": "출근",
+    "english": "'출근' (noun/verb) commute to work; to go to work",
+    "examples": [
+      "평범한 출근길도 조금만 다르게 바라보면 새롭게 느껴질 수 있어요. = Even the ordinary commute, if you look at it just a little differently, can feel fresh."
+    ]
+  },
+  {
+    "id": 1783684843590,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "산책하다 : to take a walk\n산책길 : walking path; 강아지 산책 : walking a dog",
+    "korean": "산책",
+    "english": "'산책' (noun/verb) walk, stroll; to take a walk",
+    "examples": [
+      "늘 가던 동네 산책길도 조금만 다르게 바라보면 새로워요. = Even the usual neighborhood walk feels fresh with a slightly different perspective."
+    ]
+  },
+  {
+    "id": 1783684843591,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "계획을 세우다 : to make a plan\n계획에 없다 : unplanned; 계획대로 : as planned",
+    "korean": "계획",
+    "english": "'계획' (noun/verb) plan; to plan",
+    "examples": [
+      "계획에 없던 순간들이 오히려 제일 소중한 기억이 되더라고요. = The unplanned moments turn out to be the most precious memories."
+    ]
+  },
+  {
+    "id": 1783684843592,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "시간을 보내다 : to spend time\n시간이 있다/없다 : to have/not have time; 시간이 지나다 : time passes",
+    "korean": "시간",
+    "english": "'시간' (noun) time; hour",
+    "examples": [
+      "과거를 후회하거나 미래를 걱정하면서 많은 시간을 보내잖아요. = We spend a lot of time regretting the past or worrying about the future."
+    ]
+  },
+  {
+    "id": 1783684843593,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "정말 ≈ 진짜 (really); 정말 is slightly more standard/polite\n정말요? : Really? (expressing surprise)",
+    "korean": "정말",
+    "english": "'정말' (adverb) really, truly, very much",
+    "examples": [
+      "한국 사람들은 여행을 정말 좋아하는 것 같아요. = Koreans seem to really love traveling."
+    ]
+  },
+  {
+    "id": 1783684843594,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "오히려 signals the opposite of what you might expect\nUsed when reality is the reverse of expectation",
+    "korean": "오히려",
+    "english": "'오히려' (adverb) rather, on the contrary, if anything",
+    "examples": [
+      "아주 사소한 순간들이 오히려 오래 남더라고요. = The tiny moments actually last even longer."
+    ]
+  },
+  {
+    "id": 1783684843595,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "솔직히 말하면 : to be honest\n솔직하다 : to be honest (adjective); 솔직한 사람 : an honest person",
+    "korean": "솔직히",
+    "english": "'솔직히' (adverb) honestly, frankly",
+    "examples": [
+      "솔직히 우리는 평소에 과거를 후회하거나 미래를 걱정하면서 많은 시간을 보내잖아요. = Honestly, in everyday life we spend a lot of time regretting the past or worrying about the future."
+    ]
+  },
+  {
+    "id": 1783684843596,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "한참 동안 : for a long time\n한참 후에 : after a long while; 한참을 기다리다 : to wait a long time",
+    "korean": "한참",
+    "english": "'한참' (adverb/noun) for a long time, for a while",
+    "examples": [
+      "여행하면서 본 것들, 느낀 것들이 한참 동안 제 마음에 남아 있거든요. = The things I saw and felt while traveling stay in my heart for a long time."
+    ]
+  },
+  {
+    "id": 1783684843597,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "매일 = every day\n매주 : every week; 매달 : every month; 매년 : every year",
+    "korean": "매일",
+    "english": "'매일' (adverb/noun) every day, daily",
+    "examples": [
+      "매일 똑같은 곳에서 똑같은 삶을 살다 보면 세상을 보는 눈이 좁아지기 쉽잖아요. = Living the same life in the same place day after day, it's easy for your worldview to narrow."
+    ]
+  },
+  {
+    "id": 1783684843598,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "꼭 해야 해요 : you must do it\n꼭 오세요 : please come for sure; 꼭 안다 : to hug tightly (different meaning!)",
+    "korean": "꼭",
+    "english": "'꼭' (adverb) definitely, without fail; exactly, tightly",
+    "examples": [
+      "꼭 해외여행이어야지 라고 생각했어요. = I thought it absolutely had to be overseas travel."
+    ]
+  },
+  {
+    "id": 1783684843599,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "새로운 : attributive form (before noun)\n새로운 것 : something new; 새롭게 느끼다 : to feel fresh/anew",
+    "korean": "새로운",
+    "english": "'새롭다' (adjective) new, fresh, novel",
+    "examples": [
+      "여행은 우리에게 새로운 시선을 준다고 생각해요. = I think travel gives us a new perspective."
+    ]
+  },
+  {
+    "id": 1783684843600,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "완전히 = completely\n완전하다 : to be complete/perfect; 완전한 : perfect, complete (adjective)",
+    "korean": "완전히",
+    "english": "'완전히' (adverb) completely, entirely, totally",
+    "examples": [
+      "여행을 가면 완전히 다른 세상을 보게 되어요. = When you travel, you get to see a completely different world."
+    ]
+  },
+  {
+    "id": 1783684843601,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "신기한 : attributive form (before noun)\n신기하게도 : strangely enough; 신기하다 is used for pleasant surprise, not scary-strange",
+    "korean": "신기한",
+    "english": "'신기하다' (adjective) fascinating, amazing, strange in a good way",
+    "examples": [
+      "낯선 곳에서는 작은 것 하나하나가 새롭고 신기하잖아요. = In unfamiliar places, every little thing feels new and fascinating."
+    ]
+  },
+  {
+    "id": 1783684843602,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "소중한 : attributive form (before noun)\n소중하게 여기다 : to cherish; 소중한 사람 : a precious/dear person",
+    "korean": "소중한",
+    "english": "'소중하다' (adjective) precious, valuable, dear",
+    "examples": [
+      "계획에 없던 순간들이 오히려 제일 소중한 기억이 되더라고요. = The unplanned moments turn out to be the most precious memories."
+    ]
+  },
+  {
+    "id": 1783684843603,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "중요한 : attributive form (before noun)\n중요성 : importance; 가장 중요한 것 : the most important thing",
+    "korean": "중요한",
+    "english": "'중요하다' (adjective) important",
+    "examples": [
+      "중요한 건 거리가 아니라 새로운 걸 경험하려는 마음인 것 같아요. = What matters isn't the distance but the desire to experience something new."
+    ]
+  },
+  {
+    "id": 1783684843604,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "특별한 : attributive form (before noun)\n특별히 : specially; 특별한 날 : a special day; ↔ 평범한 (ordinary)",
+    "korean": "특별한",
+    "english": "'특별하다' (adjective) special",
+    "examples": [
+      "잊지 못할 특별한 순간이 있었나요? = Is there a special moment from traveling that you can't forget?"
+    ]
+  },
+  {
+    "id": 1783684843605,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "떠나다 : to leave a place\n고향을 떠나다 : to leave hometown; 여행을 떠나다 : to set out on a trip",
+    "korean": "떠나다",
+    "english": "'떠나다' (verb) to leave, to depart, to set out",
+    "examples": [
+      "여행은 떠나는 것도 좋지만 돌아와서 내 삶을 다시 사랑하게 되는 것도 참 좋아요. = Travel isn't just good for the going — coming back and loving your own life again is wonderful too."
+    ]
+  },
+  {
+    "id": 1783684843606,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "돌아오다 = to return (coming direction)\n돌아가다 = to go back (going direction); 집에 돌아오다 : to come back home",
+    "korean": "돌아오다",
+    "english": "'돌아오다' (verb) to come back, to return",
+    "examples": [
+      "여행을 다녀오면 돌아온 후가 더 좋을 때가 있어요. = Sometimes I like the time after coming back from a trip even more."
+    ]
+  },
+  {
+    "id": 1783684843607,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "느끼다 vs 감정 : 느끼다 is the verb \"to feel\"\n느낌 : feeling (noun); 행복을 느끼다 : to feel happiness",
+    "korean": "느끼다",
+    "english": "'느끼다' (verb) to feel, to sense",
+    "examples": [
+      "여행은 행복을 느끼는 연습 같아요. = Travel is like practicing feeling happiness."
+    ]
+  },
+  {
+    "id": 1783684843608,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "발견하다 : to discover (often something previously unknown)\n발견 : discovery (noun); 새로운 것을 발견하다 : to discover something new",
+    "korean": "발견하다",
+    "english": "'발견하다' (verb) to discover, to find, to realize",
+    "examples": [
+      "평소에는 몰랐던 내 모습을 발견하게 되어요. = You discover sides of yourself you never knew in everyday life."
+    ]
+  },
+  {
+    "id": 1783684843609,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "바뀌다 : passive; the subject is changed by something else\n바꾸다 : active, to change something; 생각이 바뀌다 : one's mind changes",
+    "korean": "바뀌다",
+    "english": "'바뀌다' (verb) to change, to be changed (passive)",
+    "examples": [
+      "요즘 제 생각은 조금 바뀌었어요. = But lately my thinking has changed a little."
+    ]
+  },
+  {
+    "id": 1783684843610,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "멋진 : attributive form (before noun)\n멋있다 : also \"cool/good-looking\"; 멋진 사람 : a cool/stylish person",
+    "korean": "멋진",
+    "english": "'멋지다' (adjective) cool, great, wonderful, stylish",
+    "examples": [
+      "사실 유명한 관광지나 멋진 풍경도 기억에 남지만 오히려 아주 사소한 순간들이 오래 남더라고요. = Famous sights and great views do stay with me, but the tiny moments last even longer."
+    ]
+  },
+  {
+    "id": 1783684843612,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "문화적 : cultural (adjective)\n한국 문화 : Korean culture; 문화 차이 : cultural difference",
+    "korean": "문화",
+    "english": "'문화' (noun) culture",
+    "examples": [
+      "나와 다른 음식, 다른 문화를 보면서 세상에 다양한 삶이 있구나 하고 깨닫게 돼요. = Seeing different foods and different cultures, you realize there are so many ways of living."
+    ]
+  },
+  {
+    "id": 1783684843613,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "가깝다 ↔ 멀다 (far)\n가까운 곳 : a nearby place; 가까운 사람 : someone close to you",
+    "korean": "가깝다",
+    "english": "'가깝다' (adjective) close, near",
+    "examples": [
+      "멀든 가깝든 상관없어요. = Whether far or near, it doesn't matter."
+    ]
+  },
+  {
+    "id": 1783684843614,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "멀다 ↔ 가깝다 (close)\n멀리 : far away (adverb); 거리가 멀다 : the distance is far",
+    "korean": "멀다",
+    "english": "'멀다' (adjective) far, distant",
+    "examples": [
+      "멀든 가깝든 상관없어요. = Whether far or near, it doesn't matter."
+    ]
+  },
+  {
+    "id": 1783684843615,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "기쁘다 : joyful, glad (more intense than 좋다)\n기쁨 : joy (noun); 기쁜 소식 : good news",
+    "korean": "기쁘다",
+    "english": "'기쁘다' (adjective) glad, happy, joyful",
+    "examples": [
+      "기분이 좋아지는 주제로 이야기해 보려고 해요. = I want to talk about a topic that makes me feel good."
+    ]
+  },
+  {
+    "id": 1783684843616,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "가끔 ↔ 항상 (always), 자주 (often)\n가끔씩 : from time to time; 가끔 있다 : happens sometimes",
+    "korean": "가끔",
+    "english": "'가끔' (adverb) sometimes, occasionally",
+    "examples": [
+      "여러분도 가끔은 익숙한 곳을 떠나서 새로운 세상을 만나 보셨으면 좋겠어요. = I hope you too will sometimes leave familiar places and encounter a new world."
+    ]
+  },
+  {
+    "id": 1783684843617,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "다시 = again\n다시 한 번 : one more time; 다시 시작하다 : to start again",
+    "korean": "다시",
+    "english": "'다시' (adverb) again, once more",
+    "examples": [
+      "돌아와서 내 삶을 다시 사랑하게 되는 것도 참 좋아요. = Coming back and falling in love with your own life again is wonderful too."
+    ]
+  },
+  {
+    "id": 1783684843618,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "오래 ↔ 잠깐 (briefly)\n오래되다 : to become old/aged; 오래 기다리다 : to wait long",
+    "korean": "오래",
+    "english": "'오래' (adverb) for a long time, long",
+    "examples": [
+      "아주 사소한 순간들이 오래 남더라고요. = The tiny, trivial moments last the longest."
+    ]
+  },
+  {
+    "id": 1783684843619,
+    "tag": "story",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "trap": "",
+    "created": 1783684842549,
+    "nextReview": 1783684842549,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0,
+    "notes": "먼저 = first (in order)\n먼저 하다 : to do first; 먼저 가세요 : please go first",
+    "korean": "먼저",
+    "english": "'먼저' (adverb/adjective) first, beforehand",
+    "examples": [
+      "먼저 여행은 우리에게 새로운 시선을 준다고 생각해요. = First, I think travel gives us a new perspective."
+    ]
+  },
+  {
+    "id": 1783701923723,
+    "created": 1783701923723,
+    "korean": "하다",
+    "english": "(verb) to do",
+    "trap": "",
+    "notes": "하는 · 해요 · 했어요\n해요 = 하+여요 (contracted). 했어요 (past).",
+    "examples": [],
+    "tag": "",
+    "deck": "Walk in Seoul 016",
+    "level": "",
+    "nextReview": 1783701923723,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783811347412,
+    "korean": "바보",
+    "english": "fool",
+    "examples": [],
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "pabo; not babo",
+    "notes": "",
+    "created": 1783811347413,
+    "nextReview": 1783811347413,
+    "interval": 1,
+    "ease": 2.5,
+    "reps": 0
+  },
+  {
+    "id": 1783812879476,
+    "korean": "고양이",
+    "english": "cat",
+    "examples": [],
+    "tag": "",
+    "deck": "",
+    "level": "",
+    "trap": "",
+    "notes": "",
+    "created": 1783812879476,
+    "nextReview": 1783812879476,
     "interval": 1,
     "ease": 2.5,
     "reps": 0
