@@ -1435,7 +1435,68 @@ function setSyncStatus(msg, type) {
   if (type === 'ok') setTimeout(() => { el.textContent = ''; el.className = 'sync-status'; }, 3000);
 }
 
+// ── Server mode (production on the Mac Mini) ─────────────────────────────
+// Served from the Mini, "Load/Save" talk to the same-origin /api/data instead of
+// GitHub (no token needed). On github.io (legacy) and file:// the old GitHub
+// path below stays in use. Save is guarded by a revision number: if the server
+// has newer data (another device saved), Save is refused until you Load.
+const SERVER_MODE = location.protocol !== 'file:' && !location.hostname.endsWith('github.io');
+const SERVER_REV_KEY = 'lla_server_rev';
+
+function mergeById(local, incoming) {           // incoming wins on same id; local-only items are kept
+  const byId = new Map(local.map(x => [x.id, x]));
+  incoming.forEach(x => byId.set(x.id, x));
+  return [...byId.values()];
+}
+
+async function loadFromServer(silent) {
+  if (!silent) setSyncStatus('Loading…');
+  try {
+    const res = await fetch('/api/data', { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const remote = await res.json();
+    if (!Array.isArray(remote.cards) || !Array.isArray(remote.stories)) throw new Error('Bad format');
+    const cards = mergeById(loadCards(), remote.cards);
+    const stories = mergeById(loadStories(), remote.stories);
+    saveCards(cards);
+    saveStories(stories);
+    Object.entries(remote.settings || {}).forEach(([k, v]) => {
+      if (BACKUP_SETTING_KEYS.includes(k) && localStorage.getItem(k) === null) localStorage.setItem(k, v);
+    });
+    localStorage.setItem(SERVER_REV_KEY, String(remote.rev));
+    refreshFC();
+    if (document.getElementById('fc-all').classList.contains('active')) renderAll();
+    if (document.getElementById('fc-study').classList.contains('active')) renderStudy();
+    if (typeof renderStoryList === 'function') renderStoryList();
+    setSyncStatus(`✓ Loaded ${cards.length} cards, ${stories.length} stories (rev ${remote.rev})`, 'ok');
+  } catch (e) {
+    if (!silent) setSyncStatus('Load failed: ' + e.message, 'err');
+  }
+}
+
+async function saveToServer() {
+  const rev = localStorage.getItem(SERVER_REV_KEY);
+  if (rev === null) { setSyncStatus('Tap Load first', 'err'); return; }
+  setSyncStatus('Saving…');
+  try {
+    const b = buildBackup();
+    const res = await fetch('/api/data', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'X-LLA': '1' },
+      body: JSON.stringify({ baseRev: Number(rev), cards: b.cards, stories: b.stories, settings: b.settings }),
+    });
+    const out = await res.json().catch(() => ({}));
+    if (res.status === 409) { setSyncStatus('Server has newer data — tap Load first', 'err'); return; }
+    if (!res.ok) throw new Error(out.error || res.status);
+    localStorage.setItem(SERVER_REV_KEY, String(out.rev));
+    setSyncStatus(`✓ Saved ${out.cards} cards, ${out.stories} stories (rev ${out.rev})`, 'ok');
+  } catch (e) {
+    setSyncStatus('Save failed: ' + e.message, 'err');
+  }
+}
+
 async function loadFromGitHub() {
+  if (SERVER_MODE) return loadFromServer();
   setSyncStatus('Loading…');
   try {
     // Use the API endpoint (not raw.githubusercontent.com) to bypass CDN caching
@@ -1461,6 +1522,7 @@ async function loadFromGitHub() {
 }
 
 async function saveToGitHub() {
+  if (SERVER_MODE) return saveToServer();
   const token = localStorage.getItem('lla_gh_token');
   if (!token) {
     document.getElementById('token-row').style.display = 'block';
@@ -2445,6 +2507,16 @@ if (window.speechSynthesis) {
 
 document.getElementById('inp-level').innerHTML = levelOptions('');
 refreshFC();
+
+if (SERVER_MODE) {
+  // production (Mac Mini): relabel the sync buttons, drop the GitHub-token UI, pull latest on launch
+  const lb = document.querySelector('.sync-bar .sync-btn[onclick="loadFromGitHub()"]');
+  const sb = document.querySelector('.sync-bar .sync-btn[onclick="saveToGitHub()"]');
+  if (lb) lb.textContent = '↓ Load from Mini';
+  if (sb) sb.textContent = '↑ Save to Mini';
+  const gear = document.querySelector('.sync-setup'); if (gear) gear.style.display = 'none';
+  loadFromServer(true);
+}
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
