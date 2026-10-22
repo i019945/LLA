@@ -20,7 +20,6 @@ Design rules (see README.md):
 import datetime as dt
 import json
 import os
-import re
 import tempfile
 import threading
 from pathlib import Path
@@ -29,8 +28,6 @@ from flask import Flask, abort, jsonify, request, send_from_directory
 
 BASE_DIR = Path(__file__).resolve().parent
 STATIC_FILES = {"index.html", "sw.js", "manifest.json", "icon.svg", "vocab.json"}
-# one-time story/card injectors written by the /import skill (idempotent, by title)
-IMPORT_SCRIPT = re.compile(r"^import_[A-Za-z0-9_]+\.js$")
 SETTING_KEYS = {"lla_rate", "lla_ap_interval", "lla_ap_mode", "lla_story_roman"}
 MAX_BODY_BYTES = 20 * 1024 * 1024
 BACKUPS_KEEP = 50
@@ -167,7 +164,7 @@ def create_app(data_dir=None) -> Flask:
 
     @app.get("/<path:filename>")
     def static_files(filename):
-        if filename not in STATIC_FILES and not IMPORT_SCRIPT.match(filename):
+        if filename not in STATIC_FILES:
             abort(404)
         return send_from_directory(BASE_DIR, filename)
 

@@ -698,8 +698,6 @@
   </div>
 </div>
 
-<script src="import_seoul016.js"></script>
-<script src="import_seoul016_cards2.js"></script>
 <script>
 // ════════════════════════════════════════
 // TTS
@@ -1449,6 +1447,16 @@ function mergeById(local, incoming) {           // incoming wins on same id; loc
   return [...byId.values()];
 }
 
+// Cards: same rule as mergeById, plus a local-only card is dropped when the server
+// already has a card with the same Korean text. (The retired one-time import scripts
+// used to create such copies under fresh ids on a new browser.)
+function mergeCards(local, incoming) {
+  const serverKorean = new Set(incoming.map(c => c.korean));
+  const incomingIds = new Set(incoming.map(c => c.id));
+  const keep = local.filter(c => incomingIds.has(c.id) || !serverKorean.has(c.korean));
+  return mergeById(keep, incoming);
+}
+
 async function loadFromServer(silent) {
   if (!silent) setSyncStatus('Loading…');
   try {
@@ -1456,7 +1464,7 @@ async function loadFromServer(silent) {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const remote = await res.json();
     if (!Array.isArray(remote.cards) || !Array.isArray(remote.stories)) throw new Error('Bad format');
-    const cards = mergeById(loadCards(), remote.cards);
+    const cards = mergeCards(loadCards(), remote.cards);
     const stories = mergeById(loadStories(), remote.stories);
     saveCards(cards);
     saveStories(stories);

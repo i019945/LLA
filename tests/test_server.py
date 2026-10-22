@@ -82,8 +82,7 @@ def test_only_allowlisted_static_files_are_served(client):
     assert c.get("/").status_code == 200
     for ok in ("index.html", "sw.js", "manifest.json", "vocab.json"):
         assert c.get("/" + ok).status_code == 200, ok
-    assert c.get("/import_seoul016.js").status_code == 200          # legacy injector referenced by index.html
-    for bad in ("import_x.py", "import_.js/../lla_server.py", "cards.json", "lla_server.py", ".git/config", "../etc/passwd", "tests/test_server.py"):
+    for bad in ("import_seoul016.js", "import_seoul016_cards2.js", "cards.json", "lla_server.py", ".git/config", "../etc/passwd", "tests/test_server.py"):
         assert c.get("/" + bad).status_code == 404, bad
 
 
