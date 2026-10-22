@@ -562,6 +562,12 @@
     <span class="sync-status" id="sync-status"></span>
     <button class="sync-setup" onclick="toggleTokenSetup()" title="GitHub token settings">⚙</button>
   </div>
+  <div class="sync-bar" id="backup-bar">
+    <button class="sync-btn" onclick="exportAllData()" title="Cards + stories + settings (no API keys) as a JSON file; also copied to clipboard">⇩ Export all data</button>
+    <button class="sync-btn" onclick="document.getElementById('import-file').click()">⇧ Import file</button>
+    <button class="sync-btn" onclick="importFromClipboard()">⇧ Paste</button>
+    <input type="file" id="import-file" accept=".json,application/json" style="display:none" onchange="importFromFile(this)">
+  </div>
   <div class="token-row" id="token-row">
     <label>GitHub Personal Access Token</label>
     <p class="token-hint">On your Mac, run <code>gh auth token</code> in Terminal to get your token. Paste it below — stored locally, never shared.</p>
@@ -1481,6 +1487,77 @@ async function saveToGitHub() {
   } catch (e) {
     setSyncStatus('Save failed: ' + e.message, 'err');
   }
+}
+
+// ════════════════════════════════════════
+// BACKUP — export / import everything that lives only in this browser
+// (cards incl. review progress, stories, display settings). API keys and the
+// GitHub token are deliberately NOT included.
+// ════════════════════════════════════════
+const BACKUP_SETTING_KEYS = ['lla_rate', 'lla_ap_interval', 'lla_ap_mode', 'lla_story_roman'];
+
+function buildBackup() {
+  const settings = {};
+  BACKUP_SETTING_KEYS.forEach(k => { const v = localStorage.getItem(k); if (v !== null) settings[k] = v; });
+  return { app: 'LLA', version: 1, exportedAt: new Date().toISOString(),
+           cards: loadCards(), stories: loadStories(), settings };
+}
+
+async function exportAllData() {
+  const data = buildBackup();
+  const text = JSON.stringify(data);
+  let copied = false;
+  try { await navigator.clipboard.writeText(text); copied = true; } catch (e) { /* clipboard may be blocked */ }
+  try {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
+    a.download = `lla-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a); a.click(); a.remove();
+  } catch (e) { /* download may be blocked in some standalone PWAs */ }
+  setSyncStatus(`✓ Exported ${data.cards.length} cards, ${data.stories.length} stories` +
+                (copied ? ' (copied to clipboard)' : ''), 'ok');
+}
+
+function applyBackup(text) {
+  let data;
+  try { data = JSON.parse(text); } catch { setSyncStatus('Import failed: not valid JSON', 'err'); return; }
+  if (!data || data.app !== 'LLA' || !Array.isArray(data.cards) || !Array.isArray(data.stories)) {
+    setSyncStatus('Import failed: not an LLA backup', 'err'); return;
+  }
+  const mergeById = (local, incoming) => {
+    const byId = new Map(local.map(x => [x.id, x]));
+    incoming.forEach(x => byId.set(x.id, x));          // imported wins on same id; local-only items are kept
+    return [...byId.values()];
+  };
+  const cards = mergeById(loadCards(), data.cards);
+  const stories = mergeById(loadStories(), data.stories);
+  if (!confirm(`Import ${data.cards.length} cards and ${data.stories.length} stories?\n` +
+               `Result after merge: ${cards.length} cards, ${stories.length} stories.`)) {
+    setSyncStatus('Import cancelled'); return;
+  }
+  saveCards(cards);
+  saveStories(stories);
+  Object.entries(data.settings || {}).forEach(([k, v]) => {
+    if (BACKUP_SETTING_KEYS.includes(k) && localStorage.getItem(k) === null) localStorage.setItem(k, v);
+  });
+  refreshFC();
+  renderAll();
+  if (typeof renderStoryList === 'function') renderStoryList();
+  setSyncStatus(`✓ Imported: now ${cards.length} cards, ${stories.length} stories`, 'ok');
+}
+
+function importFromFile(input) {
+  const f = input.files && input.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = () => applyBackup(String(r.result));
+  r.readAsText(f);
+  input.value = '';
+}
+
+async function importFromClipboard() {
+  try { applyBackup(await navigator.clipboard.readText()); }
+  catch (e) { setSyncStatus('Clipboard unavailable — use “Import file”', 'err'); }
 }
 
 function toggleTokenSetup() {
