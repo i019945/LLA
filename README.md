@@ -13,4 +13,6 @@ Korean learning PWA. **Production is the Mac Mini**: https://i019945mini.taila20
 
 `cards.json` is only the seed used when the Mini has no data yet. `github.io` (GitHub Pages) is the legacy path, to be retired.
 
+Full specification and requirements (enough to rebuild the app from scratch): `SPEC.md`.
+
 Tests: `pip install -r requirements-dev.txt && python -m pytest tests`.
