@@ -1,25 +1,22 @@
-Import a YouTube story into the LLA app.
+Import a YouTube story into the LLA app (production = the Mac Mini).
 
 The user has provided a YouTube URL as the argument: $ARGUMENTS
 
 The user is a TRUE BEGINNER still learning Hangul. Generate cards for EVERY content word — never curate or skip "basic" vocabulary.
 
+**How data works now:** LLA's cards and stories live on the Mac Mini (`~/lla-data/data.json`, served at https://i019945mini.taila20961.ts.net/). An import is a DATA change made through the app's own API with `tools/import_story.py`. Do NOT create `import_*.js` scripts, do NOT edit `index.html` or `sw.js`, do NOT commit or rsync anything, and do NOT touch `cards.json` in the repo (it is only the first-start seed). The MacBook must be on Tailscale to reach the Mini.
+
 ---
 
-## Step 1 — Download Korean subtitles
+## Step 1 — Get the Korean transcript
 
 ```
-yt-dlp --write-auto-sub --sub-lang ko --skip-download \
-  -o "/private/tmp/claude-501/-Users-i019945-LLA/bd7384cf-41b6-4267-b0ef-ee0c68098372/scratchpad/yt_import" \
-  "$ARGUMENTS"
+python3 /Users/i019945/workspace/yt_transcript.py "$ARGUMENTS" --lang ko --whisper-lang ko
 ```
 
-Parse the resulting `.ko.vtt` file:
-- Strip the `WEBVTT` header line and blank separators.
-- Strip timing lines (`\d{2}:\d{2}:\d{2}\.\d{3} --> ...`).
-- Strip inline cue tags (`<\d{2}:\d{2}:\d{2}\.\d{3}>`, `<c>`, `</c>`).
-- Deduplicate adjacent identical lines (auto-captions repeat).
-- Join fragments into natural sentences (split on sentence-final `.`, `?`, `!`, `~`, `요.`, `다.` etc.).
+It prints TITLE, CHANNEL and a transcript. It uses Korean captions when they exist and otherwise transcribes the audio locally with whisper. If the transcript says it came from whisper, tell the user it is machine-transcribed and double-check unusual words. Never ask the user to paste a transcript.
+
+Turn the transcript into natural sentences (split on sentence-final `.`, `?`, `!`, `~`, `요.`, `다.` etc.; the captions are repeated and flattened, so de-duplicate).
 
 ## Step 2 — Get the video title
 
@@ -92,66 +89,44 @@ When a tapped story word is absent from the user's cards but present in `vocab.j
 
 A complete import at `ease: 2.0` with examples and notes is always preferred. The auto-add exists only as a fallback for words genuinely missed.
 
-## Step 4 — Build the injection script
+## Step 4 — Write the import file
 
-Write `import_<slug>.js` to `/Users/i019945/LLA/`. Template:
+Write `story.json` into the scratchpad directory (not into the repo):
 
-```javascript
-(function() {
-  var DECK = '<story title>';
-
-  // ── Story ──
-  var stories = JSON.parse(localStorage.getItem('lla_stories') || '[]');
-  if (stories.find(s => s.title === DECK)) return; // guard: don't re-import
-  var story = {
-    id: Date.now(),
-    title: DECK,
-    youtubeUrl: '<url>',
-    sentences: [ /* {ko, en} objects */ ],
-    deck: DECK,
-    created: Date.now()
-  };
-  stories.unshift(story);
-  localStorage.setItem('lla_stories', JSON.stringify(stories));
-
-  // ── Cards ──
-  var existing = JSON.parse(localStorage.getItem('lla_cards') || '[]');
-  var existingKo = new Set(existing.map(c => c.korean)); // ALL decks — avoid duplicates across stories and built-ins
-  var base = Date.now();
-  var newCards = [
-    // { korean, english, examples: [...], notes, tag:'story', deck:DECK,
-    //   level:'', trap:'', created:base, nextReview:base,
-    //   interval:1, ease:2.0, reps:0, id:base+<index> }
-  ];
-  var toAdd = newCards.filter(c => !existingKo.has(c.korean));
-  if (toAdd.length > 0) {
-    localStorage.setItem('lla_cards', JSON.stringify(existing.concat(toAdd)));
-  }
-
-  alert(DECK + ' imported! Tap Stories to read it.');
-})();
+```json
+{
+  "story": {
+    "title": "<story title>",
+    "youtubeUrl": "<url>",
+    "sentences": [ {"ko": "<Korean sentence>", "en": "<English translation>"} ]
+  },
+  "cards": [
+    { "korean": "<per the morphology rules>",
+      "english": "'<Hangul dictionary form>' (<word type>) <English meaning>",
+      "examples": ["<Korean sentence> = <English translation>"],
+      "notes": "<decomposition per /morphology>" }
+  ]
+}
 ```
 
-If the card list is long (> ~60 cards), split into two files: `import_<slug>.js` for the story + first half of cards, `import_<slug>_cards2.js` for the rest. Both use the same guard pattern.
+You do not need to fill `tag`, `deck`, `ease`, `interval`, `nextReview`, `reps`, `id`, `created`, `level` or `trap`: the tool sets them (tag `story`, deck = story title, ease 2.0, interval 1, due now, reps 0).
 
-## Step 5 — Wire into index.html and deploy
+## Step 5 — Dry run (always first)
 
-1. Add `<script src="import_<slug>.js"></script>` (and `_cards2.js` if split) to `index.html`, just before the main `<script>` block.
-2. Bump `sw.js` cache version (e.g. `lla-v11` → `lla-v12`).
-3. Commit:
-   ```
-   git add index.html sw.js import_<slug>.js && git commit -m "Import story: <title>"
-   ```
-4. `git push`
-5. `rsync -av --exclude='.git' /Users/i019945/LLA/ stevenmeng@i019945mini:~/LLA/`
+```
+python3 /Users/i019945/LLA/tools/import_story.py <path>/story.json --dry-run
+```
 
-## Step 6 — Tell the user
+The tool validates the file (the quoted part of `english` must be Hangul only; required fields), skips a story title that already exists and any card whose Korean text already exists in ANY deck, and prints exactly what would be added. Fix every reported problem. Tell the user how many cards would be added and which words were skipped as duplicates.
 
-Instruct the user to open the app — the story auto-imports on first load and shows an alert. Tell them to reply here when done so you can remove the injection script.
+## Step 6 — Import
 
-## Step 7 — Cleanup (after user confirms)
+```
+python3 /Users/i019945/LLA/tools/import_story.py <path>/story.json
+```
 
-1. Remove `<script src="import_<slug>.js"></script>` (and `_cards2.js`) from `index.html`.
-2. Delete `import_<slug>.js` (and `_cards2.js`) from the repo.
-3. Bump SW version.
-4. Commit, push, rsync.
+It saves with the server's revision check (a conflict is retried once). Running it again is harmless: nothing is added twice. Expect `"written": true` and a higher `rev_after`.
+
+## Step 7 — Tell the user
+
+Tell the user to open LLA on the phone and tap **↓ Load from Mini** (Vocabulary tab): the story appears under Stories and the cards under the story's deck. There is nothing to deploy and nothing to clean up afterwards. The Mini keeps its own backups, and the hourly backup copies the data to GitHub.
