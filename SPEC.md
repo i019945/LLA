@@ -54,7 +54,7 @@ Decompose every space-delimited token into root + particles + endings + irregula
 - `GET /api/data` → full document. `PUT /api/data` with `{baseRev, cards, stories, settings}`; requires header `X-LLA: 1` and `Content-Type: application/json` (cross-site requests cannot satisfy this without a preflight); validation: arrays of objects with `id`, settings keys allow-listed to `lla_rate, lla_ap_interval, lla_ap_mode, lla_story_roman` with string values (API keys and tokens are never accepted); `baseRev` must equal the server's current `rev`, else **409** (client says "Server has newer data, tap Load first"). Body limit 20 MB. `GET /healthz` → `ok`. Everything else is 404 except the static allow-list.
 - **Load** merges the server data into local: server wins on the same `id`; local-only items stay, except a local-only card whose Korean text the server already has is dropped (`mergeCards`). Stores the revision in `lla_server_rev`. The app also loads once at start.
 - **Save** refuses until a Load has happened; on success stores the new revision.
-- Legacy path (to be retired): on `github.io` the same buttons use the GitHub API with a personal token.
+- Legacy path (GitHub Pages disabled 2026-10-23): on `github.io` the same buttons used the GitHub API with a personal token; the code remains but nothing serves it.
 - **Export / Import** (any origin): "Export all data" downloads and copies a JSON `{app:"LLA", version:1, cards, stories, settings}` (no keys); import by file or clipboard merges by `id` (imported wins).
 
 ## 7. Browser storage keys
@@ -76,4 +76,4 @@ Manifest `LLA · 한국어`, standalone, theme `#1a4fa0`. Service worker `sw.js`
 Server: `flask>=3.0` (`requirements.txt`); tests: `pytest>=8`. Client: none. External services used by the browser: Anthropic Messages API (`claude-haiku-4-5`, user's own key), Naver dictionary and Papago links.
 
 ## 12. Known gaps
-Stories are only synced through Save/Load (no per-item deletion sync: a deleted card can reappear after a Load from a stale device); the Anthropic key must be re-entered per browser origin; GitHub Pages legacy mode still exists in the code.
+Stories are only synced through Save/Load (no per-item deletion sync: a deleted card can reappear after a Load from a stale device); the Anthropic key must be re-entered per browser origin; The old GitHub Pages mode still exists in the code, but Pages is disabled.

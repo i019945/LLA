@@ -11,7 +11,7 @@ Korean learning PWA. **Production is the Mac Mini**: https://i019945mini.taila20
 | Importing stories | `/import` skill → `tools/import_story.py` (a data change, no deploy) |
 | Deploy | on the Mini: `~/LLA/deploy/deploy.sh` (git pull + restart); rebuild: `deploy/install.sh` |
 
-`cards.json` is only the seed used when the Mini has no data yet. `github.io` (GitHub Pages) is the legacy path, to be retired.
+`cards.json` is only the seed used when the Mini has no data yet. GitHub Pages was retired on 2026-10-23 (site disabled); the Mini is the only host. The old github.io code path in `index.html` is dead code kept until it is removed.
 
 Full specification and requirements (enough to rebuild the app from scratch): `SPEC.md`.
 
